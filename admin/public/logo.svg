@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_图层_1" data-name="图层 1" xmlns="http://www.w3.org/2000/svg" width="128" height="128" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="_未命名的渐变_42" data-name="未命名的渐变 42" x1="3.3" y1="3.3" x2="123.09" y2="123.09" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#75f8d2"/>
+      <stop offset=".13" stop-color="#6edbd4"/>
+      <stop offset=".38" stop-color="#64a9d9"/>
+      <stop offset=".5" stop-color="#6096db"/>
+      <stop offset=".61" stop-color="#58a1df"/>
+      <stop offset=".81" stop-color="#42bfec"/>
+      <stop offset="1" stop-color="#2ae3fc"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="128" height="128" rx="5" ry="5" style="fill: url(#_未命名的渐变_42);"/>
+  <text transform="translate(14.3 69.35)" style="fill: #fff; font-family: jiangxizhuokai-Regular, jiangxizhuokai; font-size: 24px;"><tspan x="0" y="0">ecosystem</tspan></text>
+</svg>
