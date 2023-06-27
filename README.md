@@ -4,13 +4,13 @@
 
 <h2 align="center">
   <a href="https://github.com/biaov/ecosystem"><img src="https://img.shields.io/badge/version-v1.0.0-blue" /></a>
-  <a href="https://github.com/biaov/ecosystem/blob/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" /></a>
+  <a href="https://github.com/biaov/ecosystem/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" /></a>
 </h2>
 
 ## 项目结构
 
 - `admin`: `vite + react` 控制台
-- `app`: `vite + uni-app`，包含 app, h5, 小程序
+- `app`: `vite + uni-app`，包含 app, h5, 微信小程序
 - `server`: `vite + node` 服务端，包含控制台和 app 的接口
 
 ## 项目启动
@@ -21,40 +21,19 @@
 git clone https://github.com/biaov/ecosystem.git --depth=1
 ```
 
-### 安装对应依赖
+### 项目运行文档
 
-#### 安装控制台依赖
+- [控制台](https://github.com/biaov/ecosystem/blob/main/admin/README.md)
+- [app](https://github.com/biaov/ecosystem/blob/main/app/README.md)
+- [服务端](https://github.com/biaov/ecosystem/blob/main/server/README.md)
 
-```sh
-cd admin
-npm i
-```
+## 演示地址
 
-#### 安装 app 依赖
-
-```sh
-cd app
-npm i
-```
-
-#### 安装服务端依赖
-
-```sh
-cd server
-npm i
-```
-
-### 运行项目
-
-```sh
-npm start
-```
-
-### 打包项目
-
-```sh
-npm run build
-```
+- [控制台](http://biaov.cn/)
+- [小程序](http://biaov.cn/)
+- [h5](http://biaov.cn/)
+- [app](http://biaov.cn/)
+- [服务端接口](http://biaov.cn/)
 
 ## 贡献者们
 
