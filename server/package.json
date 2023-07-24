@@ -34,6 +34,7 @@
   },
   "devDependencies": {
     "@types/express": "^4.17.17",
+    "@types/jsonwebtoken": "^9.0.2",
     "@types/md5": "^2.3.2",
     "@types/node": "^20.3.1",
     "terser": "^5.18.1",
