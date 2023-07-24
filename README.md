@@ -1,6 +1,6 @@
-# ecosystem
+# ecosystem - 未上线 · 开发中
 
-一个简单的生态系统，包含 app，h5，小程序，控制台，服务端
+一个简单的生态系统，包含 app，h5，微信小程序，控制台，服务端
 
 <h2 align="center">
   <a href="https://github.com/biaov/ecosystem"><img src="https://img.shields.io/badge/version-v1.0.0-blue" /></a>
@@ -29,11 +29,11 @@ git clone https://github.com/biaov/ecosystem.git --depth=1
 
 ## 演示地址
 
-- [控制台](http://biaov.cn/)
-- [小程序](http://biaov.cn/)
-- [h5](http://biaov.cn/)
-- [app](http://biaov.cn/)
-- [服务端接口](http://biaov.cn/)
+- [控制台](http://ecosystem.biaov.cn/admin/)
+- 小程序搜索 `ecosystem`
+- [h5](http://ecosystem.biaov.cn/)
+- [app](https://github.com/biaov/ecosystem/releases)
+- [服务端接口文档](https://www.showdoc.com.cn/2302761390308442/10396968490372348)
 
 ## 贡献者们
 

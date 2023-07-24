@@ -37,7 +37,7 @@ npm run build
 - `axios`: 接口请求
 - `dayjs`: 时间处理工具
 - `react`: 前端框架
-- `react-dom`: 浏览器 DOM 渲染
+- `react-dom`: 查看器 DOM 渲染
 - `react-redux`: 将 React 连接到 Redux 的连接器
 - `react-router-dom`: React 路由
 - `@types/node`: `node` 的类型

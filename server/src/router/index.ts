@@ -1,11 +1,15 @@
 import { Router } from 'express'
-import { userList, userDetail, userLogin } from '@/controller/user'
+import { verifyToken, verifyPermission } from '@/middleware'
+import { routes } from './routes'
 
 export const router = Router()
 
-/**
- * 用户操作
- */
-router.get('/user', userList)
-router.get('/user/:id', userDetail)
-router.post('/login', userLogin)
+routes.forEach(({ method, path, controller, token, permission }) => {
+  if (token === false) {
+    router[method](path, controller)
+  } else if (permission) {
+    router[method](path, verifyToken, verifyPermission(permission), controller)
+  } else {
+    router[method](path, verifyToken, controller)
+  }
+})
