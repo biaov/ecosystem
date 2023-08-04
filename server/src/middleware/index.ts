@@ -98,3 +98,47 @@ export const verifyPermission = (value: string | string[]) => async (req: Reques
     return res.status(422).error('角色不存在')
   }
 }
+
+/**
+ * 校验 token
+ */
+export const verifyToken = async (req: Request, res: Response, next: NextFunction) => {
+  const token = req.headers.authorization?.split(' ').at(-1)
+  if (token) {
+    try {
+      const { userId } = verify(token, 'secret') as JwtPayload
+      const userInfo = await UserInfo.findByPk(userId)
+      if (!userInfo) return res.status(401).error('用户不存在')
+      req.params.userId = userId
+      next()
+    } catch {
+      return res.status(401).error('token错误')
+    }
+  } else {
+    return res.status(401).error('token不存在')
+  }
+}
+
+/**
+ * 校验权限
+ */
+export const verifyPermission = (value: string | string[]) => async (req: Request, res: Response, next: NextFunction) => {
+  const { userId } = req.params
+  const userInfo = await UserInfo.findByPk(userId)
+  const roleInfo = await Role.findOne({ where: { code: userInfo!.get('roleCode') } })
+  if (roleInfo) {
+    const permissions = roleInfo.get('permissions') as string[]
+    if (permissions.includes('*')) {
+      next()
+    } else {
+      const permission = Array.isArray(value) ? [...value] : [value]
+      if (permission.some(permis => permissions.includes(permis))) {
+        next()
+      } else {
+        return res.status(403).error('权限不足')
+      }
+    }
+  } else {
+    return res.status(422).error('角色不存在')
+  }
+}
