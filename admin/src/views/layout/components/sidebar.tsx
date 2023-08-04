@@ -31,7 +31,7 @@ export default function SidebarComponent({ collapsed }: SidebarProps) {
       openKeys={openKeys}
       onOpenChange={onOpenChange}
       theme="light"
-      style={{ width: collapsed ? 80 : 256 }}
+      style={{ width: collapsed ? 80 : 256, height: '100vh', overflowY: 'auto' }}
       items={items()}
       inlineCollapsed={collapsed}
       defaultSelectedKeys={defaultSelectedKeys}

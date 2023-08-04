@@ -2,6 +2,7 @@ import axios, { AxiosRequestConfig, Canceler } from 'axios'
 import { message } from 'antd'
 import { baseURL } from '@/config'
 import store, { authSlice } from '@/store'
+import { navigateTo } from '@/router'
 
 /**
  * 等待请求
@@ -75,9 +76,10 @@ service.interceptors.response.use(
     switch (status) {
       case 401:
         store.dispatch(authSlice.actions.logout())
+        navigateTo('/login')
         break
       default:
-        message.error(data.message || '请求失败')
+        message.error(data.message || msg || '请求失败')
         break
     }
     return Promise.reject(response)

@@ -1,14 +1,13 @@
-import { Badge, Card, Space, ColorPicker } from 'antd'
+import { Card, Space, ColorPicker, Alert } from 'antd'
 import { colorList } from '@/config'
 
 export default function Colors() {
   return (
     <Card title="颜色">
-      <Space size={[50, 20]} wrap>
+      <Alert message="点击颜色可查看详情" type="info" banner closable className="m-b-20" />
+      <Space size={[20, 20]} wrap>
         {colorList.map((item, index) => (
-          <ColorPicker value={item} key={index} format="hex">
-            <Badge color={item} text={<span className="inline-block w-60">{item}</span>} />
-          </ColorPicker>
+          <ColorPicker presets={[{ label: '预设值', colors: colorList }]} defaultValue={item} key={index} showText></ColorPicker>
         ))}
       </Space>
     </Card>

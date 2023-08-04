@@ -120,7 +120,7 @@ export default function AccountPage() {
             placement="leftTop"
             title="提示"
             icon={<InfoCircleOutlined className="color-danger" />}
-            description="你确定要删除该用户吗?"
+            description="你确定要删除该数据吗?"
             disabled={!checkPermission('/setting/account/delete')}
             onConfirm={() => handleDelete(record)}
           >
@@ -162,7 +162,7 @@ export default function AccountPage() {
             </Form.Item>
             <Form.Item>
               <Space>
-                <Button type="primary" onClick={loadData}>
+                <Button type="primary" onClick={() => loadData()}>
                   查询
                 </Button>
                 <Button onClick={onReset}>重置</Button>

@@ -10,4 +10,5 @@ export interface RouteItem {
   permission?: string | string[]
   controller: (req: Request, res: Response) => Promise<unknown>
   title: string
+  upload?: boolean
 }

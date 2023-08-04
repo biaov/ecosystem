@@ -78,3 +78,8 @@ export const paginationRewrite = ({ total, pageSize, current }: Pagination) => (
  * 或者其它方法
  */
 export const cloneDeep = <T>(arg: T): T => JSON.parse(JSON.stringify(arg))
+
+/**
+ * 随机 ID
+ */
+export const randomId = () => `${+new Date()}${Math.random().toString(36).substring(2)}`

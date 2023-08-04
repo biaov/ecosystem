@@ -18,7 +18,7 @@
     "email": "biaov@qq.com",
     "url": "https://biaov.cn/"
   },
-  "description": "生态系统的 app，h5，微信小程序",
+  "description": "生态系统的 APP，H5，微信小程序",
   "engines": {
     "node": ">=16"
   },
@@ -54,8 +54,7 @@
     "@dcloudio/uni-mp-weixin": "^3.0.0-alpha-3080620230620001",
     "dayjs": "^1.11.8",
     "pinia": "2.0.36",
-    "vue": "^3.3.4",
-    "vue-i18n": "^9.2.2"
+    "vue": "^3.3.4"
   },
   "devDependencies": {
     "@dcloudio/types": "^3.3.3",

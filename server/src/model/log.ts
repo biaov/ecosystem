@@ -1,6 +1,9 @@
 import { Model, DataTypes } from 'sequelize'
 import { sequelize } from '@/config/database'
 
+/**
+ * 日志表
+ */
 export class Log extends Model {}
 
 Log.init(

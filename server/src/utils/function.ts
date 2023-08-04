@@ -1,4 +1,5 @@
 import { Op } from 'sequelize'
+import type { Model } from 'sequelize'
 import { limit, offset } from '@/config/paging'
 
 /**
@@ -42,3 +43,24 @@ export const getLikeParams = (query: Record<string, any> = {}) => {
 
   return where
 }
+
+/**
+ * 随机 ID
+ */
+export const randomId = () => `${+new Date()}${Math.random().toString(36).substring(2)}`
+
+/**
+ * 数组格式化-访问器属性
+ */
+export const defineArrayFormatProperty = <T extends Model>(field: string) => ({
+  get() {
+    const that = this as T
+    const value = that.getDataValue(field)
+    return value ? value.split(',') : []
+  },
+  set(value: string | string[]) {
+    const that = this as T
+    const newValue = Array.isArray(value) ? value.join(',') : value
+    that.setDataValue(field, newValue)
+  }
+})

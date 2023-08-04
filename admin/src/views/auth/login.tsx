@@ -3,7 +3,7 @@ import { LockOutlined, UserOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 import store, { authSlice } from '@/store'
 import { loginApi } from '@/api/auth'
-import styles from './login.module.less'
+import Styles from './auth.module.less'
 
 export default function LoginPage() {
   const navigate = useNavigate()
@@ -47,7 +47,8 @@ export default function LoginPage() {
   }
 
   return (
-    <div className={`${styles.wrap} w-vw h-vh flex flex-center hidden p-0`}>
+    <div className={`${Styles.wrap} w-vw h-vh flex flex-center hidden p-0`}>
+      <div className={Styles.title}>生态系统控制台</div>
       <Card title="登录" style={{ width: 380 }}>
         <Form {...formProps}>
           <Form.Item name="phoneNumber" rules={[{ required: true, message: '请输入手机号码' }]}>

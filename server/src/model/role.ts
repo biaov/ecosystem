@@ -1,6 +1,10 @@
 import { Model, DataTypes } from 'sequelize'
 import { sequelize } from '@/config/database'
+import { defineArrayFormatProperty } from '@/utils/function'
 
+/**
+ * 角色表
+ */
 export class Role extends Model {}
 
 Role.init(
@@ -15,18 +19,8 @@ Role.init(
       unique: true
     },
     permissions: {
-      type: DataTypes.TEXT,
-      get() {
-        const value = this.getDataValue('permissions')
-        return value ? value.split(',') : []
-      },
-      set(value) {
-        if (Array.isArray(value)) {
-          this.setDataValue('permissions', value.join(','))
-        } else {
-          this.setDataValue('permissions', value)
-        }
-      }
+      ...defineArrayFormatProperty('permissions'),
+      type: DataTypes.TEXT
     }
   },
   {

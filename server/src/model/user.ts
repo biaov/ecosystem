@@ -1,6 +1,9 @@
 import { Model, DataTypes } from 'sequelize'
 import { sequelize } from '@/config/database'
 
+/**
+ * 用户表
+ */
 export class User extends Model {}
 
 export class UserInfo extends Model {}
@@ -22,6 +25,11 @@ User.init(
     tableName: 'user'
   }
 )
+
+/**
+ * 用户详情表
+ */
+export class UserInfo extends Model {}
 
 UserInfo.init(
   {

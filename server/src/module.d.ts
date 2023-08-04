@@ -1,5 +1,5 @@
-import { Response } from 'express'
-import { PagingResponse } from '@/middleware/types'
+import type { Response } from 'express'
+import type { PagingResponse } from '@/middleware/types'
 
 declare global {
   namespace Express {

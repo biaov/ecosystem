@@ -49,25 +49,24 @@ export const getUserDetail = async (req: Request, res: Response) => {
  * 删除用户
  */
 export const deleteUser = async (req: Request, res: Response) => {
-  const { id, userId } = req.params
+  const { id } = req.params
   const data = await UserInfo.findByPk(id, { include: User })
   if (!data) return res.status(422).error('用户不存在')
   await Promise.all([data.destroy(), User.destroy({ where: { id: data.getDataValue('User').id } })])
   res.success()
-  createLogs({ userId, pageKey: '/setting/account', content: `删除用户：${data.get('nickname')}` })
+  createLogs(req, { pageKey: '/setting/account', content: `删除用户：${data.get('nickname')}` })
 }
 
 /**
  * 重置用户密码
  */
 export const resetUserPwd = async (req: Request, res: Response) => {
-  const { id, userId } = req.params
-  console.log({ id, userId })
+  const { id } = req.params
   const data = await UserInfo.findOne({ where: { id }, include: User })
   if (!data) return res.status(422).error('用户不存在')
   await User.update({ password: defaultPassword }, { where: { id: data.getDataValue('User').id } })
   res.success()
-  createLogs({ userId, pageKey: '/setting/account', content: `重置用户密码：${data.get('nickname')}` })
+  createLogs(req, { pageKey: '/setting/account', content: `重置用户密码：${data.get('nickname')}` })
 }
 
 /**
@@ -94,7 +93,7 @@ export const createUser = async (req: Request, res: Response) => {
     const userInfo = await UserInfo.create(defaultUserConfig({ nickname, roleCode, userId: data.get('id') }))
     userInfo.setDataValue('phoneNumber', phoneNumber)
     res.success(userInfo)
-    createLogs({ userId, pageKey: '/setting/account', content: `创建用户：${userInfo.get('nickname')}` })
+    createLogs(req, { pageKey: '/setting/account', content: `创建用户：${userInfo.get('nickname')}` })
   }
 }
 
@@ -103,7 +102,7 @@ export const createUser = async (req: Request, res: Response) => {
  */
 export const updateUserDetail = async (req: Request, res: Response) => {
   const {
-    params: { id, userId },
+    params: { id },
     body: { avatar, nickname, gender, email, signature, roleCode }
   } = req
 
@@ -121,7 +120,7 @@ export const updateUserDetail = async (req: Request, res: Response) => {
   userInfo.setDataValue('permissions', roleInfo!.get('permissions'))
   userInfo.setDataValue('phnoeNumber', authInfo!.get('phoneNumber'))
   res.success(userInfo)
-  createLogs({ userId, pageKey: '/setting/account', content: `修改用户信息：${userInfo.get('nickname')}` })
+  createLogs(req, { pageKey: '/setting/account', content: `修改用户信息：${userInfo.get('nickname')}` })
 }
 
 /**
@@ -143,7 +142,7 @@ export const editPwd = async (req: Request, res: Response) => {
     if (data) {
       await User.update({ password: md5(nPassword) }, { where: { id: data.getDataValue('User').id } })
       res.success()
-      createLogs({ userId, pageKey: '/setting/account', content: `修改密码：${data.get('nickname')}` })
+      createLogs(req, { pageKey: '/setting/account', content: `修改密码：${data.get('nickname')}` })
     } else {
       res.status(422).error('原密码错误')
     }
@@ -164,7 +163,7 @@ export const userLogin = async (req: Request, res: Response) => {
   } else {
     const data = await User.findOne({ where: { phoneNumber, password: md5(password) } })
     if (data) {
-      const userId = data.get('id')
+      const userId = data.get('id') as string
       const userInfo = await UserInfo.findOne({ where: { userId }, include: User })
       userInfo!.setDataValue('phoneNumber', userInfo!.getDataValue('User').phoneNumber)
       userInfo!.setDataValue('User', undefined)
@@ -172,7 +171,7 @@ export const userLogin = async (req: Request, res: Response) => {
       const roleInfo = await Role.findOne({ where: { code: userInfo!.get('roleCode') } })
       userInfo!.setDataValue('permissions', roleInfo!.get('permissions'))
       res.success({ id: userId, token, userInfo })
-      createLogs({ userId, pageKey: '/setting/account', content: '登录系统' })
+      createLogs({ params: { userId } }, { pageKey: '/setting/account', content: '登录系统' })
     } else {
       res.status(422).error('用户名或密码错误')
     }
@@ -197,6 +196,6 @@ export const userRegister = async (req: Request, res: Response) => {
     if (!created) return res.status(422).error('用户名已存在')
     const result = await UserInfo.create(defaultUserConfig({ userId: data.get('id') }))
     res.success()
-    createLogs({ userId: result.get('id'), pageKey: '/setting/account', content: '注册帐号' })
+    createLogs({ params: { userId: result.get('id') as string } }, { pageKey: '/setting/account', content: '注册帐号' })
   }
 }

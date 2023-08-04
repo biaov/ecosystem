@@ -1,8 +1,5 @@
-import { Op } from 'sequelize'
 import type { Request, Response } from 'express'
 import { Role } from '@/model/role'
-import { phoneNumberReg } from '@/utils/regexp'
-import { limit, offset } from '@/config/paging'
 import { getPagingParams, getLikeParams } from '@/utils/function'
 import { createLogs } from './log'
 
@@ -39,20 +36,17 @@ export const getRolesDetail = async (req: Request, res: Response) => {
  * 创建角色
  */
 export const createRole = async (req: Request, res: Response) => {
-  const {
-    params: { userId },
-    body: { name, code, permissions }
-  } = req
+  const { name, code, permissions } = req.body
   if (!name) {
-    res.status(422).error('角色名称不能为空')
+    res.status(422).error('角色名称必传')
   } else if (!code) {
-    res.status(422).error('角色编码不能为空')
+    res.status(422).error('角色编码必传')
   } else if (!(permissions && Array.isArray(permissions) && permissions.length)) {
     res.status(422).error('角色权限必填')
   } else {
     const data = await Role.create({ name, code, permissions })
     res.success(data)
-    createLogs({ userId, pageKey: '/setting/role', content: `创建角色：${data.get('name')}}` })
+    createLogs(req, { pageKey: '/setting/role', content: `创建角色：${data.get('name')}}` })
   }
 }
 
@@ -61,24 +55,24 @@ export const createRole = async (req: Request, res: Response) => {
  */
 export const updateRole = async (req: Request, res: Response) => {
   const {
-    params: { id, userId },
+    params: { id },
     body: { name, permissions }
   } = req
   const data = await Role.findByPk(id)
   if (!data) return res.status(422).error('角色不存在')
   const roleInfo = await data.update({ name, permissions })
   res.success(roleInfo)
-  createLogs({ userId, pageKey: '/setting/role', content: `修改角色信息：${data.get('name')}}` })
+  createLogs(req, { pageKey: '/setting/role', content: `修改角色信息：${data.get('name')}}` })
 }
 
 /**
  * 删除角色
  */
 export const deleteRole = async (req: Request, res: Response) => {
-  const { id, userId } = req.params
+  const { id } = req.params
   const data = await Role.findByPk(id)
   if (!data) return res.status(422).error('角色不存在')
   await data.destroy()
   res.success()
-  createLogs({ userId, pageKey: '/setting/role', content: `删除角色：${data.get('name')}}` })
+  createLogs(req, { pageKey: '/setting/role', content: `删除角色：${data.get('name')}}` })
 }

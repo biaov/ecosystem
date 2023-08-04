@@ -26,6 +26,100 @@ export const items = () => [
     ]
   },
   {
+    label: '管理',
+    key: '/manage',
+    children: [
+      {
+        label: '轮播管理',
+        key: '/manage/swiper',
+        permissions: [
+          {
+            label: '查看轮播',
+            value: '/manage/swiper/list'
+          },
+          {
+            label: '新增轮播',
+            value: '/manage/swiper/add'
+          },
+          {
+            label: '编辑轮播',
+            value: '/manage/swiper/edit'
+          },
+          {
+            label: '删除轮播',
+            value: '/manage/swiper/delete'
+          }
+        ]
+      },
+      {
+        label: '公告管理',
+        key: '/manage/notice',
+        permissions: [
+          {
+            label: '查看公告',
+            value: '/manage/notice/list'
+          },
+          {
+            label: '新增公告',
+            value: '/manage/notice/add'
+          },
+          {
+            label: '编辑公告',
+            value: '/manage/notice/edit'
+          },
+          {
+            label: '删除公告',
+            value: '/manage/notice/delete'
+          }
+        ]
+      },
+      {
+        label: '热点推荐',
+        key: '/manage/recommend',
+        permissions: [
+          {
+            label: '查看推荐',
+            value: '/manage/recommend/list'
+          },
+          {
+            label: '新增推荐',
+            value: '/manage/recommend/add'
+          },
+          {
+            label: '编辑推荐',
+            value: '/manage/recommend/edit'
+          },
+          {
+            label: '删除推荐',
+            value: '/manage/recommend/delete'
+          }
+        ]
+      },
+      {
+        label: '功能列表',
+        key: '/manage/feature',
+        permissions: [
+          {
+            label: '查看功能',
+            value: '/manage/feature/list'
+          },
+          {
+            label: '新增功能',
+            value: '/manage/feature/add'
+          },
+          {
+            label: '编辑功能',
+            value: '/manage/feature/edit'
+          },
+          {
+            label: '删除功能',
+            value: '/manage/feature/delete'
+          }
+        ]
+      }
+    ]
+  },
+  {
     label: '设置',
     key: '/setting',
     children: [
@@ -72,10 +166,6 @@ export const items = () => [
             value: '/setting/role/list'
           },
           {
-            label: '查看权限详情',
-            value: '/setting/role/permission'
-          },
-          {
             label: '新增角色',
             value: '/setting/role/add'
           },
@@ -108,15 +198,3 @@ export const items = () => [
     ]
   }
 ]
-
-export const itemOptions = items().map(item => ({
-  ...item,
-  value: item.key,
-  children: item.children?.map(child => ({ ...child, value: child.key }))
-}))
-
-export const allPermission = items().map(item => ({
-  ...item,
-  value: item.key,
-  children: item.children.map(child => ({ ...child, value: child.key, children: child.permissions }))
-}))

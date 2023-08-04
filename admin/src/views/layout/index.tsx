@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
+import { FloatButton } from 'antd'
 import Sidebar from './components/sidebar'
 import Header from './components/header'
 import Styles from './index.module.less'
@@ -21,6 +22,7 @@ export default function HomePage() {
             <Outlet />
           </div>
         </div>
+        <FloatButton.BackTop visibilityHeight={200} target={() => document.querySelector(`.${Styles.overflow}`) as HTMLElement} />
       </div>
     </div>
   )

@@ -128,7 +128,7 @@ export default function RolePage() {
             placement="leftTop"
             title="提示"
             icon={<InfoCircleOutlined className="color-danger" />}
-            description="你确定要删除该角色吗?"
+            description="你确定要删除该数据吗?"
             disabled={!checkPermission('/setting/role/delete')}
             onConfirm={() => handleDelete(record)}
           >
@@ -160,7 +160,7 @@ export default function RolePage() {
             </Form.Item>
             <Form.Item>
               <Space>
-                <Button type="primary" onClick={loadData}>
+                <Button type="primary" onClick={() => loadData()}>
                   查询
                 </Button>
                 <Button onClick={onReset}>重置</Button>

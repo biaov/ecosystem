@@ -14,5 +14,5 @@ export const restful = (path: string) => ({
 
 export const command = (path: string) => ({
   get: (query = {}) => service.get(path, { params: query }) as Promise<Record<string, any>>,
-  post: (data = {}) => service.post(path, data)
+  post: <T extends Record<string, any>>(data = {}, config = {}): Promise<T> => service.post(path, data, config)
 })

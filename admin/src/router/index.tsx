@@ -11,10 +11,30 @@ import Account from '@/views/setting/account'
 import Role from '@/views/setting/role'
 import RolePermission from '@/views/setting/role/permission'
 import Log from '@/views/setting/log'
+import Swiper from '@/views/manage/swiper'
+import Notice from '@/views/manage/notice'
+import Recommend from '@/views/manage/recommend'
+import RecommendDetail from '@/views/manage/recommend/detail'
+import Feature from '@/views/manage/feature'
 import { CheckLogin, CheckPermission } from './guard'
 
+/**
+ * 基础路由前缀
+ */
+export const basename = '/admin'
+
+/**
+ * 跳转路由
+ */
+export const navigateTo = (path: string) => {
+  globalThis.location.href = globalThis.location.origin + basename + path
+}
+
+/**
+ * 路由配置
+ */
 const router = () => (
-  <BrowserRouter basename="/admin">
+  <BrowserRouter basename={basename}>
     <Routes>
       <Route path="*" element={<NotFound />} />
       <Route path="/" element={<CheckLogin component={Layout} />}>
@@ -28,6 +48,17 @@ const router = () => (
             <Route path="role" element={<Role />}></Route>
             <Route path="role-permission/:id" element={<RolePermission />}></Route>
             <Route path="log" element={<Log />}></Route>
+          </Route>
+          <Route path="manage">
+            <Route path="" element={<Navigate to="swiper" replace />}></Route>
+            <Route path="swiper" element={<Swiper />}></Route>
+            <Route path="notice" element={<Notice />}></Route>
+            <Route path="recommend">
+              <Route path="" element={<Recommend />}></Route>
+              <Route path="add" element={<RecommendDetail />}></Route>
+              <Route path="edit/:id" element={<RecommendDetail />}></Route>
+            </Route>
+            <Route path="feature" element={<Feature />}></Route>
           </Route>
         </Route>
         <Route path="403" element={<Forbidden />} />

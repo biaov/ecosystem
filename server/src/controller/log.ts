@@ -24,7 +24,8 @@ export const getLogs = async (req: Request, res: Response) => {
 /**
  * 创建日志
  */
-export const createLogs = async ({ userId, pageKey, content }: CreateLogParam) => {
-  const data = await UserInfo.findByPk(userId as number)
+export const createLogs = async (req: Request | Pick<Request, 'params'>, { pageKey, content }: CreateLogParam) => {
+  const { userId } = req.params
+  const data = await UserInfo.findByPk(+userId)
   data && Log.create({ nickname: data.get('nickname'), pageKey, content })
 }

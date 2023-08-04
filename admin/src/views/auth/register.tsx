@@ -2,7 +2,7 @@ import { Button, Card, Form, Input, message } from 'antd'
 import { LockOutlined, UserOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 import { registerApi } from '@/api/auth'
-import styles from './register.module.less'
+import Styles from './auth.module.less'
 
 export default function RegisterPage() {
   const navigate = useNavigate()
@@ -27,7 +27,8 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className={`${styles.wrap} w-vw h-vh flex flex-center hidden p-0`}>
+    <div className={`${Styles.wrap} w-vw h-vh flex flex-center hidden p-0`}>
+      <div className={Styles.title}>生态系统控制台</div>
       <Card title="注册" style={{ width: 380 }}>
         <Form {...formProps}>
           <Form.Item name="phoneNumber" rules={[{ required: true, message: '请输入手机号码' }]}>

@@ -105,7 +105,7 @@ export default function LogPage() {
             </Form.Item>
             <Form.Item>
               <Space>
-                <Button type="primary" onClick={loadData}>
+                <Button type="primary" onClick={() => loadData()}>
                   查询
                 </Button>
                 <Button onClick={onReset}>重置</Button>

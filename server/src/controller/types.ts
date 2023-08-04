@@ -1,8 +1,9 @@
+import type { Request } from 'express'
+
 /**
  * CreateLog 参数
  */
 export interface CreateLogParam {
-  userId: unknown
   pageKey: string
   content: string
 }
