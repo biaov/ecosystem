@@ -1,9 +1,18 @@
 import axios, { AxiosRequestConfig, Canceler } from 'axios'
+import { message } from 'antd'
 import { baseURL } from '@/config'
+import store, { authSlice } from '@/store'
+import { navigateTo } from '@/router'
 
-const pendingAjax: string[] = [] // 等待请求
+/**
+ * 等待请求
+ */
+const pendingAjax: string[] = []
 const { CancelToken } = axios
-const cacelKey = 'requesting' // 请求 key
+/**
+ * 请求 key
+ */
+const cacelKey = 'requesting'
 
 // 移除等待请求
 const removePendingAjax = (config: AxiosRequestConfig<unknown>, cancel?: Canceler) => {
@@ -19,22 +28,32 @@ const removePendingAjax = (config: AxiosRequestConfig<unknown>, cancel?: Cancele
   }
 }
 
-// 创建 axios 实例
+/**
+ * 创建 axios 实例
+ */
 export const service = axios.create({
   baseURL,
-  timeout: 10000, // 请求超时时间
+  /**
+   * 请求超时时间
+   */
+  timeout: 10000,
   headers: {
     'Content-Type': 'application/json'
   }
 })
 
-// request 请求拦截器
+/**
+ * request 请求拦截器
+ */
 service.interceptors.request.use(
   config => {
-    // 添加取消 key
+    /**
+     * 添加取消 key
+     */
     config.cancelToken = new CancelToken(cancel => {
       removePendingAjax(config, cancel)
     })
+    config.headers.Authorization = `Bearer ${store.getState().token}`
     return config
   },
   error => {
@@ -42,17 +61,27 @@ service.interceptors.request.use(
   }
 )
 
-// respone 响应拦截器
+/**
+ * respone 响应拦截器
+ */
 service.interceptors.response.use(
   response => {
     removePendingAjax(response.config)
-    return response.data?.data ?? response.data
+    return response.data
   },
-  data => {
-    const { response, message: msg } = data
+  ({ response, message: msg }) => {
     if (msg === cacelKey) return Promise.reject(msg)
-    removePendingAjax(response.config)
-
+    const { status, config, data } = response
+    removePendingAjax(config)
+    switch (status) {
+      case 401:
+        store.dispatch(authSlice.actions.logout())
+        navigateTo('/login')
+        break
+      default:
+        message.error(data.message || msg || '请求失败')
+        break
+    }
     return Promise.reject(response)
   }
 )

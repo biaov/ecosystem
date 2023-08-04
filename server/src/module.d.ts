@@ -1,12 +1,12 @@
-import { Response } from 'express'
-import { PagingResponse } from '@/middleware/types'
+import type { Response } from 'express'
+import type { PagingResponse } from '@/middleware/types'
 
 declare global {
   namespace Express {
     interface Response {
-      success(data: unknown): this
+      success(data?: unknown): this
       error(data: string): this
-      list(data: PagingResponse): this
+      paging(data: PagingResponse): this
     }
   }
 }

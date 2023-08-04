@@ -37,7 +37,7 @@ npm run build
 - `axios`: 接口请求
 - `dayjs`: 时间处理工具
 - `react`: 前端框架
-- `react-dom`: 浏览器 DOM 渲染
+- `react-dom`: 查看器 DOM 渲染
 - `react-redux`: 将 React 连接到 Redux 的连接器
 - `react-router-dom`: React 路由
 - `@types/node`: `node` 的类型
@@ -58,3 +58,42 @@ npm run build
 - `typescript`: 编程语言
 - `vite`: 项目构建工具
 - `vite-plugin-eslint`: 将 ESlint 集成到 Vite 中
+
+<!--
+http://mineapph5.app.biaov.cn/
+
+管理
+- 轮播管理
+  - 图片地址：url
+  - 跳转页面：pageUrl
+  - 展示状态：isShow
+- 公告管理
+  - 公告标题：title
+  - 公告内容：content
+  - 展示状态：isShow
+- 热点推荐
+  - 文章标题：title
+  - 封面图：coverUrl
+  - 文章内容：content
+- 功能列表
+  - 功能名称：name
+  - 功能平台：tag
+  - 功能图标：iconName
+  - 页面路径：pageUrl
+-->
+
+<!--
+首页
+功能
+  - 扫一扫
+  - 图片预览
+    - 图片下载
+    - 图片分享到微信好友
+    - 图片分享到朋友圈
+  - 截屏分享
+  - 热更新
+  - 地理定位
+  - 微信授权
+  - 登录/注册
+我的
+-->

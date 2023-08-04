@@ -1,13 +1,15 @@
 /// <reference path="./module.d.ts" />
 import express from 'express'
 import { router } from '@/router'
-import { baseURL, port } from '@/config'
 import { jsonResponse, jsonBodyParser } from '@/middleware'
+import { baseURL, port } from '@/config'
+import { sequelize } from '@/config/database'
 
 export const app = express()
 
 app.use(jsonResponse)
 app.use(jsonBodyParser)
 app.use(baseURL, router)
+sequelize.sync()
 
 import.meta.env.PROD && app.listen(port)

@@ -21,6 +21,14 @@ const config = {
       version: 'detect'
     }
   },
+  overrides: [
+    {
+      files: ['**/types.ts'],
+      rules: {
+        'no-unused-vars': 'off' // 禁止未使用的变量, ts 变量
+      }
+    }
+  ],
   rules: {
     'no-unused-vars': developmentOff, // 禁止未使用的变量
     'no-console': developmentOff, // 禁止 console
@@ -43,7 +51,10 @@ const config = {
     'vue/multi-word-component-names': 'off', // 禁止多个单词名称
     'default-case': 'off', // switch...case 一定要有 default
     'react/react-in-jsx-scope': 'off', // 一定要引入 React
-    "@typescript-eslint/no-explicit-any": 'off' // display-name 属性
+    '@typescript-eslint/no-explicit-any': 'off', // display-name 属性
+    '@typescript-eslint/no-unused-vars': developmentOff,
+    '@typescript-eslint/no-non-null-assertion': 'off',
+    '@typescript-eslint/no-empty-function': developmentOff
     // 'prettier/prettier': 'error',
     // 'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     // 'react/jsx-props-no-spreading': 'off',
