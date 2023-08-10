@@ -58,7 +58,7 @@
   },
   "h5": {
     "usingComponents": true,
-    "devServer":{}
+    "devServer": {}
   },
   "uniStatistics": {
     "enable": false

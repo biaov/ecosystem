@@ -1,4 +1,4 @@
 {
   "upgrade": true,
-  "reject": ["pinia", "typescript"]
+  "reject": ["pinia"]
 }

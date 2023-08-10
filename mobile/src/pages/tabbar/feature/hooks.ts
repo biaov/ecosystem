@@ -1,6 +1,5 @@
 import { ref } from 'vue'
 import { useStore } from '@/stores'
-import { newVersionApi } from '@/api/public'
 import { PackageInfo } from './types'
 
 /**
@@ -41,9 +40,7 @@ export const useApiTest = () => {
   /**
    * 接口请求
    */
-  const handleTest = async () => {
-    packageInfo.value = (await newVersionApi()) as PackageInfo
-  }
+  const handleTest = async () => {}
 
   return { packageInfo, handleTest }
 }

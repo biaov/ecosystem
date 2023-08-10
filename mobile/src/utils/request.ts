@@ -1,12 +1,17 @@
+import { useStore } from '@/stores'
 import { baseURL } from '@/config'
+import { useSilentAuth } from '@/composables/useSilentAuth'
+import { toast } from './function'
 
-const request = (option: UniApp.RequestOptions) => {
+const request = <T extends Record<string, unknown>>(option: UniApp.RequestOptions): Promise<T> => {
+  const state = useStore()
   const config = {
     sslVerify: false,
     dataType: 'json',
     timeout: 100000,
     ...option,
-    url: baseURL + option.url
+    url: baseURL + option.url,
+    header: { Authorization: `Bearer ${state.token}` }
   }
   return new Promise((resolve, reject) => {
     uni.request({
@@ -14,8 +19,14 @@ const request = (option: UniApp.RequestOptions) => {
       success: res => {
         const { statusCode, data } = res
         switch (statusCode) {
+          case 304:
           case 200:
-            resolve(data)
+            resolve(data as T)
+            break
+          case 401:
+            state.clearToken()
+            useSilentAuth()
+            toast('授权已过期，请重新进入小程序')
             break
           default:
             reject(res)
@@ -30,8 +41,8 @@ const request = (option: UniApp.RequestOptions) => {
 }
 
 export const service = {
-  get: (url: string, option: Partial<UniApp.RequestOptions> = {}) => request({ ...option, url, method: 'GET' }),
-  post: (url: string, option: Partial<UniApp.RequestOptions> = {}) => request({ ...option, url, method: 'POST' }),
+  get: <T extends Record<string, unknown>>(url: string, option: Partial<UniApp.RequestOptions> = {}): Promise<T> => request({ ...option, url, method: 'GET' }),
+  post: <T extends Record<string, unknown>>(url: string, option: Partial<UniApp.RequestOptions> = {}): Promise<T> => request({ ...option, url, method: 'POST' }),
   put: (url: string, option: Partial<UniApp.RequestOptions> = {}) => request({ ...option, url, method: 'PUT' }),
   delete: (url: string, option: Partial<UniApp.RequestOptions> = {}) => request({ ...option, url, method: 'DELETE' })
 }

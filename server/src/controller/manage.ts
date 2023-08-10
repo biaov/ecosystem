@@ -1,4 +1,4 @@
-import { Op } from 'sequelize'
+import { Op, where } from 'sequelize'
 import type { Request, Response } from 'express'
 import { Swiper, Notice, Recommend, Feature } from '@/model/manage'
 import { getPagingParams, getLikeParams } from '@/utils/function'
@@ -8,13 +8,22 @@ import { createLogs } from './log'
  * 轮播列表
  */
 export const getSwiper = async (req: Request, res: Response) => {
-  const { limit, offset, pageSize, current } = getPagingParams(req.query)
-  const { count, rows } = await Swiper.findAndCountAll({
-    order: [['id', 'DESC']],
-    offset,
-    limit
-  })
-  res.paging({ pageSize, current, total: count, items: rows })
+  const { limit, offset, pageSize, current, all, isShow } = getPagingParams(req.query)
+  const where: Record<string, unknown> = {}
+  isShow && (where.isShow = JSON.parse(isShow))
+
+  if (all) {
+    const items = await Swiper.findAll({ where })
+    res.success(items)
+  } else {
+    const { count, rows } = await Swiper.findAndCountAll({
+      order: [['id', 'DESC']],
+      where,
+      offset,
+      limit
+    })
+    res.paging({ pageSize, current, total: count, items: rows })
+  }
 }
 
 /**

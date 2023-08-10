@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Card, Form, Input, Button, Space, Modal, Table, message, Popconfirm, Switch, Image } from 'antd'
+import { Card, Form, Input, Button, Space, Modal, Table, message, Popconfirm, Switch, Image, Select } from 'antd'
 import { InfoCircleOutlined } from '@ant-design/icons'
 import type { ColumnsType, TablePaginationConfig } from 'antd/es/table'
 import { swiperApi } from '@/api/manage'
@@ -7,9 +7,12 @@ import type { PagingResponse } from '@/api/types'
 import { paginationRewrite, checkPermission } from '@/utils/function'
 import { errorImg } from '@/config'
 import UploadImg from '@/components/upload-img'
+import { showStatus } from '@/enums'
 import type { DataType } from './types'
 
 export default function SwiperPage() {
+  const [form] = Form.useForm()
+  const formProps = { form }
   const [tableData, setTableData] = useState<PagingResponse<DataType>>({
     items: [],
     meta: {
@@ -19,7 +22,7 @@ export default function SwiperPage() {
     }
   })
   const loadData = async ({ current, pageSize }: TablePaginationConfig = {}) => {
-    const filter: Record<string, number | undefined> = {}
+    const filter: Record<string, boolean | number | undefined> = form.getFieldsValue()
 
     if (current) {
       filter.current = current
@@ -32,6 +35,10 @@ export default function SwiperPage() {
   useEffect(() => {
     loadData()
   }, [])
+  const onReset = () => {
+    form.resetFields()
+    loadData()
+  }
   const [swiperForm] = Form.useForm()
   const modalProps = {
     form: swiperForm,
@@ -58,6 +65,12 @@ export default function SwiperPage() {
     message.success('删除成功')
   }
 
+  const handleSwitchChange = async (isShow: boolean, item: DataType) => {
+    await swiperApi.update(item.id, { isShow })
+    loadData()
+    message.success('操作成功')
+  }
+
   const columns: ColumnsType<DataType> = [
     {
       title: 'ID',
@@ -77,7 +90,7 @@ export default function SwiperPage() {
       title: '是否展示',
       dataIndex: 'isShow',
       width: 180,
-      render: (_, record) => <Switch checked={record.isShow} />
+      render: (_, record) => <Switch checked={record.isShow} onChange={e => handleSwitchChange(e, record)} />
     },
     {
       title: '创建时间',
@@ -124,6 +137,21 @@ export default function SwiperPage() {
   return (
     <>
       <Space direction="vertical" size={20} className="w-fill">
+        <Card>
+          <Form {...formProps} layout="inline">
+            <Form.Item name="isShow">
+              <Select placeholder="是否展示" options={showStatus.options()} className="w-120" />
+            </Form.Item>
+            <Form.Item>
+              <Space>
+                <Button type="primary" onClick={() => loadData()}>
+                  查询
+                </Button>
+                <Button onClick={onReset}>重置</Button>
+              </Space>
+            </Form.Item>
+          </Form>
+        </Card>
         <Card
           title="轮播管理"
           extra={

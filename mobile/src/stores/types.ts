@@ -3,4 +3,5 @@
  */
 export interface LoginData {
   token: string
+  userInfo: Record<string, unknown>
 }

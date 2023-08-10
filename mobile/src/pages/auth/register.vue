@@ -1,5 +1,5 @@
 <style scoped lang="less">
-@import './index.less';
+@import './form.less';
 </style>
 <template>
   <view class="wrap">

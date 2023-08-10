@@ -4,7 +4,7 @@ import { resolve } from 'path'
 import eslint from 'vite-plugin-eslint'
 
 export default defineConfig({
-  base: './',
+  base: '/admin',
   plugins: [eslint(), react()],
   optimizeDeps: {
     esbuildOptions: {
