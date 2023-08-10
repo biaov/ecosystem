@@ -6,8 +6,6 @@ import { sequelize } from '@/config/database'
  */
 export class User extends Model {}
 
-export class UserInfo extends Model {}
-
 User.init(
   {
     phoneNumber: {

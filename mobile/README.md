@@ -63,13 +63,9 @@ npm run build:%PLATFORM%
 - `vite-plugin-eslint`: 将 ESlint 集成到 Vite 中
 
 <!--
-npm i @dcloudio/uni-app@vue3 @dcloudio/uni-app-plus@vue3 @dcloudio/uni-components@vue3 @dcloudio/uni-h5@vue3 @dcloudio/uni-mp-alipay@vue3 @dcloudio/uni-mp-kuaishou@vue3 @dcloudio/uni-mp-weixin@vue3 @dcloudio/uni-automator@vue3 @dcloudio/uni-cli-shared@vue3 @dcloudio/uni-stacktracey@vue3 @dcloudio/vite-plugin-uni@vue3
+npm i @dcloudio/uni-app@vue3 @dcloudio/uni-app-plus@vue3 @dcloudio/uni-components@vue3 @dcloudio/uni-h5@vue3 @dcloudio/uni-mp-weixin@vue3 @dcloudio/uni-automator@vue3 @dcloudio/uni-cli-shared@vue3 @dcloudio/uni-stacktracey@vue3 @dcloudio/vite-plugin-uni@vue3
 -->
 
 <!--
 http://mineapph5.app.biaov.cn/
-| 登录/注册 | 扫一扫   | 上传图片           | 图片预览         |
-| 图片下载  | 特效预览 | 图片分享到微信好友  | 图片分享到朋友圈  |
-| 截屏分享  | 热更新   | 地理定位           | 微信授权         |
-移动端管理
 -->

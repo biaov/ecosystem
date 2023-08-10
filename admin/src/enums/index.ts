@@ -37,3 +37,34 @@ export const genderList = {
     return this.options().find(item => item.value === value)
   }
 }
+
+/**
+ * 展示状态
+ */
+export const showStatus = {
+  /**
+   * 展示
+   */
+  show: true,
+
+  /**
+   * 隐藏
+   */
+  hide: false,
+
+  options() {
+    return [
+      {
+        label: '展示',
+        value: this.show
+      },
+      {
+        label: '隐藏',
+        value: this.hide
+      }
+    ]
+  },
+  filter(value?: boolean) {
+    return this.options().find(item => item.value === value)
+  }
+}

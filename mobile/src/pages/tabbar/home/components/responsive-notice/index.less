@@ -1,0 +1,17 @@
+@keyframes notice-animation {
+  0% {
+    transform: translate(0%, -50%);
+  }
+  100% {
+    transform: translate(-100%, -50%);
+  }
+}
+.notice-list {
+  top: 50%;
+  left: 0;
+  transform: translate(0%, -50%);
+  animation: notice-animation var(--duration) linear infinite both;
+  &-item {
+    padding-left: 654rpx;
+  }
+}

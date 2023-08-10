@@ -1,4 +1,4 @@
-import { uploadImg } from '@/controller/common'
+import { uploadImg, silentAuth } from '@/controller/common'
 import { getUsers, getUserDetail, userLogin, userRegister, editPwd, updateUserDetail, deleteUser, resetUserPwd, createUser } from '@/controller/user'
 import { getRoles, getRolesDetail, createRole, updateRole, deleteRole } from '@/controller/role'
 import {
@@ -34,6 +34,13 @@ export const routes: RouteItem[] = [
     method: 'post',
     controller: uploadImg,
     upload: true
+  },
+  {
+    title: '静默授权',
+    path: '/silent-auth',
+    method: 'get',
+    controller: silentAuth,
+    token: false
   },
   /* 用户操作 */
   {

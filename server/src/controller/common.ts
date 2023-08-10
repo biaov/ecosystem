@@ -1,4 +1,5 @@
 import type { Request, Response } from 'express'
+import { sign } from 'jsonwebtoken'
 import { maxFileSize, domainName, fileDir } from '@/config'
 
 /**
@@ -17,4 +18,12 @@ export const uploadImg = async (req: Request, res: Response) => {
   } else {
     res.status(422).error('文件不存在')
   }
+}
+
+/**
+ * 静默授权
+ */
+export const silentAuth = async (req: Request, res: Response) => {
+  const token = sign({ userId: 0 }, 'secret', { expiresIn: '24h' })
+  res.success({ token })
 }
