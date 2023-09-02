@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Card, Form, Input, Button, Space, Modal, Table, message, Popconfirm, Image, Select } from 'antd'
+import { Card, Form, Input, Button, Space, Table, message, Popconfirm, Image } from 'antd'
 import { InfoCircleOutlined } from '@ant-design/icons'
 import type { ColumnsType, TablePaginationConfig } from 'antd/es/table'
 import { recommendApi } from '@/api/manage'

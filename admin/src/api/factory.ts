@@ -4,7 +4,7 @@ import { PagingResponse } from './types'
 
 export const restful = (path: string) => ({
   paging: <T>(query = {}): Promise<PagingResponse<T>> => service.get(path, { params: { current: 1, pageSize: defaultPageSize, ...query } }),
-  all: (query = {}) => service.get(path, { params: { ...query, all: true } }) as Promise<Record<string, any>[]>,
+  all: <T>(query = {}) => service.get(path, { params: { ...query, all: true } }) as Promise<T>,
   get: <T>(id: number): Promise<T> => service.get(`${path}/${id}`),
   create: (data = {}) => service.post(path, data),
   delete: (id: number) => service.delete(`${path}/${id}`),
@@ -13,6 +13,6 @@ export const restful = (path: string) => ({
 })
 
 export const command = (path: string) => ({
-  get: (query = {}) => service.get(path, { params: query }) as Promise<Record<string, any>>,
-  post: <T extends Record<string, any>>(data = {}, config = {}): Promise<T> => service.post(path, data, config)
+  get: <T>(query = {}) => service.get(path, { params: query }) as Promise<T>,
+  post: <T>(data = {}, config = {}) => service.post(path, data, config) as Promise<T>
 })

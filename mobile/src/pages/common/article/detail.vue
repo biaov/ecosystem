@@ -1,5 +1,5 @@
 <template>
-  <div>文章详情</div>
+  <view>文章详情</view>
 </template>
 
 <script setup lang="ts"></script>

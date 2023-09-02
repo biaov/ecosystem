@@ -1,4 +1,3 @@
-import { ref } from 'vue'
 import { swiperApi, noticeApi, recommendApi } from '@/api/manage'
 import type { SwiperList, NoticeList, RecommendList } from './types'
 

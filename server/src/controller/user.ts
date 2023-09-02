@@ -73,10 +73,7 @@ export const resetUserPwd = async (req: Request, res: Response) => {
  * 创建用户
  */
 export const createUser = async (req: Request, res: Response) => {
-  const {
-    params: { userId },
-    body: { roleCode, nickname, phoneNumber }
-  } = req
+  const { roleCode, nickname, phoneNumber } = req.body
 
   if (!roleCode) {
     res.status(422).error('角色为必传')
@@ -116,7 +113,7 @@ export const updateUserDetail = async (req: Request, res: Response) => {
 
   const data = await UserInfo.findByPk(id)
   if (!data) return res.status(422).error('用户不存在')
-  const [userInfo, authInfo, roleInfo] = await Promise.all([data.update(form, { where: { id } }), User.findByPk(data.getDataValue('userId')), Role.findOne({ where: { code: data!.get('roleCode') } })])
+  const [userInfo, authInfo, roleInfo] = await Promise.all([data.update(form, { where: { id } }), User.findByPk(data.getDataValue('userId')), Role.findOne({ where: { code: data.get('roleCode') } })])
   userInfo.setDataValue('permissions', roleInfo!.get('permissions'))
   userInfo.setDataValue('phnoeNumber', authInfo!.get('phoneNumber'))
   res.success(userInfo)
@@ -169,7 +166,7 @@ export const userLogin = async (req: Request, res: Response) => {
       userInfo!.setDataValue('User', undefined)
       const token = sign({ userId: userInfo!.get('id') }, 'secret', { expiresIn: '24h' })
       const roleInfo = await Role.findOne({ where: { code: userInfo!.get('roleCode') } })
-      userInfo!.setDataValue('permissions', roleInfo!.get('permissions'))
+      userInfo!.setDataValue('permissions', roleInfo?.get('permissions') ?? [])
       res.success({ id: userId, token, userInfo })
       createLogs({ params: { userId } }, { pageKey: '/setting/account', content: '登录系统' })
     } else {

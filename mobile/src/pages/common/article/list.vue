@@ -1,5 +1,5 @@
 <template>
-  <div>文章列表</div>
+  <view>文章列表</view>
 </template>
 
 <script setup lang="ts"></script>

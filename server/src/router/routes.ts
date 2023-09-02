@@ -7,6 +7,7 @@ import {
   updateSwiper,
   deleteSwiper,
   getNotice,
+  getNoticeDetail,
   createNotice,
   updateNotice,
   deleteNotice,
@@ -66,6 +67,13 @@ export const routes: RouteItem[] = [
     title: '修改用户信息',
     path: '/user/:id',
     method: 'patch',
+    controller: updateUserDetail,
+    permission: '/setting/account/edit'
+  },
+  {
+    title: '修改用户信息',
+    path: '/user/:id',
+    method: 'put',
     controller: updateUserDetail,
     permission: '/setting/account/edit'
   },
@@ -179,6 +187,12 @@ export const routes: RouteItem[] = [
     path: '/manage/notice',
     method: 'get',
     controller: getNotice
+  },
+  {
+    title: '公告详情',
+    path: '/manage/notice/:id',
+    method: 'get',
+    controller: getNoticeDetail
   },
   {
     title: '新增公告',

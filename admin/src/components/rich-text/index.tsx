@@ -4,7 +4,7 @@ import 'react-quill/dist/quill.snow.css'
 import type { Props } from './types'
 
 export default function richTextComponent(props: Partial<Props> = {}) {
-  const { value = '', onChange = () => {} } = props
+  const { value = '', onChange } = props
   const [richTextValue, setRichTextValue] = useState('')
 
   useEffect(() => {
@@ -35,7 +35,7 @@ export default function richTextComponent(props: Partial<Props> = {}) {
 
   const onChangeRichText = (val: string) => {
     setRichTextValue(val)
-    onChange(val)
+    onChange && onChange(val)
   }
 
   return <ReactQuill placeholder="请输入内容" theme="snow" {...{ richTextValue, modules }} style={{ height: '300px', marginBottom: '43px' }} onChange={onChangeRichText} />

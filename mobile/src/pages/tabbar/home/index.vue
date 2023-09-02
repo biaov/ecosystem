@@ -15,15 +15,15 @@
       <view class="grid grid-2 grid-gap-20 w-fill">
         <view class="bg-white hidden" v-for="(item, index) in recommendList" :key="index" @click="onClickRecommendItem(item)">
           <image :src="item.coverUrl" mode="widthFix" class="w-fill"></image>
-          <div class="p-lr-30 p-tb-20">
+          <view class="p-lr-30 p-tb-20">
             <view class="color-85 text-ellipsis fs-26">{{ item.title }}</view>
             <view class="color-45">{{ item.createdAt }}</view>
-          </div>
+          </view>
         </view>
       </view>
       <view class="flex flex-cc p-tb-30 color-65" @click="onMoreRecommend">
         <text class="color-primary">更多内容</text>
-        <image src="/static/icon/arrow-right-primary.svg" mode="widthFix" class="w-30"></image>
+        <image src="/static/icon/arrow-right-primary.png" mode="widthFix" class="w-30"></image>
       </view>
     </view>
     <view class="flex flex-ac p-t-30 color-45" v-else>暂无推荐</view>
@@ -31,8 +31,6 @@
 </template>
 
 <script setup lang="ts">
-import { useSilentAuth } from '@/composables/useSilentAuth'
-import ResponsiveNotice from './components/responsive-notice/index.vue'
 import { useSwiper, useNotice, useRecommend } from './hooks'
 
 const { swiperList, loadSwiperData, onClickSwiperItem } = useSwiper()

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { PlusOutlined } from '@ant-design/icons'
 import { Modal, Upload, message, Image } from 'antd'
 import type { RcFile, UploadProps } from 'antd/es/upload'
@@ -12,7 +12,7 @@ import Styles from './index.module.less'
  * 上传图片组件
  */
 export default function UploadImgComponent(props: Partial<Props>) {
-  const { list = [], onChange = () => {} } = props ?? {}
+  const { list = [], onChange } = props ?? {}
   const [previewOpen, setPreviewOpen] = useState(false)
   const [previewImage, setPreviewImage] = useState('')
   const [fileList, setFileList] = useState<UploadFile[]>([])
@@ -30,7 +30,7 @@ export default function UploadImgComponent(props: Partial<Props>) {
   }
 
   const handleChange: UploadProps['onChange'] = ({ fileList: newFileList }) => {
-    onChange(getEmitList(newFileList))
+    onChange && onChange(getEmitList(newFileList))
     setFileList(newFileList)
   }
 
@@ -59,7 +59,7 @@ export default function UploadImgComponent(props: Partial<Props>) {
             item.status = 'done'
           }
         })
-        onChange(getEmitList(fileList))
+        onChange && onChange(getEmitList(fileList))
         setFileList(fileList)
       })
       .catch(() => {

@@ -80,7 +80,9 @@ export const verifyToken = async (req: Request, res: Response, next: NextFunctio
  */
 export const verifyPermission = (value: string | string[]) => async (req: Request, res: Response, next: NextFunction) => {
   const { userId } = req.params
+  console.log(userId, '--userId')
   const userInfo = await UserInfo.findByPk(userId)
+  if (!userInfo) return res.status(422).error('用户不存在')
   const roleInfo = await Role.findOne({ where: { code: userInfo!.get('roleCode') } })
   if (roleInfo) {
     const permissions = roleInfo.get('permissions') as string[]

@@ -23,6 +23,7 @@ export default function TechnologyStackComponent() {
 
   const renderChart = () => {
     const proportionDom = document.getElementById('proportion')
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     if (!proportionDom) return () => {}
     proportionDom.innerHTML = ''
 

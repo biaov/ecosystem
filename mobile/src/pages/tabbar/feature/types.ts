@@ -1,6 +1,7 @@
-/**
- * 包信息
- */
-export interface PackageInfo {
-  version?: string
+export interface ListItem {
+  id: number
+  name: string
+  iconName: string
+  pageUrl: string
+  platforms: string[]
 }
