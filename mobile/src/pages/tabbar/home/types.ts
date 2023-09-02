@@ -9,17 +9,6 @@ export namespace SwiperList {
   }
 }
 
-/**
- * 公告
- */
-export namespace NoticeList {
-  export interface ListItem {
-    id: number
-    title: string
-    pageUrl: string
-    content: string
-  }
-}
 
 /**
  * 热点推荐

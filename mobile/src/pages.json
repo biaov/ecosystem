@@ -10,13 +10,14 @@
     {
       "path": "pages/tabbar/feature/index",
       "style": {
-        "navigationBarTitleText": "功能"
+        "navigationBarTitleText": "功能列表"
       }
     },
     {
       "path": "pages/tabbar/mine/index",
       "style": {
-        "navigationBarTitleText": "我的"
+        "navigationBarTitleText": "我的",
+        "navigationStyle": "custom"
       }
     }
   ],
@@ -81,6 +82,41 @@
           "style": {
             "navigationBarTitleText": "图片预览"
           }
+        },
+        {
+          "path": "svg-color",
+          "style": {
+            "navigationBarTitleText": "SVG动态颜色"
+          }
+        },
+        {
+          "path": "wechat-auth",
+          "style": {
+            "navigationBarTitleText": "微信授权"
+          }
+        }
+      ]
+    },
+    {
+      "root": "pages/user",
+      "pages": [
+        {
+          "path": "info",
+          "style": {
+            "navigationBarTitleText": "用户信息"
+          }
+        },
+        {
+          "path": "help",
+          "style": {
+            "navigationBarTitleText": "帮助中心"
+          }
+        },
+        {
+          "path": "about",
+          "style": {
+            "navigationBarTitleText": "关于我们"
+          }
         }
       ]
     }
@@ -93,20 +129,20 @@
       {
         "pagePath": "pages/tabbar/home/index",
         "text": "首页",
-        "iconPath": "static/tabBar/home.png",
-        "selectedIconPath": "static/tabBar/home-select.png"
+        "iconPath": "static/tabbar/home.png",
+        "selectedIconPath": "static/tabbar/home-select.png"
       },
       {
         "pagePath": "pages/tabbar/feature/index",
         "text": "功能",
-        "iconPath": "static/tabBar/feature.png",
-        "selectedIconPath": "static/tabBar/feature-select.png"
+        "iconPath": "static/tabbar/feature.png",
+        "selectedIconPath": "static/tabbar/feature-select.png"
       },
       {
         "pagePath": "pages/tabbar/mine/index",
         "text": "我的",
-        "iconPath": "static/tabBar/mine.png",
-        "selectedIconPath": "static/tabBar/mine-select.png"
+        "iconPath": "static/tabbar/mine.png",
+        "selectedIconPath": "static/tabbar/mine-select.png"
       }
     ]
   },

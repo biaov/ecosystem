@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Card, Form, Input, Button, Space, Modal, Table, message, Popconfirm, Switch, Select, Tag } from 'antd'
+import { Card, Form, Input, Button, Space, Modal, Table, message, Popconfirm, Select, Tag } from 'antd'
 import { InfoCircleOutlined } from '@ant-design/icons'
 import type { ColumnsType, TablePaginationConfig } from 'antd/es/table'
 import { featureApi } from '@/api/manage'

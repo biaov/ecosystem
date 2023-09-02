@@ -8,22 +8,16 @@ import { createLogs } from './log'
  * 轮播列表
  */
 export const getSwiper = async (req: Request, res: Response) => {
-  const { limit, offset, pageSize, current, all, isShow } = getPagingParams(req.query)
+  const { limit, offset, pageSize, current, isShow } = getPagingParams(req.query)
   const where: Record<string, unknown> = {}
   isShow && (where.isShow = JSON.parse(isShow))
-
-  if (all) {
-    const items = await Swiper.findAll({ where })
-    res.success(items)
-  } else {
-    const { count, rows } = await Swiper.findAndCountAll({
-      order: [['id', 'DESC']],
-      where,
-      offset,
-      limit
-    })
-    res.paging({ pageSize, current, total: count, items: rows })
-  }
+  const { count, rows } = await Swiper.findAndCountAll({
+    order: [['id', 'DESC']],
+    where,
+    offset,
+    limit
+  })
+  res.paging({ pageSize, current, total: count, items: rows })
 }
 
 /**
@@ -73,8 +67,9 @@ export const deleteSwiper = async (req: Request, res: Response) => {
  * 公告列表
  */
 export const getNotice = async (req: Request, res: Response) => {
-  const { limit, offset, pageSize, current, title } = getPagingParams(req.query)
+  const { limit, offset, pageSize, current, title, isShow } = getPagingParams(req.query)
   const where = getLikeParams({ title })
+  isShow && (where.isShow = JSON.parse(isShow))
   const { count, rows } = await Notice.findAndCountAll({
     order: [['id', 'DESC']],
     where,
@@ -82,6 +77,16 @@ export const getNotice = async (req: Request, res: Response) => {
     limit
   })
   res.paging({ pageSize, current, total: count, items: rows })
+}
+
+/**
+ * 公告详情
+ */
+export const getNoticeDetail = async (req: Request, res: Response) => {
+  const { id } = req.params
+  const data = await Notice.findByPk(id)
+  if (!data) return res.status(422).error('公告不存在')
+  res.success(data)
 }
 
 /**

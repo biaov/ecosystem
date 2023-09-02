@@ -1,12 +1,12 @@
-import { useForm } from '@/composables/useForm'
 import { useStore } from '@/stores'
-import { loginApi } from '@/api/auth'
+import type { UserInfo } from '@/stores/types'
+import { loginApi, registerApi } from '@/api/auth'
 import { toast } from '@/utils/function'
 
 /**
- * 操作
+ * 登录
  */
-export const useHandle = () => {
+export const useLogin = () => {
   const store = useStore()
   const { formState, setFormRule, validatorForm } = useForm({ phoneNumber: '18888888888', password: '123456' })
   setFormRule({
@@ -14,10 +14,14 @@ export const useHandle = () => {
     password: { required: true, message: '请输入密码' }
   })
 
+  const onRegister = () => {
+    uni.navigateTo({ url: '/pages/auth/register' })
+  }
+
   const handleLogin = async () => {
     if (!(await validatorForm())) return
     loginApi
-      .post<{ token: string; userInfo: Record<string, unknown> }>(formState.value)
+      .post<{ token: string; userInfo: UserInfo }>(formState.value)
       .then(data => {
         store.login(data)
         uni.navigateBack()
@@ -27,5 +31,36 @@ export const useHandle = () => {
       })
   }
 
-  return { formState, handleLogin }
+  return { formState, handleLogin, onRegister }
+}
+
+/**
+ * 注册
+ */
+export const useRegister = () => {
+  const { formState, setFormRule, validatorForm } = useForm({ phoneNumber: '18888888888', password: '123456' })
+  setFormRule({
+    phoneNumber: { required: true, message: '请输入手机号码' },
+    password: { required: true, message: '请输入密码' },
+    cPassword: { required: true, message: '请输入确认密码' }
+  })
+
+  const onLogin = () => {
+    uni.navigateBack()
+  }
+
+  const handleRegister = async () => {
+    if (!(await validatorForm())) return
+    registerApi
+      .post(formState.value)
+      .then(() => {
+        toast('注册成功')
+        setTimeout(onLogin, 1500)
+      })
+      .catch(error => {
+        toast(error.data.message)
+      })
+  }
+
+  return { formState, handleRegister, onLogin }
 }
