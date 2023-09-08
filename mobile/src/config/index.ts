@@ -1,3 +1,13 @@
+let currentBaseURL: string
+
+// #ifdef H5
+currentBaseURL = '/api'
+// #endif
+
+// #ifndef H5
+currentBaseURL = 'http://127.0.0.1:3600/api'
+// #endif
+
 /**
  * 本地 IP
  * 对于 APP 端不能使用 127.0.0.1，所以需要使用本地 IP
