@@ -14,6 +14,9 @@
 </template>
 
 <script setup lang="ts">
+/**
+ * 按钮列表
+ */
 const btns = ref([
   {
     name: '获取手机号',
@@ -41,5 +44,3 @@ const btns = ref([
   }
 ])
 </script>
-
-<style scoped lang="less"></style>

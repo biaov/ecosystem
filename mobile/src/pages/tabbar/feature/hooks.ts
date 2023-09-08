@@ -17,19 +17,19 @@ export const useFeature = () => {
   const onClickFeatureItem = (item: ListItem) => {
     // #ifdef APP-PLUS
     if (!item.platforms.includes(platforms.app)) {
-      toast('不属于此平台端功能')
+      toast('不属于此平台功能')
       return
     }
     // #endif
     // #ifdef H5
     if (!item.platforms.includes(platforms.h5)) {
-      toast('不属于此平台端功能')
+      toast('不属于此平台功能')
       return
     }
     // #endif
     // #ifdef MP-WEIXIN
     if (!item.platforms.includes(platforms.miniprogram)) {
-      toast('不属于此平台端功能')
+      toast('不属于此平台功能')
       return
     }
     // #endif

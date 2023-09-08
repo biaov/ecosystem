@@ -5,6 +5,9 @@
 </template>
 
 <script setup lang="ts">
+/**
+ * 颜色
+ */
 const colors = [
   '#2d8cf0',
   '#19be6b',
@@ -28,15 +31,21 @@ const colors = [
   '#e877ae',
   '#fca65e'
 ]
+
+/**
+ * 图片地址
+ */
 const urls = colors.map(color => {
   const bg = color.slice(1).toUpperCase()
   return `https://dummyimage.com/200x200/${bg}/fff&text=${bg}`
 })
+
+/**
+ * 图片预览
+ */
 const onPreview = () => {
   uni.previewImage({
     urls
   })
 }
 </script>
-
-<style scoped lang="less"></style>

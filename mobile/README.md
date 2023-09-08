@@ -14,6 +14,11 @@ npm i
 npm run dev:%PLATFORM%
 ```
 
+### 非 H5 平台
+
+- 更改本地请求 IP：`src/config/index.ts`
+- 对于 APP 端不能使用 127.0.0.1，所以需要使用本地 IP
+
 ## 打包项目
 
 ```Basic

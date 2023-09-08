@@ -115,7 +115,7 @@ export const updateUserDetail = async (req: Request, res: Response) => {
   if (!data) return res.status(422).error('用户不存在')
   const [userInfo, authInfo, roleInfo] = await Promise.all([data.update(form, { where: { id } }), User.findByPk(data.getDataValue('userId')), Role.findOne({ where: { code: data.get('roleCode') } })])
   userInfo.setDataValue('permissions', roleInfo!.get('permissions'))
-  userInfo.setDataValue('phnoeNumber', authInfo!.get('phoneNumber'))
+  userInfo.setDataValue('phoneNumber', authInfo!.get('phoneNumber'))
   res.success(userInfo)
   createLogs(req, { pageKey: '/setting/account', content: `修改用户信息：${userInfo.get('nickname')}` })
 }

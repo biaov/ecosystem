@@ -3,6 +3,9 @@ import { baseURL } from '@/config'
 import { toast } from './function'
 import type { RequestType } from './types'
 
+/**
+ * 请求
+ */
 const request = <T extends Record<string, unknown>>(option: UniApp.RequestOptions, type: RequestType = 'request'): Promise<T> => {
   const state = useStore()
   const baseConfig = {
@@ -65,6 +68,9 @@ const request = <T extends Record<string, unknown>>(option: UniApp.RequestOption
   })
 }
 
+/**
+ * 请求服务封装
+ */
 export const service = {
   get: <T extends Record<string, unknown>>(url: string, option: Partial<UniApp.RequestOptions> = {}): Promise<T> => request({ ...option, url, method: 'GET' }),
   post: <T extends Record<string, unknown>>(url: string, option: Partial<UniApp.RequestOptions> = {}): Promise<T> => request({ ...option, url, method: 'POST' }),

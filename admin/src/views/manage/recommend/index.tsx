@@ -63,6 +63,10 @@ export default function RecommendPage() {
       render: (_, record) => <Image src={record.coverUrl} height={40}></Image>
     },
     {
+      title: '页面地址',
+      dataIndex: 'pageUrl'
+    },
+    {
       title: '创建时间',
       dataIndex: 'createdAt',
       width: 180

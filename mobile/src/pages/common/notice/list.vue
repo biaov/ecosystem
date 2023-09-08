@@ -21,6 +21,9 @@ const { listData, loadData, loadingStatus } = usePagingRequest<NoticeDataType>(<
 
 onReachBottom(loadData)
 
+/**
+ * 点击列表项
+ */
 const onClickItem = (item: NoticeDataType) => {
   uni.navigateTo({
     url: `/pages/common/notice/detail?id=${item.id}`

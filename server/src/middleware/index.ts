@@ -63,8 +63,6 @@ export const verifyToken = async (req: Request, res: Response, next: NextFunctio
   if (token) {
     try {
       const { userId } = verify(token, 'secret') as JwtPayload
-      // const userInfo = await UserInfo.findByPk(userId)
-      // if (!userInfo) return res.status(401).error('用户不存在')
       req.params.userId = userId
       next()
     } catch {

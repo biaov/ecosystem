@@ -13,14 +13,14 @@ export const useCell = () => {
       needLogin: true
     },
     {
-      iconName: 'list',
-      name: '文章列表',
-      url: '/pages/common/article/list'
-    },
-    {
       iconName: 'notice',
       name: '公告列表',
       url: '/pages/common/notice/list'
+    },
+    {
+      iconName: 'list',
+      name: '文章列表',
+      url: '/pages/common/article/list'
     },
     {
       iconName: 'help',

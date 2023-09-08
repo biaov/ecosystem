@@ -27,5 +27,3 @@ onLoad(({ id } = {}) => {
   loadData()
 })
 </script>
-
-<style scoped lang="less"></style>

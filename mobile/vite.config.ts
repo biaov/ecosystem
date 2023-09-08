@@ -6,10 +6,8 @@ import autoImport from 'unplugin-auto-import/vite'
 import components from 'unplugin-vue-components/vite'
 
 export default defineConfig({
-  base: './',
   plugins: [
     eslint(),
-    uni(),
     autoImport({
       imports: ['vue', { '@dcloudio/uni-app': ['onLaunch', 'onShow', 'onHide', 'onLoad', 'onReady', 'onReachBottom'] }],
       dirs: ['./src/composables'],
@@ -25,7 +23,8 @@ export default defineConfig({
       include: [/\.vue$/, /\.vue\?vue/],
       exclude: [/node_modules/, 'types.ts'],
       dts: './types/components.d.ts'
-    })
+    }),
+    uni()
   ],
   server: {
     host: '0.0.0.0',

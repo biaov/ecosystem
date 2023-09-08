@@ -2,7 +2,7 @@ import path from 'path'
 import { Router } from 'express'
 import multer from 'multer'
 import { verifyToken, verifyPermission } from '@/middleware'
-import { fileDir } from '@/config'
+import { uploadDir } from '@/config'
 import { randomId } from '@/utils/function'
 import { routes } from './routes'
 
@@ -10,7 +10,7 @@ export const router = Router()
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, `${process.cwd()}/${fileDir}`)
+    cb(null, `${process.cwd()}/${uploadDir}`)
   },
   filename: (req, file, cb) => {
     const extname = path.extname(file.originalname)

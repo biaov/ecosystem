@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express'
 import { sign } from 'jsonwebtoken'
-import { maxFileSize, domainName, fileDir } from '@/config'
+import { maxFileSize, domainName, uploadDir } from '@/config'
 
 /**
  * 上传图片
@@ -13,7 +13,7 @@ export const uploadImg = async (req: Request, res: Response) => {
     if (size > maxFileSize) {
       res.status(422).error('文件过大，请上传不超过1M的图片')
     } else {
-      res.success({ url: domainName + fileDir + filename })
+      res.success({ url: domainName + uploadDir + filename })
     }
   } else {
     res.status(422).error('文件不存在')

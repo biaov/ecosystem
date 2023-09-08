@@ -26,6 +26,7 @@ const onClick = (item: NoticeList.ListItem) => {
   emit('clickItem', item)
 }
 const instance = getCurrentInstance()
+
 /**
  * 获取容器宽度
  */

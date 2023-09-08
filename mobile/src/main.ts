@@ -6,7 +6,5 @@ export function createApp() {
   const app = createSSRApp(App)
   app.use(plugins)
 
-  return {
-    app
-  }
+  return { app }
 }

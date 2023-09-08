@@ -1,7 +1,7 @@
 <template>
-  <swiper circular indicator-dots indicator-color="#fff" indicator-active-color="#409eff" class="w-fill" :style="{ height: swiperHeight + 'px' }" @change="onChange">
+  <swiper circular indicator-dots indicator-color="#fff" indicator-active-color="#409eff" class="w-fill" :style="{ height: swiperHeight, opacity: imgLoading ? 0 : 1 }" @change="onChange">
     <swiper-item v-for="(item, index) in list" :key="index" class="fs-0" @click="onClick(item)">
-      <image :src="item.url" mode="widthFix" class="w-fill" @load="onLoadImg(item, index)"></image>
+      <image :src="item.url" mode="widthFix" class="w-fill" @load="onLoadImg($event, index)"></image>
     </swiper-item>
   </swiper>
 </template>
@@ -9,31 +9,58 @@
 import type { ResponsiveSwiper } from './types'
 
 const emit = defineEmits(['clickItem'])
-withDefaults(
+const props = withDefaults(
   defineProps<{
     /**
      * 列表数据
      */
     list: ResponsiveSwiper.ListItem[]
+    containerWidth?: number
   }>(),
   {
-    list: () => []
+    list: () => [],
+    containerWidth: 750
   }
 )
+
+/**
+ * 点击轮播
+ */
 const onClick = (item: ResponsiveSwiper.ListItem) => {
   emit('clickItem', item)
 }
-const swiperHeight = ref(300)
-const heightGroup = ref<number[]>([])
-const onLoadImg = (item: ResponsiveSwiper.ListItem, index: number) => {
-  uni.getImageInfo({
-    src: item.url,
-    success: ({ height }) => {
-      heightGroup.value[index] = height
-      !index && (swiperHeight.value = height)
-    }
-  })
+
+/**
+ * 图片加载状态
+ */
+const imgLoading = ref(true)
+
+/**
+ * 轮播高度
+ */
+const swiperHeight = ref('300rpx')
+
+/**
+ * 图片高度集合
+ */
+const heightGroup = ref<string[]>([])
+
+/**
+ * 图片加载完成
+ */
+const onLoadImg = (e: any, index: number) => {
+  const { width, height } = e.detail
+  const viewHeight = `${~~((height / width) * props.containerWidth)}rpx`
+  heightGroup.value[index] = viewHeight
+  if (!index) {
+    swiperHeight.value = viewHeight
+    imgLoading.value = false
+  }
 }
+
+/**
+ * 切换轮播
+ */
 const onChange = (e: ResponsiveSwiper.ChangeProps) => {
   const height = heightGroup.value[e.detail.current]
   height && (swiperHeight.value = height)
