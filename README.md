@@ -30,10 +30,14 @@ git clone https://github.com/biaov/ecosystem.git --depth=1
 ## 演示地址
 
 - [控制台](http://ecosystem.biaov.cn/admin/)
-- 微信小程序搜索 `ecosystem`
 - [H5](http://ecosystem.biaov.cn/)
 - [APP](https://github.com/biaov/ecosystem/releases)
 - [服务端接口文档](https://www.showdoc.com.cn/2302761390308442/10396968490372348)
+- ⚠⚠⚠ 微信小程序搜索 `ecosystem`
+  - 由于微信小程序审核问题，所以不能使用正式版，如果想体验，可以申请体验版
+  - 体验版需要作者同意，所以申请等作者同意之后，再扫码体验
+  - 小程序体验码:
+<img src="https://ecosystem.biaov.cn/uploads/trial-version.jpg" width="200px" height="200px" />
 
 ## 贡献者们
 
