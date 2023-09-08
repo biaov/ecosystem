@@ -12,4 +12,8 @@ app.use(jsonBodyParser)
 app.use(baseURL, router)
 sequelize.sync()
 
-import.meta.env.PROD && app.listen(port)
+if (import.meta.env.PROD) {
+  app.listen(port)
+} else {
+  app.use('/uploads', express.static('uploads'))
+}

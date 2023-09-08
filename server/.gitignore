@@ -2,3 +2,5 @@
 /dist
 /.git
 /uploads
+/.env.local
+/back

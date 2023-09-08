@@ -13,7 +13,7 @@ const config = {
     defineSlots: 'readonly',
     defineOptions: 'readonly'
   },
-  extends: ['plugin:vue/vue3-essential', 'airbnb-base', 'plugin:prettier/recommended'],
+  extends: ['plugin:vue/vue3-essential', 'airbnb-base', 'plugin:prettier/recommended', './types/.eslintrc-auto-import.json'],
   parserOptions: {
     ecmaVersion: 14,
     parser: '@typescript-eslint/parser',
@@ -61,7 +61,8 @@ const config = {
     'no-multi-assign': 'off', // 禁止连续赋值
     'no-restricted-exports': 'off', // 禁止默认导出
     'vue/multi-word-component-names': 'off', // 禁止多个单词名称
-    'default-case': 'off' // switch...case 一定要有 default
+    'default-case': 'off', // switch...case 一定要有 default
+    'consistent-return': 'off' // 函数末尾返回值
   }
 }
 

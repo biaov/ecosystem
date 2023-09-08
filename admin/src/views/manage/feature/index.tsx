@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Card, Form, Input, Button, Space, Modal, Table, message, Popconfirm, Switch, Select, Tag } from 'antd'
+import { Card, Form, Input, Button, Space, Modal, Table, message, Popconfirm, Select, Tag } from 'antd'
 import { InfoCircleOutlined } from '@ant-design/icons'
 import type { ColumnsType, TablePaginationConfig } from 'antd/es/table'
 import { featureApi } from '@/api/manage'
@@ -160,7 +160,7 @@ export default function FeaturePage() {
       <Modal title={feature.id ? '编辑功能' : '新增功能'} open={feature.visible} onOk={handleFeature} onCancel={() => setFeature({ ...feature, visible: false })}>
         <Form {...modalProps}>
           <Form.Item name="name" label="功能名称" rules={[{ required: true, message: '请输入功能名称' }]}>
-            <Input placeholder="请输入功能名称，不超过6个字" maxLength={6} allowClear />
+            <Input placeholder="请输入功能名称，不超过6个字" maxLength={10} allowClear />
           </Form.Item>
           <Form.Item name="iconName" label="图标名称" rules={[{ required: true, message: '请输入图标名称' }]}>
             <Input placeholder="请输入图标名称" allowClear />

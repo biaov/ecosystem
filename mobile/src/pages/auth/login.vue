@@ -11,11 +11,15 @@
       <input type="password" v-model="formState.password" placeholder="请输入密码" class="input" placeholder-class="input-placeholder" />
     </view>
     <view class="btn btn-primary" @click="handleLogin">登录</view>
+    <view class="p-t-30" @click="onRegister">
+      还没有账号，去
+      <text class="color-primary">注册</text>
+    </view>
   </view>
 </template>
 
 <script setup lang="ts">
-import { useHandle } from './hooks'
+import { useLogin } from './hooks'
 
-const { formState, handleLogin } = useHandle()
+const { formState, handleLogin, onRegister } = useLogin()
 </script>

@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { Card, Form, Input, Button, Space, Modal, Table, message, Popconfirm, Image, Select } from 'antd'
+import { useEffect } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
+import { Card, Form, Input, Button, Space, message } from 'antd'
 import { recommendApi } from '@/api/manage'
 import UploadImg from '@/components/upload-img'
 import RichText from '@/components/rich-text'
@@ -9,24 +9,25 @@ import { DataType } from './types'
 export default function RecommendDetailPage() {
   const { id } = useParams()
   const [form] = Form.useForm()
+  const navigate = useNavigate()
 
   const onFinish = async (values: Record<string, unknown>) => {
-    console.log(values, '--')
+    const [coverUrl] = values.coverUrl as string[]
+    const params = { ...values, coverUrl }
+    await recommendApi.create(params)
+    message.success('操作成功')
+    navigate(-1)
   }
   const formProps = {
     form,
     labelCol: { span: 4 },
     wrapperCol: { span: 20 },
-    onFinish,
-    onFinishFailed: (errorInfo: any) => {
-      console.log('Failed:', errorInfo)
-    }
+    onFinish
   }
-  const [pageData, setPageData] = useState<Partial<DataType>>({})
   const loadData = async () => {
     if (!id) return
     const res = await recommendApi.get<DataType>(+id)
-    setPageData(res)
+    form.setFieldsValue({ ...res, coverUrl: [res.coverUrl] })
   }
   useEffect(() => {
     loadData()
@@ -41,6 +42,9 @@ export default function RecommendDetailPage() {
         <Form.Item label="封面图" name="coverUrl" valuePropName="list" rules={[{ required: true, message: '请上传封面图' }]}>
           <UploadImg></UploadImg>
         </Form.Item>
+        <Form.Item name="pageUrl" label="页面地址" rules={[{ required: true, message: '请输入页面地址' }]}>
+          <Input placeholder="请输入页面地址" />
+        </Form.Item>
         <Form.Item name="content" label="文章内容" rules={[{ required: true, message: '请输入文章内容' }]}>
           <RichText></RichText>
         </Form.Item>
@@ -49,7 +53,13 @@ export default function RecommendDetailPage() {
             <Button type="primary" htmlType="submit">
               确定
             </Button>
-            <Button>取消</Button>
+            <Button
+              onClick={() => {
+                navigate(-1)
+              }}
+            >
+              取消
+            </Button>
           </Space>
         </Form.Item>
       </Form>

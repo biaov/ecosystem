@@ -16,7 +16,7 @@
     "ncu": "ncu --configFileName .ncurc.json && npm i"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=16"
   },
   "license": "ISC",
   "contributors": [

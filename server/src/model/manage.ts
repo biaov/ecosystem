@@ -63,6 +63,9 @@ Recommend.init(
     coverUrl: {
       type: DataTypes.STRING
     },
+    pageUrl: {
+      type: DataTypes.STRING
+    },
     content: {
       type: DataTypes.TEXT
     }

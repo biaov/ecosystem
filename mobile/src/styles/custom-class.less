@@ -16,6 +16,10 @@
     background: @color-primary;
     color: @color-white;
   }
+  &-danger {
+    background: @color-danger;
+    color: @color-white;
+  }
 }
 
 .input {
@@ -93,6 +97,9 @@ each(@gridColumn,{
   &-ac {
     justify-content: center;
   }
+  &-end {
+    justify-content: flex-end;
+  }
   &-dc {
     align-items: center;
   }
@@ -105,15 +112,22 @@ each(@gridColumn,{
   &-1 {
     flex: 1;
   }
+  &-sb {
+    justify-content: space-between;
+  }
 }
 
 // 宽度高度
 @width: {
   fill: 100%;
   fill-half: 50%;
+  auto: auto;
   0: 0rpx;
+  20: 20rpx;
   30: 30rpx;
   40: 40rpx;
+  100: 100rpx;
+  200: 200rpx;
 };
 each(@width,{
   .w-@{key}{
@@ -126,8 +140,10 @@ each(@width,{
   fill: 100%;
   0: 0rpx;
   20: 20rpx;
+  30: 30rpx;
   40: 40rpx;
   80: 80rpx;
+  100: 100rpx;
 };
 each(@height,{
   .h-@{key}{
@@ -157,6 +173,7 @@ each(@fontSize,{
 @color: {
   primary: @color-primary;
   white: @color-white;
+  white-85: rgba(@color-white, 85%);
   primary: @color-primary;
   success: @color-success;
   info: @color-info;
@@ -179,9 +196,13 @@ each(@color,{
 // 间距
 @gap: {
   0: 0px;
-  16: 16px;
+  6: 6rpx;
+  10: 10rpx;
+  16: 16rpx;
   20: 20rpx;
   30: 30rpx;
+  40: 40rpx;
+  100: 100rpx;
 };
 each(@gap,{
   .p-@{key}{
@@ -247,3 +268,21 @@ each(@position,{
 .nowrap {
   white-space: nowrap;
 }
+
+.border-bottom {
+  border-bottom: 1px solid @color-border;
+}
+
+.br-4 {
+  border-radius: 4rpx;
+}
+.br-half {
+  border-radius: 50%;
+}
+
+@align: left, center, right, justify;
+each(@align,{
+  .align-@{value}{
+    text-align: @value !important;
+  }
+});

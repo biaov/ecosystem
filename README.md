@@ -1,4 +1,4 @@
-# ecosystem - 未上线 · 开发中
+# ecosystem
 
 一个简单的生态系统，包含 APP，H5，微信小程序，控制台，服务端 😄
 
@@ -10,7 +10,7 @@
 ## 项目结构
 
 - `admin`: `vite + react` 控制台
-- `mobile`: `vite + uni-app`，包含 APP, H5, 微信小程序
+- `mobile`: `vite + uni-app` 包含 APP, H5, 微信小程序
 - `server`: `vite + node` 服务端，包含控制台和 APP 的接口
 
 ## 项目启动

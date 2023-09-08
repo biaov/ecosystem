@@ -63,8 +63,6 @@ export const verifyToken = async (req: Request, res: Response, next: NextFunctio
   if (token) {
     try {
       const { userId } = verify(token, 'secret') as JwtPayload
-      // const userInfo = await UserInfo.findByPk(userId)
-      // if (!userInfo) return res.status(401).error('用户不存在')
       req.params.userId = userId
       next()
     } catch {
@@ -81,6 +79,7 @@ export const verifyToken = async (req: Request, res: Response, next: NextFunctio
 export const verifyPermission = (value: string | string[]) => async (req: Request, res: Response, next: NextFunction) => {
   const { userId } = req.params
   const userInfo = await UserInfo.findByPk(userId)
+  if (!userInfo) return res.status(422).error('用户不存在')
   const roleInfo = await Role.findOne({ where: { code: userInfo!.get('roleCode') } })
   if (roleInfo) {
     const permissions = roleInfo.get('permissions') as string[]

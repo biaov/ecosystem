@@ -16,8 +16,8 @@ export namespace NoticeList {
   export interface ListItem {
     id: number
     title: string
-    pageUrl: string
     content: string
+    pageUrl: string
   }
 }
 

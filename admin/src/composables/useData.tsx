@@ -9,7 +9,7 @@ export const useRoles = ({ loading }: UseRolesParams = { loading: true }) => {
   const [roles, setRoles] = useState<Record<string, any>[]>([])
 
   const loadRoles = async (filter: Record<string, any> = {}) => {
-    const data = await roleApi.all(filter)
+    const data = await roleApi.all<Record<string, any>[]>(filter)
     const newList = data.map(item => ({ ...item, label: item.name, value: item.code }))
     setRoles(newList)
   }

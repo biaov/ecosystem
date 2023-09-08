@@ -1,6 +1,10 @@
 /**
- * 包信息
+ * 列表项类型
  */
-export interface PackageInfo {
-  version?: string
+export interface ListItem {
+  id: number
+  name: string
+  iconName: string
+  pageUrl: string
+  platforms: string[]
 }

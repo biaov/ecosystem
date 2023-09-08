@@ -2,8 +2,6 @@
   <image :src="imageValue" :mode="mode" :style="{ width, height }"></image>
 </template>
 <script lang="ts" setup>
-import { ref, watch } from 'vue'
-
 const emit = defineEmits(['load'])
 const props = withDefaults(
   defineProps<{

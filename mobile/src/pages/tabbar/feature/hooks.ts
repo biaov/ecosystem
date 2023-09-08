@@ -1,46 +1,40 @@
-import { ref } from 'vue'
-import { useStore } from '@/stores'
-import { PackageInfo } from './types'
+import { featureApi } from '@/api/manage'
+import { toast } from '@/utils/function'
+import { platforms } from './enums'
+import { ListItem } from './types'
 
 /**
- * 操作
+ * 功能
  */
-export const useHandle = () => {
-  const store = useStore()
+export const useFeature = () => {
+  const featureList = ref<ListItem[]>([])
 
-  /**
-   * 跳转登录页
-   */
-  const onNavToLogin = () => {
-    uni.navigateTo({
-      url: '/pages/login/index'
-    })
+  const loadFeatureData = async () => {
+    const { items } = await featureApi.paging<ListItem>({ isShow: true, current: 1, pageSize: 20 })
+    featureList.value = items
   }
 
-  /**
-   * 退出登录
-   */
-  const onExit = () => {
-    store.logout()
-    onNavToLogin()
+  const onClickFeatureItem = (item: ListItem) => {
+    // #ifdef APP-PLUS
+    if (!item.platforms.includes(platforms.app)) {
+      toast('不属于此平台功能')
+      return
+    }
+    // #endif
+    // #ifdef H5
+    if (!item.platforms.includes(platforms.h5)) {
+      toast('不属于此平台功能')
+      return
+    }
+    // #endif
+    // #ifdef MP-WEIXIN
+    if (!item.platforms.includes(platforms.miniprogram)) {
+      toast('不属于此平台功能')
+      return
+    }
+    // #endif
+    uni.navigateTo({ url: item.pageUrl })
   }
 
-  return { onNavToLogin, onExit }
-}
-
-/**
- * API 测试
- */
-export const useApiTest = () => {
-  /**
-   * 版本信息
-   */
-  const packageInfo = ref<PackageInfo>({})
-
-  /**
-   * 接口请求
-   */
-  const handleTest = async () => {}
-
-  return { packageInfo, handleTest }
+  return { featureList, loadFeatureData, onClickFeatureItem }
 }

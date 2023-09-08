@@ -1,18 +1,15 @@
 import { defineStore } from 'pinia'
 import { setStorage, getStorage, removeStorage } from '@/utils/storage'
-import { LoginData } from './types'
+import type { LoginData, UserInfo } from './types'
 
 /**
  * 缓存 token
  */
 const tokenStorage = getStorage('token') as string
-const userInfoStorage = (getStorage('userInfo') as Record<string, unknown>) ?? {}
+const userInfoStorage = (getStorage('userInfo') as Partial<UserInfo>) || {}
 
 export const useStore = defineStore('main', {
   state: () => ({
-    /**
-     * 登录状态
-     */
     token: tokenStorage,
     userInfo: userInfoStorage
   }),
@@ -21,7 +18,7 @@ export const useStore = defineStore('main', {
       this.token = token
       setStorage('token', token)
     },
-    setUserInfo(userInfo: Record<string, unknown>) {
+    setUserInfo(userInfo: UserInfo) {
       this.userInfo = userInfo
       setStorage('userInfo', userInfo)
     },
@@ -47,5 +44,8 @@ export const useStore = defineStore('main', {
       this.clearToken()
       this.clearUserInfo()
     }
+  },
+  getters: {
+    isLogin: state => !!state.userInfo.id
   }
 })

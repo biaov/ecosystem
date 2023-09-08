@@ -1,7 +1,7 @@
 import { UserConfig } from 'vite'
 import { resolve } from 'path'
 import { VitePluginNode } from 'vite-plugin-node'
-import { port } from './src/config'
+import { port } from './src/config/port'
 
 const config: UserConfig = {
   root: __dirname,

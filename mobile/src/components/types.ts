@@ -28,3 +28,25 @@ export namespace SvgImg {
     height?: string
   }
 }
+
+/**
+ * loading-more 组件类型定义
+ */
+export namespace LoadingMore {
+  export interface Props {
+    status?: 'loadMore' | 'loading' | 'noMore'
+    loadingText?: string[]
+  }
+}
+
+/**
+ * 公告
+ */
+export namespace NoticeList {
+  export interface ListItem {
+    id: number
+    title: string
+    pageUrl: string
+    content: string
+  }
+}

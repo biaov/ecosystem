@@ -1,4 +1,3 @@
-import { ref } from 'vue'
 import { cloneDeep } from '@/utils/function'
 import type { RuleItem } from './types'
 
