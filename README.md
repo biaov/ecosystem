@@ -30,10 +30,13 @@ git clone https://github.com/biaov/ecosystem.git --depth=1
 ## 演示地址
 
 - [控制台](http://ecosystem.biaov.cn/admin/)
-- [H5](http://ecosystem.biaov.cn/)
 - [APP](https://github.com/biaov/ecosystem/releases)
 - [服务端接口文档](https://www.showdoc.com.cn/2302761390308442/10396968490372348)
 - 微信小程序: 微信开发者工具本地运行
+- [H5](http://ecosystem.biaov.cn/)
+  - 浏览器浏览请开启：`Toogle device toolbar`
+  - 手机浏览请扫描下方二维码
+<img src="https://ecosystem.biaov.cn/uploads/h5-qrcode.png" width="200px" height="200px" />
 
 ## 贡献者们
 
