@@ -36,7 +36,7 @@ git clone https://github.com/biaov/ecosystem.git --depth=1
 - [H5](http://ecosystem.biaov.cn/)
   - 浏览器浏览请开启：`Toogle device toolbar`
   - 手机浏览请扫描下方二维码
-<img src="https://ecosystem.biaov.cn/uploads/h5-qrcode.png" width="200px" height="200px" />
+    <img src="https://ecosystem.biaov.cn/uploads/h5-qrcode.png" width="200px" height="200px" />
 
 ## 贡献者们
 
