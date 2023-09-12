@@ -72,14 +72,3 @@ npm run build:%PLATFORM%
 <!--
 npm i @dcloudio/uni-app@vue3 @dcloudio/uni-app-plus@vue3 @dcloudio/uni-components@vue3 @dcloudio/uni-h5@vue3 @dcloudio/uni-mp-weixin@vue3 @dcloudio/uni-automator@vue3 @dcloudio/uni-cli-shared@vue3 @dcloudio/uni-stacktracey@vue3 @dcloudio/vite-plugin-uni@vue3
 -->
-
-<!--
-http://mineapph5.app.biaov.cn/
--->
-<!--
-😊😊更新 v1.0.15😊😊
-- 更新依赖版本
-
-Co-authored-by: biaov <biaov@qq.com>
-Co-authored-by: biaov2017 <biao2017@qq.com>
- -->
