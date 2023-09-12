@@ -1,4 +1,4 @@
 {
   "upgrade": true,
-  "reject": ["typescript"]
+  "reject": ["typescript", "@antv/g2"]
 }
