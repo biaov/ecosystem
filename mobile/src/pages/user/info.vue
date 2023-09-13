@@ -54,7 +54,7 @@
         <view class="btn btn-danger" @click="onExit">退出登录</view>
       </view>
     </block>
-    <view class="flex flex-cc p-t-30 fs-30 color-45">请登录</view>
+    <view v-else class="flex flex-cc p-t-30 fs-30 color-45">请登录</view>
   </view>
 </template>
 
