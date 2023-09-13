@@ -32,7 +32,8 @@ export default defineConfig({
     // #ifdef H5
     proxy: {
       '/api': {
-        target: 'http://127.0.0.1:3600',
+        // target: 'http://127.0.0.1:3600',
+        target: 'https://ecosystem.biaov.cn',
         changeOrigin: true,
         rewrite: path => path.replace(/^\/api/, '/api')
       }
