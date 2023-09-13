@@ -3,7 +3,6 @@ import { verify } from 'jsonwebtoken'
 import type { JwtPayload } from 'jsonwebtoken'
 import { UserInfo } from '@/model/user'
 import { Role } from '@/model/role'
-import {} from '@/config/sidebar'
 import type { PagingResponse } from './types'
 
 /**
@@ -59,7 +58,7 @@ export const jsonBodyParser = (req: Request, res: Response, next: NextFunction) 
  * 校验 token
  */
 export const verifyToken = async (req: Request, res: Response, next: NextFunction) => {
-  const token = req.headers.authorization?.split(' ').at(-1)
+  const token = req.headers.authorization?.slice(7)
   if (token) {
     try {
       const { userId } = verify(token, 'secret') as JwtPayload

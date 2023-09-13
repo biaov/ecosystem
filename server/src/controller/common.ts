@@ -1,5 +1,6 @@
 import type { Request, Response } from 'express'
-import { sign } from 'jsonwebtoken'
+import { sign, verify } from 'jsonwebtoken'
+import type { JwtPayload } from 'jsonwebtoken'
 import { maxFileSize, domainName, uploadDir } from '@/config'
 
 /**
@@ -24,6 +25,12 @@ export const uploadImg = async (req: Request, res: Response) => {
  * 静默授权
  */
 export const silentAuth = async (req: Request, res: Response) => {
-  const token = sign({ userId: 0 }, 'secret', { expiresIn: '24h' })
+  const oldToken = req.headers.authorization?.slice(7)
+  let userId = 0
+  if (oldToken) {
+    const oldTokenResult = verify(oldToken, 'secret') as JwtPayload
+    userId = oldTokenResult.userId
+  }
+  const token = sign({ userId }, 'secret', { expiresIn: '24h' })
   res.success({ token })
 }

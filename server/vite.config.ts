@@ -27,7 +27,7 @@ const config: UserConfig = {
   },
   build: {
     target: 'node18',
-    outDir: resolve(__dirname, './dist'),
+    outDir: resolve(__dirname, './dist/dist'),
     lib: {
       entry: resolve(__dirname, './src/index.ts'),
       formats: ['cjs']
