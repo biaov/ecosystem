@@ -12,7 +12,7 @@
   "scripts": {
     "start": "npm run dev",
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && node ./scripts/release",
     "ncu": "ncu --configFileName .ncurc.json && npm i"
   },
   "engines": {

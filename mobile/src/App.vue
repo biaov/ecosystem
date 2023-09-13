@@ -1,5 +1,5 @@
 <script setup lang="ts">
 onLaunch(() => {
-  useSilentAuth()
+  useSilentAuth(undefined, { force: true })
 })
 </script>
