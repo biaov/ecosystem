@@ -3,7 +3,7 @@
 一个简单的生态系统，包含 APP，H5，微信小程序，控制台，服务端 😄
 
 <h2 align="center">
-  <a href="https://github.com/biaov/ecosystem"><img src="https://img.shields.io/badge/version-v1.0.0-blue" /></a>
+  <a href="https://github.com/biaov/ecosystem"><img src="https://img.shields.io/badge/version-v1.1.0-blue" /></a>
   <a href="https://github.com/biaov/ecosystem/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" /></a>
 </h2>
 
