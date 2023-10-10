@@ -196,5 +196,33 @@ export const items = () => [
         ]
       }
     ]
+  },
+  {
+    label: '案例',
+    key: '/case',
+    children: [
+      {
+        label: '更多案例',
+        key: '/case/more',
+        permissions: [
+          {
+            label: '查看案例',
+            value: '/case/more/list'
+          },
+          {
+            label: '新增案例',
+            value: '/case/more/add'
+          },
+          {
+            label: '编辑案例',
+            value: '/case/more/edit'
+          },
+          {
+            label: '删除案例',
+            value: '/case/more/delete'
+          }
+        ]
+      }
+    ]
   }
 ]

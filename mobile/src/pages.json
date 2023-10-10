@@ -10,7 +10,13 @@
     {
       "path": "pages/tabbar/feature/index",
       "style": {
-        "navigationBarTitleText": "功能列表"
+        "navigationBarTitleText": "功能"
+      }
+    },
+    {
+      "path": "pages/tabbar/case/index",
+      "style": {
+        "navigationBarTitleText": "案例"
       }
     },
     {
@@ -64,6 +70,12 @@
           "path": "article/detail",
           "style": {
             "navigationBarTitleText": "文章详情"
+          }
+        },
+        {
+          "path": "webview/index",
+          "style": {
+            "navigationBarTitleText": "WEB视图"
           }
         }
       ]
@@ -137,6 +149,12 @@
         "text": "功能",
         "iconPath": "static/tabbar/feature.png",
         "selectedIconPath": "static/tabbar/feature-select.png"
+      },
+      {
+        "pagePath": "pages/tabbar/case/index",
+        "text": "案例",
+        "iconPath": "static/tabbar/case.png",
+        "selectedIconPath": "static/tabbar/case-select.png"
       },
       {
         "pagePath": "pages/tabbar/mine/index",

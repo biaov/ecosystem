@@ -1,4 +1,4 @@
-import { Op, where } from 'sequelize'
+import { Op } from 'sequelize'
 import type { Request, Response } from 'express'
 import { Swiper, Notice, Recommend, Feature } from '@/model/manage'
 import { getPagingParams, getLikeParams } from '@/utils/function'
@@ -32,7 +32,7 @@ export const createSwiper = async (req: Request, res: Response) => {
   } else {
     const data = await Swiper.create({ url, pageUrl, isShow: !!isShow })
     res.success(data)
-    createLogs(req, { pageKey: '/manage/swiper', content: `创建轮播图：ID - ${data.get('id')}}` })
+    createLogs(req, { pageKey: '/manage/swiper', content: `创建轮播图：ID - ${data.get('id')}` })
   }
 }
 
@@ -48,7 +48,7 @@ export const updateSwiper = async (req: Request, res: Response) => {
   if (!data) return res.status(422).error('轮播图不存在')
   const updateInfo = await data.update({ url, pageUrl, isShow })
   res.success(updateInfo)
-  createLogs(req, { pageKey: '/manage/swiper', content: `修改轮播图：ID - ${data.get('id')}}` })
+  createLogs(req, { pageKey: '/manage/swiper', content: `修改轮播图：ID - ${data.get('id')}` })
 }
 
 /**
@@ -60,7 +60,7 @@ export const deleteSwiper = async (req: Request, res: Response) => {
   if (!data) return res.status(422).error('轮播图不存在')
   await data.destroy()
   res.success()
-  createLogs(req, { pageKey: '/manage/swiper', content: `删除轮播图：ID - ${data.get('id')}}` })
+  createLogs(req, { pageKey: '/manage/swiper', content: `删除轮播图：ID - ${data.get('id')}` })
 }
 
 /**
@@ -101,7 +101,7 @@ export const createNotice = async (req: Request, res: Response) => {
   } else {
     const data = await Notice.create({ title, content, isShow: !!isShow })
     res.success(data)
-    createLogs(req, { pageKey: '/manage/notice', content: `创建公告：${data.get('title')}}` })
+    createLogs(req, { pageKey: '/manage/notice', content: `创建公告：${data.get('title')}` })
   }
 }
 
@@ -117,7 +117,7 @@ export const updateNotice = async (req: Request, res: Response) => {
   if (!data) return res.status(422).error('公告不存在')
   const updateInfo = await data.update({ title, isShow, content })
   res.success(updateInfo)
-  createLogs(req, { pageKey: '/manage/notice', content: `修改公告：${data.get('title')}}` })
+  createLogs(req, { pageKey: '/manage/notice', content: `修改公告：${data.get('title')}` })
 }
 
 /**
@@ -129,7 +129,7 @@ export const deleteNotice = async (req: Request, res: Response) => {
   if (!data) return res.status(422).error('公告不存在')
   await data.destroy()
   res.success()
-  createLogs(req, { pageKey: '/manage/notice', content: `删除公告：${data.get('title')}}` })
+  createLogs(req, { pageKey: '/manage/notice', content: `删除公告：${data.get('title')}` })
 }
 
 /**
@@ -171,7 +171,7 @@ export const createRecommend = async (req: Request, res: Response) => {
   } else {
     const data = await Recommend.create({ title, coverUrl, content })
     res.success(data)
-    createLogs(req, { pageKey: '/manage/recommend', content: `创建文章：${data.get('title')}}` })
+    createLogs(req, { pageKey: '/manage/recommend', content: `创建文章：${data.get('title')}` })
   }
 }
 
@@ -187,7 +187,7 @@ export const updateRecommend = async (req: Request, res: Response) => {
   if (!data) return res.status(422).error('文章不存在')
   const updateInfo = await data.update({ title, coverUrl, content })
   res.success(updateInfo)
-  createLogs(req, { pageKey: '/manage/recommend', content: `修改文章：${data.get('title')}}` })
+  createLogs(req, { pageKey: '/manage/recommend', content: `修改文章：${data.get('title')}` })
 }
 
 /**
@@ -199,7 +199,7 @@ export const deleteRecommend = async (req: Request, res: Response) => {
   if (!data) return res.status(422).error('文章不存在')
   await data.destroy()
   res.success()
-  createLogs(req, { pageKey: '/manage/recommend', content: `删除文章：${data.get('title')}}` })
+  createLogs(req, { pageKey: '/manage/recommend', content: `删除文章：${data.get('title')}` })
 }
 
 /**
@@ -237,7 +237,7 @@ export const createFeature = async (req: Request, res: Response) => {
   } else {
     const data = await Feature.create({ name, iconName, platforms })
     res.success(data)
-    createLogs(req, { pageKey: '/manage/feature', content: `创建功能：${data.get('name')}}` })
+    createLogs(req, { pageKey: '/manage/feature', content: `创建功能：${data.get('name')}` })
   }
 }
 
@@ -253,7 +253,7 @@ export const updateFeature = async (req: Request, res: Response) => {
   if (!data) return res.status(422).error('功能不存在')
   const updateInfo = await data.update({ name, iconName, platforms, pageUrl })
   res.success(updateInfo)
-  createLogs(req, { pageKey: '/manage/recommend', content: `修改功能：${data.get('name')}}` })
+  createLogs(req, { pageKey: '/manage/recommend', content: `修改功能：${data.get('name')}` })
 }
 
 /**
@@ -265,5 +265,5 @@ export const deleteFeature = async (req: Request, res: Response) => {
   if (!data) return res.status(422).error('功能不存在')
   await data.destroy()
   res.success()
-  createLogs(req, { pageKey: '/manage/feature', content: `删除功能：${data.get('name')}}` })
+  createLogs(req, { pageKey: '/manage/feature', content: `删除功能：${data.get('name')}` })
 }

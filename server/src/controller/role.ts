@@ -46,7 +46,7 @@ export const createRole = async (req: Request, res: Response) => {
   } else {
     const data = await Role.create({ name, code, permissions })
     res.success(data)
-    createLogs(req, { pageKey: '/setting/role', content: `创建角色：${data.get('name')}}` })
+    createLogs(req, { pageKey: '/setting/role', content: `创建角色：${data.get('name')}` })
   }
 }
 
@@ -62,7 +62,7 @@ export const updateRole = async (req: Request, res: Response) => {
   if (!data) return res.status(422).error('角色不存在')
   const roleInfo = await data.update({ name, permissions })
   res.success(roleInfo)
-  createLogs(req, { pageKey: '/setting/role', content: `修改角色信息：${data.get('name')}}` })
+  createLogs(req, { pageKey: '/setting/role', content: `修改角色信息：${data.get('name')}` })
 }
 
 /**
@@ -74,5 +74,5 @@ export const deleteRole = async (req: Request, res: Response) => {
   if (!data) return res.status(422).error('角色不存在')
   await data.destroy()
   res.success()
-  createLogs(req, { pageKey: '/setting/role', content: `删除角色：${data.get('name')}}` })
+  createLogs(req, { pageKey: '/setting/role', content: `删除角色：${data.get('name')}` })
 }

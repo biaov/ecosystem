@@ -10,6 +10,7 @@ packageJson.devDependencies = {} // 清理多余的依赖
  */
 const outDir = `../dist`
 const workDir = resolve(__dirname, outDir)
+
 /**
  * 修改文件
  * 新路径
@@ -26,7 +27,7 @@ const copyFiles = ['package-lock.json']
 copyFiles.forEach(fileName => {
   const include = resolve(__dirname, `../${fileName}`)
   const output = resolve(__dirname, `${outDir}/${fileName}`)
-  copyFileSync(include, output) // 复制文件
+  copyFileSync(include, output)
 })
 
 /**
