@@ -1,5 +1,5 @@
 const { exec, execSync } = require('child_process')
-const { writeFileSync, existsSync, unlinkSync, copyFileSync } = require('fs')
+const { writeFileSync, existsSync, unlinkSync, copyFileSync, mkdirSync } = require('fs')
 const { resolve } = require('path')
 const packageJson = require('../package.json')
 
@@ -29,6 +29,11 @@ copyFiles.forEach(fileName => {
   const output = resolve(__dirname, `${outDir}/${fileName}`)
   copyFileSync(include, output)
 })
+
+/**
+ * 创建文件夹
+ */
+mkdirSync(resolve(__dirname, `${outDir}/uploads`))
 
 /**
  * 安装依赖
