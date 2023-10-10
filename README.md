@@ -7,6 +7,10 @@
   <a href="https://github.com/biaov/ecosystem/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" /></a>
 </h2>
 
+## 技术栈
+
+`Vite` + `Vue3.x` + `TypeScript` + `Less` + `React` + `Uni-App` + `Pinia` + `Node` + `Express` + `Sequelize` + `MySql`
+
 ## 项目结构
 
 - `admin`: `vite + react` 控制台
