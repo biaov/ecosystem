@@ -8,7 +8,7 @@ export const baseURL = '/api'
 /**
  * 域名
  */
-export const domainName = import.meta.env.PROD ? 'http://ecosystem.biaov.cn/' : 'http://127.0.0.1:3600/'
+export const domainName = import.meta.env.PROD ? 'http://ecosystem.biaov.cn/server/' : 'http://127.0.0.1:3600/'
 
 /**
  * 最大上传文件, 单位: 字节 b
