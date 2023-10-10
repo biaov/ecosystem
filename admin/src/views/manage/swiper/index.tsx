@@ -166,7 +166,7 @@ export default function SwiperPage() {
       <Modal title={swiper.id ? '编辑轮播图' : '新增轮播图'} open={swiper.visible} width={576} onOk={handleSwiper} onCancel={() => setSwiper({ ...swiper, visible: false })}>
         <Form {...modalProps}>
           <Form.Item label="banner" name="url" valuePropName="list" rules={[{ required: true, message: '请上传图片地址' }]}>
-            <UploadImg></UploadImg>
+            <UploadImg />
           </Form.Item>
           <Form.Item name="pageUrl" label="页面地址" rules={[{ required: true, message: '请输入页面地址' }]}>
             <Input placeholder="请输入页面地址" />

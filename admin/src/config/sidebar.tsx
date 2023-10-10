@@ -1,7 +1,7 @@
-import { DashboardOutlined, SettingOutlined, AppstoreOutlined } from '@ant-design/icons'
+import { DashboardOutlined, SettingOutlined, AppstoreOutlined, HeatMapOutlined } from '@ant-design/icons'
 import { randomColors } from '@/utils/function'
 
-const colors = randomColors(3)
+const colors = randomColors(4)
 
 export const items = () => [
   {
@@ -200,6 +200,35 @@ export const items = () => [
           {
             label: '查看日志',
             value: '/setting/log/list'
+          }
+        ]
+      }
+    ]
+  },
+  {
+    label: '案例',
+    icon: <HeatMapOutlined style={{ color: colors[3] }} />,
+    key: '/case',
+    children: [
+      {
+        label: '更多案例',
+        key: '/case/more',
+        permissions: [
+          {
+            label: '查看案例',
+            value: '/case/more/list'
+          },
+          {
+            label: '新增案例',
+            value: '/case/more/add'
+          },
+          {
+            label: '编辑案例',
+            value: '/case/more/edit'
+          },
+          {
+            label: '删除案例',
+            value: '/case/more/delete'
           }
         ]
       }

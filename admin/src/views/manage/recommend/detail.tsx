@@ -40,7 +40,7 @@ export default function RecommendDetailPage() {
           <Input placeholder="请输入文章标题" />
         </Form.Item>
         <Form.Item label="封面图" name="coverUrl" valuePropName="list" rules={[{ required: true, message: '请上传封面图' }]}>
-          <UploadImg></UploadImg>
+          <UploadImg />
         </Form.Item>
         <Form.Item name="pageUrl" label="页面地址" rules={[{ required: true, message: '请输入页面地址' }]}>
           <Input placeholder="请输入页面地址" />

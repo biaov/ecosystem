@@ -21,6 +21,7 @@ import {
   updateFeature,
   deleteFeature
 } from '@/controller/manage'
+import { getCase, getCaseDetail, createCase, updateCase, deleteCase } from '@/controller/case'
 import { getLogs } from '@/controller/log'
 import type { RouteItem } from './types'
 
@@ -28,7 +29,9 @@ import type { RouteItem } from './types'
  * 路由配置项
  */
 export const routes: RouteItem[] = [
-  /* 通用的 */
+  /**
+   * 通用的
+   */
   {
     title: '上传图片',
     path: '/upload-img',
@@ -43,7 +46,10 @@ export const routes: RouteItem[] = [
     controller: silentAuth,
     token: false
   },
-  /* 用户操作 */
+
+  /**
+   * 用户操作
+   */
   {
     title: '用户列表',
     path: '/user',
@@ -91,7 +97,10 @@ export const routes: RouteItem[] = [
     controller: resetUserPwd,
     permission: '/setting/account/reset-pwd'
   },
-  /* 授权操作 */
+
+  /**
+   * 授权操作
+   */
   {
     title: '修改密码',
     path: '/edit-password',
@@ -113,7 +122,9 @@ export const routes: RouteItem[] = [
     token: false,
     controller: userRegister
   },
-  /* 角色操作 */
+  /**
+   * 角色操作
+   */
   {
     title: '角色列表',
     path: '/role',
@@ -147,14 +158,20 @@ export const routes: RouteItem[] = [
     controller: deleteRole,
     permission: '/setting/role/delete'
   },
-  /* 操作日志 */
+
+  /**
+   * 操作日志
+   */
   {
     title: '日志列表',
     path: '/log',
     method: 'get',
     controller: getLogs
   },
-  /* 管理 */
+
+  /**
+   * 管理
+   */
   {
     title: '轮播列表',
     path: '/manage/swiper',
@@ -274,5 +291,40 @@ export const routes: RouteItem[] = [
     method: 'delete',
     controller: deleteFeature,
     permission: '/manage/feature/delete'
+  },
+
+  /* 案例 */
+  {
+    title: '案例列表',
+    path: '/case/more',
+    method: 'get',
+    controller: getCase
+  },
+  {
+    title: '案例详情',
+    path: '/case/more/:id',
+    method: 'get',
+    controller: getCaseDetail
+  },
+  {
+    title: '新增案例',
+    path: '/case/more',
+    method: 'post',
+    controller: createCase,
+    permission: '/case/more/add'
+  },
+  {
+    title: '编辑案例',
+    path: '/case/more/:id',
+    method: 'patch',
+    controller: updateCase,
+    permission: '/case/more/edit'
+  },
+  {
+    title: '删除案例',
+    path: '/case/more/:id',
+    method: 'delete',
+    controller: deleteCase,
+    permission: '/case/more/delete'
   }
 ]

@@ -1,7 +1,7 @@
 {
   "name": "ecosystem-server",
   "private": false,
-  "version": "1.0.0",
+  "version": "1.1.0",
   "main": "src/index.ts",
   "author": {
     "name": "biaov",
@@ -38,7 +38,7 @@
     "@types/jsonwebtoken": "^9.0.3",
     "@types/md5": "^2.3.3",
     "@types/multer": "^1.4.8",
-    "@types/node": "^20.8.3",
+    "@types/node": "^20.8.4",
     "terser": "^5.21.0",
     "typescript": "^5.2.2",
     "vite": "^4.4.11",
