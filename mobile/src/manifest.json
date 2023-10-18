@@ -2,8 +2,8 @@
   "name": "ecosystem",
   "appid": "H5B979BEE",
   "description": "这是一个生态系统的移动端",
-  "versionName": "1.1.0",
-  "versionCode": "110",
+  "versionName": "1.2.0",
+  "versionCode": "120",
   "transformPx": false,
   "app-plus": {
     "usingComponents": true,
@@ -39,13 +39,30 @@
         "targetSdkVersion": 31
       },
       "ios": {},
-      "sdkConfigs": {}
+      "sdkConfigs": {},
+      "apple": {
+        "idfa": false
+      },
+      "splashscreen": {
+        "androidStyle": "default",
+        "android": {
+          "hdpi": "static/snowflake.png",
+          "xhdpi": "static/snowflake.png",
+          "xxhdpi": "static/snowflake.png"
+        }
+      }
     }
   },
   "mp-weixin": {
     "appid": "wxedb0edf60129ec39",
     "setting": {
-      "urlCheck": false
+      "urlCheck": false,
+      "es6": true,
+      "postcss": true,
+      "minified": true,
+      "newFeature": true,
+      "bigPackageSizeSupport": true,
+      "enhance": true
     },
     "usingComponents": true
   },

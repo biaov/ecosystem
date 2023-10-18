@@ -165,6 +165,7 @@ each(@fontSize,{
     font-size: @value !important;
   }
 });
+
 .bold {
   font-weight: bold;
 }
@@ -273,12 +274,17 @@ each(@position,{
   border-bottom: 1px solid @color-border;
 }
 
-.br-4 {
-  border-radius: 4rpx;
-}
-.br-half {
-  border-radius: 50%;
-}
+@borderRadius: {
+  half: 50%;
+  4: 4rpx;
+  8: 8rpx;
+  20: 20rpx;
+};
+each(@borderRadius,{
+  .br-@{key}{
+    border-radius: @value;
+  }
+});
 
 @align: left, center, right, justify;
 each(@align,{

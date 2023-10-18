@@ -1,63 +1,3 @@
-<template>
-  <view class="p-tb-30">
-    <block v-if="state.isLogin">
-      <view-cell border>
-        <template #left>头像</template>
-        <template #right>
-          <view class="w-100 h-100 br-half" @click="onChooseImg">
-            <image :src="state.userInfo.avatar || defaultAvatar" mode="widthFix" class="w-fill h-fill br-half"></image>
-          </view>
-        </template>
-      </view-cell>
-      <view-cell :arrow="false" border>
-        <template #left>手机号码</template>
-        <template #right>
-          <view class="color-45">{{ state.userInfo.phoneNumber }}</view>
-        </template>
-      </view-cell>
-      <view-cell :arrow="false" border>
-        <template #left>昵称</template>
-        <template #right>
-          <input :value="state.userInfo.nickname" type="text" placeholder="请输入昵称" class="color-85 fs-24 align-right" placeholder-class="color-45" @confirm="onUpdateNickname" />
-        </template>
-      </view-cell>
-      <picker :range="genderList.options()" range-key="label" @change="onUpdateGender">
-        <view-cell border>
-          <template #left>性别</template>
-          <template #right>
-            {{ genderList.filter(state.userInfo.gender)?.label }}
-          </template>
-        </view-cell>
-      </picker>
-      <view-cell :arrow="false" border>
-        <template #left>邮箱</template>
-        <template #right>
-          <input :value="state.userInfo.email" type="text" placeholder="请输入邮箱" class="color-85 fs-24 align-right" placeholder-class="color-45" @confirm="onUpdateEmail" />
-        </template>
-      </view-cell>
-      <view-cell :arrow="false" border flex="flex-start">
-        <template #left>个性签名</template>
-        <template #right>
-          <textarea
-            :value="state.userInfo.signature"
-            type="text"
-            :maxlength="100"
-            auto-height
-            placeholder="请输入个性签名"
-            class="color-85 fs-24 align-right textarea"
-            placeholder-class="color-45"
-            @confirm="onUpdateSignature"
-          ></textarea>
-        </template>
-      </view-cell>
-      <view class="m-t-40 p-30">
-        <view class="btn btn-danger" @click="onExit">退出登录</view>
-      </view>
-    </block>
-    <view v-else class="flex flex-cc p-t-30 fs-30 color-45">请登录</view>
-  </view>
-</template>
-
 <script setup lang="ts">
 import { defaultAvatar } from '@/config'
 import { uploadImg } from '@/utils/file'
@@ -130,6 +70,67 @@ const onExit = () => {
   uni.navigateBack()
 }
 </script>
+
+<template>
+  <view class="p-tb-30">
+    <block v-if="state.isLogin">
+      <view-cell border>
+        <template #left>头像</template>
+        <template #right>
+          <view class="w-100 h-100 br-half" @click="onChooseImg">
+            <image :src="state.userInfo.avatar || defaultAvatar" mode="widthFix" class="w-fill h-fill br-half"></image>
+          </view>
+        </template>
+      </view-cell>
+      <view-cell :arrow="false" border>
+        <template #left>手机号码</template>
+        <template #right>
+          <view class="color-45">{{ state.userInfo.phoneNumber }}</view>
+        </template>
+      </view-cell>
+      <view-cell :arrow="false" border>
+        <template #left>昵称</template>
+        <template #right>
+          <input :value="state.userInfo.nickname" type="text" placeholder="请输入昵称" class="color-85 fs-24 align-right" placeholder-class="color-45" @confirm="onUpdateNickname" />
+        </template>
+      </view-cell>
+      <picker :range="genderList.options()" range-key="label" @change="onUpdateGender">
+        <view-cell border>
+          <template #left>性别</template>
+          <template #right>
+            {{ genderList.filter(state.userInfo.gender)?.label }}
+          </template>
+        </view-cell>
+      </picker>
+      <view-cell :arrow="false" border>
+        <template #left>邮箱</template>
+        <template #right>
+          <input :value="state.userInfo.email" type="text" placeholder="请输入邮箱" class="color-85 fs-24 align-right" placeholder-class="color-45" @confirm="onUpdateEmail" />
+        </template>
+      </view-cell>
+      <view-cell :arrow="false" border flex="flex-start">
+        <template #left>个性签名</template>
+        <template #right>
+          <textarea
+            :value="state.userInfo.signature"
+            type="text"
+            :maxlength="100"
+            auto-height
+            placeholder="请输入个性签名"
+            class="color-85 fs-24 align-right textarea"
+            placeholder-class="color-45"
+            @confirm="onUpdateSignature"
+          ></textarea>
+        </template>
+      </view-cell>
+      <view class="m-t-40 p-30">
+        <view class="btn btn-danger" @click="onExit">退出登录</view>
+      </view>
+    </block>
+    <view v-else class="flex flex-cc p-t-30 fs-30 color-45">请登录</view>
+  </view>
+</template>
+
 <style scoped lang="less">
 .textarea {
   width: 100%;

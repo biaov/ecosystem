@@ -235,7 +235,7 @@ export const createFeature = async (req: Request, res: Response) => {
   } else if (!(Array.isArray(platforms) && platforms.length)) {
     res.status(422).error('功能平台格式错误')
   } else {
-    const data = await Feature.create({ name, iconName, platforms })
+    const data = await Feature.create({ name, iconName, pageUrl, platforms })
     res.success(data)
     createLogs(req, { pageKey: '/manage/feature', content: `创建功能：${data.get('name')}` })
   }

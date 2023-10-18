@@ -1,5 +1,12 @@
 /**
- * responsive-swiper 组件类型定义
+ * 默认插槽
+ */
+export interface DefaultSlots {
+  default: (props: {}) => unknown
+}
+
+/**
+ * responsive-swiper 组件
  */
 export namespace ResponsiveSwiper {
   export interface ListItem extends Record<string, unknown> {
@@ -17,7 +24,7 @@ export namespace ResponsiveSwiper {
 }
 
 /**
- * svg-img 组件类型定义
+ * svg-img 组件
  */
 export namespace SvgImg {
   export interface Props {
@@ -30,7 +37,7 @@ export namespace SvgImg {
 }
 
 /**
- * loading-more 组件类型定义
+ * loading-more 组件
  */
 export namespace LoadingMore {
   export interface Props {
@@ -50,3 +57,29 @@ export namespace NoticeList {
     content: string
   }
 }
+
+/**
+ * view-mask 组件
+ */
+export namespace ViewMask {
+  export interface Emits {
+    (event: 'update:visible', e: boolean): void
+  }
+  export interface Props {
+    /**
+     * 显示状态
+     */
+    visible?: boolean
+
+    /**
+     * 背景颜色
+     */
+    background?: string
+
+    /**
+     * 禁止点击遮罩层关闭弹窗
+     */
+    disabled?: boolean
+  }
+}
+

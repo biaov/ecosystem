@@ -106,6 +106,12 @@
           "style": {
             "navigationBarTitleText": "微信授权"
           }
+        },
+        {
+          "path": "draw-poster",
+          "style": {
+            "navigationBarTitleText": "绘制海报"
+          }
         }
       ]
     },

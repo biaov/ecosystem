@@ -68,6 +68,7 @@
     "useSilentAuth": true,
     "usePagingRequest": true,
     "onReachBottom": true,
-    "useDetailRequest": true
+    "useDetailRequest": true,
+    "useVisible": true
   }
 }
