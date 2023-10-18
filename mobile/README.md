@@ -2,10 +2,6 @@
 
 生态系统的 APP，H5，微信小程序
 
-<h2 align="center">
-  <a href="https://github.com/biaov/ecosystem"><img src="https://img.shields.io/badge/version-v1.1.0-blue" /></a>
-</h2>
-
 ## 安装依赖
 
 ```Basic

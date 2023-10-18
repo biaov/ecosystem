@@ -2,4 +2,4 @@
 /dist
 /.git
 /uploads
-/.env.local
+/.env.production

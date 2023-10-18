@@ -1,6 +1,31 @@
-<style scoped lang="less">
-@import './index.less';
-</style>
+<script setup lang="ts">
+import { useStore } from '@/stores'
+import { defaultAvatar } from '@/config'
+import { genderList } from '@/enums'
+import { validatorLogin } from '@/utils/function'
+import { useCell } from './hooks'
+
+const state = useStore()
+const { cellList, onClickCell } = useCell()
+
+/**
+ * 点击设置
+ */
+const onSetting = () => {
+  if (!validatorLogin()) return
+  uni.navigateTo({ url: '/pages/user/info' })
+}
+
+/**
+ * 点击功能 banner
+ */
+const onFeature = () => {
+  uni.switchTab({
+    url: '/pages/tabbar/feature/index'
+  })
+}
+</script>
+
 <template>
   <view>
     <view class="head flex flex-sb flex-cc" @click="onSetting">
@@ -35,30 +60,6 @@
   </view>
 </template>
 
-<script setup lang="ts">
-import { useStore } from '@/stores'
-import { defaultAvatar } from '@/config'
-import { genderList } from '@/enums'
-import { validatorLogin } from '@/utils/function'
-import { useCell } from './hooks'
-
-const state = useStore()
-const { cellList, onClickCell } = useCell()
-
-/**
- * 点击设置
- */
-const onSetting = () => {
-  if (!validatorLogin()) return
-  uni.navigateTo({ url: '/pages/user/info' })
-}
-
-/**
- * 点击功能 banner
- */
-const onFeature = () => {
-  uni.switchTab({
-    url: '/pages/tabbar/feature/index'
-  })
-}
-</script>
+<style scoped lang="less">
+@import './index.less';
+</style>

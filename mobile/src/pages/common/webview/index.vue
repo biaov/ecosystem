@@ -1,7 +1,3 @@
-<template>
-  <web-view :src="webviewUrl"></web-view>
-</template>
-
 <script setup lang="ts">
 const webviewUrl = ref('')
 
@@ -10,3 +6,7 @@ onLoad(option => {
   webviewUrl.value = decodeURIComponent(option.url)
 })
 </script>
+
+<template>
+  <web-view :src="webviewUrl"></web-view>
+</template>

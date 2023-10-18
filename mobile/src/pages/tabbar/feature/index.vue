@@ -1,3 +1,14 @@
+<script setup lang="ts">
+import { useFeature } from './hooks'
+import { platforms } from './enums'
+
+const { featureList, loadFeatureData, onClickFeatureItem } = useFeature()
+
+useSilentAuth(loadFeatureData)
+
+const presetColors = ['#f56c6c', '#409eff', '#67c23a']
+</script>
+
 <template>
   <view class="p-t-20">
     <view class="p-lr-30 p-tb-20 bg-white">
@@ -16,14 +27,3 @@
     </view-cell>
   </view>
 </template>
-
-<script setup lang="ts">
-import { useFeature } from './hooks'
-import { platforms } from './enums'
-
-const { featureList, loadFeatureData, onClickFeatureItem } = useFeature()
-
-useSilentAuth(loadFeatureData)
-
-const presetColors = ['#f56c6c', '#409eff', '#67c23a']
-</script>

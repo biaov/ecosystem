@@ -33,7 +33,8 @@ copyFiles.forEach(fileName => {
 /**
  * 创建文件夹
  */
-mkdirSync(resolve(__dirname, `${outDir}/uploads`))
+const uploadsDir = resolve(__dirname, `${outDir}/uploads`)
+!existsSync(uploadsDir) && mkdirSync(uploadsDir)
 
 /**
  * 安装依赖

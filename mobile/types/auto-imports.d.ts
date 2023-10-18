@@ -63,6 +63,7 @@ declare global {
   const usePagingRequest: typeof import('../src/composables/usePagingRequest')['usePagingRequest']
   const useSilentAuth: typeof import('../src/composables/useSilentAuth')['useSilentAuth']
   const useSlots: typeof import('vue')['useSlots']
+  const useVisible: typeof import('../src/composables/useVisible')['useVisible']
   const watch: typeof import('vue')['watch']
   const watchEffect: typeof import('vue')['watchEffect']
   const watchPostEffect: typeof import('vue')['watchPostEffect']

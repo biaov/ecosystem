@@ -17,6 +17,7 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     SvgImg: typeof import('./../src/components/svg-img.vue')['default']
     ViewCell: typeof import('./../src/components/view-cell.vue')['default']
+    ViewMask: typeof import('./../src/components/view-mask.vue')['default']
     ViewTag: typeof import('./../src/components/view-tag.vue')['default']
   }
 }

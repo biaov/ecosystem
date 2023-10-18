@@ -9,6 +9,7 @@
 </template>
 <script lang="ts" setup>
 const emit = defineEmits(['click'])
+
 withDefaults(
   defineProps<{
     /**

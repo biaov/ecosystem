@@ -1,6 +1,9 @@
-<style scoped lang="less">
-@import './form.less';
-</style>
+<script setup lang="ts">
+import { useLogin } from './hooks'
+
+const { formState, handleLogin, onRegister } = useLogin()
+</script>
+
 <template>
   <view class="form">
     <image class="logo" src="/static/logo.svg" mode="widthFix" />
@@ -18,8 +21,6 @@
   </view>
 </template>
 
-<script setup lang="ts">
-import { useLogin } from './hooks'
-
-const { formState, handleLogin, onRegister } = useLogin()
-</script>
+<style scoped lang="less">
+@import './form.less';
+</style>

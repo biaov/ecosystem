@@ -1,3 +1,9 @@
+<script setup lang="ts">
+import { useWechatAuth } from './hooks/wechat-auth'
+
+const { btns } = useWechatAuth()
+</script>
+
 <template>
   <view class="p-30">
     <view v-for="(item, index) in btns" :key="index" class="m-b-40">
@@ -12,35 +18,3 @@
     </view>
   </view>
 </template>
-
-<script setup lang="ts">
-/**
- * 按钮列表
- */
-const btns = ref([
-  {
-    name: '获取手机号',
-    openType: 'getPhoneNumber',
-    value: '',
-    callback: (e: Record<string, any>) => {
-      btns.value[0].value = e.detail.errMsg
-    }
-  },
-  {
-    name: '获取用户信息',
-    openType: 'getUserInfo',
-    value: '',
-    callback: (e: Record<string, any>) => {
-      btns.value[1].value = JSON.stringify(e.detail)
-    }
-  },
-  {
-    name: '获取用户头像',
-    openType: 'chooseAvatar',
-    value: '',
-    callback: (e: Record<string, any>) => {
-      btns.value[2].value = e.detail.avatarUrl
-    }
-  }
-])
-</script>
