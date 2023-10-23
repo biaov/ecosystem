@@ -190,7 +190,12 @@ export const items = () => [
       {
         label: '角色权限详情',
         key: '/setting/role-permission',
-        permissions: [],
+        permissions: [
+          {
+            label: '查看角色权限详情',
+            value: '/setting/role-permission/detail'
+          }
+        ],
         hidden: true
       },
       {
@@ -245,5 +250,5 @@ export const itemOptions = items().map(item => ({
 export const allPermission = items().map(item => ({
   ...item,
   value: item.key,
-  children: item.children.filter(chld => !chld.hidden).map(child => ({ ...child, value: child.key, children: child.permissions }))
+  children: item.children.map(child => ({ ...child, value: child.key, children: child.permissions }))
 }))

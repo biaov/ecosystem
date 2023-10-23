@@ -182,7 +182,12 @@ export const items = () => [
       {
         label: '角色权限详情',
         key: '/setting/role-permission',
-        permissions: [],
+        permissions: [
+          {
+            label: '查看权限详情',
+            value: '/setting/role-permission/detail'
+          }
+        ],
         hidden: true
       },
       {

@@ -4,13 +4,13 @@
 
 ## 安装依赖
 
-```Basic
+```sh
 npm i
 ```
 
 ## 运行项目
 
-```Basic
+```sh
 npm run dev:%PLATFORM%
 ```
 
@@ -21,7 +21,7 @@ npm run dev:%PLATFORM%
 
 ## 打包项目
 
-```Basic
+```sh
 npm run build:%PLATFORM%
 ```
 

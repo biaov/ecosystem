@@ -30,7 +30,7 @@ export const CheckPermission = ({ component, ...rest }: Record<string, unknown>)
   const { pathname } = useLocation()
 
   if (permissions) {
-    const hasPermission = permissions.includes('*') || permissions.includes(`${pathname}/list`) || pathname === '/'
+    const hasPermission = permissions.includes('*') || permissions.includes(`${pathname}/list`) || permissions.includes(pathname.replace(/\d+/g, 'detail')) || pathname === '/'
     if (!hasPermission) return <Navigate to="/403" replace />
   }
 
