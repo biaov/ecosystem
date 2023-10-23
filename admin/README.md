@@ -4,19 +4,19 @@
 
 ## 安装依赖
 
-```Basic
+```sh
 npm i
 ```
 
 ## 运行项目
 
-```Basic
+```sh
 npm start
 ```
 
 ## 打包项目
 
-```Basic
+```sh
 npm run build
 ```
 

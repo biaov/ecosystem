@@ -4,19 +4,21 @@
 
 ## 安装依赖
 
-```Basic
+```sh
 npm i
 ```
 
 ## 运行项目
 
-```Basic
+- 复制根目录文件 `.env.development` 重命名为 `.env.production`
+
+```sh
 npm start
 ```
 
 ## 打包项目
 
-```Basic
+```sh
 npm run build
 ```
 
