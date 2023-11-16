@@ -1,9 +1,11 @@
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import uni from '@dcloudio/vite-plugin-uni'
 import { resolve } from 'path'
 import eslint from 'vite-plugin-eslint'
 import autoImport from 'unplugin-auto-import/vite'
 import components from 'unplugin-vue-components/vite'
+
+const env = loadEnv('development', resolve(__dirname, './'))
 
 export default defineConfig({
   plugins: [
@@ -32,10 +34,9 @@ export default defineConfig({
     // #ifdef H5
     proxy: {
       '/api': {
-        target: 'http://127.0.0.1:3600',
-        // target: 'https://ecosystem.biaov.cn',
+        target: env['VITE_BASE_URL'],
         changeOrigin: true,
-        rewrite: path => path.replace(/^\/api/, '/api')
+        rewrite: path => path.replace(/^\/api/, '')
       }
     }
     // #endif

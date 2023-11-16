@@ -69,6 +69,10 @@
     "usePagingRequest": true,
     "onReachBottom": true,
     "useDetailRequest": true,
-    "useVisible": true
+    "useVisible": true,
+    "ExtractDefaultPropTypes": true,
+    "ExtractPropTypes": true,
+    "ExtractPublicPropTypes": true,
+    "WritableComputedRef": true
   }
 }

@@ -17,6 +17,7 @@ onLoad(({ id } = {}) => {
 
 <template>
   <view>
+    <loading-page :loading="loading" />
     <view class="p-30">
       <view class="align-center m-b-20">
         <view class="bold fs-30 m-b-10">{{ detail.title }}</view>
@@ -24,6 +25,5 @@ onLoad(({ id } = {}) => {
       </view>
       <view class="fs-26">{{ detail.content }}</view>
     </view>
-    <loading-page :loading="loading"></loading-page>
   </view>
 </template>

@@ -1,7 +1,7 @@
 {
   "name": "ecosystem-server",
   "private": false,
-  "version": "1.2.0",
+  "version": "0.0.0",
   "main": "src/index.ts",
   "author": {
     "name": "biaov",
@@ -30,18 +30,18 @@
     "jsonwebtoken": "^9.0.2",
     "md5": "^2.3.0",
     "multer": "^1.4.5-lts.1",
-    "mysql2": "^3.6.2",
-    "sequelize": "^6.33.0"
+    "mysql2": "^3.6.3",
+    "sequelize": "^6.35.0"
   },
   "devDependencies": {
-    "@types/express": "^4.17.20",
-    "@types/jsonwebtoken": "^9.0.4",
-    "@types/md5": "^2.3.3",
-    "@types/multer": "^1.4.8",
-    "@types/node": "^20.8.6",
-    "terser": "^5.22.0",
+    "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.5",
+    "@types/md5": "^2.3.5",
+    "@types/multer": "^1.4.10",
+    "@types/node": "^20.9.0",
+    "terser": "^5.24.0",
     "typescript": "^5.2.2",
-    "vite": "^4.4.11",
-    "vite-plugin-node": "^3.0.2"
+    "vite": "^4.5.0",
+    "vite-plugin-node": "^3.1.0"
   }
 }

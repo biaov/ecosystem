@@ -26,7 +26,7 @@ const onClickItem = (item: NoticeDataType) => {
       </view>
       <image src="/static/icon/arrow-right.png" mode="widthFix" class="w-40"></image>
     </view>
-    <loading-more :status="loadingStatus"></loading-more>
+    <loading-more :status="loadingStatus" />
   </view>
-  <null-placeholder v-else></null-placeholder>
+  <null-placeholder v-else />
 </template>

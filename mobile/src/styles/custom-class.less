@@ -263,6 +263,15 @@ each(@gap,{
 each(@position,{
   .@{key}{
     position: @value !important;
+    z-index: 9;
+  }
+});
+
+// 层级
+@zIndex: 99;
+each(@zIndex,{
+  .z-index-@{value}{
+    z-index: @value;
   }
 });
 

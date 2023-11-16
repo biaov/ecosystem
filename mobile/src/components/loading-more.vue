@@ -1,7 +1,7 @@
 <template>
   <view class="flex flex-column flex-cc p-tb-20">
     <view class="m-b-20 color-45">{{ loadingText }}</view>
-    <loading-animation v-if="status === 'loading'"></loading-animation>
+    <loading-animation v-if="status === 'loading'" />
   </view>
 </template>
 <script lang="ts" setup>

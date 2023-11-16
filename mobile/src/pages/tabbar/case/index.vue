@@ -31,9 +31,9 @@ const onClickItem = (item: CaseMoreListItem) => {
           </view>
         </view>
       </view>
-      <loading-more :status="loadingStatus"></loading-more>
+      <loading-more :status="loadingStatus" />
     </view>
-    <null-placeholder v-else></null-placeholder>
+    <null-placeholder v-else />
   </view>
 </template>
 
