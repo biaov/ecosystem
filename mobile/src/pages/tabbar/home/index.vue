@@ -4,11 +4,13 @@ import { useSwiper, useNotice, useRecommend } from './hooks'
 const { swiperList, loadSwiperData, onClickSwiperItem } = useSwiper()
 const { noticeList, loadNoticeData, onClickNoticeItem } = useNotice()
 const { recommendList, loadRecommendData, onClickRecommendItem } = useRecommend()
+const [loading, setLoading] = useVisible(true)
 
-useSilentAuth(() => {
-  loadSwiperData()
-  loadNoticeData()
-  loadRecommendData()
+useSilentAuth(async () => {
+  await Promise.all([loadSwiperData(), loadNoticeData(), loadRecommendData()])
+  nextTick(() => {
+    setLoading(false)
+  })
 })
 
 /**
@@ -31,8 +33,9 @@ const onMoreRecommend = () => {
 </script>
 
 <template>
-  <responsive-swiper :list="swiperList" @clickItem="onClickSwiperItem"></responsive-swiper>
-  <responsive-notice :list="noticeList" @clickItem="onClickNoticeItem"></responsive-notice>
+  <loading-page :loading="loading" />
+  <responsive-swiper :list="swiperList" @clickItem="onClickSwiperItem" />
+  <responsive-notice :list="noticeList" @clickItem="onClickNoticeItem" />
   <view class="m-b-30"></view>
   <view class="m-b-30 p-lr-30 relative w-fill p-lr-30" @click="onClickFeature">
     <image src="/static/image/feature-banner.png" mode="widthFix" class="w-fill"></image>

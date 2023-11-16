@@ -2,8 +2,8 @@
   "name": "ecosystem",
   "appid": "H5B979BEE",
   "description": "这是一个生态系统的移动端",
-  "versionName": "1.2.0",
-  "versionCode": "120",
+  "versionName": "1.2.1",
+  "versionCode": "121",
   "transformPx": false,
   "app-plus": {
     "usingComponents": true,

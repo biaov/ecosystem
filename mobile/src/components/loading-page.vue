@@ -1,6 +1,6 @@
 <template>
-  <view class="fixed w-fill h-fill bg-white loading-page flex flex-cc" v-if="loading">
-    <loading-animation></loading-animation>
+  <view class="fixed w-fill h-fill bg-white loading-page flex flex-cc z-index-99" v-if="loading">
+    <loading-animation />
   </view>
 </template>
 <script lang="ts" setup>

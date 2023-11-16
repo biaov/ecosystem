@@ -3,13 +3,20 @@ import { useFeature } from './hooks'
 import { platforms } from './enums'
 
 const { featureList, loadFeatureData, onClickFeatureItem } = useFeature()
+const [loading, setLoading] = useVisible(true)
 
-useSilentAuth(loadFeatureData)
+useSilentAuth(async () => {
+  await loadFeatureData()
+  nextTick(() => {
+    setLoading(false)
+  })
+})
 
 const presetColors = ['#f56c6c', '#409eff', '#67c23a']
 </script>
 
 <template>
+  <loading-page :loading="loading" />
   <view class="p-t-20">
     <view class="p-lr-30 p-tb-20 bg-white">
       <image src="/static/image/feature-banner.png" mode="widthFix" class="w-fill"></image>
