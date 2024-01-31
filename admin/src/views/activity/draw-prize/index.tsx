@@ -96,7 +96,7 @@ export default function CasePage() {
       render: (_, record) => (
         <Space size={12}>
           <Button type="link" className="p-0" disabled={!checkPermission('/activity/draw-prize/qrcode') || record.status === activityStatus.ended} onClick={() => onShowQrcodeModal(record)}>
-            二维码
+            投放二维码
           </Button>
           <Button
             type="link"

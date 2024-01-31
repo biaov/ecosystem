@@ -22,7 +22,7 @@ export default function modalQrcodeComponent(props: Props) {
 
   return (
     <>
-      <Modal {...{ onCancel, footer: null, open: formState.visible, title: '二维码' }}>
+      <Modal {...{ onCancel, footer: null, open: formState.visible, title: '投放二维码' }}>
         <div className="p-tb-40">
           <Row justify="center">
             <QRCode type="svg" value={text || '-'} color="#409eff" />
