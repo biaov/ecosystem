@@ -3,8 +3,8 @@
 一个简单的生态系统，包含 APP，H5，微信小程序，控制台，服务端 😄
 
 <h2 align="center">
-  <a href="https://github.com/biaov/ecosystem"><img src="https://img.shields.io/badge/version-v1.2.1-blue" /></a>
-  <a href="https://github.com/biaov/ecosystem/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" /></a>
+  <a href="https://github.com/biaov/ecosystem"><img src="https://img.shields.io/badge/version-v1.3.0-blue" alt="version" /></a>
+  <a href="https://github.com/biaov/ecosystem/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="LICENSE" /></a>
 </h2>
 
 ## 技术栈
@@ -42,7 +42,7 @@ git clone https://github.com/biaov/ecosystem.git --depth=1
   - 浏览器浏览请开启：`Toogle device toolbar`
   - 手机浏览请扫描下方二维码
 
-<img src="https://ecosystem.biaov.cn/uploads/h5-qrcode.png" width="200px" height="200px" />
+<img src="https://ecosystem.biaov.cn/uploads/h5-qrcode.png" width="200px" height="200px" alt="qrcode" />
 
 ## 贡献者们
 

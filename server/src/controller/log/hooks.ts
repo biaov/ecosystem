@@ -2,7 +2,7 @@ import type { Request, Response } from 'express'
 import { Log } from '@/model/log'
 import { UserInfo } from '@/model/user'
 import { getPagingParams, getLikeParams } from '@/utils/function'
-import type { CreateLogParam } from './types'
+import type { CreateLogParam } from '../types'
 
 /**
  * 日志列表

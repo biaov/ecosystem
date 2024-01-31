@@ -5,6 +5,7 @@
   60: 60px;
   120: 120px;
   140: 140px;
+  200: 200px;
 };
 each(@widths, {
   .w-@{key} {
@@ -52,10 +53,19 @@ each(@heights, {
   0: 0px;
   15: 15px;
   20: 20px;
+  40: 40px;
 };
 each(@gaps,{
   .p-@{key}{
     padding: @value !important;
+  }
+  .p-tb-@{key}{
+    padding-top: @value !important;
+    padding-bottom: @value !important;
+  }
+  .p-lr-@{key}{
+    padding-left: @value !important;
+    padding-right: @value !important;
   }
   .p-t-@{key}{
     padding-top: @value !important;
@@ -68,6 +78,14 @@ each(@gaps,{
   }
   .p-l-@{key}{
     padding-left: @value !important;
+  }
+  .m-tb-@{key}{
+    margin-top: @value !important;
+    margin-bottom: @value !important;
+  }
+  .m-lr-@{key}{
+    margin-left: @value !important;
+    margin-right: @value !important;
   }
   .m-@{key}{
     margin: @value !important;

@@ -16,7 +16,7 @@
     "ncu": "ncu --configFileName .ncurc.json && npm i"
   },
   "engines": {
-    "node": ">=16"
+    "node": ">=20"
   },
   "license": "ISC",
   "contributors": [
@@ -26,22 +26,23 @@
     }
   ],
   "dependencies": {
+    "dayjs": "^1.11.10",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
     "md5": "^2.3.0",
     "multer": "^1.4.5-lts.1",
-    "mysql2": "^3.6.3",
-    "sequelize": "^6.35.0"
+    "mysql2": "^3.7.0",
+    "sequelize": "^6.35.2"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",
     "@types/jsonwebtoken": "^9.0.5",
     "@types/md5": "^2.3.5",
-    "@types/multer": "^1.4.10",
-    "@types/node": "^20.9.0",
-    "terser": "^5.24.0",
-    "typescript": "^5.2.2",
-    "vite": "^4.5.0",
+    "@types/multer": "^1.4.11",
+    "@types/node": "^20.11.0",
+    "terser": "^5.26.0",
+    "typescript": "^5.3.3",
+    "vite": "^4.5.1",
     "vite-plugin-node": "^3.1.0"
   }
 }

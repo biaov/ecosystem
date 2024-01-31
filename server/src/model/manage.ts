@@ -21,7 +21,6 @@ Swiper.init(
   },
   {
     sequelize,
-    modelName: 'Swiper',
     tableName: 'swiper'
   }
 )
@@ -45,7 +44,6 @@ Notice.init(
   },
   {
     sequelize,
-    modelName: 'Notice',
     tableName: 'notice'
   }
 )
@@ -72,7 +70,6 @@ Recommend.init(
   },
   {
     sequelize,
-    modelName: 'Recommend',
     tableName: 'recommend'
   }
 )
@@ -100,7 +97,6 @@ Feature.init(
   },
   {
     sequelize,
-    modelName: 'Feature',
     tableName: 'feature'
   }
 )

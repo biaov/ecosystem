@@ -22,7 +22,6 @@ Log.init(
   },
   {
     sequelize,
-    modelName: 'Log',
     tableName: 'log'
   }
 )

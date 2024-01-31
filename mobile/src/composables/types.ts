@@ -5,7 +5,7 @@ import type { Meta, PagingResponse } from '@/api/types'
 export interface RuleItem {
   required?: boolean
   message?: string
-  validator?: (rule: RuleItem, value: unknown) => Promise<string | undefined>
+  validator?: (rule: RuleItem, value: unknown) => Promise<Error | void>
 }
 
 /**

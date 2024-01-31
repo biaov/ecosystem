@@ -17,6 +17,9 @@ import Recommend from '@/views/manage/recommend'
 import RecommendDetail from '@/views/manage/recommend/detail'
 import Feature from '@/views/manage/feature'
 import CaseMore from '@/views/case/more'
+import DrawPrize from '@/views/activity/draw-prize'
+import DrawPrizeDetail from '@/views/activity/draw-prize/detail'
+import DrawPrizeData from '@/views/activity/draw-prize/data'
 import { CheckLogin, CheckPermission } from './guard'
 
 /**
@@ -64,6 +67,15 @@ const router = () => (
           <Route path="case">
             <Route path="" element={<Navigate to="more" replace />}></Route>
             <Route path="more" element={<CaseMore />}></Route>
+          </Route>
+          <Route path="activity">
+            <Route path="" element={<Navigate to="draw-prize" replace />}></Route>
+            <Route path="draw-prize">
+              <Route path="" element={<DrawPrize />}></Route>
+              <Route path="add" element={<DrawPrizeDetail />}></Route>
+              <Route path="edit/:id" element={<DrawPrizeDetail />}></Route>
+              <Route path="data/:id" element={<DrawPrizeData />}></Route>
+            </Route>
           </Route>
         </Route>
         <Route path="403" element={<Forbidden />} />

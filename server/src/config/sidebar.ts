@@ -229,5 +229,41 @@ export const items = () => [
         ]
       }
     ]
+  },
+  {
+    label: '活动',
+    key: '/activity',
+    children: [
+      {
+        label: '抽奖活动',
+        key: '/activity/draw-prize',
+        permissions: [
+          {
+            label: '查看活动',
+            value: '/activity/draw-prize/list'
+          },
+          {
+            label: '新增活动',
+            value: '/activity/draw-prize/add'
+          },
+          {
+            label: '编辑活动',
+            value: '/activity/draw-prize/edit'
+          },
+          {
+            label: '删除活动',
+            value: '/activity/draw-prize/delete'
+          },
+          {
+            label: '生成二维码',
+            value: '/activity/draw-prize/qrcode'
+          },
+          {
+            label: '活动数据',
+            value: '/activity/draw-prize/data'
+          }
+        ]
+      }
+    ]
   }
 ]

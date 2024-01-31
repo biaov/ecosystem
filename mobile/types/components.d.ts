@@ -18,6 +18,7 @@ declare module 'vue' {
     SvgImg: typeof import('./../src/components/svg-img.vue')['default']
     ViewCell: typeof import('./../src/components/view-cell.vue')['default']
     ViewMask: typeof import('./../src/components/view-mask.vue')['default']
+    ViewModal: typeof import('./../src/components/view-modal.vue')['default']
     ViewTag: typeof import('./../src/components/view-tag.vue')['default']
   }
 }

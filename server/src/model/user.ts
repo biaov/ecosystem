@@ -19,7 +19,6 @@ User.init(
   },
   {
     sequelize,
-    modelName: 'User',
     tableName: 'user'
   }
 )
@@ -62,7 +61,6 @@ UserInfo.init(
   },
   {
     sequelize,
-    modelName: 'UserInfo',
     tableName: 'user_detail'
   }
 )

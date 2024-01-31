@@ -54,7 +54,8 @@ const config = {
     '@typescript-eslint/no-explicit-any': 'off', // display-name 属性
     '@typescript-eslint/no-unused-vars': developmentOff,
     '@typescript-eslint/no-non-null-assertion': 'off',
-    '@typescript-eslint/no-empty-function': developmentOff
+    '@typescript-eslint/no-empty-function': developmentOff,
+    '@typescript-eslint/no-namespace': 'off'
     // 'prettier/prettier': 'error',
     // 'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     // 'react/jsx-props-no-spreading': 'off',

@@ -8,8 +8,8 @@ import { toast } from '@/utils/function'
  */
 export const useLogin = () => {
   const store = useStore()
-  const { formState, setFormRule, validatorForm } = useForm({ phoneNumber: '18888888888', password: '123456' })
-  setFormRule({
+  const { formState, setFormRules, validatorForm } = useForm({ phoneNumber: '18888888888', password: '123456' })
+  setFormRules({
     phoneNumber: { required: true, message: '请输入手机号码' },
     password: { required: true, message: '请输入密码' }
   })
@@ -26,9 +26,7 @@ export const useLogin = () => {
         store.login(data)
         uni.navigateBack()
       })
-      .catch(error => {
-        toast(error.data.message)
-      })
+      .catch(toast)
   }
 
   return { formState, handleLogin, onRegister }
@@ -38,8 +36,8 @@ export const useLogin = () => {
  * 注册
  */
 export const useRegister = () => {
-  const { formState, setFormRule, validatorForm } = useForm({ phoneNumber: '18888888888', password: '123456' })
-  setFormRule({
+  const { formState, setFormRules, validatorForm } = useForm({ phoneNumber: '18888888888', password: '123456' })
+  setFormRules({
     phoneNumber: { required: true, message: '请输入手机号码' },
     password: { required: true, message: '请输入密码' },
     cPassword: { required: true, message: '请输入确认密码' }
@@ -57,9 +55,7 @@ export const useRegister = () => {
         toast('注册成功')
         setTimeout(onLogin, 1500)
       })
-      .catch(error => {
-        toast(error.data.message)
-      })
+      .catch(toast)
   }
 
   return { formState, handleRegister, onLogin }

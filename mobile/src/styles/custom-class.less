@@ -10,7 +10,17 @@
   cursor: pointer;
   &-default {
     background: @color-white;
-    color: rgba(0, 0, 0, 0.85);
+    color: @color-85;
+    &-border {
+      border: 1px solid @color-85;
+      background: @color-white;
+      color: @color-85;
+    }
+  }
+  &-disabled {
+    border: 1px solid @color-20;
+    background: @color-white;
+    color: @color-45;
   }
   &-primary {
     background: @color-primary;
@@ -121,31 +131,21 @@ each(@gridColumn,{
 @width: {
   fill: 100%;
   fill-half: 50%;
+  100vw: 100vw;
+  100vh: 100vh;
   auto: auto;
-  0: 0rpx;
-  20: 20rpx;
-  30: 30rpx;
-  40: 40rpx;
-  100: 100rpx;
-  200: 200rpx;
-};
-each(@width,{
-  .w-@{key}{
-    width: @value !important;
-  }
-});
-
-// 高度
-@height: {
-  fill: 100%;
   0: 0rpx;
   20: 20rpx;
   30: 30rpx;
   40: 40rpx;
   80: 80rpx;
   100: 100rpx;
+  200: 200rpx;
 };
-each(@height,{
+each(@width, {
+  .w-@{key}{
+    width: @value !important;
+  }
   .h-@{key}{
     height: @value !important;
   }
@@ -159,6 +159,7 @@ each(@height,{
   26: 26rpx;
   28: 28rpx;
   30: 30rpx;
+  60: 60rpx;
 };
 each(@fontSize,{
   .fs-@{key}{
@@ -184,6 +185,7 @@ each(@fontSize,{
   65: @color-65;
   45: @color-45;
   20: @color-20;
+  color-f5: @color-f5;
 };
 each(@color,{
   .color-@{key}{
@@ -203,7 +205,10 @@ each(@color,{
   20: 20rpx;
   30: 30rpx;
   40: 40rpx;
+  60: 60rpx;
   100: 100rpx;
+  200: 200rpx;
+  300: 300rpx;
 };
 each(@gap,{
   .p-@{key}{

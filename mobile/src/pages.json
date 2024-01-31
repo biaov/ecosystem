@@ -137,6 +137,23 @@
           }
         }
       ]
+    },
+    {
+      "root": "pages/activity",
+      "pages": [
+        {
+          "path": "draw-prize-list/index",
+          "style": {
+            "navigationBarTitleText": "抽奖列表"
+          }
+        },
+        {
+          "path": "draw-prize/index",
+          "style": {
+            "navigationBarTitleText": "抽奖"
+          }
+        }
+      ]
     }
   ],
   "tabBar": {
