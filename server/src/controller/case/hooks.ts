@@ -2,7 +2,7 @@ import { Op, where } from 'sequelize'
 import type { Request, Response } from 'express'
 import { Case } from '@/model/case'
 import { getPagingParams, getLikeParams } from '@/utils/function'
-import { createLogs } from './log'
+import { createLogs } from '../log/hooks'
 
 /**
  * 案例列表

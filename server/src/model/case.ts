@@ -23,7 +23,6 @@ Case.init(
   },
   {
     sequelize,
-    modelName: 'Case',
     tableName: 'case'
   }
 )

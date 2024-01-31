@@ -2,7 +2,7 @@ import { Op } from 'sequelize'
 import type { Request, Response } from 'express'
 import { Swiper, Notice, Recommend, Feature } from '@/model/manage'
 import { getPagingParams, getLikeParams } from '@/utils/function'
-import { createLogs } from './log'
+import { createLogs } from '../log/hooks'
 
 /**
  * 轮播列表

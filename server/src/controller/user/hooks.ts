@@ -7,7 +7,7 @@ import { Role } from '@/model/role'
 import { phoneNumberReg } from '@/utils/regexp'
 import { defaultUserConfig, defaultPassword } from '@/config/user'
 import { getPagingParams, getLikeParams } from '@/utils/function'
-import { createLogs } from './log'
+import { createLogs } from '../log/hooks'
 
 /**
  * 用户列表
@@ -27,8 +27,8 @@ export const getUsers = async (req: Request, res: Response) => {
     }
   })
   rows.forEach(item => {
-    item.setDataValue('phoneNumber', item.getDataValue('User').phoneNumber)
-    item.setDataValue('User', undefined)
+    item.setDataValue('phoneNumber', item.getDataValue(User.name).phoneNumber)
+    item.setDataValue(User.name, undefined)
   })
   res.paging({ pageSize, current, total: count, items: rows })
 }
@@ -40,8 +40,8 @@ export const getUserDetail = async (req: Request, res: Response) => {
   const { id } = req.params
   const data = await UserInfo.findByPk(id, { include: User })
   if (!data) return res.status(422).error('用户不存在')
-  data.setDataValue('phoneNumber', data.getDataValue('User').phoneNumber)
-  data.setDataValue('User', undefined)
+  data.setDataValue('phoneNumber', data.getDataValue(User.name).phoneNumber)
+  data.setDataValue(User.name, undefined)
   res.success(data)
 }
 
@@ -52,7 +52,7 @@ export const deleteUser = async (req: Request, res: Response) => {
   const { id } = req.params
   const data = await UserInfo.findByPk(id, { include: User })
   if (!data) return res.status(422).error('用户不存在')
-  await Promise.all([data.destroy(), User.destroy({ where: { id: data.getDataValue('User').id } })])
+  await Promise.all([data.destroy(), User.destroy({ where: { id: data.getDataValue(User.name).id } })])
   res.success()
   createLogs(req, { pageKey: '/setting/account', content: `删除用户：${data.get('nickname')}` })
 }
@@ -64,7 +64,7 @@ export const resetUserPwd = async (req: Request, res: Response) => {
   const { id } = req.params
   const data = await UserInfo.findOne({ where: { id }, include: User })
   if (!data) return res.status(422).error('用户不存在')
-  await User.update({ password: defaultPassword }, { where: { id: data.getDataValue('User').id } })
+  await User.update({ password: defaultPassword }, { where: { id: data.getDataValue(User.name).id } })
   res.success()
   createLogs(req, { pageKey: '/setting/account', content: `重置用户密码：${data.get('nickname')}` })
 }
@@ -137,7 +137,7 @@ export const editPwd = async (req: Request, res: Response) => {
   } else {
     const data = await UserInfo.findOne({ where: { userId }, include: { model: User, where: { password: md5(password) } } })
     if (data) {
-      await User.update({ password: md5(nPassword) }, { where: { id: data.getDataValue('User').id } })
+      await User.update({ password: md5(nPassword) }, { where: { id: data.getDataValue(User.name).id } })
       res.success()
       createLogs(req, { pageKey: '/setting/account', content: `修改密码：${data.get('nickname')}` })
     } else {
@@ -162,8 +162,8 @@ export const userLogin = async (req: Request, res: Response) => {
     if (data) {
       const userId = data.get('id') as string
       const userInfo = await UserInfo.findOne({ where: { userId }, include: User })
-      userInfo!.setDataValue('phoneNumber', userInfo!.getDataValue('User').phoneNumber)
-      userInfo!.setDataValue('User', undefined)
+      userInfo!.setDataValue('phoneNumber', userInfo!.getDataValue(User.name).phoneNumber)
+      userInfo!.setDataValue(User.name, undefined)
       const token = sign({ userId: userInfo!.get('id') }, 'secret', { expiresIn: '24h' })
       const roleInfo = await Role.findOne({ where: { code: userInfo!.get('roleCode') } })
       userInfo!.setDataValue('permissions', roleInfo?.get('permissions') ?? [])

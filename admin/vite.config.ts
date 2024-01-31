@@ -1,7 +1,9 @@
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 import { resolve } from 'path'
 import eslint from 'vite-plugin-eslint'
+
+const env = loadEnv('development', resolve(__dirname, './'))
 
 export default defineConfig({
   base: '/admin',
@@ -19,7 +21,7 @@ export default defineConfig({
     port: 8090,
     proxy: {
       '/api': {
-        target: 'http://127.0.0.1:3600',
+        target: env['VITE_PROXY_BASE_URL'],
         changeOrigin: true,
         rewrite: path => path.replace(/^\/api/, '/api')
       }

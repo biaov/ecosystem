@@ -1,6 +1,7 @@
 import { Op } from 'sequelize'
 import type { Model } from 'sequelize'
 import { limit, offset } from '@/config/paging'
+import crypto from 'crypto'
 
 /**
  * 随机字母
@@ -64,3 +65,26 @@ export const defineArrayFormatProperty = <T extends Model>(field: string) => ({
     that.setDataValue(field, newValue)
   }
 })
+
+/**
+ * 随机数
+ */
+export const random = (min: number, max: number) => {
+  const range = max - min + 1
+  const byteArray = new Uint8Array(1)
+
+  do {
+    crypto.getRandomValues(byteArray)
+  } while (byteArray[0] >= 256 - (256 % range))
+
+  return min + (byteArray[0] % range)
+}
+
+/**
+ * 手机号码加密
+ */
+export const encryptionPhoneNumber = (phoneNumber: string) => {
+  const start = phoneNumber.slice(0, 3)
+  const end = phoneNumber.slice(-4)
+  return `${start}****${end}`
+}

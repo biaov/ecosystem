@@ -6,10 +6,9 @@ import type { Props } from './types'
 export default function richTextComponent(props: Partial<Props> = {}) {
   const { value = '', onChange } = props
   const [richTextValue, setRichTextValue] = useState('')
-
   useEffect(() => {
     setRichTextValue(value)
-  }, [])
+  }, [value])
 
   const modules = {
     toolbar: [
@@ -37,6 +36,5 @@ export default function richTextComponent(props: Partial<Props> = {}) {
     setRichTextValue(val)
     onChange && onChange(val)
   }
-
-  return <ReactQuill placeholder="请输入内容" theme="snow" {...{ richTextValue, modules }} style={{ height: '300px', marginBottom: '43px' }} onChange={onChangeRichText} />
+  return <ReactQuill placeholder="请输入内容" theme="snow" value={richTextValue} modules={modules} style={{ height: '300px', marginBottom: '43px' }} onChange={onChangeRichText} />
 }

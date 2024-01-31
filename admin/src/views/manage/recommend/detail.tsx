@@ -46,7 +46,7 @@ export default function RecommendDetailPage() {
           <Input placeholder="请输入页面地址" />
         </Form.Item>
         <Form.Item name="content" label="文章内容" rules={[{ required: true, message: '请输入文章内容' }]}>
-          <RichText></RichText>
+          <RichText />
         </Form.Item>
         <Form.Item wrapperCol={{ offset: 4, span: 20 }}>
           <Space>

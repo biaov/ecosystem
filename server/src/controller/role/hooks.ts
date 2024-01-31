@@ -1,7 +1,7 @@
 import type { Request, Response } from 'express'
 import { Role } from '@/model/role'
 import { getPagingParams, getLikeParams } from '@/utils/function'
-import { createLogs } from './log'
+import { createLogs } from '../log/hooks'
 
 /**
  * 角色列表

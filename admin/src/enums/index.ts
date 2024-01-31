@@ -1,3 +1,5 @@
+import { ActivityStatus } from './types'
+
 /**
  * 性别列表
  */
@@ -66,5 +68,36 @@ export const showStatus = {
   },
   filter(value?: boolean) {
     return this.options().find(item => item.value === value)
+  }
+}
+
+/**
+ * 活动状态
+ */
+export const activityStatus = {
+  /**
+   * 未开始
+   */
+  noStart: 'noStart',
+
+  /**
+   * 进行中
+   */
+  normal: 'normal',
+
+  /**
+   * 已结束
+   */
+  ended: 'ended',
+
+  options(): ActivityStatus.Option[] {
+    return [
+      { label: '未开始', value: this.noStart, status: 'processing' },
+      { label: '进行中', value: this.normal, status: 'success' },
+      { label: '已结束', value: this.ended, status: 'default' }
+    ]
+  },
+  filter(value: string) {
+    return this.options().find(item => item.value === value)!
   }
 }
