@@ -36,13 +36,20 @@ git clone https://github.com/biaov/ecosystem.git --depth=1
 - [控制台](http://ecosystem.biaov.cn/admin/)
 - [APP](https://github.com/biaov/ecosystem/releases)
 - [服务端接口文档](https://www.showdoc.com.cn/2302761390308442/10396968490372348)
-- 微信小程序: 微信开发者工具本地运行
 - [H5](http://ecosystem.biaov.cn/)
 
   - 浏览器浏览请开启：`Toogle device toolbar`
   - 手机浏览请扫描下方二维码
 
 <img src="https://ecosystem.biaov.cn/uploads/h5-qrcode.png" width="200px" height="200px" alt="qrcode" />
+
+- 微信小程序: 微信开发者工具本地运行
+
+> [!WARNING]
+> 由于小程序正式版有一些功能个人开发者不支持，所有需要本地运行或者使用体验版体验
+> 以下是小程序体验码，体验版需要审核
+
+<img src="https://ecosystem.biaov.cn/uploads/trial-version.png" width="200px" height="200px" alt="qrcode" />
 
 ## 贡献者们
 
