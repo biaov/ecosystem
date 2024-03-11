@@ -52,4 +52,4 @@ npm run build
 
 ### 接口文档
 
-- [ecosystem-api](https://www.showdoc.com.cn/2302761390308442/10396968490372348)
+- [ecosystem-api](https://apifox.com/apidoc/shared-668841b4-2ff4-4ac5-8674-8a2e9223f54d)

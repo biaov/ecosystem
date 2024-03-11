@@ -1,4 +1,4 @@
 {
   "upgrade": true,
-  "reject": ["pinia"]
+  "reject": ["pinia", "vite", "@vitejs/plugin-vue"]
 }
