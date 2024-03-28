@@ -34,12 +34,17 @@ npm run build
 
 ### 依赖特性
 
+#### dependencies
+
 - `express`: Node 开发框架
 - `jsonwebtoken`: token 生成
 - `md5`: 加密库
 - `multer`: 处理文件上传
 - `mysql2`: mysql 数据库
 - `sequelize`: 一个基于 promise 的 Node.js ORM 工具
+
+#### devDependencies
+
 - `@types/express`: `express` 的类型
 - `@types/jsonwebtoken`: `jsonwebtoken` 的类型
 - `@types/md5`: `md5` 的类型

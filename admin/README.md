@@ -32,6 +32,8 @@ npm run build
 
 ### 依赖特性
 
+#### dependencies
+
 - `@reduxjs/toolkit`: Redux 工具包
 - `antd`: React UI 框架
 - `axios`: 接口请求
@@ -40,6 +42,9 @@ npm run build
 - `react-dom`: 查看器 DOM 渲染
 - `react-redux`: 将 React 连接到 Redux 的连接器
 - `react-router-dom`: React 路由
+
+#### devDependencies
+
 - `@types/node`: `node` 的类型
 - `@types/react`: `react` 的类型
 - `@types/react-dom`: `react-dom` 的类型
@@ -54,7 +59,7 @@ npm run build
 - `eslint-plugin-react`: 检测和修复 react 代码,
 - `eslint-plugin-react-hooks`: 检测和修复 react-hooks 代码,
 - `less`: CSS 预编译器
-  "prettier": "^2.8.8",
+- `prettier`: 代码格式化工具
 - `typescript`: 编程语言
 - `vite`: 项目构建工具
 - `vite-plugin-eslint`: 将 ESlint 集成到 Vite 中

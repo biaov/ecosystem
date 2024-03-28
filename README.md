@@ -4,7 +4,7 @@
 
 <h2 align="center">
   <a href="https://github.com/biaov/ecosystem"><img src="https://shields.io/github/v/release/biaov/ecosystem.svg?logo=github&label=version" alt="version" /></a>
-  <a href="https://github.com/biaov/ecosystem/blob/main/LICENSE"><img src="https://img.shields.io/github/license/biaov/ecosystem.svg" alt="LICENSE" /></a>
+  <a href="https://github.com/biaov/ecosystem/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="LICENSE" /></a>
 </h2>
 
 ## 技术栈
