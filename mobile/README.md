@@ -37,6 +37,8 @@ npm run build:%PLATFORM%
 
 ## 依赖特性
 
+### dependencies
+
 - `@dcloudio/uni-app`: 一份代码编译成不同平台
 - `@dcloudio/uni-app-plus`: 解析成 APP
 - `@dcloudio/uni-components`: uni-app 组件库
@@ -46,6 +48,9 @@ npm run build:%PLATFORM%
 - `dayjs`: 时间处理工具
 - `pinia`: 状态管理器
 - `vue`: 前端框架
+
+### devDependencies
+
 - `@dcloudio/types`: `dcloud` 类型声明
 - `@dcloudio/uni-automator`: 自动化测试工具
 - `@dcloudio/uni-cli-shared`: 公共函数库
