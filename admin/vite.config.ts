@@ -3,7 +3,8 @@ import react from '@vitejs/plugin-react'
 import { resolve } from 'path'
 import eslint from 'vite-plugin-eslint'
 
-const env = loadEnv('development', resolve(__dirname, './'))
+const { dirname } = import.meta
+const env = loadEnv('development', resolve(dirname, './'))
 
 export default defineConfig({
   base: '/admin',
@@ -29,7 +30,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@': resolve(__dirname, './src')
+      '@': resolve(dirname, './src')
     }
   },
   css: {
@@ -39,5 +40,17 @@ export default defineConfig({
         additionalData: `@import '@/styles/variable.less';`
       }
     }
+  },
+  build: {
+    sourcemap: false,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          antd: ['antd'],
+          'ant-g2': ['@antv/g2']
+        }
+      }
+    },
+    chunkSizeWarningLimit: 1024
   }
 })

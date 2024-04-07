@@ -36,7 +36,7 @@ export const useLogin = () => {
  * 注册
  */
 export const useRegister = () => {
-  const { formState, setFormRules, validatorForm } = useForm({ phoneNumber: '18888888888', password: '123456' })
+  const { formState, setFormRules, validatorForm } = useForm({ phoneNumber: '18888888888', password: '123456', cPassword: '123456' })
   setFormRules({
     phoneNumber: { required: true, message: '请输入手机号码' },
     password: { required: true, message: '请输入密码' },

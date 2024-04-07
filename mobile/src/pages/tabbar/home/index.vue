@@ -38,7 +38,7 @@ const onMoreRecommend = () => {
   <responsive-notice :list="noticeList" @clickItem="onClickNoticeItem" />
   <view class="m-b-30"></view>
   <view class="m-b-30 p-lr-30 relative w-fill p-lr-30" @click="onClickFeature">
-    <image src="/static/image/feature-banner.png" mode="widthFix" class="w-fill"></image>
+    <image src="/static/image/feature-banner.png" mode="widthFix" class="w-fill feature-banner"></image>
   </view>
   <view class="w-fill p-lr-30">
     <view class="color-primary bold fs-28 m-b-20">热点推荐</view>

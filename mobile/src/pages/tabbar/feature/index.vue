@@ -19,7 +19,7 @@ const presetColors = ['#f56c6c', '#409eff', '#67c23a']
   <loading-page :loading="loading" />
   <view class="p-t-20">
     <view class="p-lr-30 p-tb-20 bg-white">
-      <image src="/static/image/feature-banner.png" mode="widthFix" class="w-fill"></image>
+      <image src="/static/image/feature-banner.png" mode="widthFix" class="w-fill feature-banner"></image>
     </view>
     <view-cell v-for="(item, index) in featureList" :key="index" border @click="onClickFeatureItem(item)">
       <template #left>

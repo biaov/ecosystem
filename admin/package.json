@@ -8,7 +8,6 @@
     "url": "https://biaov.cn/"
   },
   "description": "生态系统的控制台",
-  "type": "module",
   "scripts": {
     "start": "npm run dev",
     "dev": "vite",
@@ -17,8 +16,9 @@
     "lint": "eslint --ext .ts,.tsx ./src --fix",
     "ncu": "ncu --configFileName .ncurc.json && npm i"
   },
+  "type": "module",
   "engines": {
-    "node": ">=20"
+    "node": ">=20.12"
   },
   "keywords": [
     "控制台",
@@ -42,10 +42,10 @@
     }
   ],
   "dependencies": {
-    "@ant-design/icons": "^5.3.5",
+    "@ant-design/icons": "^5.3.6",
     "@antv/g2": "^4.2.10",
-    "@reduxjs/toolkit": "^2.2.2",
-    "antd": "^5.15.4",
+    "@reduxjs/toolkit": "^2.2.3",
+    "antd": "^5.16.1",
     "axios": "^1.6.8",
     "dayjs": "^1.11.10",
     "react": "^18.2.0",
@@ -55,11 +55,11 @@
     "react-router-dom": "^6.22.3"
   },
   "devDependencies": {
-    "@types/node": "^20.11.30",
-    "@types/react": "^18.2.73",
-    "@types/react-dom": "^18.2.22",
-    "@typescript-eslint/eslint-plugin": "^7.4.0",
-    "@typescript-eslint/parser": "^7.4.0",
+    "@types/node": "^20.12.5",
+    "@types/react": "^18.2.74",
+    "@types/react-dom": "^18.2.24",
+    "@typescript-eslint/eslint-plugin": "^7.5.0",
+    "@typescript-eslint/parser": "^7.5.0",
     "@vitejs/plugin-react": "^4.2.1",
     "eslint": "^8.57.0",
     "eslint-config-airbnb-base": "^15.0.0",
@@ -71,7 +71,7 @@
     "less": "^4.2.0",
     "prettier": "^3.2.5",
     "typescript": "5.0.4",
-    "vite": "^5.2.6",
+    "vite": "^5.2.8",
     "vite-plugin-eslint": "^1.8.1"
   }
 }

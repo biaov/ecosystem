@@ -47,7 +47,7 @@ const onFeature = () => {
       </view>
     </view>
     <view class="p-lr-30 p-tb-20 bg-white" @click="onFeature">
-      <image src="/static/image/feature-banner.png" mode="widthFix" class="w-fill"></image>
+      <image src="/static/image/feature-banner.png" mode="widthFix" class="w-fill feature-banner"></image>
     </view>
     <view-cell v-for="(item, index) in cellList" :key="index" @click="onClickCell(item)" :border="index !== cellList.length - 1">
       <template #left>

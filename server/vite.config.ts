@@ -3,11 +3,13 @@ import { resolve } from 'path'
 import { VitePluginNode } from 'vite-plugin-node'
 import { port } from './src/config/port'
 
+const { dirname } = import.meta
+
 const config: UserConfig = {
-  root: __dirname,
+  root: dirname,
   resolve: {
     alias: {
-      '@': resolve(__dirname, './src')
+      '@': resolve(dirname, './src')
     }
   },
   plugins: [
@@ -27,9 +29,9 @@ const config: UserConfig = {
   },
   build: {
     target: 'node18',
-    outDir: resolve(__dirname, './dist/dist'),
+    outDir: resolve(dirname, './dist/dist'),
     lib: {
-      entry: resolve(__dirname, './src/index.ts'),
+      entry: resolve(dirname, './src/index.ts'),
       formats: ['cjs']
     },
     rollupOptions: {
