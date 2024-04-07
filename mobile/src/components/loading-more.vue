@@ -31,9 +31,8 @@ const loadingText = computed(() => {
       return loadMore
     case 'loading':
       return loading
-    case 'noMore':
+    default:
       return noMore
   }
 })
 </script>
-<style lang="less" scoped></style>
