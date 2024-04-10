@@ -42,8 +42,23 @@ const configurePath = resolve(dirname, './configure.json')
 const env = loadEnv('development', resolve(dirname, '../'))
 const execOption = { encoding: 'utf-8' }
 
-const release = () => {
+/**
+ * 延迟器
+ */
+const delayer = (duration = 2000) =>
+  new Promise(resolve => {
+    setTimeout(() => {
+      resolve()
+    }, duration)
+  })
+
+const release = async () => {
   execSync('cli open', execOption)
+
+  console.log(chalk.yellow(`等待软件启动...`))
+
+  await delayer()
+
   const userInfo = execSync('cli user info', execOption)
 
   if (!userInfo) {
@@ -54,7 +69,6 @@ const release = () => {
   }
 
   const wgtDir = resolve(outputUnpackage, 'wgt')
-  // 65001
   existsSync(wgtDir) && rmSync(wgtDir, rmOption)
   mkdirSync(wgtDir)
   console.log()
@@ -68,15 +82,20 @@ const release = () => {
    * 由于配置了环境变量，因此此处可以直接可以使用 cli 命令
    */
   console.log(chalk.yellow(`开始生成 apk...`))
-
-  const result = execSync(`cli pack --config ${transformPath(configurePath)} --project ${transformPath(output)} --android.certfile ${transformPath(keystore)}`, execOption)
-  let pkgName = result.match(/(?<=dist\/build\/app\/unpackage\/release\/apk\/)(.+\.apk)/g)
-  if (!pkgName) return console.log(chalk.red('打包失败'))
-  pkgName = pkgName[0]
-  const renameDest = resolve(outputUnpackage, `release/apk/ecosystem.${manifestJson.versionName}.apk`)
-  renameSync(resolve(outputUnpackage, `release/apk/${pkgName}`), renameDest)
-  console.log()
-  console.log(chalk.green(`下载成功，APK 路径：${renameDest}`))
-  execSync('cli app quit', execOption)
+  try {
+    const result = execSync(`cli pack --config ${transformPath(configurePath)} --project ${transformPath(output)} --android.certfile ${transformPath(keystore)}`, execOption)
+    console.log(chalk.yellow(result))
+    let pkgName = result.match(/(?<=dist\/build\/app\/unpackage\/release\/apk\/)(.+\.apk)/g)
+    if (!pkgName) return console.log(chalk.red('打包失败'))
+    pkgName = pkgName[0]
+    const renameDest = resolve(outputUnpackage, `release/apk/ecosystem.${manifestJson.versionName}.apk`)
+    renameSync(resolve(outputUnpackage, `release/apk/${pkgName}`), renameDest)
+    console.log()
+    console.log(chalk.green(`下载成功，APK 路径：${renameDest}`))
+    execSync('cli app quit', execOption)
+  } catch (error) {
+    console.log(chalk.red(error))
+  }
 }
+
 release()
