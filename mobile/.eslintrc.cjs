@@ -8,6 +8,7 @@ const config = {
     'vue/setup-compiler-macros': true
   },
   globals: {
+    plus: 'readonly',
     uni: 'readonly',
     UniApp: 'readonly',
     defineSlots: 'readonly',

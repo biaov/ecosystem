@@ -4,6 +4,7 @@
 export interface CellListItem {
   iconName: string
   name: string
-  url: string
+  url?: string
   needLogin?: boolean
+  gap?: boolean
 }

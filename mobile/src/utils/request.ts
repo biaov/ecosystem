@@ -1,16 +1,16 @@
 import { useStore } from '@/stores'
 import { baseURL } from '@/config'
 import { toast } from './function'
-import type { RequestType } from './types'
+import type { RequestType, RequestOption } from './types'
 
 /**
  * 请求
  */
-const request = <T extends Record<string, unknown>>(option: UniApp.RequestOptions, type: RequestType = 'request'): Promise<T> => {
+const request = <T extends Record<string, unknown>>(option: RequestOption, type: RequestType = 'request'): Promise<T> => {
   const state = useStore()
   const baseConfig = {
-    url: baseURL + option.url,
-    header: { Authorization: `Bearer ${state.token}` }
+    url: (option.unPrefix ? '' : baseURL) + option.url,
+    header: { Authorization: !option.unAuth && `Bearer ${state.token}` }
   }
   const config = {
     sslVerify: false,

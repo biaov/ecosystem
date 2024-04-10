@@ -1,10 +1,12 @@
 import { validatorLogin } from '@/utils/function'
+import { useVisible } from '@/composables/useVisible'
 import type { CellListItem } from './types'
 
 /**
  * 行列表
  */
 export const useCell = () => {
+  const [checkUpdateVisible, setCheckUpdateVisible] = useVisible()
   const cellList = ref<CellListItem[]>([
     {
       iconName: 'user-info',
@@ -25,18 +27,30 @@ export const useCell = () => {
     {
       iconName: 'help',
       name: '帮助中心',
-      url: '/pages/user/help'
+      url: '/pages/user/help',
+      gap: true
     },
     {
       iconName: 'about',
       name: '关于我们',
       url: '/pages/user/about'
+    },
+    {
+      iconName: 'check-update',
+      name: '检查更新'
     }
   ])
-  const onClickCell = ({ url, needLogin }: CellListItem) => {
+  const onClickCell = ({ url, needLogin, iconName }: CellListItem) => {
     if (needLogin && !validatorLogin()) return
-    uni.navigateTo({ url })
+    switch (iconName) {
+      case 'check-update':
+        setCheckUpdateVisible(true)
+        break
+      default:
+        url && uni.navigateTo({ url })
+        break
+    }
   }
 
-  return { cellList, onClickCell }
+  return { checkUpdateVisible, cellList, onClickCell }
 }

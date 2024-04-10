@@ -34,6 +34,7 @@ const onMoreRecommend = () => {
 
 <template>
   <loading-page :loading="loading" />
+  <app-upgrador visible autoUpdate />
   <responsive-swiper :list="swiperList" @clickItem="onClickSwiperItem" />
   <responsive-notice :list="noticeList" @clickItem="onClickNoticeItem" />
   <view class="m-b-30"></view>

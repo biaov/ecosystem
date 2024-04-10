@@ -7,6 +7,7 @@ import components from 'unplugin-vue-components/vite'
 
 const { dirname } = import.meta
 const env = loadEnv('development', resolve(dirname, './'))
+
 export default defineConfig({
   plugins: [
     eslint(),
@@ -24,9 +25,9 @@ export default defineConfig({
       extensions: ['vue'],
       include: [/\.vue$/, /\.vue\?vue/],
       exclude: [/node_modules/, 'types.ts'],
-      dts: './types/components.d.ts'
+      dts: './types/components.d.ts',
     }),
-    (uni as any).default()
+    (uni as Record<string, any>).default()
   ],
   server: {
     host: '0.0.0.0',

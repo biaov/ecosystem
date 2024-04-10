@@ -10,6 +10,8 @@ npm i
 
 ## 运行项目
 
+- 在 `.env.development` 文件中配置环境变量
+
 ```sh
 npm run dev:%PLATFORM%
 ```
@@ -24,6 +26,16 @@ npm run dev:%PLATFORM%
 ```sh
 npm run build:%PLATFORM%
 ```
+
+## APP 打包 APK
+
+- 方法一：使用 HBuilerX 打包
+  - HBuilerX 打开 `dist/build/app` 目录进行打包发行
+- 方法二：使用 HBuilderX cli 打包
+  - 仍需安装 HBuilerX
+  - HBuilerX 登录账号
+  - 配置好 cli 环境变量，即 HBuilderX 软件安装目录的 cli.exe
+  - 运行 `npm run release` 命令
 
 ## 命名规范
 
@@ -60,6 +72,7 @@ npm run build:%PLATFORM%
 - `@typescript-eslint/eslint-plugin`: 检测和修复 TS 代码
 - `@typescript-eslint/parser`: 解析 TS 代码并生成抽象语法树（AST），以供 eslint 进行代码检查
 - `@vitejs/plugin-vue`: Vite 解析 Vue 文件
+- `chalk`: 颜色工具
 - `eslint`: 代码检查工具
 - `eslint-config-airbnb-base`: airbnb-base 代码编写规范
 - `eslint-config-prettier`: 将 Prettier 规则集成到 ESlint 检查中
