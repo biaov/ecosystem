@@ -7,10 +7,12 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    AppUpgrador: typeof import('./../src/components/app-upgrador.vue')['default']
     LoadingAnimation: typeof import('./../src/components/loading-animation.vue')['default']
     LoadingMore: typeof import('./../src/components/loading-more.vue')['default']
     LoadingPage: typeof import('./../src/components/loading-page.vue')['default']
     NullPlaceholder: typeof import('./../src/components/null-placeholder.vue')['default']
+    ProgressBar: typeof import('./../src/components/progress-bar.vue')['default']
     ResponsiveNotice: typeof import('./../src/components/responsive-notice.vue')['default']
     ResponsiveSwiper: typeof import('./../src/components/responsive-swiper.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

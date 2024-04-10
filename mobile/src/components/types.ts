@@ -83,3 +83,16 @@ export namespace ViewMask {
   }
 }
 
+/**
+ * app-upgrador 组件
+ */
+export namespace AppUpgrador {
+  interface Preset {
+    cancelText: string
+    okText: string
+  }
+
+  export interface ModalPreset {
+    [key: string]: Preset | undefined
+  }
+}

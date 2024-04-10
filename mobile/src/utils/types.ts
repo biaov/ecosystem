@@ -17,3 +17,11 @@ export interface ChooseImageSuccessCallbackResult extends UniApp.ChooseImageSucc
 export interface UploadImgResult extends Record<string, any> {
   url: string
 }
+
+/**
+ * 请求配置项
+ */
+export type RequestOption = UniApp.RequestOptions & {
+  unPrefix?: boolean
+  unAuth?: boolean
+}

@@ -10,16 +10,20 @@ const emit = defineEmits<{
 /**
  * 所需参数
  */
-const props = withDefaults(
+withDefaults(
   defineProps<{
     title?: string
     background?: string
     width?: string
+    cancelText?: string
+    okText?: string
   }>(),
   {
     title: '提示',
     background: '#fff',
-    width: '80%'
+    width: '80%',
+    cancelText: '取消',
+    okText: '确定'
   }
 )
 
@@ -37,9 +41,9 @@ const onOk = () => {
   <view class="view-modal absolute p-40 flex flex-column flex-dc br-20" :style="{ background, width }" @click.stop>
     <view class="title color-85 fs-30">{{ title }}</view>
     <slot></slot>
-    <view class="flex flex-sb flex-dc w-fill">
-      <view class="btn btn-disabled" @click="onCancel">取消</view>
-      <view class="btn btn-primary" @click="onOk">确定</view>
+    <view class="flex flex-sb flex-dc w-fill" v-if="okText || cancelText">
+      <view class="btn btn-disabled" @click="onCancel" v-if="cancelText">{{ cancelText }}</view>
+      <view class="btn btn-primary" @click="onOk" v-if="okText">{{ okText }}</view>
     </view>
   </view>
 </template>
@@ -50,8 +54,15 @@ const onOk = () => {
   left: 50%;
   transform: translate(-50%, -50%);
   .btn {
+    flex-grow: 1;
     width: 46%;
     height: 80rpx;
+    &:first-child {
+      margin-right: 40rpx;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
   }
 }
 </style>

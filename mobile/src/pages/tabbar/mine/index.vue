@@ -6,7 +6,7 @@ import { validatorLogin } from '@/utils/function'
 import { useCell } from './hooks'
 
 const state = useStore()
-const { cellList, onClickCell } = useCell()
+const { checkUpdateVisible, cellList, onClickCell } = useCell()
 
 /**
  * 点击设置
@@ -27,7 +27,7 @@ const onFeature = () => {
 </script>
 
 <template>
-  <view>
+  <view class="p-b-20">
     <view class="head flex flex-sb flex-cc" @click="onSetting">
       <view class="flex flex-cc">
         <view class="avatar m-r-20">
@@ -46,17 +46,18 @@ const onFeature = () => {
         <image src="/static/icon/setting.png" class="w-fill h-40"></image>
       </view>
     </view>
-    <view class="p-lr-30 p-tb-20 bg-white" @click="onFeature">
+    <view class="p-lr-30 p-tb-20 bg-white relative" @click="onFeature">
       <image src="/static/image/feature-banner.png" mode="widthFix" class="w-fill feature-banner"></image>
     </view>
-    <view-cell v-for="(item, index) in cellList" :key="index" @click="onClickCell(item)" :border="index !== cellList.length - 1">
+    <view-cell v-for="(item, index) in cellList" :key="index" :border="index !== cellList.length - 1" :class="{ 'm-b-20': item.gap }" @click="onClickCell(item)">
       <template #left>
         <view class="flex flex-cc">
-          <image :src="`/static/icon/${item.iconName}.png`" mode="widthFix" class="w-40 m-r-20"></image>
+          <image :src="`/static/icon/${item.iconName}.png`" mode="widthFix" class="w-40 h-p-40 m-r-20"></image>
           <view>{{ item.name }}</view>
         </view>
       </template>
     </view-cell>
+    <app-upgrador :visible="checkUpdateVisible" />
   </view>
 </template>
 

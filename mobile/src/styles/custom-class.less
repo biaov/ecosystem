@@ -149,6 +149,12 @@ each(@width, {
   .h-@{key}{
     height: @value !important;
   }
+  .w-p-@{key}{
+    width: @value;
+  }
+  .h-p-@{key}{
+    height: @value;
+  }
 });
 
 // 字体大小
@@ -269,6 +275,13 @@ each(@position,{
   .@{key}{
     position: @value !important;
     z-index: 9;
+
+  }
+  .@{key}-top-left{
+    position: @value !important;
+    z-index: 9;
+    top: 0;
+    left: 0;
   }
 });
 

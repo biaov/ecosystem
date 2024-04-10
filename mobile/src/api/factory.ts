@@ -1,6 +1,7 @@
 import { service } from '@/utils/request'
 import { defaultPageSize } from '@/config'
-import { PagingResponse } from './types'
+import type { RequestOption } from '@/utils/types'
+import type { PagingResponse } from './types'
 
 export const restful = (path: string) => ({
   paging: <T>(query = {}): Promise<PagingResponse<T>> => service.get<PagingResponse<T>>(path, { data: { current: 1, pageSize: defaultPageSize, ...query } }),
@@ -12,8 +13,8 @@ export const restful = (path: string) => ({
   replace: (id: number, data = {}) => service.put(`${path}/${id}`, { data })
 })
 
-export const command = (path: string) => ({
-  get: <T>(query = {}) => service.get(path, { data: query }) as Promise<T>,
+export const command = (path: string, option: Partial<RequestOption> = {}) => ({
+  get: <T>(query = {}) => service.get(path, { ...option, data: query }) as Promise<T>,
   post: <T>(data = {}) => service.post(path, { data }) as Promise<T>,
   file: <T>(data = {}) => service.file(path, { data }) as Promise<T>
 })
