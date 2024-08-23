@@ -2,7 +2,7 @@
 import { recommendApi } from '@/api/manage'
 import type { ArticleDataType } from './types'
 
-const query: Record<string, any> = {}
+const query: Record<string, number> = {}
 const { detail, loadData, loading } = useDetailRequest<ArticleDataType>(<T,>() => recommendApi.get<T>(query.id), false)
 
 onLoad(({ id } = {}) => {

@@ -8,4 +8,5 @@ export interface ArticleDataType {
   content: string
   createdAt: string
   updatedAt: string
+  [key: string]: string | number
 }

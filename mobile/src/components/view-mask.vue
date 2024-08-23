@@ -1,10 +1,10 @@
 <script setup lang="ts">
+import type { ViewMask } from './types'
+
 /**
  * 响应事件
  */
-const emit = defineEmits<{
-  (event: 'update:visible', e: boolean): void
-}>()
+const emit = defineEmits<ViewMask.Emits>()
 
 /**
  * 所需参数

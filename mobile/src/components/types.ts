@@ -96,3 +96,27 @@ export namespace AppUpgrador {
     [key: string]: Preset | undefined
   }
 }
+
+/**
+ * view-modal 组件
+ */
+export namespace ViewModal {
+
+  export interface Emits {
+    (event: 'cancel'): void
+    (event: 'ok'): void
+  }
+}
+
+/**
+ * view-mask 组件
+ */
+export namespace ViewMask {
+
+  export interface Emits {
+    (event: 'update:visible', e: boolean): void
+  }
+}
+
+
+

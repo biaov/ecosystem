@@ -5,7 +5,7 @@ import type { UsePagingRequestParam, UseDetailRequest } from './types'
 /**
  * 分页请求
  */
-export const usePagingRequest = <T extends Record<string, any>>(
+export const usePagingRequest = <T extends Record<string, unknown>>(
   /**
    * 请求函数
    */
@@ -65,7 +65,7 @@ export const usePagingRequest = <T extends Record<string, any>>(
 /**
  * 详情请求
  */
-export const useDetailRequest = <T extends Record<string, any>>(
+export const useDetailRequest = <T extends Record<string, unknown>>(
   /**
    * 请求函数
    */

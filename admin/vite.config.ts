@@ -22,7 +22,7 @@ export default defineConfig({
     port: 8090,
     proxy: {
       '/api': {
-        target: env['VITE_PROXY_BASE_URL'],
+        target: env.VITE_PROXY_BASE_URL,
         changeOrigin: true,
         rewrite: path => path.replace(/^\/api/, '/api')
       }

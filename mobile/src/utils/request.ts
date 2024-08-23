@@ -44,7 +44,7 @@ const request = <T extends Record<string, unknown>>(option: RequestOption, type:
     } else {
       uni.uploadFile({
         ...baseConfig,
-        filePath: (option.data as Record<string, any>).url,
+        filePath: (option.data as AnyObject).url,
         name: 'file',
         success: res => {
           const { statusCode, data } = res

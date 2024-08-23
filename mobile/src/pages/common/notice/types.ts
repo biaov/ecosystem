@@ -7,4 +7,5 @@ export interface NoticeDataType {
   content: string
   createdAt: string
   updatedAt: string
+  [key: string]: number | string
 }

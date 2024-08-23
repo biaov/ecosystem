@@ -2,7 +2,7 @@
 import { noticeApi } from '@/api/manage'
 import type { NoticeDataType } from './types'
 
-const query: Record<string, any> = {}
+const query: Record<string, number> = {}
 const { detail, loadData, loading } = useDetailRequest<NoticeDataType>(<T,>() => noticeApi.get<T>(query.id), false)
 
 onLoad(({ id } = {}) => {

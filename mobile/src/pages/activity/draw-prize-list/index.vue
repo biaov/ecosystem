@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { toast } from '@/utils/function'
 import { useDrawPrizeList } from './hooks'
 
 const [loading, setLoading] = useVisible(true)

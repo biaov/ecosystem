@@ -48,7 +48,7 @@ const heightGroup = ref<string[]>([])
 /**
  * 图片加载完成
  */
-const onLoadImg = (e: any, index: number) => {
+const onLoadImg = (e: { detail: { width: number; height: number } }, index: number) => {
   const { width, height } = e.detail
   const viewHeight = `${~~((height / width) * props.containerWidth)}rpx`
   heightGroup.value[index] = viewHeight

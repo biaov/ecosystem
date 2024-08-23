@@ -16,7 +16,7 @@ export const useSilentAuth = async (callback = () => {}, { force = false }: Part
   }
 
   const store = useStore()
-  if (!store.token || force) {
+  if (!store.state.token || force) {
     store.clearToken()
     silentAuthPromise = new Promise((resolve, reject) => {
       silentAuthApi

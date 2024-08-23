@@ -6,5 +6,5 @@ export interface DrawPrizeItem {
   name: string
   desc: string
   startTime: string
-  endTime: String
+  endTime: string
 }

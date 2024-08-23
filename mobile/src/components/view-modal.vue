@@ -1,11 +1,10 @@
 <script setup lang="ts">
+import type { ViewModal } from './types'
+
 /**
  * 响应事件
  */
-const emit = defineEmits<{
-  (event: 'cancel'): void
-  (event: 'ok'): void
-}>()
+const emit = defineEmits<ViewModal.Emits>()
 
 /**
  * 所需参数

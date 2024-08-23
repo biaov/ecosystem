@@ -1,4 +1,3 @@
-import { defineStore } from 'pinia'
 import { setStorage, getStorage, removeStorage } from '@/utils/storage'
 import type { LoginData, UserInfo } from './types'
 
@@ -8,44 +7,47 @@ import type { LoginData, UserInfo } from './types'
 const tokenStorage = getStorage('token') as string
 const userInfoStorage = (getStorage('userInfo') as Partial<UserInfo>) || {}
 
-export const useStore = defineStore('main', {
-  state: () => ({
-    token: tokenStorage,
-    userInfo: userInfoStorage
-  }),
-  actions: {
-    setToken(token: string) {
-      this.token = token
-      setStorage('token', token)
-    },
-    setUserInfo(userInfo: UserInfo) {
-      this.userInfo = userInfo
-      setStorage('userInfo', userInfo)
-    },
-    clearToken() {
-      this.token = ''
-      removeStorage('token')
-    },
-    clearUserInfo() {
-      this.userInfo = {}
-      removeStorage('userInfo')
-    },
-    /**
-     * 登录
-     */
-    login({ token, userInfo }: LoginData) {
-      this.setToken(token)
-      this.setUserInfo(userInfo)
-    },
-    /**
-     * 登出
-     */
-    logout() {
-      this.clearToken()
-      this.clearUserInfo()
-    }
-  },
-  getters: {
-    isLogin: state => !!state.userInfo.id
-  }
+const state = reactive({
+  token: tokenStorage,
+  userInfo: userInfoStorage
 })
+
+export const useStore = () => {
+  const setToken = (token: string) => {
+    state.token = token
+    setStorage('token', token)
+  }
+  const clearToken = () => {
+    state.token = ''
+    removeStorage('token')
+  }
+  const setUserInfo = (userInfo: LoginData['userInfo']) => {
+    state.userInfo = userInfo
+    setStorage('userInfo', userInfo)
+  }
+  const clearUserInfo = () => {
+    state.userInfo = {}
+    removeStorage('userInfo')
+  }
+  const login = ({ token, userInfo }: LoginData) => {
+    setToken(token)
+    setUserInfo(userInfo)
+  }
+  const logout = () => {
+    clearToken()
+    clearUserInfo()
+  }
+
+  const isLogin = computed(() => !!state.userInfo.id)
+
+  return {
+    state: readonly(state),
+    isLogin,
+    login,
+    logout,
+    setToken,
+    clearToken,
+    setUserInfo,
+    clearUserInfo
+  }
+}

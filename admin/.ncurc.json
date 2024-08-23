@@ -1,4 +1,0 @@
-{
-  "upgrade": true,
-  "reject": ["typescript", "@antv/g2", "eslint"]
-}
