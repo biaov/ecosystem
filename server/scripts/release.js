@@ -5,19 +5,17 @@ import packageJson from '../package.json' assert { type: 'json' }
 
 packageJson.devDependencies = {} // 清理多余的依赖
 
-const { dirname } = import.meta
-
 /**
  * 外层目录
  */
 const outDir = `../dist`
-const workDir = resolve(dirname, outDir)
+const workDir = resolve(import.meta.dirname, outDir)
 
 /**
  * 修改文件
  * 新路径
  */
-const prePackagePath = resolve(dirname, `${outDir}/package.json`)
+const prePackagePath = resolve(import.meta.dirname, `${outDir}/package.json`)
 existsSync(prePackagePath) && unlinkSync(prePackagePath) // 删除旧的
 writeFileSync(prePackagePath, JSON.stringify(packageJson, null, 2)) // 写入最新的
 
@@ -27,15 +25,15 @@ writeFileSync(prePackagePath, JSON.stringify(packageJson, null, 2)) // 写入最
  */
 const copyFiles = ['package-lock.json']
 copyFiles.forEach(fileName => {
-  const include = resolve(dirname, `../${fileName}`)
-  const output = resolve(dirname, `${outDir}/${fileName}`)
+  const include = resolve(import.meta.dirname, `../${fileName}`)
+  const output = resolve(import.meta.dirname, `${outDir}/${fileName}`)
   copyFileSync(include, output)
 })
 
 /**
  * 创建文件夹
  */
-const uploadsDir = resolve(dirname, `${outDir}/uploads`)
+const uploadsDir = resolve(import.meta.dirname, `${outDir}/uploads`)
 !existsSync(uploadsDir) && mkdirSync(uploadsDir)
 
 /**
