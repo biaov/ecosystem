@@ -10,4 +10,4 @@ resolve:
     '@dcloudio/uni-stacktracey@vue3',
     '@dcloudio/vite-plugin-uni@vue3'
   ]
-reject: ['vite']
+reject: ['vite','eslint-plugin-vue']
