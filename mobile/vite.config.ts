@@ -5,8 +5,7 @@ import eslint from 'vite-plugin-eslint'
 import autoImport from 'unplugin-auto-import/vite'
 import components from 'unplugin-vue-components/vite'
 
-const { dirname } = import.meta
-const env = loadEnv('development', resolve(dirname, './'))
+const env = loadEnv('development', resolve(import.meta.dirname, './'))
 
 export default defineConfig({
   plugins: [
@@ -47,7 +46,7 @@ export default defineConfig({
      * 路径别名
      */
     alias: {
-      '@': resolve(dirname, './src')
+      '@': resolve(import.meta.dirname, './src')
     }
   },
   css: {

@@ -3,9 +3,14 @@ import { Card, Row, Select, Space } from 'antd'
 import { Chart } from '@antv/g2'
 import { setStorage, getStorage } from '@/utils/storage'
 
+interface DataItem {
+  lang: string
+  ratio: number
+}
+
 export default function TechnologyStackComponent() {
   const [chartType, setChartType] = useState('pie')
-  const renderData = [
+  const renderData: DataItem[] = [
     { lang: 'TS', ratio: 40 },
     { lang: 'REACT', ratio: 30 },
     { lang: 'AXIOS', ratio: 5 },
@@ -23,7 +28,6 @@ export default function TechnologyStackComponent() {
 
   const renderChart = () => {
     const proportionDom = document.getElementById('proportion')
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
     if (!proportionDom) return () => {}
     proportionDom.innerHTML = ''
 
@@ -43,93 +47,77 @@ export default function TechnologyStackComponent() {
         alias: '占比'
       }
     })
-    chart.legend({
-      position: 'bottom'
+    chart.legend('color', { position: 'bottom', layout: { justifyContent: 'center' } })
+    chart.axis({
+      x: {
+        title: '语言'
+      },
+      y: {
+        title: '比例'
+      }
     })
+
+    const labelOption = {
+      position: 'outside',
+      text: ({ lang, ratio }: DataItem) => `${lang}: ${ratio}%`
+    }
+    const tooltipOption = ({ lang, ratio }: DataItem) => ({
+      name: lang,
+      value: labelFormatter.labelFormatter(ratio)
+    })
+
+    const labelFormatter = {
+      labelFormatter: (v: number | string) => `${v}%`
+    }
+
+    const position = { x: 'lang', y: 'ratio' }
+
     switch (chartType) {
       case 'pie':
-        chart.coordinate('theta', {
-          radius: 0.75
-        })
-        chart
-          .interval()
-          .position('ratio')
-          .color('lang')
-          .tooltip('lang*ratio')
-          .adjust('stack')
-          .label('ratio', {
-            content: ({ lang, ratio }) => `${lang} ${ratio}%`
-          })
-          .style({
-            lineWidth: 1,
-            stroke: '#fff',
-            opacity: 0.4
-          })
-
-        chart.tooltip({
-          showTitle: false,
-          showMarkers: false
-        })
-        chart.interaction('element-single-selected')
+        chart.coordinate({ type: 'theta', outerRadius: 0.8 })
+        chart.interval().transform({ type: 'stackY' }).encode('y', 'ratio').encode('color', 'lang').label(labelOption).tooltip(tooltipOption)
         break
       case 'ring':
-        chart.coordinate('theta', {
-          radius: 0.75,
-          innerRadius: 0.6
-        })
-        chart
-          .interval()
-          .position('ratio')
-          .color('lang')
-          .tooltip('lang*ratio')
-          .adjust('stack')
-          .label('ratio', {
-            content: ({ lang, ratio }) => `${lang} ${ratio}%`
-          })
-          .style({
-            lineWidth: 1,
-            stroke: '#fff',
-            opacity: 0.4
-          })
-
-        chart.tooltip({
-          showTitle: false,
-          showMarkers: false
-        })
-        chart.interaction('element-single-selected')
+        chart.coordinate({ type: 'theta', outerRadius: 0.8, innerRadius: 0.5 })
+        chart.interval().transform({ type: 'stackY' }).encode('y', 'ratio').encode('color', 'lang').label(labelOption).tooltip(tooltipOption)
         break
       case 'histogram':
-        chart.tooltip({
-          showMarkers: false,
-          showTitle: false
-        })
-        chart.interval().position('lang*ratio').color('lang')
+        chart.interval().encode(position).encode('color', 'lang').tooltip(tooltipOption).axis('y', labelFormatter)
         break
       case 'bar':
-        chart.coordinate().transpose()
-        chart.tooltip({
-          showMarkers: false,
-          showTitle: false
-        })
-        chart.interval().position('lang*ratio').color('lang')
+        chart
+          .interval()
+          .coordinate({ transform: [{ type: 'transpose' }] })
+          .encode(position)
+          .encode('color', 'lang')
+          .tooltip(tooltipOption)
+          .axis('y', labelFormatter)
         break
       case 'line':
-        chart.line().position('lang*ratio').shape('smooth')
-        chart.point().position('lang*ratio').color('lang').shape('circle')
-        chart.scale('ratio', {
-          min: 0,
-          alias: '占比'
-        })
+        chart
+          .encode(position)
+          .scale('y', {
+            domainMin: 0
+          })
+          .axis('y', {
+            ...labelFormatter,
+            title: '比例'
+          })
+        chart.line().encode('shape', 'smooth').tooltip(false)
+        chart.point().encode('color', 'lang').encode('shape', 'circle').tooltip(tooltipOption)
         break
-      case 'area':
-        chart.line().position('lang*ratio').shape('smooth')
-        chart.point().position('lang*ratio').color('lang').shape('circle')
-        chart.area().position('lang*ratio').shape('smooth')
-        chart.scale('ratio', {
-          min: 0,
-          alias: '占比'
+      case 'area': {
+        const colors = ['35,137,255', '13,204,204', '241,142,86', '215,135,255', '127,107,255']
+        const gradient = colors.reduce((prev, item, i) => `${prev}, rgba(${item},1) ${(i / (colors.length - 1)) * 100}%`, '0deg')
+        chart.encode(position).axis('y', {
+          ...labelFormatter,
+          title: '比例'
         })
+        chart.line().style('strokeWidth', 2).encode('shape', 'smooth').tooltip(false).style('stoken', `linear-gradient(${gradient})`)
+        chart.point().encode('color', 'lang').encode('shape', 'circle').tooltip(tooltipOption)
+        chart.area().encode('shape', 'smooth').tooltip(false).style('fill', `linear-gradient(${gradient})`)
         break
+      }
     }
 
     chart.render()

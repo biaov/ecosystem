@@ -13,12 +13,11 @@ const transformPath = path => path.replace(/\\/g, '/')
 /**
  * 相对路径
  */
-const { dirname } = import.meta
 
 /**
  * 项目打包目录
  */
-const output = resolve(dirname, '../dist/build/app')
+const output = resolve(import.meta.dirname, '../dist/build/app')
 
 const outputUnpackage = resolve(output, 'unpackage')
 const keystore = resolve(outputUnpackage, 'res/ecosystem.keystore')
@@ -27,19 +26,19 @@ const rmOption = { force: true, recursive: true }
 /**
  * 复制资源
  */
-const unpackagePath = resolve(dirname, '../unpackage')
+const unpackagePath = resolve(import.meta.dirname, '../unpackage')
 
 cpSync(unpackagePath, outputUnpackage, rmOption)
 
 /**
  * 配置文件路径
  */
-const configurePath = resolve(dirname, './configure.json')
+const configurePath = resolve(import.meta.dirname, './configure.json')
 
 /**
  * 环境变量
  */
-const env = loadEnv('development', resolve(dirname, '../'))
+const env = loadEnv('development', resolve(import.meta.dirname, '../'))
 const execOption = { encoding: 'utf-8' }
 
 /**
@@ -75,7 +74,7 @@ const release = async () => {
   console.log(chalk.yellow(`开始生成 wgt 包...`))
   console.log()
   execSync(`cli publish --platform APP --type wgt --project ${transformPath(output)} --path ${wgtDir} --name upgrade.wgt --confuse true`)
-  console.log(chalk.green(`wgt 包生成完成，路径：${resolve(dirname, '../dist/build/app/unpackage/wgt/upgrade.wgt')}`))
+  console.log(chalk.green(`wgt 包生成完成，路径：${resolve(import.meta.dirname, '../dist/build/app/unpackage/wgt/upgrade.wgt')}`))
   console.log()
   /**
    * cli: HBuilderX 软件安装目录的 cli.exe

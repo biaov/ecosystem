@@ -1,7 +1,7 @@
 import { execSync } from 'child_process'
 import { writeFileSync, existsSync, unlinkSync, copyFileSync, mkdirSync } from 'fs'
 import { resolve } from 'path'
-import packageJson from '../package.json' assert { type: 'json' }
+import packageJson from '../package.json' with { type: 'json' }
 
 packageJson.devDependencies = {} // 清理多余的依赖
 

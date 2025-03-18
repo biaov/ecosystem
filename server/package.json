@@ -13,6 +13,7 @@
     "start": "npm run dev",
     "dev": "vite",
     "build": "vite build && node ./scripts/release",
+    "install": "node scripts/install",
     "ncu": "ncu --configFileName .ncurc.json && npm i"
   },
   "type": "module",
@@ -40,7 +41,7 @@
     "@types/jsonwebtoken": "^9.0.9",
     "@types/md5": "^2.3.5",
     "@types/multer": "^1.4.12",
-    "@types/node": "^22.13.9",
+    "@types/node": "^22.13.10",
     "terser": "^5.39.0",
     "typescript": "^5.8.2",
     "vite": "^5.4.11",

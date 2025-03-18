@@ -3,8 +3,7 @@ import react from '@vitejs/plugin-react'
 import { resolve } from 'path'
 import eslint from 'vite-plugin-eslint'
 
-const { dirname } = import.meta
-const env = loadEnv('development', resolve(dirname, './'))
+const env = loadEnv('development', resolve(import.meta.dirname, './'))
 
 export default defineConfig({
   base: '/admin',
@@ -30,7 +29,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@': resolve(dirname, './src')
+      '@': resolve(import.meta.dirname, './src')
     }
   },
   css: {
