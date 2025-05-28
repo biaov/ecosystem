@@ -1,9 +1,11 @@
 import { Request, Response, NextFunction } from 'express'
-import { verify } from 'jsonwebtoken'
+import jsonwebtoken from 'jsonwebtoken'
 import type { JwtPayload } from 'jsonwebtoken'
 import { UserInfo } from '@/model/user'
 import { Role } from '@/model/role'
 import type { PagingResponse } from './types'
+
+const { verify } = jsonwebtoken
 
 /**
  * res.json 重写中间件

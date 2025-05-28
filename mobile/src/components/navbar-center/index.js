@@ -1,4 +1,4 @@
-const { height, top } = wx.getMenuButtonBoundingClientRect()
+const { height, top } = uni.getMenuButtonBoundingClientRect()
 const x = 10
 const navbarHeight = height + top + x
 const navbarTitleHeight = height + 2 * x

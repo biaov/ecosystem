@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express'
 import md5 from 'md5'
-import { sign } from 'jsonwebtoken'
+import jsonwebtoken from 'jsonwebtoken'
 import type { WhereOptions } from 'sequelize'
 import { User, UserInfo } from '@/model/user'
 import { Role } from '@/model/role'
@@ -8,6 +8,8 @@ import { phoneNumberReg } from '@/utils/regexp'
 import { defaultUserConfig, defaultPassword } from '@/config/user'
 import { getPagingParams, getLikeParams } from '@/utils/function'
 import { createLogs } from '../log/hooks'
+
+const { sign } = jsonwebtoken
 
 /**
  * 用户列表

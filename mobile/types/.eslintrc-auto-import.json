@@ -74,6 +74,19 @@
     "ExtractPropTypes": true,
     "ExtractPublicPropTypes": true,
     "WritableComputedRef": true,
-    "useUpgrader": true
+    "useUpgrader": true,
+    "DirectiveBinding": true,
+    "MaybeRef": true,
+    "MaybeRefOrGetter": true,
+    "Pagation": true,
+    "Params": true,
+    "Request": true,
+    "RuleItem": true,
+    "Transform": true,
+    "UseSilentAuthParam": true,
+    "onWatcherCleanup": true,
+    "useId": true,
+    "useModel": true,
+    "useTemplateRef": true
   }
 }

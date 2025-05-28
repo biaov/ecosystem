@@ -45,7 +45,7 @@ npm run build:%PLATFORM%
 
 ## 技术栈
 
-- `Vite` + `TypeScript` + `Vue` + `Less` + `Pinia` + `uni-app`
+- `Vite` + `TypeScript` + `Vue` + `Less` + `uni-app`
 
 ## 依赖特性
 

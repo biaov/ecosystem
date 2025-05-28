@@ -9,7 +9,7 @@
 
 ## 技术栈
 
-`Vite` + `Vue3.x` + `TypeScript` + `Less` + `React` + `Uni-App` + `Pinia` + `Node` + `Express` + `Sequelize` + `MySql`
+`Vite` + `Vue3.x` + `TypeScript` + `Less` + `React` + `Uni-App` +  `Node` + `Express` + `Sequelize` + `MySql`
 
 ## 项目结构
 

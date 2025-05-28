@@ -1,7 +1,10 @@
 import type { Request, Response } from 'express'
-import { sign, verify } from 'jsonwebtoken'
+import jsonwebtoken from 'jsonwebtoken'
 import type { JwtPayload } from 'jsonwebtoken'
 import { maxFileSize, domainName, uploadDir } from '@/config'
+import crypto from 'crypto'
+
+const { sign, verify } = jsonwebtoken
 
 /**
  * 上传图片
@@ -33,4 +36,25 @@ export const silentAuth = async (req: Request, res: Response) => {
   }
   const token = sign({ userId }, 'secret', { expiresIn: '24h' })
   res.success({ token })
+}
+
+export const offiaccount = async (req: Request, res: Response) => {
+  // 加密方法
+  function sha1(str: string) {
+    const md5sum = crypto.createHash('sha1')
+    md5sum.update(str)
+    str = md5sum.digest('hex')
+    return str
+  }
+
+  const { signature, echostr, timestamp, nonce } = req.query
+  const oriArray = [nonce, timestamp, 'biaov001']
+  oriArray.sort()
+  const original = oriArray.join('')
+  let scyptoString = sha1(original)
+  if (signature == scyptoString) {
+    res.send(echostr)
+  } else {
+    res.send(false)
+  }
 }

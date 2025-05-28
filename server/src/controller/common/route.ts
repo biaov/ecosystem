@@ -1,5 +1,5 @@
 import type { RouteItem } from '@/router/types'
-import { uploadImg, silentAuth } from './hooks'
+import { uploadImg, silentAuth,offiaccount } from './hooks'
 
 /**
  * 通用的
@@ -17,6 +17,13 @@ const routes: RouteItem[] = [
     path: '/silent-auth',
     method: 'get',
     controller: silentAuth,
+    token: false
+  },
+  {
+    title: '公众号',
+    path: '/wx',
+    method: 'get',
+    controller: offiaccount,
     token: false
   }
 ]
