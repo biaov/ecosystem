@@ -1,6 +1,6 @@
 # ecosystem
 
-一个简单的生态系统，包含 APP，H5，微信小程序，控制台，服务端 😄
+一个简单的商城系统，包含 PC 网站 APP，H5，微信小程序，控制台，服务端 😄
 
 <h2 align="center">
   <a href="https://github.com/biaov/ecosystem"><img src="https://shields.io/github/v/release/biaov/ecosystem.svg?logo=github&label=version" alt="version" /></a>
@@ -9,7 +9,10 @@
 
 ## 技术栈
 
-`Vite` + `Vue3.x` + `TypeScript` + `Less` + `React` + `Uni-App` +  `Node` + `Express` + `Sequelize` + `MySql`
+- PC 网站: `NuxtJs` + `Vue3.x` + `TypeScript` + `Less` + `Tailwindcss`
+- APP, H5, 微信小程序: `Vite` + `Uni-App` + `Vue3.x` + `TypeScript` + `Less` + `Tailwindcss` + `UView-plus`
+- 控制台: `Vite` + `Vue3.x` + `TypeScript` + `Less` + `Ant Design Vue` + `Tailwindcss`
+- 服务端: `Vite` + `Node.js` + `NestJs` + `MySQL` + `TypeScript`
 
 ## 项目结构
 
