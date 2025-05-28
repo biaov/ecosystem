@@ -62,6 +62,7 @@ git clone https://github.com/biaov/ecosystem.git --depth=1
 
 > [!WARNING]
 > 项目不包含第三方对接，如 `微信支付`、`云存储`、`短信验证` 等，需自行对接。
+> [意见反馈](https://github.com/biaov/ecosystem/issues)
 
 ## 贡献者们
 
