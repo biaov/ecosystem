@@ -1,5 +1,7 @@
 # ecosystem
 
+**[v2.0.0 计划](https://github.com/biaov/ecosystem/discussions/31)**
+
 一个简单的生态系统，包含 APP，H5，微信小程序，控制台，服务端 😄
 
 <h2 align="center">
