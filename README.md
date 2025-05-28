@@ -1,7 +1,5 @@
 # ecosystem
 
-**[v2.0.0 计划](https://github.com/biaov/ecosystem/discussions/31)**
-
 一个简单的商城系统，包含 PC 网站 APP，H5，微信小程序，控制台，服务端 😄
 
 <h2 align="center">
