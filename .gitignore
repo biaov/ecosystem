@@ -2,3 +2,5 @@ node_modules
 dist
 .log
 .git
+.idea
+.DS_Store
