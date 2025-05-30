@@ -35,6 +35,6 @@
     "strictPropertyInitialization": false,
     "noImplicitAny": false
   },
-  "include": ["src/**/*.ts", "typings/shims.d.ts", "package.json"],
+  "include": ["src/**/*.ts", "typings/*.d.ts", "package.json"],
   "exclude": ["node_modules", "dist"]
 }

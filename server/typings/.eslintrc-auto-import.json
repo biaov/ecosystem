@@ -1,0 +1,32 @@
+{
+  "globals": {
+    "BizException": true,
+    "Body": true,
+    "Column": true,
+    "Controller": true,
+    "CreateDateColumn": true,
+    "Delete": true,
+    "Entity": true,
+    "Get": true,
+    "InjectRepository": true,
+    "Injectable": true,
+    "IsNotEmpty": true,
+    "IsString": true,
+    "JoinColumn": true,
+    "MaxLength": true,
+    "MinLength": true,
+    "Module": true,
+    "OneToOne": true,
+    "Param": true,
+    "Post": true,
+    "PrimaryGeneratedColumn": true,
+    "Put": true,
+    "TypeOrmModule": true,
+    "UpdateDateColumn": true,
+    "UserAdminModel": true,
+    "UserDetailModel": true,
+    "UserModel": true,
+    "UserRoleModel": true,
+    "isEmpty": true
+  }
+}

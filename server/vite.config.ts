@@ -1,6 +1,8 @@
 import { defineConfig, loadEnv } from 'vite'
 import { VitePluginNode } from 'vite-plugin-node'
 import { resolve } from 'path'
+import autoImport from 'unplugin-auto-import/vite'
+import imports from './auto.import'
 
 const env = loadEnv('development', './')
 
@@ -13,6 +15,13 @@ export default defineConfig({
   },
   esbuild: false,
   plugins: [
+    autoImport({
+      include: /\.ts$/,
+      imports,
+      dirs: ['./src/exceptions', './src/models'],
+      dts: './typings/auto-imports.d.ts',
+      eslintrc: { enabled: true, filepath: './typings/.eslintrc-auto-import.json', globalsPropValue: true }
+    }),
     ...VitePluginNode({
       adapter: 'nest',
       appPath: './src/main.ts',

@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import migrations from '@/migrations'
+import { APP_INTERCEPTOR } from '@nestjs/core'
+import { TransformResponseInterceptor } from './http.interceptor'
 
 const modulesSync = import.meta.glob('@/modules/**/*.module.ts', { eager: true }) as Record<string, Record<string, new () => {}>>
 
@@ -24,6 +26,12 @@ const modules = Object.values(modulesSync)
       dateStrings: true
     }),
     ...modules
+  ],
+  providers: [
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: TransformResponseInterceptor
+    }
   ]
 })
 export class AppModule {}
