@@ -74,7 +74,7 @@ service.interceptors.response.use(
         break
       case 400:
       case 422:
-        message.error(data)
+        message.error(data.message)
         break
     }
     return Promise.reject(response)

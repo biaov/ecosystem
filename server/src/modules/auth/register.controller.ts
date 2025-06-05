@@ -9,15 +9,21 @@ export class RegisterController {
   private readonly userService: RegisterService
   private readonly captchaValidator: CaptchaValidator
 
-  @Post()
-  register(@Body() { username, password, cpassword, code }: RegisterDto) {
+  registerValidator(password, cpassword, code: { id: string; value: string }) {
     if (password !== cpassword) throw new BizException('两次密码输入不一致')
     const { id, value } = code
     if (!this.captchaValidator.verify(id, value)) return
+    return true
+  }
+
+  @Post()
+  register(@Body() { username, password, cpassword, code }: RegisterDto) {
+    if (!this.registerValidator(password, cpassword, code)) return
     return this.userService.register(username, password)
   }
   @Post('admin')
   adminRegister(@Body() { username, password, cpassword, code }: RegisterDto) {
+    if (!this.registerValidator(password, cpassword, code)) return
     return this.userService.adminRegister(username, password)
   }
 }

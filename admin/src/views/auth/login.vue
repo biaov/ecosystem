@@ -1,25 +1,53 @@
 <template>
-  <div class="w-screen h-screen bg-[radial-gradient(#48c6ef, #6f86d6)]">
-    <!-- <div class="position top-50 left-50 text-white text-34 font-bold"></div> -->
-    <a-image src="/logo.svg" :width="60" class="position top-50 left-50" />
-    <a-card title="登录" class="w-500">
-      <a-space direction="vertical">
-        <img src="@/assets/template.svg" alt="" />
-        <a-button type="primary" @click="onSubmit">提交</a-button>
-      </a-space>
+  <div class="w-screen h-screen bg-radial flex justify-center items-center relative">
+    <div class="absolute top-50 left-50">
+      <!-- <a-image src="/logo.svg" :width="80" :preview="false" /> -->
+      生态系统后台管理系统
+    </div>
+    <a-card title="登录" class="w-400">
+      <div class="flex justify-center items-center mb-24 pt-12">
+        <a-image src="/logo.svg" :width="80" :preview="false" />
+      </div>
+      <a-form>
+        <a-form-item>
+          <a-input v-model:value="formState.username" placeholder="请输入账号" />
+        </a-form-item>
+        <a-form-item>
+          <a-input-password v-model:value="formState.password" placeholder="请输入密码" />
+        </a-form-item>
+        <a-form-item>
+          <a-button type="primary" @click="handleSubmit" block>登录</a-button>
+        </a-form-item>
+      </a-form>
+      <router-link to="/register" class="text-center text-info block">还没有账号？去注册</router-link>
     </a-card>
   </div>
 </template>
 <script setup lang="ts">
+import { message } from 'ant-design-vue'
+import { loginApi } from '@/api/auth'
+
 const router = useRouter()
 const store = useStore()
+
+const { formState, setFormStateRules, validFormState } = useFormState({
+  username: '',
+  password: '',
+})
+
+setFormStateRules({
+  username: { required: true, message: '请输入账号' },
+  password: { required: true, message: '请输入密码' },
+})
 
 /**
  * 提交
  */
-const onSubmit = () => {
-  // store.login({ token: 'token' })
-  // router.push({ name: 'dashboard' })
+const handleSubmit = async () => {
+  if (!(await validFormState())) return
+  const userInfo = await loginApi.post<UserInfo>(formState.value)
+  message.success('登录成功')
+  store.login(userInfo)
+  router.push({ name: 'dashboard' })
 }
-
 </script>

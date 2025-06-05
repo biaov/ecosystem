@@ -25,3 +25,8 @@
 .text-danger {
   color: #f56c6c;
 }
+
+.bg-radial {
+  /* background: radial-gradient(#48c6ef, #6f86d6); */
+  background: radial-gradient(rgba(72, 198, 239, 0.5), rgba(111, 134, 214, 0.5));
+}

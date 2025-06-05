@@ -8,17 +8,18 @@ import 'mine-h5-ui/styles/MeCaptcha.css'
 import { captchaApi, captchaVerifyApi } from '@/api/common'
 import { Captcha } from './types';
 
-const emit = defineEmits([])
+const emit = defineEmits(['success'])
 
-const props = defineProps({})
 const visible = defineModel('visible', {
   type: Boolean,
   default: false
 })
 
+const modelValue = defineModel({
+  type: Object
+})
+
 const statusCode = ref(-1)
-
-
 
 const { data, getData } = useApiRequest<Captcha.DataType>(async () => {
   statusCode.value = -1
@@ -30,13 +31,19 @@ const { data, getData } = useApiRequest<Captcha.DataType>(async () => {
 
 const onCheck = async (value: number[]) => {
   try {
-    await captchaVerifyApi.post({
+    const res = await captchaVerifyApi.post({
       id: data.value.id,
       value
     })
+    statusCode.value = 1
+    modelValue.value = res.data
+    emit('success')
   } catch (error) {
-    console.log(error)
+    statusCode.value = (error as ResponseError)?.data?.message?.includes('过期') ? 3 : 2
   }
 }
 
+watch(visible, (value) => {
+  value && getData()
+}, { immediate: true })
 </script>

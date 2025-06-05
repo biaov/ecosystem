@@ -7,6 +7,8 @@
 export {}
 declare global {
   const ArrayNotEmpty: typeof import('class-validator')['ArrayNotEmpty']
+  const BeforeInsert: typeof import('typeorm')['BeforeInsert']
+  const BeforeUpdate: typeof import('typeorm')['BeforeUpdate']
   const BizException: typeof import('../src/exceptions/biz')['BizException']
   const Body: typeof import('@nestjs/common')['Body']
   const CaptchaEnum: typeof import('../src/enums/index')['CaptchaEnum']

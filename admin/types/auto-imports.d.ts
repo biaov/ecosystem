@@ -94,6 +94,6 @@ declare global {
   export type { Pagination, FormRule, PagingResponse } from '../src/composables/types'
   import('../src/composables/types')
   // @ts-ignore
-  export type { LoginData } from '../src/stores/types'
+  export type { UserInfo } from '../src/stores/types'
   import('../src/stores/types')
 }

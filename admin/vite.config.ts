@@ -9,6 +9,7 @@ import tailwindcss from '@tailwindcss/vite'
 const env = loadEnv('development', './')
 
 export default defineConfig({
+  base: './',
   plugins: [
     tailwindcss(),
     // eslint({
@@ -55,6 +56,13 @@ export default defineConfig({
     // 路径别名
     alias: {
       '@': resolve(__dirname, './src')
+    }
+  },
+  css: {
+    preprocessorOptions: {
+      less: {
+        additionalData: '@import "@/styles/vars.less";'
+      }
     }
   }
 })

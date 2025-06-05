@@ -73,7 +73,7 @@ export class CaptchaController {
   async verifyCaptcha(@Body() { id, value }: VerifyCaptchaDot) {
     const res = await this.redis.get(getRedisKey(CaptchaEnum.Image, id))
 
-    if (!res) throw new BizException('验证码已失效')
+    if (!res) throw new BizException('验证码已过期')
 
     const { value: target } = JSON.parse(res)
     const gap = 5

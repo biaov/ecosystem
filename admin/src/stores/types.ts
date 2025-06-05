@@ -1,6 +1,7 @@
 /**
  * 登录数据
  */
-export interface LoginData {
+export interface UserInfo {
   token: string
+  [key: string]: unknown
 }

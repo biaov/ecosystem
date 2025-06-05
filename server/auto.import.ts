@@ -6,7 +6,7 @@ export default [
     '@nestjs/typeorm': ['InjectRepository', 'TypeOrmModule']
   },
   {
-    typeorm: ['Entity', 'PrimaryGeneratedColumn', 'Column', 'OneToOne', 'CreateDateColumn', 'UpdateDateColumn', 'JoinColumn']
+    typeorm: ['Entity', 'PrimaryGeneratedColumn', 'Column', 'OneToOne', 'CreateDateColumn', 'UpdateDateColumn', 'JoinColumn', 'BeforeInsert', 'BeforeUpdate']
   },
   {
     'class-transformer': ['Type']

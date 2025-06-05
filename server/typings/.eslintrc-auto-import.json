@@ -1,6 +1,8 @@
 {
   "globals": {
     "ArrayNotEmpty": true,
+    "BeforeInsert": true,
+    "BeforeUpdate": true,
     "BizException": true,
     "Body": true,
     "CaptchaEnum": true,

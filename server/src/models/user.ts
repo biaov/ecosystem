@@ -56,7 +56,7 @@ export class UserRoleModel {
   code: string
 
   @Column({ comment: '权限', type: 'text', nullable: true })
-  _permissions: string
+  private _permissions: string
 
   constructor(value: string[]) {
     this.permissions = value
@@ -70,11 +70,11 @@ export class UserRoleModel {
     return (this._permissions ?? '').split(separator)
   }
 
-  // @BeforeInsert()
-  // @BeforeUpdate()
-  // formatPermissions() {
-  //   // this._permissions = this._permissions
-  // }
+  @BeforeInsert()
+  @BeforeUpdate()
+  formatPermissions() {
+    this._permissions = this.permissions.join(separator)
+  }
 
   @CreateDateColumn({ comment: '创建时间', type: 'timestamp' })
   createdAt: Date
