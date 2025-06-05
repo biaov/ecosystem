@@ -1,6 +1,5 @@
 import { UserModel } from '@/models/user'
 import { BizException } from '@/exceptions/biz'
-import { md5 } from '@/utils'
 
 @Injectable()
 export class LoginService {

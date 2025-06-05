@@ -6,17 +6,23 @@
 // biome-ignore lint: disable
 export {}
 declare global {
+  const ArrayNotEmpty: typeof import('class-validator')['ArrayNotEmpty']
   const BizException: typeof import('../src/exceptions/biz')['BizException']
   const Body: typeof import('@nestjs/common')['Body']
+  const CaptchaEnum: typeof import('../src/enums/index')['CaptchaEnum']
   const Column: typeof import('typeorm')['Column']
   const Controller: typeof import('@nestjs/common')['Controller']
   const CreateDateColumn: typeof import('typeorm')['CreateDateColumn']
   const Delete: typeof import('@nestjs/common')['Delete']
+  const DrawImg: typeof import('../src/utils/draw')['DrawImg']
   const Entity: typeof import('typeorm')['Entity']
   const Get: typeof import('@nestjs/common')['Get']
+  const InjectRedis: typeof import('@nestjs-modules/ioredis')['InjectRedis']
   const InjectRepository: typeof import('@nestjs/typeorm')['InjectRepository']
   const Injectable: typeof import('@nestjs/common')['Injectable']
+  const IsArray: typeof import('class-validator')['IsArray']
   const IsNotEmpty: typeof import('class-validator')['IsNotEmpty']
+  const IsNumber: typeof import('class-validator')['IsNumber']
   const IsString: typeof import('class-validator')['IsString']
   const JoinColumn: typeof import('typeorm')['JoinColumn']
   const MaxLength: typeof import('class-validator')['MaxLength']
@@ -27,13 +33,21 @@ declare global {
   const Post: typeof import('@nestjs/common')['Post']
   const PrimaryGeneratedColumn: typeof import('typeorm')['PrimaryGeneratedColumn']
   const Put: typeof import('@nestjs/common')['Put']
+  const Type: typeof import('class-transformer')['Type']
   const TypeOrmModule: typeof import('@nestjs/typeorm')['TypeOrmModule']
   const UpdateDateColumn: typeof import('typeorm')['UpdateDateColumn']
   const UserAdminModel: typeof import('../src/models/user')['UserAdminModel']
   const UserDetailModel: typeof import('../src/models/user-detail')['UserDetailModel']
   const UserModel: typeof import('../src/models/user')['UserModel']
   const UserRoleModel: typeof import('../src/models/user')['UserRoleModel']
+  const ValidateNested: typeof import('class-validator')['ValidateNested']
+  const aesDecrypt: typeof import('../src/utils/crypto')['aesDecrypt']
+  const aesEncrypt: typeof import('../src/utils/crypto')['aesEncrypt']
+  const getRedisKey: typeof import('../src/utils/utils')['getRedisKey']
   const isEmpty: typeof import('class-validator')['isEmpty']
+  const md5: typeof import('../src/utils/crypto')['md5']
+  const random: typeof import('../src/utils/utils')['random']
+  const randomId: typeof import('../src/utils/utils')['randomId']
 }
 // for type re-export
 declare global {
@@ -46,4 +60,10 @@ declare global {
   // @ts-ignore
   export type { UserModel, UserAdminModel, UserRoleModel } from '../src/models/user'
   import('../src/models/user')
+  // @ts-ignore
+  export type { DrawImg } from '../src/utils/draw'
+  import('../src/utils/draw')
+  // @ts-ignore
+  export type { CaptchaEnum } from '../src/enums/index'
+  import('../src/enums/index')
 }

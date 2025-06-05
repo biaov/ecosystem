@@ -1,4 +1,3 @@
-import { md5 } from '@/utils'
 import { UserDetailModel } from './user-detail'
 
 const separator = '-biaov-'

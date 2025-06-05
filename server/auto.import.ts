@@ -9,6 +9,15 @@ export default [
     typeorm: ['Entity', 'PrimaryGeneratedColumn', 'Column', 'OneToOne', 'CreateDateColumn', 'UpdateDateColumn', 'JoinColumn']
   },
   {
-    'class-validator': ['isEmpty', 'IsString', 'MaxLength', 'MinLength', 'IsNotEmpty']
+    'class-transformer': ['Type']
+  },
+  {
+    'class-validator': ['isEmpty', 'IsString', 'MaxLength', 'MinLength', 'IsNotEmpty', 'IsArray', 'ArrayNotEmpty', 'ValidateNested', 'IsNumber']
+  },
+  {
+    '@nestjs-modules/ioredis': ['InjectRedis']
   }
+  // {
+  //   ioredis: [['default', 'Redis']]
+  // }
 ]

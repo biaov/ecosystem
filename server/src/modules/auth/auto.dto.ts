@@ -8,9 +8,47 @@ export class LoginDto {
   @IsNotEmpty({ message: '用户名不能为空' })
   username: string
 
-  @MaxLength(64, { message: '密码长度不能超过64个字符' })
+  @MaxLength(32, { message: '密码长度不能超过32个字符' })
   @MinLength(6, { message: '密码长度不能小于6个字符' })
   @IsString({ message: '密码必须是字符串' })
   @IsNotEmpty({ message: '密码不能为空' })
   password: string
+}
+
+class Code {
+  @IsString({ message: 'code.id 必需是字符串' })
+  @IsNotEmpty({ message: 'code.id 必传' })
+  id: string
+
+  @IsString({ message: 'code.value 必需是字符串' })
+  @IsNotEmpty({ message: 'code.value 必传' })
+  value: string
+}
+
+/**
+ * 注册验证器
+ */
+export class RegisterDto {
+  @MaxLength(11, { message: '用户名长度不能超过11个字符' })
+  @MinLength(4, { message: '用户名长度不能小于4个字符' })
+  @IsString({ message: '用户名必须是字符串' })
+  @IsNotEmpty({ message: '用户名不能为空' })
+  username: string
+
+  @MaxLength(32, { message: '密码长度不能超过32个字符' })
+  @MinLength(6, { message: '密码长度不能小于6个字符' })
+  @IsString({ message: '密码必须是字符串' })
+  @IsNotEmpty({ message: '密码不能为空' })
+  password: string
+
+  @MaxLength(32, { message: '确认密码长度不能超过32个字符' })
+  @MinLength(6, { message: '确认密码长度不能小于6个字符' })
+  @IsString({ message: '确认密码必须是字符串' })
+  @IsNotEmpty({ message: '确认密码不能为空' })
+  cpassword: string
+
+  @ValidateNested()
+  @Type(() => Code)
+  @IsNotEmpty({ message: 'code 必传' })
+  code: Code
 }

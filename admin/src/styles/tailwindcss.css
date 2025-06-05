@@ -1,0 +1,27 @@
+@import 'tailwindcss/theme.css';
+@import 'tailwindcss/preflight.css';
+@import 'tailwindcss/utilities.css';
+
+@theme {
+  --spacing: 1px;
+}
+
+.text-primary {
+  color: #409eff;
+}
+
+.text-success {
+  color: #67c23a;
+}
+
+.text-info {
+  color: #909399;
+}
+
+.text-warning {
+  color: #e6a23c;
+}
+
+.text-danger {
+  color: #f56c6c;
+}

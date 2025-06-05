@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import migrations from '@/migrations'
 import { APP_INTERCEPTOR } from '@nestjs/core'
 import { TransformResponseInterceptor } from './http.interceptor'
+import { RedisCacheModule } from './redis.module'
 
 const modulesSync = import.meta.glob('@/modules/**/*.module.ts', { eager: true }) as Record<string, Record<string, new () => {}>>
 
@@ -25,7 +26,8 @@ const modules = Object.values(modulesSync)
       timezone: '+08:00',
       dateStrings: true
     }),
-    ...modules
+    ...modules,
+    RedisCacheModule
   ],
   providers: [
     {

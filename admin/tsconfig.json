@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "jsx": "preserve",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "lib": ["ESNext", "DOM"],
+    "types": ["node", "vite/client"],
+    "skipLibCheck": true,
+    "noEmit": true,
+    "baseUrl": "./",
+
+    /* 路径别名 */
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+
+    /* 解析模式 */
+    "moduleResolution": "Bundler",
+
+    /* lint */
+    "strict": true
+  },
+  "include": ["src/**/*.ts", "src/**/*.vue", "types/**/*.d.ts"]
+}
