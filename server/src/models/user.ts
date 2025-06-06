@@ -3,52 +3,31 @@ import { UserDetailModel } from './user-detail'
 const separator = '-biaov-'
 
 @Entity('user')
-export class UserModel {
-  @PrimaryGeneratedColumn('increment')
-  id: number
-
+export class UserModel extends BaseModel {
   @Column({ length: 32, comment: '用户名' })
   username: string
 
   @Column({ length: 64, comment: '密码' })
   password: string
-
-  @CreateDateColumn({ comment: '创建时间', type: 'timestamp' })
-  createdAt: Date
-
-  @UpdateDateColumn({ comment: '最后修改时间', type: 'timestamp' })
-  updatedAt: Date
 
   @OneToOne(() => UserDetailModel, user => user.user, { cascade: true })
   user: UserDetailModel
 }
 
 @Entity('user_admin')
-export class UserAdminModel {
-  @PrimaryGeneratedColumn('increment')
-  id: number
-
+export class UserAdminModel extends BaseModel {
   @Column({ length: 32, comment: '用户名' })
   username: string
 
   @Column({ length: 64, comment: '密码' })
   password: string
 
-  @CreateDateColumn({ comment: '创建时间', type: 'timestamp' })
-  createdAt: Date
-
-  @UpdateDateColumn({ comment: '最后修改时间', type: 'timestamp' })
-  updatedAt: Date
-
   @OneToOne(() => UserDetailModel, user => user.userAdmin, { cascade: true })
   user: UserDetailModel
 }
 
 @Entity('user_role')
-export class UserRoleModel {
-  @PrimaryGeneratedColumn('increment')
-  id: number
-
+export class UserRoleModel extends BaseModel {
   @Column({ length: 24, comment: '名称' })
   name: string
 
@@ -56,11 +35,7 @@ export class UserRoleModel {
   code: string
 
   @Column({ comment: '权限', type: 'text', nullable: true })
-  private _permissions: string
-
-  constructor(value: string[]) {
-    this.permissions = value
-  }
+  _permissions: string
 
   set permissions(value: string[]) {
     this._permissions = (value ?? []).join(separator)
@@ -75,10 +50,4 @@ export class UserRoleModel {
   formatPermissions() {
     this._permissions = this.permissions.join(separator)
   }
-
-  @CreateDateColumn({ comment: '创建时间', type: 'timestamp' })
-  createdAt: Date
-
-  @UpdateDateColumn({ comment: '最后修改时间', type: 'timestamp' })
-  updatedAt: Date
 }

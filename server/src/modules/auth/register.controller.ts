@@ -17,13 +17,13 @@ export class RegisterController {
   }
 
   @Post()
-  async register(@Body() { username, password, cpassword, code }: RegisterDto) {
+  async register(@Body() { username, password, cpassword, code, source }: RegisterDto) {
     if (!(await this.registerValidator(password, cpassword, code))) return
-    return this.userService.register(username, password)
+    return this.userService.register(username, password, source)
   }
   @Post('admin')
-  async adminRegister(@Body() { username, password, cpassword, code }: RegisterDto) {
-    if (!(await this.registerValidator(password, cpassword, code))) return
-    return this.userService.adminRegister(username, password)
+  async adminRegister(@Body() { username, password, cpassword, code, source }: RegisterDto) {
+    // if (!(await this.registerValidator(password, cpassword, code))) return
+    return this.userService.adminRegister(username, password, source)
   }
 }

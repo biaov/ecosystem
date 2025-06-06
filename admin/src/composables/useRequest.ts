@@ -86,7 +86,7 @@ export const usePagingApiRequest = <T = unknown>(request: (value: Page) => Promi
 /**
  * 普通请求
  */
-export const useApiRequest = <T = unknown>(request: () => Promise<T>, calledOnMounted = true, initData: unknown = []) => {
+export const useApiRequest = <T = unknown>(request: () => Promise<unknown>, calledOnMounted = true, initData: unknown = []) => {
   const loading = ref(false)
 
   const data = ref<T>(initData as T)
@@ -94,7 +94,7 @@ export const useApiRequest = <T = unknown>(request: () => Promise<T>, calledOnMo
   const getData = async () => {
     loading.value = true
     try {
-      data.value = (await request()) as T
+      data.value = (await request()) as unknown as T
     } catch (error) {
       throw error
     } finally {

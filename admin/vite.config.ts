@@ -26,7 +26,7 @@ export default defineConfig({
         }
       ],
       ignore: ['types.ts'],
-      dirs: ['./src/composables', './src/stores'],
+      dirs: ['./src/composables', './src/stores', './src/enums'],
       dts: './types/auto-imports.d.ts',
       eslintrc: {
         enabled: true,

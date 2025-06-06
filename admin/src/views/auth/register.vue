@@ -31,9 +31,9 @@ const router = useRouter()
 const showCaptcha = ref(false)
 
 const { formState, setFormStateRules, validFormState } = useFormState({
-  username: '15575148487',
-  password: '123456',
-  cpassword: '123456',
+  username: '',
+  password: '',
+  cpassword: '',
   code: null
 })
 
@@ -62,9 +62,8 @@ const handleSubmit = async () => {
     showCaptcha.value = true
     return
   }
-
   try {
-    await registerApi.post<UserInfo>(formState.value)
+    await registerApi.post({ ...formState.value, source: sourceEnum.admin })
     message.success('注册成功，请登录')
     router.push({ name: 'login' })
   } catch {

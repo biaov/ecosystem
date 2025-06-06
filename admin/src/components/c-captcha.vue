@@ -24,7 +24,7 @@ const statusCode = ref(-1)
 const { data, getData } = useApiRequest<Captcha.DataType>(async () => {
   statusCode.value = -1
   const res = await captchaApi.get()
-  return res.data as Captcha.DataType
+  return res.data
 }, false, null)
 
 

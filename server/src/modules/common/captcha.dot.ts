@@ -8,7 +8,7 @@ export class VerifyCaptchaDot {
 
   @IsNumber({}, { each: true, message: '数组中的每个元素必须是数字' })
   @ArrayNotEmpty({ message: 'value 不能为空' })
-  @IsArray({ message: 'value 必需是数组' })
+  @IsArray({ message: 'value 必须是数组' })
   @IsNotEmpty({ message: 'value 必传' })
   value: number[]
 }

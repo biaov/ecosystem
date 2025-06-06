@@ -7,6 +7,8 @@
 export {}
 declare global {
   const ArrayNotEmpty: typeof import('class-validator')['ArrayNotEmpty']
+  const BaseEntity: typeof import('typeorm')['BaseEntity']
+  const BaseModel: typeof import('../src/common/base.model')['BaseModel']
   const BeforeInsert: typeof import('typeorm')['BeforeInsert']
   const BeforeUpdate: typeof import('typeorm')['BeforeUpdate']
   const BizException: typeof import('../src/exceptions/biz')['BizException']

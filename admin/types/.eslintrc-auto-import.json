@@ -62,6 +62,7 @@
     "shallowReactive": true,
     "shallowReadonly": true,
     "shallowRef": true,
+    "sourceEnum": true,
     "toRaw": true,
     "toRef": true,
     "toRefs": true,

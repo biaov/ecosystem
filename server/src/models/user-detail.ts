@@ -1,10 +1,7 @@
 import { UserAdminModel, UserModel } from './user'
 
 @Entity('user_detail')
-export class UserDetailModel {
-  @PrimaryGeneratedColumn('increment')
-  id: number
-
+export class UserDetailModel extends BaseModel {
   @Column({ length: 32, comment: '用户名', unique: true })
   username: string
 
@@ -28,12 +25,6 @@ export class UserDetailModel {
 
   @Column({ comment: '注册来源: 1 - PC 官网, 2 - H5 端, 3 - APP 端, 4 - PC 管理后台, 5 - 微信小程序端', nullable: false, type: 'tinyint' })
   source: number
-
-  @CreateDateColumn({ comment: '创建时间', type: 'timestamp' })
-  createdAt: Date
-
-  @UpdateDateColumn({ comment: '最后修改时间', type: 'timestamp' })
-  updatedAt: Date
 
   @OneToOne(() => UserModel)
   @JoinColumn()

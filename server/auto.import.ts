@@ -6,7 +6,7 @@ export default [
     '@nestjs/typeorm': ['InjectRepository', 'TypeOrmModule']
   },
   {
-    typeorm: ['Entity', 'PrimaryGeneratedColumn', 'Column', 'OneToOne', 'ManyToOne', 'OneToMany', 'CreateDateColumn', 'UpdateDateColumn', 'JoinColumn', 'BeforeInsert', 'BeforeUpdate']
+    typeorm: ['Entity', 'BaseEntity', 'PrimaryGeneratedColumn', 'Column', 'OneToOne', 'ManyToOne', 'OneToMany', 'CreateDateColumn', 'UpdateDateColumn', 'JoinColumn', 'BeforeInsert', 'BeforeUpdate']
   },
   {
     from: 'typeorm',
@@ -26,5 +26,10 @@ export default [
     from: 'ioredis',
     imports: ['Redis'],
     type: true
+  },
+  {
+    from: './src/common/base.model.ts',
+    imports: ['BaseModel'],
+    type: false
   }
 ]
