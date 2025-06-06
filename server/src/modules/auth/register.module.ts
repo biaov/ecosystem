@@ -1,11 +1,11 @@
+import { CaptchaService } from '@/modules/common/captcha.service'
 import { RegisterController } from './register.controller'
 import { RegisterService } from './register.service'
-import { CaptchaValidator } from '@/validator/captcha'
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UserModel, UserAdminModel])],
+  imports: [TypeOrmModule.forFeature([UserModel, UserAdminModel, UserDetailModel])],
   exports: [TypeOrmModule],
   controllers: [RegisterController],
-  providers: [RegisterService, CaptchaValidator]
+  providers: [RegisterService, CaptchaService]
 })
 export class RegisterModule {}

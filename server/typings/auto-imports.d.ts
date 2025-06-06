@@ -27,9 +27,11 @@ declare global {
   const IsNumber: typeof import('class-validator')['IsNumber']
   const IsString: typeof import('class-validator')['IsString']
   const JoinColumn: typeof import('typeorm')['JoinColumn']
+  const ManyToOne: typeof import('typeorm')['ManyToOne']
   const MaxLength: typeof import('class-validator')['MaxLength']
   const MinLength: typeof import('class-validator')['MinLength']
   const Module: typeof import('@nestjs/common')['Module']
+  const OneToMany: typeof import('typeorm')['OneToMany']
   const OneToOne: typeof import('typeorm')['OneToOne']
   const Param: typeof import('@nestjs/common')['Param']
   const Post: typeof import('@nestjs/common')['Post']
@@ -53,6 +55,12 @@ declare global {
 }
 // for type re-export
 declare global {
+  // @ts-ignore
+  export type { Repository } from 'typeorm'
+  import('typeorm')
+  // @ts-ignore
+  export type { Redis } from 'ioredis'
+  import('ioredis')
   // @ts-ignore
   export type { BizException } from '../src/exceptions/biz'
   import('../src/exceptions/biz')

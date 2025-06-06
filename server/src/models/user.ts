@@ -19,7 +19,7 @@ export class UserModel {
   @UpdateDateColumn({ comment: '最后修改时间', type: 'timestamp' })
   updatedAt: Date
 
-  @OneToOne(() => UserDetailModel, user => user.user)
+  @OneToOne(() => UserDetailModel, user => user.user, { cascade: true })
   user: UserDetailModel
 }
 
@@ -40,7 +40,7 @@ export class UserAdminModel {
   @UpdateDateColumn({ comment: '最后修改时间', type: 'timestamp' })
   updatedAt: Date
 
-  @OneToOne(() => UserDetailModel, user => user.user)
+  @OneToOne(() => UserDetailModel, user => user.userAdmin, { cascade: true })
   user: UserDetailModel
 }
 

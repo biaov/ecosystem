@@ -1,18 +1,18 @@
 <template>
   <div class="w-screen h-screen bg-radial flex justify-center items-center relative">
     <div class="absolute top-50 left-50">
-      <a-image src="/logo.svg" :width="80" :preview="false" />
+      <a-image src="/logo.svg" :width="60" :preview="false" />
     </div>
-    <a-card title="注册" class="w-400">
-      <a-form :label-col="{ span: 5 }">
-        <a-form-item label="账号">
-          <a-input v-model:value="formState.username" placeholder="请输入4-16位数字、字母或特殊字符" />
+    <a-card title="注册" class="w-320">
+      <a-form>
+        <a-form-item>
+          <a-input v-model:value="formState.username" placeholder="请输入4-16位数字、字母或特殊字符的账号" />
         </a-form-item>
-        <a-form-item label="密码">
+        <a-form-item>
           <a-input-password v-model:value="formState.password" placeholder="请输入密码" />
         </a-form-item>
-        <a-form-item label="确认密码">
-          <a-input-password v-model:value="formState.cPassword" placeholder="请输入确认密码" />
+        <a-form-item>
+          <a-input-password v-model:value="formState.cpassword" placeholder="请输入确认密码" />
         </a-form-item>
         <a-form-item>
           <a-button type="primary" block @click="handleSubmit">注册</a-button>
@@ -33,8 +33,8 @@ const showCaptcha = ref(false)
 const { formState, setFormStateRules, validFormState } = useFormState({
   username: '15575148487',
   password: '123456',
-  cPassword: '123456',
-  code: undefined
+  cpassword: '123456',
+  code: null
 })
 
 setFormStateRules({
@@ -45,7 +45,7 @@ setFormStateRules({
     }
   },
   password: { required: true, message: '请输入密码', },
-  cPassword: {
+  cpassword: {
     validator(value: string) {
       if (value !== formState.value.password) return Promise.reject('确认密码和密码不一致')
       return Promise.resolve()
@@ -63,8 +63,12 @@ const handleSubmit = async () => {
     return
   }
 
-  await registerApi.post<UserInfo>(formState.value)
-  message.success('注册成功')
-  router.push({ name: 'login' })
+  try {
+    await registerApi.post<UserInfo>(formState.value)
+    message.success('注册成功，请登录')
+    router.push({ name: 'login' })
+  } catch {
+    formState.value.code = null
+  }
 }
 </script>

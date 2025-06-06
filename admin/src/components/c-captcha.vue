@@ -31,7 +31,10 @@ const { data, getData } = useApiRequest<Captcha.DataType>(async () => {
 
 const onCheck = async (value: number[]) => {
   try {
-    const res = await captchaVerifyApi.post({
+    const res = await captchaVerifyApi.post<ResponseSuccess<{
+      id: string
+      value: string
+    }>>({
       id: data.value.id,
       value
     })

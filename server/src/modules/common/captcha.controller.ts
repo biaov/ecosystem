@@ -1,6 +1,7 @@
 import { createCanvas, loadImage } from 'canvas'
 import { join } from 'path'
 import { VerifyCaptchaDot } from './captcha.dot'
+import { CaptchaService } from './captcha.service'
 
 const imagePaths = Object.keys(import.meta.glob('@/assets/captch/*.png'))
 const imgTasks = imagePaths.map(item => loadImage(join(process.cwd(), item)))
@@ -10,6 +11,8 @@ const images = await Promise.all(imgTasks)
 export class CaptchaController {
   @InjectRedis()
   private readonly redis: Redis
+
+  constructor(private readonly captchaService: CaptchaService) {}
 
   @Get()
   async getCaptcha() {
@@ -71,20 +74,6 @@ export class CaptchaController {
 
   @Post('/verify')
   async verifyCaptcha(@Body() { id, value }: VerifyCaptchaDot) {
-    const res = await this.redis.get(getRedisKey(CaptchaEnum.Image, id))
-
-    if (!res) throw new BizException('验证码已过期')
-
-    const { value: target } = JSON.parse(res)
-    const gap = 5
-
-    if (Math.abs(value[0] - target[0]) < gap && Math.abs(value[1] - target[1]) < gap) {
-      const id = randomId()
-      const value = aesEncrypt(randomId())
-      this.redis.set(getRedisKey(CaptchaEnum.Code, id), JSON.stringify({ value }), 'EX', 60 * 5)
-      return { id, value }
-    } else {
-      throw new BizException('验证错误，请重试')
-    }
+    return this.captchaService.verifyImage(id, value)
   }
 }

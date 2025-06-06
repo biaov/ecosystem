@@ -4,6 +4,10 @@ interface ResponseError {
   }
 }
 
+interface ResponseSuccess<T> {
+  data: T
+}
+
 interface Page {
   current: number
   pageSize: number

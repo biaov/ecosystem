@@ -6,7 +6,12 @@ export default [
     '@nestjs/typeorm': ['InjectRepository', 'TypeOrmModule']
   },
   {
-    typeorm: ['Entity', 'PrimaryGeneratedColumn', 'Column', 'OneToOne', 'CreateDateColumn', 'UpdateDateColumn', 'JoinColumn', 'BeforeInsert', 'BeforeUpdate']
+    typeorm: ['Entity', 'PrimaryGeneratedColumn', 'Column', 'OneToOne', 'ManyToOne', 'OneToMany', 'CreateDateColumn', 'UpdateDateColumn', 'JoinColumn', 'BeforeInsert', 'BeforeUpdate']
+  },
+  {
+    from: 'typeorm',
+    imports: ['Repository'],
+    type: true
   },
   {
     'class-transformer': ['Type']
@@ -16,8 +21,10 @@ export default [
   },
   {
     '@nestjs-modules/ioredis': ['InjectRedis']
+  },
+  {
+    from: 'ioredis',
+    imports: ['Redis'],
+    type: true
   }
-  // {
-  //   ioredis: [['default', 'Redis']]
-  // }
 ]

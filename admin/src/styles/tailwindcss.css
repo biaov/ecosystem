@@ -27,6 +27,25 @@
 }
 
 .bg-radial {
-  /* background: radial-gradient(#48c6ef, #6f86d6); */
-  background: radial-gradient(rgba(72, 198, 239, 0.5), rgba(111, 134, 214, 0.5));
+  background: linear-gradient(-45deg, #48c6ef, #6f86d6, #ee7752, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 20s ease-in-out infinite forwards;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 0%;
+  }
+  25% {
+    background-position: 50% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  75% {
+    background-position: 50% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
 }

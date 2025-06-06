@@ -1,13 +1,9 @@
 <template>
   <div class="w-screen h-screen bg-radial flex justify-center items-center relative">
     <div class="absolute top-50 left-50">
-      <!-- <a-image src="/logo.svg" :width="80" :preview="false" /> -->
-      生态系统后台管理系统
+      <a-image src="/logo.svg" :width="60" :preview="false" />
     </div>
-    <a-card title="登录" class="w-400">
-      <div class="flex justify-center items-center mb-24 pt-12">
-        <a-image src="/logo.svg" :width="80" :preview="false" />
-      </div>
+    <a-card title="登录" class="w-320">
       <a-form>
         <a-form-item>
           <a-input v-model:value="formState.username" placeholder="请输入账号" />

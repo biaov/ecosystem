@@ -45,6 +45,7 @@
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.27.0",
     "@swc/core": "^1.11.29",
+    "@types/crypto-js": "^4.2.2",
     "@types/express": "^5.0.2",
     "@types/node": "^22.15.24",
     "eslint": "^9.27.0",

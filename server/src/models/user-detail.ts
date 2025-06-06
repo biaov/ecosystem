@@ -26,7 +26,7 @@ export class UserDetailModel {
   @Column({ length: 12, comment: '权限码', nullable: true })
   roleCode: string
 
-  @Column({ comment: '注册来源: pc - PC 官网, h5 - H5 端, app - APP 端, admin - PC 管理后台, wechat - 微信小程序端', nullable: false, type: 'tinyint' })
+  @Column({ comment: '注册来源: 1 - PC 官网, 2 - H5 端, 3 - APP 端, 4 - PC 管理后台, 5 - 微信小程序端', nullable: false, type: 'tinyint' })
   source: number
 
   @CreateDateColumn({ comment: '创建时间', type: 'timestamp' })

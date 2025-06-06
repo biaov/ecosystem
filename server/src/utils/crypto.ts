@@ -1,7 +1,7 @@
 import CryptoJS from 'crypto-js'
 
-const key = CryptoJS.enc.Utf8.parse('key-ecosytem@biaov')
-const iv = CryptoJS.enc.Utf8.parse('iv-ecosytem@biaov')
+const key = CryptoJS.enc.Utf8.parse('k-ecosytem@biaov') // 必需是 16 位
+const iv = CryptoJS.enc.Utf8.parse('i-ecosytem@biaov')
 
 /**
  * AES 加密
