@@ -12,3 +12,4 @@ export const randomId = (binary = 32) => +new Date() + Math.random().toString(bi
  * 生成 Redis 键
  */
 export const getRedisKey = (prefix: string, id: string): string => `${prefix}-${id}`
+

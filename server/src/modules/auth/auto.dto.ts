@@ -26,6 +26,20 @@ class Code {
 }
 
 /**
+ * 手机号登录
+ */
+export class MobileLoginDto {
+  @IsString({ message: '手机号必须是字符串' })
+  @IsNotEmpty({ message: '手机号不能为空' })
+  username: string
+
+  @ValidateNested()
+  @Type(() => Code)
+  @IsNotEmpty({ message: 'code 必传' })
+  code: Code
+}
+
+/**
  * 注册验证器
  */
 export class RegisterDto {

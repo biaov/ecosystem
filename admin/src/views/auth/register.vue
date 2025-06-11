@@ -6,7 +6,10 @@
     <a-card title="注册" class="w-320">
       <a-form>
         <a-form-item>
-          <a-input v-model:value="formState.username" placeholder="请输入4-16位数字、字母或特殊字符的账号" />
+          <a-input v-model:value="formState.username" placeholder="请输入手机号" />
+        </a-form-item>
+        <a-form-item>
+          <c-sms :mobile="formState.username" v-model="formState.code" ref="sms" />
         </a-form-item>
         <a-form-item>
           <a-input-password v-model:value="formState.password" placeholder="请输入密码" />
@@ -21,30 +24,36 @@
       <router-link to="/login" class="text-center text-info">已有账号，去登录</router-link>
     </a-card>
   </div>
-  <c-captcha v-model:visible="showCaptcha" v-model="formState.code" @success="handleSubmit" />
 </template>
 <script setup lang="ts">
 import { message } from 'ant-design-vue'
 import { registerApi } from '@/api/auth'
 
 const router = useRouter()
-const showCaptcha = ref(false)
+const smsRef = useTemplateRef<{ valid: () => string }>('sms')
 
 const { formState, setFormStateRules, validFormState } = useFormState({
   username: '',
+  code: null,
   password: '',
   cpassword: '',
-  code: null
 })
 
 setFormStateRules({
   username: {
     validator(value: string) {
-      if (!/^[a-zA-Z0-9_-]{4,16}$/.test(value)) return Promise.reject('账号格式错误')
+      if (!useValidPhone(value)) return Promise.reject('手机号格式错误')
       return Promise.resolve()
     }
   },
-  password: { required: true, message: '请输入密码', },
+  code: {
+    validator() {
+      const result = smsRef.value!.valid()
+      if (result) return Promise.reject(result)
+      return Promise.resolve()
+    }
+  },
+  password: { required: true, message: '请输入密码' },
   cpassword: {
     validator(value: string) {
       if (value !== formState.value.password) return Promise.reject('确认密码和密码不一致')
@@ -53,15 +62,12 @@ setFormStateRules({
   }
 })
 
+
 /**
  * 提交
  */
 const handleSubmit = async () => {
   if (!(await validFormState())) return
-  if (!formState.value.code) {
-    showCaptcha.value = true
-    return
-  }
   try {
     await registerApi.post({ ...formState.value, source: sourceEnum.admin })
     message.success('注册成功，请登录')

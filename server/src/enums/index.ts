@@ -8,3 +8,14 @@ export enum CaptchaEnum {
    */
   Code = 'code'
 }
+
+export enum DefaultRoleCodeEnum {
+  /**
+   * 访客角色
+   */
+  Visitor = 'visitor',
+  /**
+   * 管理员角色
+   */
+  Admin = 'admin'
+}

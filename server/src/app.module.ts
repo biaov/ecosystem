@@ -1,5 +1,3 @@
-import { Module } from '@nestjs/common'
-import { TypeOrmModule } from '@nestjs/typeorm'
 import migrations from '@/migrations'
 import { APP_INTERCEPTOR } from '@nestjs/core'
 import { TransformResponseInterceptor } from '@/http.interceptor'
@@ -11,6 +9,11 @@ const modules = Object.values(modulesSync)
   .map(module => Object.values(module))
   .flat()
 
+/**
+ * 是否同步数据库
+ */
+const isSyns = import.meta.env.VITE_DB_SYNC === 'true'
+
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -21,13 +24,14 @@ const modules = Object.values(modulesSync)
       password: import.meta.env.VITE_DB_PASSWORD,
       database: import.meta.env.VITE_DB_NAME,
       autoLoadEntities: true,
-      synchronize: import.meta.env.VITE_DB_SYNC,
-      dropSchema: import.meta.env.VITE_DB_SYNC,
+      synchronize: isSyns,
+      dropSchema: isSyns,
       migrations,
       entityPrefix: import.meta.env.VITE_DB_PREFIX,
-      // migrationsTransactionMode: 'all',
+      migrationsTransactionMode: 'all',
       timezone: '+08:00',
-      dateStrings: true
+      dateStrings: true,
+      connectorPackage: 'mysql2'
     }),
     ...modules,
     RedisCacheModule

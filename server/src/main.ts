@@ -16,9 +16,7 @@ app.useGlobalPipes(
     exceptionFactory: errors => new UnprocessableEntityException(Object.values(errors[0].constraints!)[0]) // 格式化错误信息
   })
 )
-
-app.useGlobalFilters(new HttpErrorFilter())
-
-app.enableCors()
+app.useGlobalFilters(new HttpErrorFilter()) // 错误过滤器
+app.enableCors() // 启用 CORS
 
 import.meta.env.PROD && app.listen(import.meta.env.VITE_PORT)

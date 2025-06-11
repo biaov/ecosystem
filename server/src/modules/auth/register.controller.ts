@@ -23,7 +23,7 @@ export class RegisterController {
   }
   @Post('admin')
   async adminRegister(@Body() { username, password, cpassword, code, source }: RegisterDto) {
-    // if (!(await this.registerValidator(password, cpassword, code))) return
+    if (!(await this.registerValidator(password, cpassword, code))) return
     return this.userService.adminRegister(username, password, source)
   }
 }

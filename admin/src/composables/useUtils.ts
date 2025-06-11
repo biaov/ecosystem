@@ -6,4 +6,4 @@ export const useRandomId = () => `${+dayjs()}${Math.random().toString(36).slice(
 /**
  * 校验手机号
  */
-export const useValidPhone = (value: string) => /^1[3-9]\d{9}$/.test(value)
+export const useValidPhone = (value?: string) => /^1[3-9]\d{9}$/.test(`${value}`)

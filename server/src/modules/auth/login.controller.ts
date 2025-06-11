@@ -1,16 +1,47 @@
+import { TokenService } from '@/modules/common/token.service'
+import { CaptchaService } from '@/modules/common/captcha.service'
 import { LoginService } from './login.service'
-import { LoginDto } from './auto.dto'
+import { LoginDto, MobileLoginDto } from './auto.dto'
 
+// @UseGuards(AuthGuardAdmin)
 @Controller('login')
 export class LoginController {
-  constructor(private readonly userService: LoginService) {}
+  constructor(
+    private readonly loginService: LoginService,
+    private readonly captchaService: CaptchaService,
+    private readonly tokenService: TokenService
+  ) {}
+
+  async codeValidator(code: { id: string; value: string }) {
+    const { id, value } = code
+    if (!(await this.captchaService.verify(id, value))) return
+    return true
+  }
+
+  async getToken<T extends Promise<Record<string, any>>>(data: T) {
+    const result = await data
+    const token = this.tokenService.getToken({ userId: result.id })
+    return { ...result, token }
+  }
 
   @Post()
   login(@Body() { username, password }: LoginDto) {
-    return this.userService.login(username, password)
+    return this.getToken(this.loginService.login(username, password))
+  }
+  @Post('mobile')
+  async mobileLogin(@Body() { username, code }: MobileLoginDto) {
+    if (!validator.mobile(username)) return
+    if (!(await this.codeValidator(code))) return
+    return await this.getToken(this.loginService.mobileLogin(username))
   }
   @Post('admin')
   adminLogin(@Body() { username, password }: LoginDto) {
-    return this.userService.adminLogin(username, password)
+    return this.getToken(this.loginService.adminLogin(username, password))
+  }
+  @Post('admin-mobile')
+  async mobileAdminLogin(@Body() { username, code }: MobileLoginDto) {
+    if (!validator.mobile(username)) return
+    if (!(await this.codeValidator(code))) return
+    return await this.getToken(this.loginService.mobileAdminLogin(username))
   }
 }

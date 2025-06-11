@@ -6,7 +6,11 @@
 // biome-ignore lint: disable
 export {}
 declare global {
+  const AfterInsert: typeof import('typeorm')['AfterInsert']
+  const AfterUpdate: typeof import('typeorm')['AfterUpdate']
   const ArrayNotEmpty: typeof import('class-validator')['ArrayNotEmpty']
+  const AuthGuard: typeof import('../src/modules/common/token.service')['AuthGuard']
+  const AuthGuardAdmin: typeof import('../src/modules/common/token.service')['AuthGuardAdmin']
   const BaseEntity: typeof import('typeorm')['BaseEntity']
   const BaseModel: typeof import('../src/common/base.model')['BaseModel']
   const BeforeInsert: typeof import('typeorm')['BeforeInsert']
@@ -17,10 +21,13 @@ declare global {
   const Column: typeof import('typeorm')['Column']
   const Controller: typeof import('@nestjs/common')['Controller']
   const CreateDateColumn: typeof import('typeorm')['CreateDateColumn']
+  const DefaultRoleCodeEnum: typeof import('../src/enums/index')['DefaultRoleCodeEnum']
   const Delete: typeof import('@nestjs/common')['Delete']
   const DrawImg: typeof import('../src/utils/draw')['DrawImg']
   const Entity: typeof import('typeorm')['Entity']
   const Get: typeof import('@nestjs/common')['Get']
+  const HttpException: typeof import('@nestjs/common')['HttpException']
+  const HttpStatus: typeof import('@nestjs/common')['HttpStatus']
   const InjectRedis: typeof import('@nestjs-modules/ioredis')['InjectRedis']
   const InjectRepository: typeof import('@nestjs/typeorm')['InjectRepository']
   const Injectable: typeof import('@nestjs/common')['Injectable']
@@ -29,6 +36,8 @@ declare global {
   const IsNumber: typeof import('class-validator')['IsNumber']
   const IsString: typeof import('class-validator')['IsString']
   const JoinColumn: typeof import('typeorm')['JoinColumn']
+  const JwtAuthGuard: typeof import('../src/modules/common/jwt-auth.guard')['JwtAuthGuard']
+  const JwtPayload: typeof import('jsonwebtoken')['JwtPayload']
   const ManyToOne: typeof import('typeorm')['ManyToOne']
   const MaxLength: typeof import('class-validator')['MaxLength']
   const MinLength: typeof import('class-validator')['MinLength']
@@ -36,12 +45,14 @@ declare global {
   const OneToMany: typeof import('typeorm')['OneToMany']
   const OneToOne: typeof import('typeorm')['OneToOne']
   const Param: typeof import('@nestjs/common')['Param']
+  const PassportStrategy: typeof import('@nestjs/passport')['PassportStrategy']
   const Post: typeof import('@nestjs/common')['Post']
   const PrimaryGeneratedColumn: typeof import('typeorm')['PrimaryGeneratedColumn']
   const Put: typeof import('@nestjs/common')['Put']
   const Type: typeof import('class-transformer')['Type']
   const TypeOrmModule: typeof import('@nestjs/typeorm')['TypeOrmModule']
   const UpdateDateColumn: typeof import('typeorm')['UpdateDateColumn']
+  const UseGuards: typeof import('@nestjs/common')['UseGuards']
   const UserAdminModel: typeof import('../src/models/user')['UserAdminModel']
   const UserDetailModel: typeof import('../src/models/user-detail')['UserDetailModel']
   const UserModel: typeof import('../src/models/user')['UserModel']
@@ -51,9 +62,15 @@ declare global {
   const aesEncrypt: typeof import('../src/utils/crypto')['aesEncrypt']
   const getRedisKey: typeof import('../src/utils/utils')['getRedisKey']
   const isEmpty: typeof import('class-validator')['isEmpty']
+  const jsonwebtoken: typeof import('jsonwebtoken')['default']
+  const jwt: typeof import('jsonwebtoken')['default']
   const md5: typeof import('../src/utils/crypto')['md5']
   const random: typeof import('../src/utils/utils')['random']
   const randomId: typeof import('../src/utils/utils')['randomId']
+  const sign: typeof import('jsonwebtoken')['sign']
+  const validMobile: typeof import('../src/utils/utils')['validMobile']
+  const validator: typeof import('../src/utils/validator')['validator']
+  const verify: typeof import('jsonwebtoken')['verify']
 }
 // for type re-export
 declare global {
@@ -76,6 +93,6 @@ declare global {
   export type { DrawImg } from '../src/utils/draw'
   import('../src/utils/draw')
   // @ts-ignore
-  export type { CaptchaEnum } from '../src/enums/index'
+  export type { CaptchaEnum, DefaultRoleCodeEnum } from '../src/enums/index'
   import('../src/enums/index')
 }

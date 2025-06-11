@@ -14,5 +14,5 @@ export const useVisible = (initVisible = false) => {
     visible.value = value
   }
 
-  return [visible, setVisible]
+  return [visible, setVisible] as const
 }

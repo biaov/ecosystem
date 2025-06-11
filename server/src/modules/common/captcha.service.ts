@@ -13,6 +13,9 @@ export class CaptchaService {
     const gap = 5
 
     if (Math.abs(value[0] - target[0]) < gap && Math.abs(value[1] - target[1]) < gap) {
+      /**
+       * 此处可以对接第三方发送短信或邮件服务
+       */
       this.redis.del(key)
       const id = randomId()
       const value = randomId()

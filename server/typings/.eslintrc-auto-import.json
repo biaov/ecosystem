@@ -1,6 +1,10 @@
 {
   "globals": {
+    "AfterInsert": true,
+    "AfterUpdate": true,
     "ArrayNotEmpty": true,
+    "AuthGuard": true,
+    "AuthGuardAdmin": true,
     "BaseEntity": true,
     "BaseModel": true,
     "BeforeInsert": true,
@@ -11,10 +15,13 @@
     "Column": true,
     "Controller": true,
     "CreateDateColumn": true,
+    "DefaultRoleCodeEnum": true,
     "Delete": true,
     "DrawImg": true,
     "Entity": true,
     "Get": true,
+    "HttpException": true,
+    "HttpStatus": true,
     "InjectRedis": true,
     "InjectRepository": true,
     "Injectable": true,
@@ -38,6 +45,7 @@
     "Type": true,
     "TypeOrmModule": true,
     "UpdateDateColumn": true,
+    "UseGuards": true,
     "UserAdminModel": true,
     "UserDetailModel": true,
     "UserModel": true,
@@ -47,8 +55,10 @@
     "aesEncrypt": true,
     "getRedisKey": true,
     "isEmpty": true,
+    "jwt": true,
     "md5": true,
     "random": true,
-    "randomId": true
+    "randomId": true,
+    "validator": true
   }
 }

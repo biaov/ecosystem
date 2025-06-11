@@ -11,6 +11,7 @@ declare module 'vue' {
     CCaptcha: typeof import('./../src/components/c-captcha.vue')['default']
     Components: typeof import('./../src/components/index.vue')['default']
     CScreenBg: typeof import('./../src/components/c-screen-bg.vue')['default']
+    CSms: typeof import('./../src/components/c-sms.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
