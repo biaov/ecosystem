@@ -1,6 +1,6 @@
 <template>
   <me-captcha :item="data" v-model:visible="visible" v-model:status-code="statusCode" @check="onCheck"
-    @refresh="getData" v-if="data" />
+    @refresh="getData" />
 </template>
 <script setup lang="ts">
 import { MeCaptcha } from 'mine-h5-ui'
