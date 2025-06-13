@@ -1,26 +1,27 @@
 import eslint from '@eslint/js'
-import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 import globals from 'globals'
 import tseslint from 'typescript-eslint'
 import { FlatCompat } from '@eslint/eslintrc'
+import prettier from 'eslint-plugin-prettier'
 
 const developmentOff = process.env.NODE_ENV === 'development' ? 'off' : 'error'
 const compat = new FlatCompat()
 
 export default tseslint.config(
   {
-    ignores: ['eslint.config.js', 'node_modules', 'dist']
+    files: ['./src/**/*.ts'],
+    ignores: ['node_modules', 'dist'],
+    plugins: {
+      prettier
+    }
   },
   eslint.configs.recommended,
-  ...tseslint.configs.recommendedTypeChecked,
-  eslintPluginPrettierRecommended,
+  ...tseslint.configs.recommended,
   ...compat.config({ extends: ['./typings/.eslintrc-auto-import.json'] }),
   {
     languageOptions: {
-      globals: {
-        ...globals.node
-      },
-      sourceType: 'commonjs',
+      globals: globals.node,
+      sourceType: 'module',
       parserOptions: {
         projectService: true,
         tsconfigRootDir: import.meta.dirname
@@ -29,8 +30,8 @@ export default tseslint.config(
   },
   {
     rules: {
-      'no-unused-vars': developmentOff,
       'no-console': developmentOff,
+      '@typescript-eslint/no-unused-vars': developmentOff
       // '@typescript-eslint/no-unused-expressions': 'off',
       // '@typescript-eslint/no-unsafe-function-type': 'off',
       // '@typescript-eslint/no-namespace': 'off',

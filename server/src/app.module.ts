@@ -2,7 +2,7 @@ import { APP_INTERCEPTOR } from '@nestjs/core'
 import { TransformResponseInterceptor } from '@/http.interceptor'
 import { RedisCacheModule } from '@/redis.module'
 
-const modulesSync = import.meta.glob('@/modules/**/*.module.ts', { eager: true }) as Record<string, Record<string, new () => {}>>
+const modulesSync = import.meta.glob('@/modules/**/*.module.ts', { eager: true }) as Record<string, Record<string, new () => unknown>>
 
 const modules = Object.values(modulesSync)
   .map(module => Object.values(module))

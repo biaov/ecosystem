@@ -8,7 +8,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "node dist/main",
-    "lint": "eslint \"{src}/**/*.ts\" --fix",
+    "lint": "eslint ./src/**/*.ts --fix",
     "migration:create": "typeorm migration:create --esm",
     "migration:run": "typeorm migration:run -d ./ormconfig.js"
   },
