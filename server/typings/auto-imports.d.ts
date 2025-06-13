@@ -36,8 +36,6 @@ declare global {
   const IsNumber: typeof import('class-validator')['IsNumber']
   const IsString: typeof import('class-validator')['IsString']
   const JoinColumn: typeof import('typeorm')['JoinColumn']
-  const JwtAuthGuard: typeof import('../src/modules/common/jwt-auth.guard')['JwtAuthGuard']
-  const JwtPayload: typeof import('jsonwebtoken')['JwtPayload']
   const ManyToOne: typeof import('typeorm')['ManyToOne']
   const MaxLength: typeof import('class-validator')['MaxLength']
   const MinLength: typeof import('class-validator')['MinLength']
@@ -45,7 +43,6 @@ declare global {
   const OneToMany: typeof import('typeorm')['OneToMany']
   const OneToOne: typeof import('typeorm')['OneToOne']
   const Param: typeof import('@nestjs/common')['Param']
-  const PassportStrategy: typeof import('@nestjs/passport')['PassportStrategy']
   const Post: typeof import('@nestjs/common')['Post']
   const PrimaryGeneratedColumn: typeof import('typeorm')['PrimaryGeneratedColumn']
   const Put: typeof import('@nestjs/common')['Put']
@@ -62,15 +59,11 @@ declare global {
   const aesEncrypt: typeof import('../src/utils/crypto')['aesEncrypt']
   const getRedisKey: typeof import('../src/utils/utils')['getRedisKey']
   const isEmpty: typeof import('class-validator')['isEmpty']
-  const jsonwebtoken: typeof import('jsonwebtoken')['default']
   const jwt: typeof import('jsonwebtoken')['default']
   const md5: typeof import('../src/utils/crypto')['md5']
   const random: typeof import('../src/utils/utils')['random']
   const randomId: typeof import('../src/utils/utils')['randomId']
-  const sign: typeof import('jsonwebtoken')['sign']
-  const validMobile: typeof import('../src/utils/utils')['validMobile']
   const validator: typeof import('../src/utils/validator')['validator']
-  const verify: typeof import('jsonwebtoken')['verify']
 }
 // for type re-export
 declare global {

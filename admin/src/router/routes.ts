@@ -12,8 +12,14 @@ export const routes: RouteRecordRaw[] = [
     component: () => import(`@/views/auth/register.vue`)
   },
   {
-    path: 'dashboard',
-    name: 'dashboard',
-    component: () => import(`@/views/dashboard/index.vue`)
+    path: '',
+    component: () => import(`@/views/layout/index.vue`),
+    children: [
+      {
+        path: 'dashboard',
+        name: 'dashboard',
+        component: () => import(`@/views/dashboard/index.vue`)
+      }
+    ]
   }
 ]

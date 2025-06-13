@@ -33,9 +33,6 @@ export default defineConfig({
     host: '0.0.0.0',
     port: +env.VITE_PORT
   },
-  optimizeDeps: {
-    exclude: []
-  },
   build: {
     target: 'node22',
     lib: {
