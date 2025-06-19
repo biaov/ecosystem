@@ -1,10 +1,10 @@
 import { MigrationInterface, QueryRunner } from 'typeorm'
 import { UserRoleModel } from '@/models/user'
 
-export class UserRole1749635404337 implements MigrationInterface {
+export class UserRole1750059785812 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     const initRoles = [
-      { code: DefaultRoleCodeEnum.Admin, name: '游客' },
+      { code: DefaultRoleCodeEnum.Visitor, name: '游客' },
       { code: DefaultRoleCodeEnum.Admin, name: '超级管理员' }
     ]
     const roleCodes = initRoles.map(({ code }) => ({ code }))

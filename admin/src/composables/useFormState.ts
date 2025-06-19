@@ -17,7 +17,7 @@ export const useFormState = <T extends Record<string, unknown> = {}>(initFormSta
   /**
    * 设置表单规则
    */
-  const setFormStateRules = (rule = {}) => {
+  const setFormRules = (rule = {}) => {
     rules.value = rule
   }
   const forValidaor = async (i: number, tasks: (() => Promise<unknown>)[]) => {
@@ -64,5 +64,25 @@ export const useFormState = <T extends Record<string, unknown> = {}>(initFormSta
     }
   }
 
-  return { formState, setFormState, setFormStateRules, validFormState }
+  /**
+   * 初始数据
+   */
+  let initData: () => void
+
+  /**
+   * 重置表单状态回调
+   */
+  const onRestFormState = (cb: () => void) => {
+    initData = cb
+  }
+
+  /**
+   * 重置表单状态
+   */
+  const resetFormState = () => {
+    formState.value = structuredClone(initFormState ?? {}) as T
+    initData()
+  }
+
+  return { formState, setFormState, setFormRules, validFormState, onRestFormState, resetFormState }
 }

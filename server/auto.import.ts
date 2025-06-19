@@ -1,6 +1,13 @@
+import { resolve } from 'path'
+
+/**
+ * 获取路径
+ */
+const getPath = path => resolve(import.meta.dirname, path).replace(/\\/g, '/')
+
 export default [
   {
-    '@nestjs/common': ['Injectable', 'Module', 'Controller', 'Post', 'Get', 'Put', 'Delete', 'Param', 'Body', 'UseGuards', 'HttpException', 'HttpStatus']
+    '@nestjs/common': ['Injectable', 'Module', 'Controller', 'Post', 'Get', 'Put', 'Delete', 'Param', 'Query', 'Body', 'UseGuards', 'HttpException', 'HttpStatus']
   },
   {
     '@nestjs/typeorm': ['InjectRepository', 'TypeOrmModule']
@@ -46,12 +53,17 @@ export default [
     jsonwebtoken: [['default', 'jwt']]
   },
   {
-    from: './src/common/base.model.ts',
+    from: getPath('./src/common/base.model.ts'),
     imports: ['BaseModel'],
     type: false
   },
   {
-    from: './src/modules/common/token.service.ts',
+    from: getPath('./src/common/paging.dot.ts'),
+    imports: ['PagingDot'],
+    type: false
+  },
+  {
+    from: getPath('./src/modules/common/token.service.ts'),
     imports: ['AuthGuard', 'AuthGuardAdmin'],
     type: false
   }

@@ -12,5 +12,9 @@ declare module 'vue' {
     CSms: typeof import('./../src/components/c-sms.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    UAntIcon: typeof import('./../src/components/u-ant-icon.vue')['default']
+    UcAntIcon: typeof import('../src/components/u-ant-icon.vue')['default']
+    ULayoutForm: typeof import('./../src/components/u-layout-form.vue')['default']
+    ULayoutList: typeof import('./../src/components/u-layout-list.vue')['default']
   }
 }

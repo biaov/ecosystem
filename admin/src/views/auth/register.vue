@@ -1,12 +1,12 @@
 <template>
   <div class="w-screen h-screen bg-radial flex justify-center items-center relative">
-    <div class="absolute top-50 left-50">
-      <a-image src="/logo.svg" :width="60" :preview="false" />
+    <div class="absolute top-50 left-50 cursor-pointer">
+      <a-image src="/logo-white.svg" :width="60" :preview="false" />
     </div>
     <a-card title="注册" class="w-320">
       <a-form>
         <a-form-item>
-          <a-input v-model:value="formState.username" placeholder="请输入手机号" />
+          <a-input v-model:value="formState.username" placeholder="请输入手机号，随便填一个" />
         </a-form-item>
         <a-form-item>
           <c-sms :mobile="formState.username" v-model="formState.code" ref="sms" />
@@ -25,21 +25,21 @@
     </a-card>
   </div>
 </template>
-<script setup lang="ts">
+<script lang="ts" setup>
 import { message } from 'ant-design-vue'
 import { registerApi } from '@/api/auth'
 
 const router = useRouter()
 const smsRef = useTemplateRef<{ valid: () => string }>('sms')
 
-const { formState, setFormStateRules, validFormState } = useFormState({
+const { formState, setFormRules, validFormState } = useFormState({
   username: '',
   code: null,
   password: '',
-  cpassword: '',
+  cpassword: ''
 })
 
-setFormStateRules({
+setFormRules({
   username: {
     validator(value: string) {
       if (!useValidPhone(value)) return Promise.reject('手机号格式错误')
@@ -61,7 +61,6 @@ setFormStateRules({
     }
   }
 })
-
 
 /**
  * 提交

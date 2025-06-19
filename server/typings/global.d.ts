@@ -6,3 +6,8 @@ interface Point {
 interface TokenValue {
   userId?: string
 }
+
+interface PageOption {
+  skip: number
+  take: number
+}

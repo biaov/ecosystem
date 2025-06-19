@@ -36,28 +36,37 @@ declare global {
   const IsNumber: typeof import('class-validator')['IsNumber']
   const IsString: typeof import('class-validator')['IsString']
   const JoinColumn: typeof import('typeorm')['JoinColumn']
+  const LogModel: typeof import('../src/models/log')['LogModel']
   const ManyToOne: typeof import('typeorm')['ManyToOne']
   const MaxLength: typeof import('class-validator')['MaxLength']
+  const MigrationsModel: typeof import('../src/models/log')['MigrationsModel']
   const MinLength: typeof import('class-validator')['MinLength']
   const Module: typeof import('@nestjs/common')['Module']
   const OneToMany: typeof import('typeorm')['OneToMany']
   const OneToOne: typeof import('typeorm')['OneToOne']
+  const PagingDot: typeof import('../src/common/paging.dot')['PagingDot']
   const Param: typeof import('@nestjs/common')['Param']
   const Post: typeof import('@nestjs/common')['Post']
   const PrimaryGeneratedColumn: typeof import('typeorm')['PrimaryGeneratedColumn']
   const Put: typeof import('@nestjs/common')['Put']
+  const Query: typeof import('@nestjs/common')['Query']
   const Type: typeof import('class-transformer')['Type']
   const TypeOrmModule: typeof import('@nestjs/typeorm')['TypeOrmModule']
   const UpdateDateColumn: typeof import('typeorm')['UpdateDateColumn']
   const UseGuards: typeof import('@nestjs/common')['UseGuards']
   const UserAdminModel: typeof import('../src/models/user')['UserAdminModel']
-  const UserDetailModel: typeof import('../src/models/user-detail')['UserDetailModel']
+  const UserDetailModel: typeof import('../src/models/user')['UserDetailModel']
   const UserModel: typeof import('../src/models/user')['UserModel']
+  const UserPermissionModel: typeof import('../src/models/user')['UserPermissionModel']
   const UserRoleModel: typeof import('../src/models/user')['UserRoleModel']
   const ValidateNested: typeof import('class-validator')['ValidateNested']
   const aesDecrypt: typeof import('../src/utils/crypto')['aesDecrypt']
   const aesEncrypt: typeof import('../src/utils/crypto')['aesEncrypt']
+  const database: typeof import('../src/config/database')['default']
+  const databaseOptions: typeof import('../src/config/database')['databaseOptions']
+  const getPageQuery: typeof import('../src/utils/utils')['getPageQuery']
   const getRedisKey: typeof import('../src/utils/utils')['getRedisKey']
+  const initPage: typeof import('../src/config/index')['initPage']
   const isEmpty: typeof import('class-validator')['isEmpty']
   const jwt: typeof import('jsonwebtoken')['default']
   const md5: typeof import('../src/utils/crypto')['md5']
@@ -77,10 +86,10 @@ declare global {
   export type { BizException } from '../src/exceptions/biz'
   import('../src/exceptions/biz')
   // @ts-ignore
-  export type { UserDetailModel } from '../src/models/user-detail'
-  import('../src/models/user-detail')
+  export type { MigrationsModel, LogModel } from '../src/models/log'
+  import('../src/models/log')
   // @ts-ignore
-  export type { UserModel, UserAdminModel, UserRoleModel } from '../src/models/user'
+  export type { UserModel, UserAdminModel, UserRoleModel, UserDetailModel, UserPermissionModel } from '../src/models/user'
   import('../src/models/user')
   // @ts-ignore
   export type { DrawImg } from '../src/utils/draw'

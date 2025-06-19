@@ -12,5 +12,8 @@
   "prettier.trailingComma": "none",
   "prettier.printWidth": 200,
   "files.eol": "\n",
-  "emmet.triggerExpansionOnTab": true
+  "emmet.triggerExpansionOnTab": true,
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

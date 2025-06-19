@@ -66,7 +66,7 @@ export class RegisterDto {
   @IsNotEmpty({ message: 'code 必传' })
   code: Code
 
-  @IsNumber({}, { message: 'source 必须是字符串' })
+  @IsNumber({}, { message: 'source 必须是数字' })
   @IsNotEmpty({ message: 'source 必传' })
   source: number
 }

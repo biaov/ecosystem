@@ -1,7 +1,7 @@
 <template>
   <div class="w-screen h-screen bg-radial flex justify-center items-center relative">
-    <div class="absolute top-50 left-50">
-      <a-image src="/logo.svg" :width="60" :preview="false" />
+    <div class="absolute top-50 left-50 cursor-pointer">
+      <a-image src="/logo-white.svg" :width="60" :preview="false" />
     </div>
     <a-card class="w-320">
       <a-form>
@@ -9,7 +9,7 @@
           <a-tab-pane :key="0">
             <template #tab>
               <span>
-                <UserSwitchOutlined />
+                <u-ant-icon name="UserSwitchOutlined" />
                 账号登录
               </span>
             </template>
@@ -23,7 +23,7 @@
           <a-tab-pane :key="1">
             <template #tab>
               <span>
-                <MobileOutlined />
+                <u-ant-icon name="MobileOutlined" />
                 手机号登录
               </span>
             </template>
@@ -43,8 +43,7 @@
     </a-card>
   </div>
 </template>
-<script setup lang="ts">
-import { UserSwitchOutlined, MobileOutlined } from '@ant-design/icons-vue'
+<script lang="ts" setup>
 import { message } from 'ant-design-vue'
 import { loginApi, mobileLoginApi } from '@/api/auth'
 
@@ -52,13 +51,13 @@ const router = useRouter()
 const store = useStore()
 const smsRef = useTemplateRef<{ valid: () => string }>('sms')
 const activeKey = ref(0)
-const { formState, setFormStateRules, validFormState } = useFormState({
-  username: '',
-  password: '',
-  code: null,
+const { formState, setFormRules, validFormState } = useFormState({
+  username: '15575148487',
+  password: '123456',
+  code: null
 })
 
-setFormStateRules({
+setFormRules({
   username: {
     required: true,
     message: '请输入账号',
@@ -81,7 +80,7 @@ setFormStateRules({
       }
       return Promise.resolve()
     }
-  },
+  }
 })
 
 /**
@@ -89,7 +88,7 @@ setFormStateRules({
  */
 const handleSubmit = async () => {
   if (!(await validFormState())) return
-  const userInfo = activeKey.value ? await mobileLoginApi.post<UserInfo>(formState.value) : await loginApi.post<UserInfo>(formState.value)
+  const userInfo = await (activeKey.value ? mobileLoginApi.post<UserInfo>(formState.value) : loginApi.post<UserInfo>(formState.value))
   message.success('登录成功')
   store.login(userInfo)
   router.push({ name: 'dashboard' })

@@ -16,4 +16,6 @@ interface Page {
 interface PageDataType<T = Record<string, unknown>> {
   items: T[]
   total: number
+  current: number
+  pageSize: number
 }

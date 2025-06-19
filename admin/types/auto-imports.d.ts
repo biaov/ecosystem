@@ -71,16 +71,17 @@ declare global {
   const useRestful: typeof import('../src/composables/useRequest')['useRestful']
   const useRoute: typeof import('vue-router')['useRoute']
   const useRouter: typeof import('vue-router')['useRouter']
-  const useService: typeof import('../src/composables/useRequest.js')['useService']
+  const useService: (typeof import('../src/composables/useRequest.js'))['useService']
   const useSlots: typeof import('vue')['useSlots']
+  const useState: typeof import('../src/composables/useState')['useState']
   const useStore: typeof import('../src/stores/index')['useStore']
-  const useSystemInfo: typeof import('../src/composables/useConfig.js')['useSystemInfo']
+  const useSystemInfo: (typeof import('../src/composables/useConfig.js'))['useSystemInfo']
   const useTemplateRef: typeof import('vue')['useTemplateRef']
   const useToastRequest: typeof import('../src/composables/useRequest')['useToastRequest']
-  const useUpload: typeof import('../src/composables/useRequest.js')['useUpload']
+  const useTransformQuery: typeof import('../src/composables/useTransformQuery')['useTransformQuery']
+  const useUpload: (typeof import('../src/composables/useRequest.js'))['useUpload']
   const useValidPhone: typeof import('../src/composables/useUtils')['useValidPhone']
-  const useVisible: typeof import('../src/composables/useVisible')['useVisible']
-  const useVisibleAnimation: typeof import('../src/composables/useVisible.js')['useVisibleAnimation']
+  const useVisibleAnimation: (typeof import('../src/composables/useState.js'))['useVisibleAnimation']
   const watch: typeof import('vue')['watch']
   const watchEffect: typeof import('vue')['watchEffect']
   const watchPostEffect: typeof import('vue')['watchPostEffect']
@@ -92,7 +93,7 @@ declare global {
   export type { Component, Slot, Slots, ComponentPublicInstance, ComputedRef, DirectiveBinding, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, MaybeRef, MaybeRefOrGetter, VNode, WritableComputedRef } from 'vue'
   import('vue')
   // @ts-ignore
-  export type { Pagination, FormRule, PagingResponse } from '../src/composables/types'
+  export type { FormRule, PagingResponse } from '../src/composables/types'
   import('../src/composables/types')
   // @ts-ignore
   export type { UserInfo } from '../src/stores/types'

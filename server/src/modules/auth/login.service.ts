@@ -40,7 +40,9 @@ export class LoginService {
       select: ['id', 'username', 'user', 'createdAt', 'updatedAt']
     })) as UserAdminModel & { role: UserRoleModel | null }
     if (!result) throw new BizException('用户名或密码错误')
-    result.role = await this.userRoleRepository.findOneBy({ code: result.user.roleCode })
+    const role = await this.userRoleRepository.findOneBy({ code: result.user.roleCode })
+    console.log(role.permissions, 'role')
+    result.role = { ...role, permissions: role.permissions }
     return result
   }
   async mobileAdminLogin(username: string) {

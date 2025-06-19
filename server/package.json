@@ -1,16 +1,18 @@
 {
   "name": "ecosystem",
-  "version": "1.0.0",
-  "main": "index.js",
+  "version": "2.0.0",
+  "main": "main.js",
   "scripts": {
     "start": "npm run dev",
     "start:dev": "nest start --watch",
     "dev": "vite",
     "build": "vite build",
+    "build:start": "vite build && cd dist && npm i",
     "preview": "node dist/main",
     "lint": "eslint ./src/**/*.ts --fix",
-    "migration:create": "typeorm migration:create --esm",
-    "migration:run": "typeorm migration:run -d ./ormconfig.js"
+    "migration:create": "node --experimental-strip-types ./scripts/migration.ts -n",
+    "migration:run": "typeorm -d ./config/database.js migration:run",
+    "migration:revert": "typeorm -d ./config/database.js migration:revert"
   },
   "type": "module",
   "keywords": [

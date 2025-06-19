@@ -14,7 +14,7 @@ import { message } from 'ant-design-vue'
 const props = defineProps<{
   mobile?: string
 }>()
-const [showCaptcha, setShowCaptcha] = useVisible(false)
+const [showCaptcha, setShowCaptcha] = useState(false)
 const sms = ref('')
 const code = defineModel<{
   id: string,

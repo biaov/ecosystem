@@ -1,12 +1,11 @@
 <template>
-  <me-captcha :item="data" v-model:visible="visible" v-model:status-code="statusCode" @check="onCheck"
-    @refresh="getData" />
+  <me-captcha :item="data" v-model:visible="visible" v-model:status-code="statusCode" @check="onCheck" @refresh="getData" v-show="data" />
 </template>
-<script setup lang="ts">
+<script lang="ts" setup>
 import { MeCaptcha } from 'mine-h5-ui'
 import 'mine-h5-ui/styles/MeCaptcha.css'
 import { captchaApi, captchaVerifyApi } from '@/api/common'
-import { Captcha } from './types';
+import { Captcha } from './types'
 
 const emit = defineEmits(['success'])
 
@@ -21,20 +20,24 @@ const modelValue = defineModel({
 
 const statusCode = ref(-1)
 
-const { data, getData } = useApiRequest<Captcha.DataType>(async () => {
-  statusCode.value = -1
-  const res = await captchaApi.get()
-  return res.data
-}, false, null)
-
-
+const { data, getData } = useApiRequest<Captcha.DataType>(
+  async () => {
+    statusCode.value = -1
+    const res = await captchaApi.get()
+    return res.data
+  },
+  false,
+  null
+)
 
 const onCheck = async (value: number[]) => {
   try {
-    const res = await captchaVerifyApi.post<ResponseSuccess<{
-      id: string
-      value: string
-    }>>({
+    const res = await captchaVerifyApi.post<
+      ResponseSuccess<{
+        id: string
+        value: string
+      }>
+    >({
       id: data.value.id,
       value
     })
@@ -46,7 +49,11 @@ const onCheck = async (value: number[]) => {
   }
 }
 
-watch(visible, (value) => {
-  value && getData()
-}, { immediate: true })
+watch(
+  visible,
+  value => {
+    value && getData()
+  },
+  { immediate: true }
+)
 </script>

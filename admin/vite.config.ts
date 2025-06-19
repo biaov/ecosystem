@@ -45,18 +45,15 @@ export default defineConfig({
     host: '0.0.0.0',
     port: 8090,
     proxy: {
-      '/api': {
-        target: env.VITE_PROXY_BASE_URL,
-        changeOrigin: true,
-        rewrite: path => path.replace(/^\/api/, '/api')
-      }
+      '/api': env.VITE_PROXY_BASE_URL
     }
   },
   resolve: {
     // 路径别名
     alias: {
       '@': resolve(__dirname, './src')
-    }
+    },
+    extensions: ['.ts', '.vue']
   },
   css: {
     preprocessorOptions: {

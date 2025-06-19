@@ -1,7 +1,20 @@
-/**
- * 分页
- */
-export const pagination = {
-  pageSize: 10,
-  current: 1
+export default {
+  /**
+   * 分页
+   */
+  pagination: {
+    pageSize: 10,
+    current: 1
+  },
+  /**
+   * 表单配置
+   */
+  cols: {
+    labelCol: {
+      span: 3
+    },
+    wrapperCol: {
+      span: 21
+    }
+  }
 }

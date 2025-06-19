@@ -13,3 +13,13 @@ export const randomId = (binary = 32) => +new Date() + Math.random().toString(bi
  */
 export const getRedisKey = (prefix: string, id: string): string => `${prefix}-${id}`
 
+/**
+ * 获取分页器参数
+ */
+export const getPageQuery = ({ current, pageSize }: { current?: number; pageSize?: number } = initPage) => {
+  const newCurrent = current || initPage.current
+  const take = pageSize || initPage.pageSize
+  const skip = (newCurrent - 1) * take
+
+  return { take, skip }
+}

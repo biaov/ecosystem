@@ -17,6 +17,8 @@ const state = reactive({
   userInfo: getStorage('userInfo') as UserInfo | null
 })
 
+const router = useRouter()
+
 export const useStore = () => {
   /**
    * 登录
@@ -35,6 +37,7 @@ export const useStore = () => {
     state.userInfo = null
     removeStorage('token')
     removeStorage('userInfo')
+    router.push({ name: 'login' })
   }
 
   const isLogin = computed(() => !!state.token)

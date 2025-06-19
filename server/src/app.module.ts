@@ -16,19 +16,9 @@ const isSyns = import.meta.env.VITE_DB_SYNC === 'true'
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: import.meta.env.VITE_DB_HOST,
-      port: 3306,
-      username: import.meta.env.VITE_DB_USERNAME,
-      password: import.meta.env.VITE_DB_PASSWORD,
-      database: import.meta.env.VITE_DB_NAME,
+      ...databaseOptions,
       autoLoadEntities: true,
-      synchronize: isSyns,
-      dropSchema: isSyns,
-      entityPrefix: import.meta.env.VITE_DB_PREFIX,
-      timezone: '+08:00',
-      dateStrings: true,
-      connectorPackage: 'mysql2'
+      synchronize: isSyns
     }),
     ...modules,
     RedisCacheModule
