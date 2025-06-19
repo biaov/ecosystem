@@ -6,7 +6,8 @@ const operators = ['>', '<', '!', '>=', '<=', '!=']
  * 请求参数转换
  */
 export const useTransformQuery = (query: Record<string, any> | Ref<Record<string, any>> | Reactive<Record<string, any>>, transfomers: Record<string, any> = {}) => {
-  const rawQuery = structuredClone(isRef(query) ? query.value : isReactive(query) ? toRaw(query) : query) as Record<string, any>
+  const form = isRef(query) ? query.value : isReactive(query) ? toRaw(query) : query
+  const rawQuery = JSON.parse(JSON.stringify(form)) as Record<string, any>
 
   Object.keys(transfomers).forEach(key => {
     let value = rawQuery[key]

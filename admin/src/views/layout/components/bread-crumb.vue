@@ -16,10 +16,3 @@ onBeforeRouteUpdate(to => {
 })
 const crumbList = computed(() => routes.value.matched.filter(item => item.path !== '/'))
 </script>
-<style scoped lang="less">
-// .bread-crumb {
-// :deep(span:last-child > .ant-breadcrumb-link) {
-//   color: rgba(0, 0, 0, 0.65);
-// }
-// }
-</style>

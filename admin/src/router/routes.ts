@@ -11,31 +11,66 @@ export const menuRoutes: RouteRecordRaw[] = [
     component: () => import(`@/views/dashboard/index.vue`)
   },
   {
+    path: 'user',
+    redirect: {
+      name: 'user-list'
+    },
+    meta: {
+      title: '用户管理',
+      antIcon: 'UserOutlined'
+    },
+    children: [
+      {
+        path: 'list',
+        name: 'user-list',
+        meta: {
+          title: '全部用户'
+        },
+        component: () => import('@/views/user/list.vue')
+      },
+      {
+        path: 'blocklist',
+        name: 'user-blocklist',
+        meta: {
+          title: '拉黑名单'
+        },
+        component: () => import('@/views/user/blocklist.vue')
+      }
+    ]
+  },
+  {
     path: 'permission',
     redirect: {
       name: 'permission-menu'
     },
     meta: {
-      title: '权限管理'
+      title: '权限管理',
+      antIcon: 'AuditOutlined'
     },
     children: [
       {
-        path: 'operation',
-        name: 'log-operation',
+        path: 'menu',
+        name: 'permission-menu',
         meta: {
-          title: '操作日志',
-          antIcon: 'FileSearchOutlined'
+          title: '权限标识'
         },
-        component: () => import('@/views/log/operation.vue')
+        component: () => import('@/views/permission/menu.vue')
       },
       {
-        path: 'migration',
-        name: 'log-migration',
+        path: 'role',
+        name: 'permission-role',
         meta: {
-          title: '迁移日志',
-          antIcon: 'FileSearchOutlined'
+          title: '角色权限'
         },
-        component: () => import('@/views/log/migration.vue')
+        component: () => import('@/views/permission/role.vue')
+      },
+      {
+        path: 'account',
+        name: 'permission-account',
+        meta: {
+          title: '账号设置'
+        },
+        component: () => import('@/views/permission/account.vue')
       }
     ]
   },
@@ -45,15 +80,15 @@ export const menuRoutes: RouteRecordRaw[] = [
       name: 'log-operation'
     },
     meta: {
-      title: '日志管理'
+      title: '日志管理',
+      antIcon: 'UnorderedListOutlined'
     },
     children: [
       {
         path: 'operation',
         name: 'log-operation',
         meta: {
-          title: '操作日志',
-          antIcon: 'FileSearchOutlined'
+          title: '操作日志'
         },
         component: () => import('@/views/log/operation.vue')
       },
@@ -61,10 +96,89 @@ export const menuRoutes: RouteRecordRaw[] = [
         path: 'migration',
         name: 'log-migration',
         meta: {
-          title: '迁移日志',
-          antIcon: 'FileSearchOutlined'
+          title: '迁移日志'
         },
         component: () => import('@/views/log/migration.vue')
+      }
+    ]
+  },
+  {
+    path: 'promotion',
+    redirect: {
+      name: 'promotion-coupon'
+    },
+    meta: {
+      title: '促销活动',
+      antIcon: 'SlackOutlined' // BgColorsOutlined
+    },
+    children: [
+      {
+        path: 'coupon',
+        name: 'promotion-coupon',
+        meta: {
+          title: '优惠券'
+        },
+        component: () => import('@/views/promotion/coupon.vue')
+      },
+      {
+        path: '',
+        name: 'promotion-activity-coupon',
+        meta: {
+          title: '活动发券'
+        },
+        component: () => import('@/views/promotion/activity-coupon.vue')
+      },
+      {
+        path: 'order',
+        name: 'promotion-distribute-coupon',
+        meta: {
+          title: '手动发券'
+        },
+        component: () => import('@/views/promotion/distribute-coupon.vue')
+      }
+    ]
+  },
+  {
+    path: 'setting',
+    redirect: {
+      name: 'setting-user'
+    },
+    meta: {
+      title: '用户设置',
+      antIcon: 'SettingOutlined'
+    },
+    children: [
+      {
+        path: 'user',
+        name: 'setting-user',
+        meta: {
+          title: '用户设置'
+        },
+        component: () => import('@/views/setting/user.vue')
+      },
+      {
+        path: 'protocol',
+        name: 'setting-protocol',
+        meta: {
+          title: '隐私协议'
+        },
+        component: () => import('@/views/setting/protocol.vue')
+      },
+      {
+        path: 'order',
+        name: 'setting-order',
+        meta: {
+          title: '订单设置'
+        },
+        component: () => import('@/views/setting/order.vue')
+      },
+      {
+        path: 'hotkeyword',
+        name: 'setting-hotkeyword',
+        meta: {
+          title: '热搜词设置'
+        },
+        component: () => import('@/views/setting/hotkeyword.vue')
       }
     ]
   }

@@ -25,7 +25,6 @@ export default defineConfig({
           dayjs: [['default', 'dayjs']]
         }
       ],
-      ignore: ['types.ts'],
       dirs: ['./src/composables', './src/stores', './src/enums'],
       dts: './types/auto-imports.d.ts',
       eslintrc: {
@@ -53,7 +52,7 @@ export default defineConfig({
     alias: {
       '@': resolve(__dirname, './src')
     },
-    extensions: ['.ts', '.vue']
+    extensions: ['.ts', '.vue', '.js', '.json']
   },
   css: {
     preprocessorOptions: {
@@ -61,5 +60,17 @@ export default defineConfig({
         additionalData: '@import "@/styles/vars.less";'
       }
     }
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'ant-design-vue': ['ant-design-vue'],
+          'ant-design-vue-icon': ['@ant-design/icons-vue'],
+          'antv-g2': ['@antv/g2']
+        }
+      }
+    },
+    chunkSizeWarningLimit: 800
   }
 })

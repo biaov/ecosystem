@@ -5,16 +5,16 @@
     <side-bar v-model:collapsed="isCollapsed" />
     <div class="flex-grow w-0 flex flex-col">
       <!-- 头部 -->
-      <div class="flex justify-between items-center h-48 px-24 relative z-10 shadow-[0 1px 4px rgba(0, 21, 41, 0.08)]">
+      <div class="flex justify-between items-center h-60 px-24 relative z-10 shadow-sm shadow-gray-200">
         <bread-crumb />
-        <a-space size="large">
-          <span class="user-name text-[#333]">欢迎您，{{ adminName }}</span>
-          <a-button type="link" title="修改密码" @click="onEditPwd">
+        <a-space>
+          <span class="user-name text-[#333]">欢迎您，{{ adminName }}游客</span>
+          <a-button type="text" title="修改密码" @click="onEditPwd">
             <template #icon>
               <u-ant-icon name="LockOutlined" />
             </template>
           </a-button>
-          <a-button type="link" title="退出登录" @click="logout">
+          <a-button type="text" title="退出登录" @click="logout">
             <template #icon>
               <u-ant-icon name="PoweroffOutlined" />
             </template>
@@ -22,7 +22,7 @@
         </a-space>
       </div>
       <!-- 主体 -->
-      <div class="relative flex-grow w-full h-0 bg-gray-200 overflow-x-scroll overflow-y-auto">
+      <div class="relative flex-grow w-full h-0 bg-gray-100 overflow-x-scroll overflow-y-auto">
         <div class="w-full h-full p-24 overflow-y-auto" :style="`min-width:${minWidth};`">
           <router-view />
         </div>
