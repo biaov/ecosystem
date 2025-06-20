@@ -30,10 +30,10 @@
     </div>
   </div>
   <!-- 修改密码 -->
-  <a-modal v-model:open="pwdOpen" title="修改密码" @ok="handleSubmit">
+  <a-modal v-model:open="pwdOpen" title="修改密码"  @ok="handleSubmit">
     <a-form>
       <a-form-item label="原始密码" required>
-        <a-input v-model:value.trim="formState.opassword" placeholder="请输入原始密码" />
+        <a-input-password v-model:value.trim="formState.opassword" placeholder="请输入原始密码" />
       </a-form-item>
       <a-form-item label="新设密码" required>
         <a-input-password v-model:value.trime="formState.password" placeholder="请输入新设密码" />

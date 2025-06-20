@@ -81,7 +81,7 @@ export const useFormState = <T extends Record<string, unknown> = {}>(initFormSta
    */
   const resetFormState = () => {
     formState.value = structuredClone(initFormState ?? {}) as T
-    initData()
+    initData && initData()
   }
 
   return { formState, setFormState, setFormRules, validFormState, onRestFormState, resetFormState }

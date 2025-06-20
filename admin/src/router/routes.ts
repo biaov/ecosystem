@@ -1,14 +1,141 @@
 import type { RouteRecordRaw } from 'vue-router'
-
 export const menuRoutes: RouteRecordRaw[] = [
   {
     path: 'dashboard',
     name: 'dashboard',
     meta: {
-      title: '仪表盘',
+      title: '仪表面板',
       antIcon: 'DashboardOutlined'
     },
     component: () => import(`@/views/dashboard/index.vue`)
+  },
+  {
+    path: 'goods',
+    redirect: {
+      name: 'goods-list'
+    },
+    meta: {
+      title: '商品管理',
+      antIcon: 'ShoppingOutlined'
+    },
+    children: [
+      {
+        path: 'list',
+        name: 'goods-list',
+        meta: {
+          title: '全部商品'
+        },
+        component: () => import('@/views/goods/list.vue')
+      },
+      {
+        path: 'category',
+        name: 'goods-category',
+        meta: {
+          title: '商品分类'
+        },
+        component: () => import('@/views/goods/category.vue')
+      }
+    ]
+  },
+  {
+    path: 'gift',
+    redirect: {
+      name: 'gift-list'
+    },
+    meta: {
+      title: '礼品管理',
+      antIcon: 'SlackOutlined'
+    },
+    children: [
+      {
+        path: 'list',
+        name: 'gift-list',
+        meta: {
+          title: '全部礼品'
+        },
+        component: () => import('@/views/gift/list.vue')
+      },
+      {
+        path: 'category',
+        name: 'gift-category',
+        meta: {
+          title: '商品分类'
+        },
+        component: () => import('@/views/gift/category.vue')
+      },
+      {
+        path: 'shopping',
+        name: 'gift-shopping',
+        meta: {
+          title: '积分商城'
+        },
+        component: () => import('@/views/gift/shopping.vue')
+      }
+    ]
+  },
+  {
+    path: 'order',
+    redirect: {
+      name: 'order-buy'
+    },
+    meta: {
+      title: '订单管理',
+      antIcon: 'OrderedListOutlined'
+    },
+    children: [
+      {
+        path: 'list',
+        name: 'order-list',
+        meta: {
+          title: '购物订单'
+        },
+        component: () => import('@/views/order/list.vue')
+      },
+      {
+        path: 'credit',
+        name: 'order-credit',
+        meta: {
+          title: '积分订单'
+        },
+        component: () => import('@/views/order/credit.vue')
+      }
+    ]
+  },
+  {
+    path: 'promotion',
+    redirect: {
+      name: 'promotion-coupon'
+    },
+    meta: {
+      title: '促销活动',
+      antIcon: 'BgColorsOutlined'
+    },
+    children: [
+      {
+        path: 'coupon',
+        name: 'promotion-coupon',
+        meta: {
+          title: '优惠券'
+        },
+        component: () => import('@/views/promotion/coupon.vue')
+      },
+      {
+        path: '',
+        name: 'promotion-activity-coupon',
+        meta: {
+          title: '活动发券'
+        },
+        component: () => import('@/views/promotion/activity-coupon.vue')
+      },
+      {
+        path: 'order',
+        name: 'promotion-distribute-coupon',
+        meta: {
+          title: '手动发券'
+        },
+        component: () => import('@/views/promotion/distribute-coupon.vue')
+      }
+    ]
   },
   {
     path: 'user',
@@ -102,42 +229,7 @@ export const menuRoutes: RouteRecordRaw[] = [
       }
     ]
   },
-  {
-    path: 'promotion',
-    redirect: {
-      name: 'promotion-coupon'
-    },
-    meta: {
-      title: '促销活动',
-      antIcon: 'SlackOutlined' // BgColorsOutlined
-    },
-    children: [
-      {
-        path: 'coupon',
-        name: 'promotion-coupon',
-        meta: {
-          title: '优惠券'
-        },
-        component: () => import('@/views/promotion/coupon.vue')
-      },
-      {
-        path: '',
-        name: 'promotion-activity-coupon',
-        meta: {
-          title: '活动发券'
-        },
-        component: () => import('@/views/promotion/activity-coupon.vue')
-      },
-      {
-        path: 'order',
-        name: 'promotion-distribute-coupon',
-        meta: {
-          title: '手动发券'
-        },
-        component: () => import('@/views/promotion/distribute-coupon.vue')
-      }
-    ]
-  },
+
   {
     path: 'setting',
     redirect: {

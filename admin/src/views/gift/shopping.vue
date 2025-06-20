@@ -1,0 +1,43 @@
+<template>
+  <c-layout-list title="菜单管理">
+    <template #filter>
+      <a-form-item>
+        <a-input v-model:value.trim="formState.name" placeholder="标题" />
+      </a-form-item>
+      <a-form-item>
+        <a-range-picker v-model:value="formState.createdAt" show-time />
+      </a-form-item>
+      <a-form-item>
+        <a-button type="primary" @click="setPage">查询</a-button>
+        <a-button @click="resetFormState">重置</a-button>
+      </a-form-item>
+    </template>
+    <template #extra></template>
+    <template #list>
+      <a-table :data-source="data.items" row-key="id" :loading="loading" :pagination="$formatter.pagination(data)" @change="setPage">
+        <a-table-column title="标题" data-index="title" ellipsis />
+      </a-table>
+    </template>
+  </c-layout-list>
+</template>
+<script lang="ts" setup>
+import { operationApi } from '@/api/log'
+
+const { formState, onRestFormState, resetFormState } = useFormState({
+  name: undefined,
+  createdAt: []
+})
+
+const { data, setPage, loading } = usePagingApiRequest(({ current, pageSize }) =>
+  operationApi.paging({
+    ...useTransformQuery(formState, {
+      name: 'like',
+      createdAt: 'range'
+    }),
+    current,
+    pageSize
+  })
+)
+
+onRestFormState(setPage)
+</script>

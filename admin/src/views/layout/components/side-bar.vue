@@ -4,8 +4,8 @@
     <router-link to="/" class="flex justify-center items-center h-80" title="回到首页">
       <img src="/logo.svg" class="w-40" />
     </router-link>
-    <div class="flex-grow h-0">
-      <a-menu v-model:selected-keys="menuState.selectedKeys" v-model:open-keys="menuState.openKeys" :items="items" theme="white" mode="inline" :inline-collapsed="isCollapsed" />
+    <div class="flex-grow h-0 overflow-auto">
+      <a-menu v-model:selected-keys="menuState.selectedKeys" v-model:open-keys="menuState.openKeys" :items="items" mode="inline" :inline-collapsed="isCollapsed" />
     </div>
     <div class="p-24">
       <a-button type="link" @click="onCollapsed">
@@ -18,7 +18,7 @@
 </template>
 <script lang="ts" setup>
 import { createVNode } from 'vue'
-import type { RouteRecordRaw } from 'vue-router'
+import type { RouteRecordRaw, RouteLocationNormalizedLoadedGeneric } from 'vue-router'
 import { menuRoutes } from '@/router/routes'
 import UAntIcon from '@/components/u-ant-icon.vue'
 
@@ -70,7 +70,29 @@ const onCollapsed = () => {
 
 // 只展开当前菜单
 const menuState = reactive({
-  openKeys: [],
-  selectedKeys: []
+  openKeys: [] as string[],
+  selectedKeys: [] as string[]
 })
+
+const getKey = (list: typeof items, name: string) =>
+  list.some(item => {
+    if (!item) return
+    if (item.key === name) {
+      menuState.selectedKeys = [name]
+      return true
+    } else if (item.children?.length) {
+      const child = getKey(item.children as typeof items, name)
+      if (!child) return
+      menuState.openKeys = [item.key]
+      return true
+    }
+  })
+
+const handleRoute = ({ name }: RouteLocationNormalizedLoadedGeneric) => {
+  if (!name) return
+  getKey(items, name as string)
+}
+
+handleRoute(useRoute())
+onBeforeRouteUpdate(handleRoute)
 </script>
