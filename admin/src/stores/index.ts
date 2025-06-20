@@ -17,9 +17,8 @@ const state = reactive({
   userInfo: getStorage('userInfo') as UserInfo | null
 })
 
-const router = useRouter()
-
 export const useStore = () => {
+  const router = useRouter()
   /**
    * 登录
    */
