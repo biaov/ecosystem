@@ -6,13 +6,13 @@ export class LogService {
   @InjectRepository(LogModel)
   private logRepository: Repository<LogModel>
 
-  migration(page: PageOption, name?: string, createdAt?: string) {
+  async migration(page: PageOption, name?: string, createdAt?: string) {
     const where = {
       name,
-      createdAt: createdAt as unknown as Date,
-      ...page
+      createdAt: createdAt as unknown as Date
     }
-    return this.migrationRepository.findAndCountBy(where)
+    const [items, total] = await this.migrationRepository.findAndCount({ where, ...page })
+    return { items, total }
   }
   operation(page: PageOption, name?: string, createdAt?: string) {
     const where = {
@@ -20,6 +20,7 @@ export class LogService {
       createdAt: createdAt as unknown as Date,
       ...page
     }
+    console.log(where)
     return this.logRepository.findAndCountBy(where)
   }
 }

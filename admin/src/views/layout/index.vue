@@ -11,12 +11,12 @@
           <span class="user-name text-[#333]">欢迎您，{{ adminName }}游客</span>
           <a-button type="text" title="修改密码" @click="onEditPwd">
             <template #icon>
-              <u-ant-icon name="LockOutlined" />
+              <c-ant-icon name="LockOutlined" />
             </template>
           </a-button>
           <a-button type="text" title="退出登录" @click="logout">
             <template #icon>
-              <u-ant-icon name="PoweroffOutlined" />
+              <c-ant-icon name="PoweroffOutlined" />
             </template>
           </a-button>
         </a-space>
@@ -30,7 +30,7 @@
     </div>
   </div>
   <!-- 修改密码 -->
-  <a-modal v-model:open="pwdOpen" title="修改密码"  @ok="handleSubmit">
+  <a-modal v-model:open="pwdOpen" title="修改密码" @ok="handleSubmit">
     <a-form>
       <a-form-item label="原始密码" required>
         <a-input-password v-model:value.trim="formState.opassword" placeholder="请输入原始密码" />

@@ -10,7 +10,7 @@
     <div class="p-24">
       <a-button type="link" @click="onCollapsed">
         <template #icon>
-          <u-ant-icon :name="isCollapsed ? 'MenuUnfoldOutlined' : 'MenuFoldOutlined'" type="primary" class="text-xl" />
+          <c-ant-icon :name="isCollapsed ? 'MenuUnfoldOutlined' : 'MenuFoldOutlined'" type="primary" class="text-xl" />
         </template>
       </a-button>
     </div>
@@ -20,7 +20,7 @@
 import { createVNode } from 'vue'
 import type { RouteRecordRaw, RouteLocationNormalizedLoadedGeneric } from 'vue-router'
 import { menuRoutes } from '@/router/routes'
-import UAntIcon from '@/components/u-ant-icon.vue'
+import UAntIcon from '@/components/c-ant-icon.vue'
 
 const props = defineProps({
   // 收缩状态

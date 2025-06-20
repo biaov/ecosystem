@@ -40,7 +40,7 @@ export const useTransformQuery = (query: Record<string, any> | Ref<Record<string
           value = `${value}`
           break
         case 'range':
-          value = (value[0] ? `>=${value[0]} ` : '') + (value[1] ? `<=${value[1]}` : '')
+          value = !value.length ? undefined : `${value[0] ? `>=${value[0]} ` : ''} ${value[1] ? `<=${value[1]}` : ''}`
           break
         default:
           if (operators.indexOf(transfomer) >= 0) {

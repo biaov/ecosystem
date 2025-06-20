@@ -1,7 +1,5 @@
 import type { Relation } from 'typeorm'
 
-const separator = '-biaov-'
-
 @Entity('user')
 export class UserModel extends BaseModel {
   @Column({ length: 32, comment: '用户名' })
@@ -34,8 +32,8 @@ export class UserRoleModel extends BaseModel {
   @Column({ length: 64, comment: '状态码', unique: true })
   code: string
 
-  @OneToMany(() => UserPermissionModel, user => user.userRole, { cascade: true })
-  permissions: Relation<UserPermissionModel>
+  @OneToMany(() => UserPermissionModel, userPermission => userPermission.userRole, { cascade: true })
+  permissions: Relation<UserPermissionModel[]>
 }
 
 @Entity('user_detail')

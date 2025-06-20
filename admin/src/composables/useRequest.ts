@@ -77,7 +77,7 @@ export const usePagingApiRequest = <T = unknown>(request: (value: Page) => Promi
     page,
     refresh,
     setPage: ({ current, pageSize } = initalPage) => {
-      page.value = { current, pageSize }
+      page.value = { current: current || initalPage.current, pageSize: pageSize || initalPage.pageSize }
       getData(page.value)
     }
   }

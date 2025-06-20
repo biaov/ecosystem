@@ -9,7 +9,7 @@
           <a-tab-pane :key="0">
             <template #tab>
               <span>
-                <u-ant-icon name="UserSwitchOutlined" />
+                <c-ant-icon name="UserSwitchOutlined" />
                 账号登录
               </span>
             </template>
@@ -23,7 +23,7 @@
           <a-tab-pane :key="1">
             <template #tab>
               <span>
-                <u-ant-icon name="MobileOutlined" />
+                <c-ant-icon name="MobileOutlined" />
                 手机号登录
               </span>
             </template>

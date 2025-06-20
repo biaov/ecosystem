@@ -8,12 +8,15 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    CAntIcon: typeof import('./../src/components/c-ant-icon.vue')['default']
     CCaptcha: typeof import('./../src/components/c-captcha.vue')['default']
+    CLayoutForm: typeof import('./../src/components/c-layout-form.vue')['default']
+    CLayoutList: typeof import('./../src/components/c-layout-list.vue')['default']
     CSms: typeof import('./../src/components/c-sms.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    UAntIcon: typeof import('./../src/components/u-ant-icon.vue')['default']
-    ULayoutForm: typeof import('./../src/components/u-layout-form.vue')['default']
-    ULayoutList: typeof import('./../src/components/u-layout-list.vue')['default']
+    UAntIcon: typeof import('../src/components/c-ant-icon.vue')['default']
+    ULayoutForm: typeof import('../src/components/c-layout-form.vue')['default']
+    ULayoutList: typeof import('../src/components/c-layout-list.vue')['default']
   }
 }
