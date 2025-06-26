@@ -6,6 +6,7 @@
 // biome-ignore lint: disable
 export {}
 declare global {
+  const APP_INTERCEPTOR: typeof import('@nestjs/core')['APP_INTERCEPTOR']
   const AfterInsert: typeof import('typeorm')['AfterInsert']
   const AfterUpdate: typeof import('typeorm')['AfterUpdate']
   const ArrayNotEmpty: typeof import('class-validator')['ArrayNotEmpty']
@@ -15,12 +16,14 @@ declare global {
   const BaseModel: typeof import('../src/common/base.model')['BaseModel']
   const BeforeInsert: typeof import('typeorm')['BeforeInsert']
   const BeforeUpdate: typeof import('typeorm')['BeforeUpdate']
+  const Between: typeof import('typeorm')['Between']
   const BizException: typeof import('../src/exceptions/biz')['BizException']
   const Body: typeof import('@nestjs/common')['Body']
   const CaptchaEnum: typeof import('../src/enums/index')['CaptchaEnum']
   const Column: typeof import('typeorm')['Column']
   const Controller: typeof import('@nestjs/common')['Controller']
   const CreateDateColumn: typeof import('typeorm')['CreateDateColumn']
+  const CustomRoute: typeof import('../src/common/base.decorator')['CustomRoute']
   const DefaultRoleCodeEnum: typeof import('../src/enums/index')['DefaultRoleCodeEnum']
   const Delete: typeof import('@nestjs/common')['Delete']
   const DrawImg: typeof import('../src/utils/draw')['DrawImg']
@@ -34,14 +37,17 @@ declare global {
   const IsArray: typeof import('class-validator')['IsArray']
   const IsNotEmpty: typeof import('class-validator')['IsNotEmpty']
   const IsNumber: typeof import('class-validator')['IsNumber']
+  const IsOptional: typeof import('class-validator')['IsOptional']
   const IsString: typeof import('class-validator')['IsString']
   const JoinColumn: typeof import('typeorm')['JoinColumn']
+  const Like: typeof import('typeorm')['Like']
   const LogModel: typeof import('../src/models/log')['LogModel']
   const ManyToOne: typeof import('typeorm')['ManyToOne']
   const MaxLength: typeof import('class-validator')['MaxLength']
   const MigrationsModel: typeof import('../src/models/log')['MigrationsModel']
   const MinLength: typeof import('class-validator')['MinLength']
   const Module: typeof import('@nestjs/common')['Module']
+  const NestFactory: typeof import('@nestjs/core')['NestFactory']
   const OneToMany: typeof import('typeorm')['OneToMany']
   const OneToOne: typeof import('typeorm')['OneToOne']
   const PagingDot: typeof import('../src/common/paging.dot')['PagingDot']
@@ -50,8 +56,10 @@ declare global {
   const PrimaryGeneratedColumn: typeof import('typeorm')['PrimaryGeneratedColumn']
   const Put: typeof import('@nestjs/common')['Put']
   const Query: typeof import('@nestjs/common')['Query']
+  const RouterModule: typeof import('@nestjs/core')['RouterModule']
   const Type: typeof import('class-transformer')['Type']
   const TypeOrmModule: typeof import('@nestjs/typeorm')['TypeOrmModule']
+  const UnprocessableEntityException: typeof import('@nestjs/common')['UnprocessableEntityException']
   const UpdateDateColumn: typeof import('typeorm')['UpdateDateColumn']
   const UseGuards: typeof import('@nestjs/common')['UseGuards']
   const UserAdminModel: typeof import('../src/models/user')['UserAdminModel']
@@ -60,10 +68,13 @@ declare global {
   const UserPermissionModel: typeof import('../src/models/user')['UserPermissionModel']
   const UserRoleModel: typeof import('../src/models/user')['UserRoleModel']
   const ValidateNested: typeof import('class-validator')['ValidateNested']
+  const ValidationPipe: typeof import('@nestjs/common')['ValidationPipe']
   const aesDecrypt: typeof import('../src/utils/crypto')['aesDecrypt']
   const aesEncrypt: typeof import('../src/utils/crypto')['aesEncrypt']
   const database: typeof import('../src/config/database')['default']
   const databaseOptions: typeof import('../src/config/database')['databaseOptions']
+  const dayjs: typeof import('dayjs')['default']
+  const findAndCount: typeof import('../src/utils/utils')['findAndCount']
   const getPageQuery: typeof import('../src/utils/utils')['getPageQuery']
   const getRedisKey: typeof import('../src/utils/utils')['getRedisKey']
   const initPage: typeof import('../src/config/index')['initPage']
@@ -72,12 +83,13 @@ declare global {
   const md5: typeof import('../src/utils/crypto')['md5']
   const random: typeof import('../src/utils/utils')['random']
   const randomId: typeof import('../src/utils/utils')['randomId']
+  const useTransfrormQuery: typeof import('../src/utils/utils')['useTransfrormQuery']
   const validator: typeof import('../src/utils/validator')['validator']
 }
 // for type re-export
 declare global {
   // @ts-ignore
-  export type { Repository } from 'typeorm'
+  export type { Repository, FindOperator } from 'typeorm'
   import('typeorm')
   // @ts-ignore
   export type { Redis } from 'ioredis'

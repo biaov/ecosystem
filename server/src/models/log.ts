@@ -6,7 +6,7 @@ export class MigrationsModel extends BaseModel {
 
 @Entity('log')
 export class LogModel extends BaseModel {
-  @Column({ length: 32, comment: '昵称' })
+  @Column({ length: 32, comment: '操作人' })
   nickname: string
 
   @Column({ length: 32, comment: '操作模块' })

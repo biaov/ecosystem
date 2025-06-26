@@ -45,11 +45,16 @@ export const useToastRequest = async <T = unknown>(promise: () => Promise<T>, re
 /**
  * 分页请求
  */
-export const usePagingApiRequest = <T = unknown>(request: (value: Page) => Promise<unknown>, initalPage = { current: 1, pageSize: 10 }, calledOnMounted = true, showLoading = false) => {
+export const usePagingApiRequest = <T extends Record<string, any> = {}>(
+  request: (value: Page) => Promise<unknown>,
+  initalPage = { current: 1, pageSize: 10 },
+  calledOnMounted = true,
+  showLoading = false
+) => {
   const loading = ref(false)
   const page = ref({ ...initalPage })
 
-  const data = ref<PageDataType<T>>({ items: [], total: 0 })
+  const data = ref<PageDataType<T>>({ items: [] as T[], total: 0, current: initalPage.current, pageSize: initalPage.pageSize })
 
   const getData = async (curPage = initalPage) => {
     if (curPage.pageSize != page.value.pageSize || curPage.current != page.value.current) {

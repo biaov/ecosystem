@@ -1,8 +1,13 @@
 /**
  * 分页器
  */
-export abstract class PagingDot {
-  current?: number
+abstract class PagingDot {
+  @IsOptional()
+  @IsString()
+  current: string
 
-  pageSize?: number
+  @IsOptional()
+  @IsString()
+  pageSize: string
 }
+export { PagingDot }

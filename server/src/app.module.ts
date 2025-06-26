@@ -1,12 +1,9 @@
-import { APP_INTERCEPTOR } from '@nestjs/core'
 import { TransformResponseInterceptor } from '@/http.interceptor'
 import { RedisCacheModule } from '@/redis.module'
+import { PcModule } from '@/platform/pc/route.module'
 
-const modulesSync = import.meta.glob('@/modules/**/*.module.ts', { eager: true }) as Record<string, Record<string, new () => unknown>>
-
-const modules = Object.values(modulesSync)
-  .map(module => Object.values(module))
-  .flat()
+const moduleSync = import.meta.glob('@/platform/**/*.module.ts', { eager: true }) as Record<string, Record<string, new () => void>>
+const modules = Object.values(moduleSync).map(value => Object.values(value)[0])
 
 /**
  * 是否同步数据库
@@ -15,12 +12,12 @@ const isSyns = import.meta.env.VITE_DB_SYNC === 'true'
 
 @Module({
   imports: [
+    ...modules,
     TypeOrmModule.forRoot({
       ...databaseOptions,
       autoLoadEntities: true,
       synchronize: isSyns
     }),
-    ...modules,
     RedisCacheModule
   ],
   providers: [

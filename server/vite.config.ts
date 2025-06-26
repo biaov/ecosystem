@@ -20,7 +20,17 @@ export default defineConfig({
     autoImport({
       include: /\.ts$/,
       imports,
-      dirs: ['./src/exceptions', './src/models', './src/utils', './src/enums', './src/config'],
+      dirs: [
+        './src/exceptions',
+        './src/models',
+        './src/utils',
+        './src/enums',
+        './src/config',
+        {
+          glob: './src/common/*.ts',
+          types: false
+        }
+      ],
       dts: './typings/auto-imports.d.ts',
       eslintrc: { enabled: true, filepath: './typings/.eslintrc-auto-import.json', globalsPropValue: true }
     }),

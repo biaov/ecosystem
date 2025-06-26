@@ -7,7 +7,29 @@ const getPath = path => resolve(import.meta.dirname, path).replace(/\\/g, '/')
 
 export default [
   {
-    '@nestjs/common': ['Injectable', 'Module', 'Controller', 'Post', 'Get', 'Put', 'Delete', 'Param', 'Query', 'Body', 'UseGuards', 'HttpException', 'HttpStatus']
+    '@nestjs/core': ['APP_INTERCEPTOR', 'RouterModule', 'NestFactory']
+  },
+  {
+    dayjs: [['default', 'dayjs']]
+  },
+  {
+    '@nestjs/common': [
+      'Injectable',
+      'Module',
+      'Controller',
+      'Post',
+      'Get',
+      'Put',
+      'Delete',
+      'Param',
+      'Query',
+      'Body',
+      'UseGuards',
+      'HttpException',
+      'HttpStatus',
+      'ValidationPipe',
+      'UnprocessableEntityException'
+    ]
   },
   {
     '@nestjs/typeorm': ['InjectRepository', 'TypeOrmModule']
@@ -27,19 +49,21 @@ export default [
       'BeforeInsert',
       'BeforeUpdate',
       'AfterInsert',
-      'AfterUpdate'
+      'AfterUpdate',
+      'Like',
+      'Between'
     ]
   },
   {
     from: 'typeorm',
-    imports: ['Repository'],
+    imports: ['Repository', 'FindOperator'],
     type: true
   },
   {
     'class-transformer': ['Type']
   },
   {
-    'class-validator': ['isEmpty', 'IsString', 'MaxLength', 'MinLength', 'IsNotEmpty', 'IsArray', 'ArrayNotEmpty', 'ValidateNested', 'IsNumber']
+    'class-validator': ['isEmpty', 'IsString', 'MaxLength', 'MinLength', 'IsNotEmpty', 'IsArray', 'ArrayNotEmpty', 'ValidateNested', 'IsNumber', 'IsOptional']
   },
   {
     '@nestjs-modules/ioredis': ['InjectRedis']
@@ -53,17 +77,7 @@ export default [
     jsonwebtoken: [['default', 'jwt']]
   },
   {
-    from: getPath('./src/common/base.model.ts'),
-    imports: ['BaseModel'],
-    type: false
-  },
-  {
-    from: getPath('./src/common/paging.dot.ts'),
-    imports: ['PagingDot'],
-    type: false
-  },
-  {
-    from: getPath('./src/modules/common/token.service.ts'),
+    from: getPath('./src/platform/common/token/token.service.ts'),
     imports: ['AuthGuard', 'AuthGuardAdmin'],
     type: false
   }

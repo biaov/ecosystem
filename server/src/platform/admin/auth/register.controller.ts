@@ -1,4 +1,4 @@
-import { CaptchaService } from '@/modules/common/captcha.service'
+import { CaptchaService } from '@/platform/common/captcha/captcha.service'
 import { RegisterService } from './register.service'
 import { RegisterDto } from './auto.dto'
 

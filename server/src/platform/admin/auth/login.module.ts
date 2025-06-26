@@ -1,7 +1,7 @@
-import { CaptchaService } from '@/modules/common/captcha.service'
+import { CaptchaService } from '@/platform/common/captcha/captcha.service'
 import { LoginController } from './login.controller'
 import { LoginService } from './login.service'
-import { TokenService } from '../common/token.service'
+import { TokenService } from '../../common/token/token.service'
 
 @Module({
   imports: [TypeOrmModule.forFeature([UserModel, UserDetailModel, UserAdminModel, UserRoleModel])],

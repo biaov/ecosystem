@@ -8,13 +8,13 @@
         <a-tabs v-model:activeKey="activeKey" centered>
           <a-tab-pane :key="0">
             <template #tab>
-              <span>
+              <div class="flex items-center">
                 <c-ant-icon name="UserSwitchOutlined" />
                 账号登录
-              </span>
+              </div>
             </template>
             <a-form-item>
-              <a-input v-model:value="formState.username" placeholder="请输入账号" />
+              <a-input v-model:value="formState.username" placeholder="请输入账号/手机号" />
             </a-form-item>
             <a-form-item>
               <a-input-password v-model:value="formState.password" placeholder="请输入密码" />
@@ -22,10 +22,10 @@
           </a-tab-pane>
           <a-tab-pane :key="1">
             <template #tab>
-              <span>
+              <div class="flex items-center">
                 <c-ant-icon name="MobileOutlined" />
                 手机号登录
-              </span>
+              </div>
             </template>
             <a-form-item>
               <a-input v-model:value="formState.username" placeholder="请输入账号" />

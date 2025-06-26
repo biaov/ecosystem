@@ -10,4 +10,6 @@ interface TokenValue {
 interface PageOption {
   skip: number
   take: number
+  current: number
+  pageSize: number
 }

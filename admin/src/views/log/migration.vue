@@ -15,7 +15,10 @@
     <template #extra></template>
     <template #list>
       <a-table :data-source="data.items" row-key="id" :loading="loading" :pagination="$formatter.pagination(data)" @change="setPage">
-        <a-table-column title="标题" data-index="title" ellipsis />
+        <a-table-column title="模块" data-index="module" />
+        <a-table-column title="IP" data-index="ip" />
+        <a-table-column title="操作内容" data-index="content" ellipsis />
+        <a-table-column title="操作人" data-index="nickname" />
       </a-table>
     </template>
   </c-layout-list>

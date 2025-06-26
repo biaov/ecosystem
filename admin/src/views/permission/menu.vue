@@ -21,7 +21,7 @@
   </c-layout-list>
 </template>
 <script lang="ts" setup>
-import { operationApi } from '@/api/log'
+import { permissionApi } from '@/api/permission'
 
 const { formState, onRestFormState, resetFormState } = useFormState({
   name: undefined,
@@ -29,7 +29,7 @@ const { formState, onRestFormState, resetFormState } = useFormState({
 })
 
 const { data, setPage, loading } = usePagingApiRequest(({ current, pageSize }) =>
-  operationApi.paging({
+  permissionApi.paging({
     ...useTransformQuery(formState, {
       name: 'like',
       createdAt: 'range'

@@ -63,7 +63,7 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   response => {
     removePendingAjax(response.config)
-    return response.data
+    return response.data.data
   },
   ({ response, message: msg }) => {
     if (msg === cacelKey) return Promise.reject(msg)

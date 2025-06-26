@@ -1,5 +1,5 @@
-import { TokenService } from '@/modules/common/token.service'
-import { CaptchaService } from '@/modules/common/captcha.service'
+import { TokenService } from '@/platform/common/token/token.service'
+import { CaptchaService } from '@/platform/common/captcha/captcha.service'
 import { LoginService } from './login.service'
 import { LoginDto, MobileLoginDto } from './auto.dto'
 
