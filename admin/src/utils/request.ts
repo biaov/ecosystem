@@ -1,5 +1,4 @@
 import axios, { AxiosRequestConfig, Canceler } from 'axios'
-import { message } from 'ant-design-vue'
 
 /**
  * 等待请求

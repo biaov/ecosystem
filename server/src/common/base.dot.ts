@@ -10,4 +10,5 @@ abstract class PagingDot {
   @IsString()
   pageSize: string
 }
+
 export { PagingDot }

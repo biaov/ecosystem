@@ -10,8 +10,8 @@ declare global {
   const AfterInsert: typeof import('typeorm')['AfterInsert']
   const AfterUpdate: typeof import('typeorm')['AfterUpdate']
   const ArrayNotEmpty: typeof import('class-validator')['ArrayNotEmpty']
-  const AuthGuard: typeof import('../src/modules/common/token.service')['AuthGuard']
-  const AuthGuardAdmin: typeof import('../src/modules/common/token.service')['AuthGuardAdmin']
+  const AuthGuard: typeof import('../src/platform/common/token/token.service')['AuthGuard']
+  const AuthGuardAdmin: typeof import('../src/platform/common/token/token.service')['AuthGuardAdmin']
   const BaseEntity: typeof import('typeorm')['BaseEntity']
   const BaseModel: typeof import('../src/common/base.model')['BaseModel']
   const BeforeInsert: typeof import('typeorm')['BeforeInsert']
@@ -20,7 +20,9 @@ declare global {
   const BizException: typeof import('../src/exceptions/biz')['BizException']
   const Body: typeof import('@nestjs/common')['Body']
   const CaptchaEnum: typeof import('../src/enums/index')['CaptchaEnum']
+  const CaptchaModule: typeof import('../src/platform/common/captcha/captcha.module')['CaptchaModule']
   const Column: typeof import('typeorm')['Column']
+  const CommonModule: typeof import('../src/platform/common/route.module')['CommonModule']
   const Controller: typeof import('@nestjs/common')['Controller']
   const CreateDateColumn: typeof import('typeorm')['CreateDateColumn']
   const CustomRoute: typeof import('../src/common/base.decorator')['CustomRoute']
@@ -44,19 +46,22 @@ declare global {
   const LogModel: typeof import('../src/models/log')['LogModel']
   const ManyToOne: typeof import('typeorm')['ManyToOne']
   const MaxLength: typeof import('class-validator')['MaxLength']
+  const MenuModel: typeof import('../src/models/menu')['MenuModel']
   const MigrationsModel: typeof import('../src/models/log')['MigrationsModel']
   const MinLength: typeof import('class-validator')['MinLength']
   const Module: typeof import('@nestjs/common')['Module']
   const NestFactory: typeof import('@nestjs/core')['NestFactory']
   const OneToMany: typeof import('typeorm')['OneToMany']
   const OneToOne: typeof import('typeorm')['OneToOne']
-  const PagingDot: typeof import('../src/common/paging.dot')['PagingDot']
+  const PagingDot: typeof import('../src/common/base.dot')['PagingDot']
   const Param: typeof import('@nestjs/common')['Param']
+  const Patch: typeof import('@nestjs/common')['Patch']
   const Post: typeof import('@nestjs/common')['Post']
   const PrimaryGeneratedColumn: typeof import('typeorm')['PrimaryGeneratedColumn']
   const Put: typeof import('@nestjs/common')['Put']
   const Query: typeof import('@nestjs/common')['Query']
   const RouterModule: typeof import('@nestjs/core')['RouterModule']
+  const TokenModule: typeof import('../src/platform/common/token/token.module')['TokenModule']
   const Type: typeof import('class-transformer')['Type']
   const TypeOrmModule: typeof import('@nestjs/typeorm')['TypeOrmModule']
   const UnprocessableEntityException: typeof import('@nestjs/common')['UnprocessableEntityException']
@@ -101,6 +106,9 @@ declare global {
   export type { MigrationsModel, LogModel } from '../src/models/log'
   import('../src/models/log')
   // @ts-ignore
+  export type { MenuModel } from '../src/models/menu'
+  import('../src/models/menu')
+  // @ts-ignore
   export type { UserModel, UserAdminModel, UserRoleModel, UserDetailModel, UserPermissionModel } from '../src/models/user'
   import('../src/models/user')
   // @ts-ignore
@@ -109,4 +117,13 @@ declare global {
   // @ts-ignore
   export type { CaptchaEnum, DefaultRoleCodeEnum } from '../src/enums/index'
   import('../src/enums/index')
+  // @ts-ignore
+  export type { CaptchaModule } from '../src/platform/common/captcha/captcha.module'
+  import('../src/platform/common/captcha/captcha.module')
+  // @ts-ignore
+  export type { CommonModule } from '../src/platform/common/route.module'
+  import('../src/platform/common/route.module')
+  // @ts-ignore
+  export type { TokenModule } from '../src/platform/common/token/token.module'
+  import('../src/platform/common/token/token.module')
 }

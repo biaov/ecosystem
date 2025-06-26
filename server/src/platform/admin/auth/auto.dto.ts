@@ -13,6 +13,10 @@ export class LoginDto {
   @IsString({ message: '密码必须是字符串' })
   @IsNotEmpty({ message: '密码不能为空' })
   password: string
+
+  @IsString()
+  @IsNotEmpty()
+  type: string
 }
 
 class Code {
@@ -37,6 +41,10 @@ export class MobileLoginDto {
   @Type(() => Code)
   @IsNotEmpty({ message: 'code 必传' })
   code: Code
+
+  @IsString()
+  @IsNotEmpty()
+  type: string
 }
 
 /**

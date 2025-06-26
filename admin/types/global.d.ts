@@ -19,3 +19,7 @@ interface PageDataType<T = Record<string, unknown>> {
   current: number
   pageSize: number
 }
+
+interface TableDataType {
+  id: number
+}

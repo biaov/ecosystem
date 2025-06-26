@@ -19,6 +19,7 @@ export default [
       'Controller',
       'Post',
       'Get',
+      'Patch',
       'Put',
       'Delete',
       'Param',
@@ -79,6 +80,11 @@ export default [
   {
     from: getPath('./src/platform/common/token/token.service.ts'),
     imports: ['AuthGuard', 'AuthGuardAdmin'],
+    type: false
+  },
+  {
+    from: getPath('./src/platform/common/token/token.module.ts'),
+    imports: ['TokenModule'],
     type: false
   }
 ]

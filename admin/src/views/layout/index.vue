@@ -45,7 +45,6 @@
   </a-modal>
 </template>
 <script setup lang="ts">
-import { message } from 'ant-design-vue'
 import { updatePasswordApi } from '@/api/user'
 import SideBar from './components/side-bar.vue'
 import BreadCrumb from './components/bread-crumb.vue'

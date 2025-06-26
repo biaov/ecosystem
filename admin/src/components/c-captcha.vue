@@ -21,10 +21,9 @@ const modelValue = defineModel({
 const statusCode = ref(-1)
 
 const { data, getData } = useApiRequest<Captcha.DataType>(
-  async () => {
+  () => {
     statusCode.value = -1
-    const res = await captchaApi.get()
-    return res.data
+    return captchaApi.get()
   },
   false,
   null
@@ -42,7 +41,7 @@ const onCheck = async (value: number[]) => {
       value
     })
     statusCode.value = 1
-    modelValue.value = res.data
+    modelValue.value = res
     emit('success')
   } catch (error) {
     statusCode.value = (error as ResponseError)?.data?.message?.includes('过期') ? 3 : 2

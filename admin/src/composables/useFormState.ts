@@ -1,4 +1,3 @@
-import { message } from 'ant-design-vue'
 import type { FormRule } from './types'
 
 /**

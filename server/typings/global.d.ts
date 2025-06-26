@@ -13,3 +13,8 @@ interface PageOption {
   current: number
   pageSize: number
 }
+
+class IdDto {
+  @IsNumber()
+  id: number
+}

@@ -44,8 +44,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { message } from 'ant-design-vue'
-import { loginApi, mobileLoginApi } from '@/api/auth'
+import { loginApi } from '@/api/auth'
 
 const router = useRouter()
 const store = useStore()
@@ -88,7 +87,9 @@ setFormRules({
  */
 const handleSubmit = async () => {
   if (!(await validFormState())) return
-  const userInfo = await (activeKey.value ? mobileLoginApi.post<UserInfo>(formState.value) : loginApi.post<UserInfo>(formState.value))
+  const param = { ...formState.value } as Record<string, any>
+  param.type = activeKey.value ? 'account' : 'mobile'
+  const userInfo = await (activeKey.value ? loginApi.post<UserInfo>(formState.value) : loginApi.post<UserInfo>(formState.value))
   message.success('登录成功')
   store.login(userInfo)
   router.push({ name: 'dashboard' })

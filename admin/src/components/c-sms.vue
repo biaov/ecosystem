@@ -9,17 +9,19 @@
   <c-captcha v-model:visible="showCaptcha" v-model="code" @success="onSuccess" />
 </template>
 <script lang="ts" setup>
-import { message } from 'ant-design-vue'
-
 const props = defineProps<{
   mobile?: string
 }>()
-const [showCaptcha, setShowCaptcha] = useState(false)
+const [showCaptcha, setShowCaptcha] = useState()
 const sms = ref('')
-const code = defineModel<{
-  id: string,
-  value: string
-} | undefined | null>()
+const code = defineModel<
+  | {
+      id: string
+      value: string
+    }
+  | undefined
+  | null
+>()
 
 const countTime = ref(0)
 let timer: NodeJS.Timeout

@@ -1,14 +1,9 @@
 /**
  * 登录
  */
-export const loginApi = useCommand('login/admin')
-
-/**
- * 手机号登录
- */
-export const mobileLoginApi = useCommand('login/admin-mobile')
+export const loginApi = useCommand('admin/login')
 
 /**
  * 注册
  */
-export const registerApi = useCommand('register/admin')
+export const registerApi = useCommand('admin/register')

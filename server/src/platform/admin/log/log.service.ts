@@ -25,10 +25,7 @@ export class LogService {
       ip: string
     }>
   ) {
-    const where: Record<string, string | string[] | FindOperator<string> | undefined> = useTransfrormQuery(
-      { nickname, module, content, createdAt, ip },
-      { nickname: 'like', content: 'like', createdAt: 'between' }
-    )
+    const where = useTransfrormQuery({ nickname, module, content, createdAt, ip }, { nickname: 'like', content: 'like', createdAt: 'between' })
     return findAndCount(this.logRepository.findAndCount({ where, skip, take }), { current, pageSize })
   }
 }

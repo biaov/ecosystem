@@ -1,7 +1,7 @@
 <template>
   <!-- 详情页基础组件 -->
   <div class="layout-form">
-    <a-form :label-col="layoutLabelCol" :wrapper-col="layoutWrapperCol">
+    <a-form v-bind="$config.cols">
       <a-space direction="vertical" :size="20">
         <slot></slot>
       </a-space>
@@ -17,11 +17,9 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { useLoading } from '@/composables/useToggles'
-
 const router = useRouter()
 const emit = defineEmits(['cancel', 'submit'])
-const { loading, setLoading } = useLoading()
+const [loading, setLoading] = useState()
 
 defineProps({
   submitText: {

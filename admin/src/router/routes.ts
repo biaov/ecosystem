@@ -181,7 +181,7 @@ export const menuRoutes: RouteRecordRaw[] = [
         meta: {
           title: '权限标识'
         },
-        component: () => import('@/views/permission/menu.vue')
+        component: () => import('@/views/permission/menu/list.vue')
       },
       {
         path: 'role',

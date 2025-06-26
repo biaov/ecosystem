@@ -23,6 +23,9 @@ export default defineConfig({
         'vue-router',
         {
           dayjs: [['default', 'dayjs']]
+        },
+        {
+          'ant-design-vue': ['message']
         }
       ],
       dirs: ['./src/composables', './src/stores', './src/enums'],

@@ -29,6 +29,10 @@ export default defineConfig({
         {
           glob: './src/common/*.ts',
           types: false
+        },
+        {
+          glob: './src/platform/common/**/*.module.ts',
+          types: false
         }
       ],
       dts: './typings/auto-imports.d.ts',

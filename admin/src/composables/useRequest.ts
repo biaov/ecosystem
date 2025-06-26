@@ -1,6 +1,5 @@
 import { service } from '@/utils/request'
 import { PagingResponse } from './types'
-import { message } from 'ant-design-vue'
 
 export const useRestful = (path: string) => ({
   paging: (query = {}) => service.get(path, { params: query }) as Promise<PagingResponse>,

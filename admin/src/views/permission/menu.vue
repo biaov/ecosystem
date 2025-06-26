@@ -1,27 +1,30 @@
 <template>
-  <c-layout-list title="菜单管理">
-    <template #filter>
-      <a-form-item>
-        <a-input v-model:value.trim="formState.name" placeholder="标题" />
-      </a-form-item>
-      <a-form-item>
-        <a-range-picker v-model:value="formState.createdAt" show-time />
-      </a-form-item>
-      <a-form-item>
-        <a-button type="primary" @click="setPage">查询</a-button>
-        <a-button @click="resetFormState">重置</a-button>
-      </a-form-item>
+  <c-layout-list title="权限标识">
+    <template #extra>
+      <a-button>新增</a-button>
     </template>
-    <template #extra></template>
     <template #list>
-      <a-table :data-source="data.items" row-key="id" :loading="loading" :pagination="$formatter.pagination(data)" @change="setPage">
-        <a-table-column title="标题" data-index="title" ellipsis />
+      <a-table :data-source="[{ children: [{}] }, { children: [{}] }]" row-key="id" :loading="loading" :pagination="$formatter.pagination(data)" @change="setPage">
+        <a-table-column title="权限名称" data-index="name" />
+        <a-table-column title="权限内容" data-index="content" />
+        <a-table-column title="更新时间" data-index="updatedAt" :width="180" />
+        <a-table-column title="操作" :width="200">
+          <template #="row">
+            {{ row }}
+            <a-space :size="0">
+              <a-button type="link" size="small">新增</a-button>
+              <a-button type="link" size="small">编辑</a-button>
+              <a-button type="link" size="small" danger>删除</a-button>
+            </a-space>
+          </template>
+        </a-table-column>
       </a-table>
     </template>
   </c-layout-list>
 </template>
 <script lang="ts" setup>
-import { permissionApi } from '@/api/permission'
+import { menuApi } from '@/api/permission'
+import { MenuTypeEnum } from './enums'
 
 const { formState, onRestFormState, resetFormState } = useFormState({
   name: undefined,
@@ -29,9 +32,8 @@ const { formState, onRestFormState, resetFormState } = useFormState({
 })
 
 const { data, setPage, loading } = usePagingApiRequest(({ current, pageSize }) =>
-  permissionApi.paging({
+  menuApi.paging({
     ...useTransformQuery(formState, {
-      name: 'like',
       createdAt: 'range'
     }),
     current,

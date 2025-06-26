@@ -16,5 +16,13 @@ export default {
     wrapperCol: {
       span: 21
     }
+  },
+  modalCols: {
+    labelCol: {
+      span: 5
+    },
+    wrapperCol: {
+      span: 19
+    }
   }
 }

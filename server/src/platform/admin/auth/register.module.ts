@@ -3,7 +3,7 @@ import { RegisterController } from './register.controller'
 import { RegisterService } from './register.service'
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UserModel, UserAdminModel])],
+  imports: [TypeOrmModule.forFeature([UserAdminModel])],
   controllers: [RegisterController],
   providers: [RegisterService, CaptchaService]
 })

@@ -1,34 +1,19 @@
 @Injectable()
 export class LoginService {
-  @InjectRepository(UserModel)
-  private userRepository: Repository<UserModel>
-
   @InjectRepository(UserAdminModel)
   private userAdminRepository: Repository<UserAdminModel>
 
   @InjectRepository(UserRoleModel)
   private userRoleRepository: Repository<UserRoleModel>
 
+  private async getRole<T extends Record<string, any>>(result: T) {
+    const role = await this.userRoleRepository.findOne({ where: { code: result.user.roleCode }, relations: ['permissions'] })
+    // if (!role) throw new BizException('用户角色不存在')
+    ;(result as Record<string, any>).role = role
+    return result as T
+  }
+
   async login(username: string, password: string) {
-    const result = (await this.userRepository.findOne({
-      where: {
-        username,
-        password: md5(password)
-      },
-      relations: {
-        user: true
-      }
-    })) as (UserModel & { role: UserRoleModel | null }) | null
-    if (!result) throw new BizException('用户名或密码错误')
-    result.role = await this.userRoleRepository.findOneBy({ code: result.user.roleCode })
-    return result
-  }
-  async mobileLogin(username: string) {
-    const result = await this.userRepository.createQueryBuilder('user').leftJoinAndSelect('user.user', 'userDetail').where('userDetail.mobile = :mobile', { mobile: username }).getOne()
-    if (!result) throw new BizException('用户不存在')
-    return result
-  }
-  async adminLogin(username: string, password: string) {
     const result = (await this.userAdminRepository.findOne({
       where: {
         username,
@@ -40,14 +25,15 @@ export class LoginService {
       select: ['id', 'username', 'user', 'createdAt', 'updatedAt']
     })) as UserAdminModel & { role: UserRoleModel | null }
     if (!result) throw new BizException('用户名或密码错误')
-    const role = await this.userRoleRepository.findOneBy({ code: result.user.roleCode })
-    console.log(role.permissions, 'role')
-    result.role = { ...role, permissions: role.permissions }
-    return result
+    return this.getRole(result)
   }
-  async mobileAdminLogin(username: string) {
-    const result = await this.userAdminRepository.createQueryBuilder('userAdmin').leftJoinAndSelect('userAdmin.user', 'userDetail').where('userDetail.mobile = :mobile', { mobile: username }).getOne()
+  async mobileLogin(username: string) {
+    const result = (await this.userAdminRepository
+      .createQueryBuilder('userAdmin')
+      .leftJoinAndSelect('userAdmin.user', 'userDetail')
+      .where('userDetail.mobile = :mobile', { mobile: username })
+      .getOne()) as UserAdminModel & { role: UserRoleModel | null }
     if (!result) throw new BizException('用户不存在')
-    return result
+    return this.getRole(result)
   }
 }

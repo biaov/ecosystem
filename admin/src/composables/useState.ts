@@ -1,7 +1,7 @@
 /**
  * 设置属性展示
  */
-export const useState = <T = boolean>(initVisible: T | boolean = false) => {
+export const useState = (initVisible: boolean = false) => {
   /**
    * 值
    */
@@ -10,7 +10,7 @@ export const useState = <T = boolean>(initVisible: T | boolean = false) => {
   /**
    * 更新值
    */
-  const setState = (value: T) => {
+  const setState = (value: boolean) => {
     state.value = value
   }
 

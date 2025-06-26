@@ -26,7 +26,6 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { message } from 'ant-design-vue'
 import { registerApi } from '@/api/auth'
 
 const router = useRouter()
@@ -67,12 +66,8 @@ setFormRules({
  */
 const handleSubmit = async () => {
   if (!(await validFormState())) return
-  try {
-    await registerApi.post({ ...formState.value, source: sourceEnum.admin })
-    message.success('注册成功，请登录')
-    router.push({ name: 'login' })
-  } catch {
-    formState.value.code = null
-  }
+  await registerApi.post({ ...formState.value, source: sourceEnum.admin })
+  message.success('注册成功，请登录')
+  router.push({ name: 'login' })
 }
 </script>

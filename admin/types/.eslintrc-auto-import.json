@@ -36,6 +36,7 @@
     "isReadonly": true,
     "isRef": true,
     "markRaw": true,
+    "message": true,
     "nextTick": true,
     "onActivated": true,
     "onBeforeMount": true,

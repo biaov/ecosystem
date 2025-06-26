@@ -5,7 +5,7 @@
         <a-input v-model:value.trim="formState.name" placeholder="标题" />
       </a-form-item>
       <a-form-item>
-        <a-range-picker v-model:value="formState.createdAt" show-time />
+        <a-range-picker v-model:value="formState.createdAt" :placeholder="['开始时间', '结束时间']" show-time value-format="YYYY-MM-DD HH:mm:ss" />
       </a-form-item>
       <a-form-item>
         <a-button type="primary" @click="setPage">查询</a-button>
@@ -21,7 +21,7 @@
   </c-layout-list>
 </template>
 <script lang="ts" setup>
-import { operationApi } from '@/api/log'
+import { roleApi } from '@/api/permission'
 
 const { formState, onRestFormState, resetFormState } = useFormState({
   name: undefined,
@@ -29,9 +29,8 @@ const { formState, onRestFormState, resetFormState } = useFormState({
 })
 
 const { data, setPage, loading } = usePagingApiRequest(({ current, pageSize }) =>
-  operationApi.paging({
+  roleApi.paging({
     ...useTransformQuery(formState, {
-      name: 'like',
       createdAt: 'range'
     }),
     current,
