@@ -6,7 +6,8 @@ const dateFields = ['createdAt', 'updatedAt']
  * 自定义参数处理管道
  */
 export class TransfromPipe implements PipeTransform {
-  transform(value: Record<string, unknown>) {
+  transform(value?: Record<string, unknown>) {
+    if (!value) return
     dateFields.forEach(field => {
       const val = value[field] as string | undefined
       if (!val) return
@@ -16,6 +17,7 @@ export class TransfromPipe implements PipeTransform {
         .map(item => item.trim())
       filterVal.length === 2 && (value[field] = filterVal)
     })
+    value?.all === 'true' && (value.all = true)
     return value
   }
 }

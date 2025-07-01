@@ -29,7 +29,7 @@ export class LogDto extends PagingDot {
 export class MigrationLogDto extends PagingDot {
   @IsString()
   name?: string
-  
+
   @IsString()
   createdAt?: string
 }

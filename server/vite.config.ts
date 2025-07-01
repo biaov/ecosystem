@@ -26,10 +26,7 @@ export default defineConfig({
         './src/utils',
         './src/enums',
         './src/config',
-        {
-          glob: './src/common/*.ts',
-          types: false
-        },
+        './src/common',
         {
           glob: './src/platform/common/**/*.module.ts',
           types: false

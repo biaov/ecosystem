@@ -189,7 +189,16 @@ export const menuRoutes: RouteRecordRaw[] = [
         meta: {
           title: '角色权限'
         },
-        component: () => import('@/views/permission/role.vue')
+        component: () => import('@/views/permission/role/list.vue')
+      },
+      {
+        path: 'role/:id',
+        name: 'permission-role-permission',
+        meta: {
+          title: '分配权限',
+          hidden: true
+        },
+        component: () => import('@/views/permission/role/permission.vue')
       },
       {
         path: 'account',

@@ -1,23 +1,31 @@
 import { MenuService } from './menu.service'
 import { MenuDto, MenuCreateDto, MenuUpdateDto } from './permission.dto'
+import { PermissionType } from './enums'
+import { BizException } from '@/exceptions/biz'
 
 // @UseGuards(AuthGuardAdmin)
 @Controller('menu')
 export class MenuController {
-  constructor(private readonly roleService: MenuService) {}
+  constructor(private readonly menuService: MenuService) {}
 
   @Get()
-  list(@Query() { name, createdAt, current, pageSize }: MenuDto) {
-    return this.roleService.list(getPageQuery({ current, pageSize }), { name, createdAt })
+  list(@Query() { name, createdAt, current, pageSize, all }: MenuDto) {
+    return all ? this.menuService.all() : this.menuService.list(getPageQuery({ current, pageSize }), { name, createdAt })
   }
+
   @Post()
   create(@Body() { name, content, type, parentId }: MenuCreateDto) {
-    return this.roleService.create({ name, content, type, parentId })
+    if (!parentId && type === PermissionType.Action) throw new BizException(`顶级的 type 不能是 ${PermissionType.Action}`)
+    return this.menuService.create({ name, content, type, parentId })
   }
 
   @Patch(':id')
-  update(@Param() { id }: IdDto, @Body() { name, content }: MenuUpdateDto) {
-    if (!id) throw new BizException('ID不能为空')
-    return this.roleService.update(id, { name, content })
+  update(@IdParam() id: number, @Body() { name, content }: MenuUpdateDto) {
+    return this.menuService.update(id, { name, content })
+  }
+
+  @Delete(':id')
+  delete(@IdParam() id: number) {
+    return this.menuService.delete(id)
   }
 }

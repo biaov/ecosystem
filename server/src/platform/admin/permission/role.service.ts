@@ -1,10 +1,32 @@
+import { UserRoleModel } from '@/models/user'
+
 @Injectable()
 export class RoleService {
   @InjectRepository(UserRoleModel)
   private roleRepository: Repository<UserRoleModel>
 
-  list({ skip, take, current, pageSize }: PageOption, { name, createdAt }) {
-    const where = useTransfrormQuery({ name, createdAt }, { name: 'like', createdAt: 'between' })
+  list({ skip, take, current, pageSize }: PageOption, { name }: Partial<Pick<UserRoleModel, 'name'>>) {
+    const where = useTransfrormQuery({ name }, { name: 'like' })
     return findAndCount(this.roleRepository.findAndCount({ where, skip, take }), { current, pageSize })
+  }
+
+  detail(id: number) {
+    return this.roleRepository.findOneBy({ id })
+  }
+
+  create({ name, code }: Pick<UserRoleModel, 'name' | 'code'>) {
+    return this.roleRepository.save({ name, code })
+  }
+
+  update(id: number, { name, code }: Partial<Pick<UserRoleModel, 'name' | 'code'>>) {
+    return this.roleRepository.update({ id }, { name, code })
+  }
+
+  permission(id: number, { permissions }: Pick<UserRoleModel, 'permissions'>) {
+    return this.roleRepository.update({ id }, { permissions })
+  }
+
+  delete(id: number) {
+    return useDeleteHandle(this.roleRepository.delete({ id }))
   }
 }

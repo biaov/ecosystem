@@ -22,6 +22,10 @@ export const MenuTypeEnum = {
       }
     ]
   },
+  filterOptions(isFilter = false) {
+    const options = this.options()
+    return isFilter ? options.filter(item => item.value !== this.action) : options
+  },
   filter(value: string) {
     return this.options().find(item => item.value === value)
   }

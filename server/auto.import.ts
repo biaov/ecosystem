@@ -61,10 +61,10 @@ export default [
     type: true
   },
   {
-    'class-transformer': ['Type']
+    'class-transformer': ['Type', 'Transform']
   },
   {
-    'class-validator': ['isEmpty', 'IsString', 'MaxLength', 'MinLength', 'IsNotEmpty', 'IsArray', 'ArrayNotEmpty', 'ValidateNested', 'IsNumber', 'IsOptional']
+    'class-validator': ['IsString', 'MaxLength', 'MinLength', 'IsNotEmpty', 'IsArray', 'ArrayNotEmpty', 'ValidateNested', 'IsNumber', 'IsInt', 'IsOptional', 'IsPositive', 'IsBoolean', 'IsEnum']
   },
   {
     '@nestjs-modules/ioredis': ['InjectRedis']

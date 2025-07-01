@@ -1,4 +1,5 @@
 <template>
+  <!-- 验证器 -->
   <me-captcha :item="data" v-model:visible="visible" v-model:status-code="statusCode" @check="onCheck" @refresh="getData" v-show="data" />
 </template>
 <script lang="ts" setup>

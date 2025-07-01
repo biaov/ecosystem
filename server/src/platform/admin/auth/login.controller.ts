@@ -11,13 +11,13 @@ export class LoginController {
     private readonly tokenService: TokenService
   ) {}
 
-  async codeValidator(code: { id: string; value: string }) {
+  private async codeValidator(code: { id: string; value: string }) {
     const { id, value } = code
     if (!(await this.captchaService.verify(id, value))) return
     return true
   }
 
-  async getToken<T extends Promise<Record<string, any>>>(data: T) {
+  private async getToken<T extends Promise<Record<string, any>>>(data: T) {
     const result = await data
     const token = this.tokenService.getToken({ userId: result.id })
     return { ...result, token }

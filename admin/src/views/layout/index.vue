@@ -14,6 +14,11 @@
               <c-ant-icon name="LockOutlined" />
             </template>
           </a-button>
+          <a-button type="text" title="全屏浏览" @click="onScreen">
+            <template #icon>
+              <c-ant-icon :name="isFullScreen ? 'FullscreenExitOutlined' : 'FullscreenOutlined'" />
+            </template>
+          </a-button>
           <a-button type="text" title="退出登录" @click="logout">
             <template #icon>
               <c-ant-icon name="PoweroffOutlined" />
@@ -43,6 +48,7 @@
       </a-form-item>
     </a-form>
   </a-modal>
+  <c-reload-prompt />
 </template>
 <script setup lang="ts">
 import { updatePasswordApi } from '@/api/user'
@@ -86,5 +92,11 @@ const handleSubmit = async () => {
   await updatePasswordApi.post(formState.value)
   setPwdOpen(false)
   message.success('密码修改成功')
+}
+
+const isFullScreen = ref(false)
+const onScreen = () => {
+  isFullScreen.value ? document.exitFullscreen() : document.documentElement.requestFullscreen()
+  isFullScreen.value = !isFullScreen.value
 }
 </script>

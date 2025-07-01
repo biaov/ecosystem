@@ -33,13 +33,19 @@ declare global {
   const Get: typeof import('@nestjs/common')['Get']
   const HttpException: typeof import('@nestjs/common')['HttpException']
   const HttpStatus: typeof import('@nestjs/common')['HttpStatus']
+  const IdDto: typeof import('../src/common/base.dot')['IdDto']
+  const IdParam: typeof import('../src/common/base.decorator')['IdParam']
   const InjectRedis: typeof import('@nestjs-modules/ioredis')['InjectRedis']
   const InjectRepository: typeof import('@nestjs/typeorm')['InjectRepository']
   const Injectable: typeof import('@nestjs/common')['Injectable']
   const IsArray: typeof import('class-validator')['IsArray']
+  const IsBoolean: typeof import('class-validator')['IsBoolean']
+  const IsEnum: typeof import('class-validator')['IsEnum']
+  const IsInt: typeof import('class-validator')['IsInt']
   const IsNotEmpty: typeof import('class-validator')['IsNotEmpty']
   const IsNumber: typeof import('class-validator')['IsNumber']
   const IsOptional: typeof import('class-validator')['IsOptional']
+  const IsPositive: typeof import('class-validator')['IsPositive']
   const IsString: typeof import('class-validator')['IsString']
   const JoinColumn: typeof import('typeorm')['JoinColumn']
   const Like: typeof import('typeorm')['Like']
@@ -62,6 +68,7 @@ declare global {
   const Query: typeof import('@nestjs/common')['Query']
   const RouterModule: typeof import('@nestjs/core')['RouterModule']
   const TokenModule: typeof import('../src/platform/common/token/token.module')['TokenModule']
+  const Transform: typeof import('class-transformer')['Transform']
   const Type: typeof import('class-transformer')['Type']
   const TypeOrmModule: typeof import('@nestjs/typeorm')['TypeOrmModule']
   const UnprocessableEntityException: typeof import('@nestjs/common')['UnprocessableEntityException']
@@ -70,7 +77,6 @@ declare global {
   const UserAdminModel: typeof import('../src/models/user')['UserAdminModel']
   const UserDetailModel: typeof import('../src/models/user')['UserDetailModel']
   const UserModel: typeof import('../src/models/user')['UserModel']
-  const UserPermissionModel: typeof import('../src/models/user')['UserPermissionModel']
   const UserRoleModel: typeof import('../src/models/user')['UserRoleModel']
   const ValidateNested: typeof import('class-validator')['ValidateNested']
   const ValidationPipe: typeof import('@nestjs/common')['ValidationPipe']
@@ -83,11 +89,11 @@ declare global {
   const getPageQuery: typeof import('../src/utils/utils')['getPageQuery']
   const getRedisKey: typeof import('../src/utils/utils')['getRedisKey']
   const initPage: typeof import('../src/config/index')['initPage']
-  const isEmpty: typeof import('class-validator')['isEmpty']
   const jwt: typeof import('jsonwebtoken')['default']
   const md5: typeof import('../src/utils/crypto')['md5']
   const random: typeof import('../src/utils/utils')['random']
   const randomId: typeof import('../src/utils/utils')['randomId']
+  const useDeleteHandle: typeof import('../src/utils/utils')['useDeleteHandle']
   const useTransfrormQuery: typeof import('../src/utils/utils')['useTransfrormQuery']
   const validator: typeof import('../src/utils/validator')['validator']
 }
@@ -109,7 +115,7 @@ declare global {
   export type { MenuModel } from '../src/models/menu'
   import('../src/models/menu')
   // @ts-ignore
-  export type { UserModel, UserAdminModel, UserRoleModel, UserDetailModel, UserPermissionModel } from '../src/models/user'
+  export type { UserModel, UserAdminModel, UserRoleModel, UserDetailModel } from '../src/models/user'
   import('../src/models/user')
   // @ts-ignore
   export type { DrawImg } from '../src/utils/draw'

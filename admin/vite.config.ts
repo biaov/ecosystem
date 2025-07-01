@@ -5,6 +5,7 @@ import eslint from 'vite-plugin-eslint'
 import autoImport from 'unplugin-auto-import/vite'
 import components from 'unplugin-vue-components/vite'
 import tailwindcss from '@tailwindcss/vite'
+import { VitePWA } from 'vite-plugin-pwa'
 
 const env = loadEnv('development', './')
 
@@ -41,6 +42,28 @@ export default defineConfig({
       include: [/\.vue$/, /\.vue\?vue/],
       exclude: [/node_modules/, 'types.ts'],
       dts: './types/components.d.ts'
+    }),
+    VitePWA({
+      registerType: 'prompt',
+      includeAssets: ['logo.svg'],
+      manifest: {
+        id: `${env.VITE_ROUTER_BASEURL}/`,
+        name: 'ecosystem-admin',
+        short_name: 'PWA for ecosystem-admin',
+        description: '关于 ecosystem-admin 的 PWA',
+        theme_color: '#ffffff',
+        icons: [180, 192, 512].map(key => ({
+          src: `${env.VITE_ROUTER_BASEURL}/pwa-${key}x${key}.svg`,
+          sizes: `${key}x${key}`,
+          type: 'image/svg+xml',
+          purpose: 'any'
+        }))
+      },
+      workbox: {
+        globDirectory: resolve(import.meta.dirname, '../dist'),
+        skipWaiting: true,
+        clientsClaim: true
+      }
     })
   ],
   server: {

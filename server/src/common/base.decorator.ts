@@ -1,10 +1,10 @@
-import type { ModuleMetadata } from '@nestjs/common'
 /**
  * 自定义路由
  * 类修饰器
  */
-export const CustomRoute = (modulesSyncValue: Record<string, unknown>, isRoute = true) => {
-  return function <T extends { new (...args: any[]): {} }>(constructor: T) {
+export const CustomRoute =
+  (modulesSyncValue: Record<string, unknown>, isRoute = true) =>
+  <T extends { new (...args: any[]): {} }>(constructor: T) => {
     // 路由路径
     const path = constructor.name.split('Module')[0].replace(/[A-Z]/g, (val: string, i: number) => `${i ? '-' : ''}${val.toLowerCase()}`)
     // 基础路由模块
@@ -28,7 +28,20 @@ export const CustomRoute = (modulesSyncValue: Record<string, unknown>, isRoute =
       ]
     })
     class baseRouteModule extends constructor {}
-
     return baseRouteModule
   }
+
+import { ParseIntPipe } from '@nestjs/common'
+
+/**
+ * id 参数装饰器
+ */
+export const IdParam = () => {
+  return Param(
+    'id',
+    new ParseIntPipe({
+      errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY,
+      exceptionFactory: () => new BizException('ID 错误')
+    })
+  )
 }

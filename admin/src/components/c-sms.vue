@@ -1,4 +1,5 @@
 <template>
+  <!-- 短信验证输入 -->
   <a-input v-model:value="sms" placeholder="请输入验证码">
     <template #addonAfter>
       <div @click="onSms" class="cursor-pointer" :class="{ disabled: countTime }">

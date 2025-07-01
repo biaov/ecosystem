@@ -1,3 +1,5 @@
+import { PermissionType } from './enums'
+
 /**
  * 角色验证器
  */
@@ -5,10 +7,39 @@ export class RoleDto extends PagingDot {
   @IsOptional()
   @IsString()
   name?: string
+}
+
+/**
+ * 角色验证器-创建
+ */
+export class RoleCreateDto {
+  @IsString()
+  name: string
+
+  @IsString()
+  code: string
+}
+
+/**
+ * 角色验证器-更新
+ */
+export class RoleUpdateDto {
+  @IsOptional()
+  @IsString()
+  name?: string
 
   @IsOptional()
+  @IsString()
+  code: string
+}
+
+/**
+ * 角色验证器-分配权限
+ */
+export class RolePermissionDto {
   @IsString({ each: true })
-  createdAt?: string[]
+  @IsNotEmpty({ each: true })
+  permissions: string[]
 }
 
 /**
@@ -20,8 +51,12 @@ export class MenuDto extends PagingDot {
   name?: string
 
   @IsOptional()
-  @IsString({ each: true })
-  createdAt?: string[]
+  @IsString()
+  createdAt?: string
+
+  @IsOptional()
+  @IsBoolean()
+  all?: boolean
 }
 
 /**
@@ -34,10 +69,11 @@ export class MenuCreateDto {
   @IsString()
   content: string
 
+  @IsEnum(PermissionType)
   @IsString()
   type: string
 
-  @IsNumber()
+  @IsInt()
   parentId: number
 }
 

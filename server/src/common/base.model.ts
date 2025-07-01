@@ -2,7 +2,7 @@
  * model 基础字段类
  * CreateDateColumn, UpdateDateColumn 不能使 dataString 生效
  */
-abstract class BaseModel extends BaseEntity {
+class BaseModel extends BaseEntity {
   @PrimaryGeneratedColumn('increment')
   id: number
 

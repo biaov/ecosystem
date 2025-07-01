@@ -1,3 +1,4 @@
+import { DeleteResult } from 'typeorm'
 /**
  * [min, max) 随机数
  */
@@ -58,4 +59,13 @@ export const useTransfrormQuery = (
   }, {})
 
   return filterValue
+}
+
+/**
+ * 删除处理
+ */
+export const useDeleteHandle = async (promise: Promise<DeleteResult>) => {
+  const result = await promise
+  if (!result.affected) throw new BizException('删除失败，数据不存在或已被删除')
+  return true
 }

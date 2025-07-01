@@ -3,8 +3,8 @@ import { PagingResponse } from './types'
 
 export const useRestful = (path: string) => ({
   paging: (query = {}) => service.get(path, { params: query }) as Promise<PagingResponse>,
-  all: (query = {}) => service.get(path, { params: { ...query, all: true } }) as Promise<Record<string, unknown>[]>,
-  get: (id: number) => service.get(`${path}/${id}`),
+  all: <T extends Record<string, any>>(query = {}) => service.get(path, { params: { ...query, all: true } }) as Promise<T[]>,
+  get: <T extends Record<string, any>>(id: number) => service.get(`${path}/${id}`) as Promise<T>,
   create: (data = {}) => service.post(path, data),
   delete: (id: number) => service.delete(`${path}/${id}`),
   update: (id: number, data = {}) => service.patch(`${path}/${id}`, data),

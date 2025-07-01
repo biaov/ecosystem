@@ -1,3 +1,4 @@
+import { AfterLoad } from 'typeorm'
 import type { Relation } from 'typeorm'
 
 @Entity('user')
@@ -29,11 +30,29 @@ export class UserRoleModel extends BaseModel {
   @Column({ length: 24, comment: '名称' })
   name: string
 
-  @Column({ length: 64, comment: '状态码', unique: true })
+  @Column({ length: 64, comment: '唯一值', unique: true })
   code: string
 
-  @OneToMany(() => UserPermissionModel, userPermission => userPermission.userRole, { cascade: true })
-  permissions: Relation<UserPermissionModel[]>
+  @Column({ type: 'text', comment: '权限内容, *,页面:行为,模块:页面:行为', nullable: true })
+  permissions: string[]
+
+  @BeforeUpdate()
+  @BeforeInsert()
+  setPermissions() {
+    if (!this.permissions) return
+    this.permissions = this.permissions.join(',') as unknown as string[]
+    console.log('set')
+  }
+
+  @AfterLoad()
+  getPermissions() {
+    if (this.permissions) {
+      this.permissions = (this.permissions as unknown as string).split(',')
+    } else {
+      this.permissions = []
+    }
+    console.log('get')
+  }
 }
 
 @Entity('user_detail')
@@ -69,14 +88,4 @@ export class UserDetailModel extends BaseModel {
   @OneToOne(() => UserAdminModel)
   @JoinColumn()
   userAdmin: Relation<UserAdminModel>
-}
-
-@Entity('user_permission')
-export class UserPermissionModel extends BaseModel {
-  @Column({ length: 32, comment: '权限内容, 模块:页面:行为', unique: true })
-  content: string
-
-  @ManyToOne(() => UserRoleModel)
-  @JoinColumn()
-  userRole: Relation<UserRoleModel>
 }

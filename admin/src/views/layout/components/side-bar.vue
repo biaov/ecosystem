@@ -50,7 +50,10 @@ const items = menuRoutes
               return {
                 key: child.name,
                 label: child.meta?.title,
-                onClick: menuClick.bind(null, child)
+                onClick: (e: MouseEvent) => {
+                  e.stopPropagation()
+                  menuClick(child)
+                }
               }
             })
             .filter(Boolean)
@@ -88,9 +91,11 @@ const getKey = (list: typeof items, name: string) =>
     }
   })
 
-const handleRoute = ({ name }: RouteLocationNormalizedLoadedGeneric) => {
+const handleRoute = ({ name, path }: RouteLocationNormalizedLoadedGeneric) => {
   if (!name) return
   getKey(items, name as string)
+  if (menuState.openKeys.length) return
+  menuState.openKeys = [path.split('/')[1]]
 }
 
 handleRoute(useRoute())
