@@ -35,3 +35,27 @@ export const sourceEnum = {
     return this.options().find(item => item.value === value)
   }
 }
+
+/**
+ * 权限枚举
+ */
+export enum permissionEnum {
+  /**
+   * 浏览
+   */
+  list = 'list',
+  /**
+   * 创建
+   */
+  create = 'create',
+
+  /**
+   * 更新
+   */
+  update = 'update',
+
+  /**
+   * 删除
+   */
+  delete = 'delete'
+}

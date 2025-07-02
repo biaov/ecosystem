@@ -3,5 +3,8 @@
  */
 export interface UserInfo {
   token: string
+  role?: {
+    permissions: string[]
+  }
   [key: string]: unknown
 }

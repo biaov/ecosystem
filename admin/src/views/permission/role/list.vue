@@ -10,7 +10,7 @@
       </a-form-item>
     </template>
     <template #extra>
-      <a-button type="primary" @click="onAdd()">新增</a-button>
+      <a-button type="primary" @click="onAdd" v-perm="permKey.create">新增</a-button>
     </template>
     <template #list>
       <a-table :data-source="data.items" row-key="id" :loading="loading" :pagination="$formatter.pagination(data)" @change="setPage">
@@ -20,10 +20,10 @@
         <a-table-column title="操作" :width="180">
           <template #="{ record }">
             <a-space :size="0">
-              <a-button type="link" size="small" :href="`/admin/permission/role/${record.id}`">分配权限</a-button>
-              <a-button type="link" size="small" @click="onEdit(record)">编辑</a-button>
+              <a-button type="link" size="small" :href="`/admin/permission/role/${record.id}`" v-perm="permKey.perm">分配权限</a-button>
+              <a-button type="link" size="small" @click="onEdit(record)" v-perm="permKey.update">编辑</a-button>
               <a-popconfirm placement="left" title="你确定要删除这条数据吗?" @confirm="handleDelete(record)">
-                <a-button type="link" size="small" danger>删除</a-button>
+                <a-button type="link" size="small" danger v-perm="permKey.delete">删除</a-button>
               </a-popconfirm>
             </a-space>
           </template>
@@ -36,6 +36,8 @@
 <script lang="ts" setup>
 import { roleApi } from '@/api/permission'
 import EditForm from './form.vue'
+
+const permKey = definePermission('permission:role', { perm: 'permission' })
 
 interface TableType extends IdDataType {}
 

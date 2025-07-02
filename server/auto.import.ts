@@ -7,7 +7,7 @@ const getPath = path => resolve(import.meta.dirname, path).replace(/\\/g, '/')
 
 export default [
   {
-    '@nestjs/core': ['APP_INTERCEPTOR', 'RouterModule', 'NestFactory']
+    '@nestjs/core': ['APP_INTERCEPTOR', 'APP_GUARD', 'RouterModule', 'NestFactory']
   },
   {
     dayjs: [['default', 'dayjs']]
@@ -29,7 +29,11 @@ export default [
       'HttpException',
       'HttpStatus',
       'ValidationPipe',
-      'UnprocessableEntityException'
+      'UnprocessableEntityException',
+      'Global',
+      'applyDecorators',
+      'SetMetadata',
+      'ParseIntPipe'
     ]
   },
   {
@@ -80,11 +84,6 @@ export default [
   {
     from: getPath('./src/platform/common/token/token.service.ts'),
     imports: ['AuthGuard', 'AuthGuardAdmin'],
-    type: false
-  },
-  {
-    from: getPath('./src/platform/common/token/token.module.ts'),
-    imports: ['TokenModule'],
     type: false
   }
 ]

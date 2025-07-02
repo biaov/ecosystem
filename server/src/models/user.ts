@@ -1,4 +1,4 @@
-import { AfterLoad } from 'typeorm'
+import { AfterLoad, BeforeUpdate, BeforeInsert } from 'typeorm'
 import type { Relation } from 'typeorm'
 
 @Entity('user')
@@ -33,25 +33,12 @@ export class UserRoleModel extends BaseModel {
   @Column({ length: 64, comment: '唯一值', unique: true })
   code: string
 
-  @Column({ type: 'text', comment: '权限内容, *,页面:行为,模块:页面:行为', nullable: true })
+  @Column({ type: 'json', comment: '权限内容, *,页面:行为,模块:页面:行为', nullable: true })
   permissions: string[]
-
-  @BeforeUpdate()
-  @BeforeInsert()
-  setPermissions() {
-    if (!this.permissions) return
-    this.permissions = this.permissions.join(',') as unknown as string[]
-    console.log('set')
-  }
 
   @AfterLoad()
   getPermissions() {
-    if (this.permissions) {
-      this.permissions = (this.permissions as unknown as string).split(',')
-    } else {
-      this.permissions = []
-    }
-    console.log('get')
+    !this.permissions && (this.permissions = [])
   }
 }
 

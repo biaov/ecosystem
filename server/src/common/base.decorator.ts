@@ -31,8 +31,6 @@ export const CustomRoute =
     return baseRouteModule
   }
 
-import { ParseIntPipe } from '@nestjs/common'
-
 /**
  * id 参数装饰器
  */
@@ -45,3 +43,9 @@ export const IdParam = () => {
     })
   )
 }
+
+/**
+ * 权限标识
+ * 方法修饰器
+ */
+export const Permission = (permission: string) => applyDecorators(SetMetadata(MetaKeyEnum.permission, permission))

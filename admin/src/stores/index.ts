@@ -1,4 +1,5 @@
 import { setStorage, getStorage, removeStorage } from '@/utils/storage'
+import { router } from '@/router'
 import { UserInfo } from './types'
 
 /**
@@ -18,7 +19,6 @@ const state = reactive({
 })
 
 export const useStore = () => {
-  const router = useRouter()
   /**
    * 登录
    */

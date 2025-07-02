@@ -1,4 +1,5 @@
 import { CanActivate, ExecutionContext } from '@nestjs/common'
+import { Reflector } from '@nestjs/core'
 
 /**
  * token 服务
@@ -10,10 +11,13 @@ export class TokenService {
   private userRepository: Repository<UserModel>
   @InjectRepository(UserAdminModel)
   private userAdminRepository: Repository<UserAdminModel>
+  @InjectRepository(UserRoleModel)
+  private userRoleRepository: Repository<UserRoleModel>
 
-  async verify(context: ExecutionContext, type: 'user' | 'admin' = 'user'): Promise<boolean> {
+  async verify(context: ExecutionContext, type: 'user' | 'admin' = 'user', permission?: string): Promise<boolean> {
     const request = context.switchToHttp().getRequest()
     const { authorization } = request.headers
+    // token 校验
     if (!authorization) throw new BizException('未登录', HttpStatus.UNAUTHORIZED)
     const token = authorization.split(' ')[1]
     if (!token) throw new BizException('未登录', HttpStatus.UNAUTHORIZED)
@@ -21,12 +25,21 @@ export class TokenService {
     try {
       payload = jwt.verify(token, import.meta.env.VITE_JWT_SECRET)
     } catch (error) {
-      const msg = (error as Error).message.includes('expired') ? 'token 已过期' : 'token 错误'
-      throw new BizException(msg, HttpStatus.UNAUTHORIZED)
+      throw new BizException((error as Error).message.includes('expired') ? 'token 已过期' : 'token 错误', HttpStatus.UNAUTHORIZED)
     }
+
+    // 用户校验
     if (!payload?.userId) throw new BizException('未登录或登录已过期', HttpStatus.UNAUTHORIZED)
-    const userExist = await this[type === 'admin' ? 'userAdminRepository' : 'userRepository'].findOneBy({ id: +payload.userId })
+    const userExist = await this[type === 'admin' ? 'userAdminRepository' : 'userRepository'].findOne({ where: { id: +payload.userId }, relations: ['user'] })
     if (!userExist) throw new BizException('用户不存在', HttpStatus.UNAUTHORIZED)
+
+    // 权限校验
+    if (permission) {
+      const role = await this.userRoleRepository.findOneBy({ code: userExist.user.roleCode })
+      if (!role) throw new BizException('用户角色不存在')
+      if (!role.permissions.includes('*') && !role.permissions.includes(permission)) throw new BizException('权限不足', HttpStatus.FORBIDDEN)
+    }
+
     return true
   }
 
@@ -56,9 +69,13 @@ export class AuthGuard implements CanActivate {
  */
 @Injectable()
 export class AuthGuardAdmin implements CanActivate {
-  constructor(private tokenService: TokenService) {}
+  constructor(
+    private reflector: Reflector,
+    private tokenService: TokenService
+  ) {}
 
   canActivate(context: ExecutionContext) {
-    return this.tokenService.verify(context, 'admin')
+    const permission = this.reflector.getAllAndOverride<string>(MetaKeyEnum.permission, [context.getHandler(), context.getClass()])
+    return this.tokenService.verify(context, 'admin', permission)
   }
 }

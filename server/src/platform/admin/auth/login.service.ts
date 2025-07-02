@@ -7,7 +7,7 @@ export class LoginService {
   private userRoleRepository: Repository<UserRoleModel>
 
   private async getRole<T extends Record<string, any>>(result: T) {
-    const role = await this.userRoleRepository.findOne({ where: { code: result.user.roleCode }, relations: ['permissions'] })
+    const role = await this.userRoleRepository.findOne({ where: { code: result.user.roleCode } })
     // if (!role) throw new BizException('用户角色不存在')
     ;(result as Record<string, any>).role = role
     return result as T

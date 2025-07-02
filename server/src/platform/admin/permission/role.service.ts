@@ -22,11 +22,11 @@ export class RoleService {
     return this.roleRepository.update({ id }, { name, code })
   }
 
-  permission(id: number, { permissions }: Pick<UserRoleModel, 'permissions'>) {
-    return this.roleRepository.update({ id }, { permissions })
+  delete(id: number) {
+    return useAffected(this.roleRepository.delete({ id }))
   }
 
-  delete(id: number) {
-    return useDeleteHandle(this.roleRepository.delete({ id }))
+  permission(id: number, { permissions }: Pick<UserRoleModel, 'permissions'>) {
+    return useAffected(this.roleRepository.update({ id }, { permissions }))
   }
 }

@@ -58,6 +58,6 @@ export class MenuService {
   }
 
   delete(id: number) {
-    return useDeleteHandle(this.menuRepository.delete({ id }))
+    return useAffected(this.menuRepository.delete({ id }))
   }
 }

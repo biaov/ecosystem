@@ -64,8 +64,28 @@ export const useTransfrormQuery = (
 /**
  * 删除处理
  */
-export const useDeleteHandle = async (promise: Promise<DeleteResult>) => {
+export const useAffected = async (promise: Promise<DeleteResult>) => {
   const result = await promise
   if (!result.affected) throw new BizException('删除失败，数据不存在或已被删除')
   return true
+}
+
+/**
+ * 定义权限
+ */
+export const definePermission = <T extends string, U extends Record<string, string>>(prefix: T, action: U = {} as U) => {
+  const result = Object.entries({
+    ...action,
+    list: PermissionEnum.list,
+    create: PermissionEnum.create,
+    update: PermissionEnum.update,
+    delete: PermissionEnum.delete
+  }).reduce((prev, [key, value]) => {
+    prev[key] = `${prefix}:${value}`
+    return prev
+  }, {})
+  type PermissionEnumType = typeof PermissionEnum
+  return result as {
+    [K in keyof U | keyof PermissionEnumType]: K extends keyof PermissionEnumType ? `${T}:${PermissionEnumType[K]}` : K extends keyof U ? `${T}:${U[K]}` : never
+  }
 }

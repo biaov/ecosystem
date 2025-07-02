@@ -1,4 +1,6 @@
 import axios, { AxiosRequestConfig, Canceler } from 'axios'
+import { useStore } from '@/stores'
+import { router } from '@/router'
 
 /**
  * 等待请求
@@ -45,6 +47,7 @@ export const service = axios.create({
  */
 service.interceptors.request.use(
   config => {
+    config.headers.Authorization = `Bearer ${useStore().state.token}`
     // 添加取消 key
     config.cancelToken = new CancelToken(cancel => {
       removePendingAjax(config, cancel)
@@ -70,8 +73,12 @@ service.interceptors.response.use(
     removePendingAjax(config)
     switch (status) {
       case 401:
+        message.error(data.message)
+        useStore().logout()
         break
-      case 400:
+      case 403:
+        router.push({ name: '403' })
+        break
       case 422:
         message.error(data.message)
         break

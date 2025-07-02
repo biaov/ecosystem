@@ -7,7 +7,6 @@ const filterAuth = ['login', 'register']
  * 全局前置守卫
  */
 export const beforeEach = ({ name }: RouteLocationNormalized) => {
-  return true
   NProgress.start()
   const store = useStore()
   if (store.state.token) {

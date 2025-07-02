@@ -15,12 +15,9 @@ export namespace PermissionName {
     content: string
     type: string
     checked: string[]
-    children: (
-      | GroupMenuRole
-      | {
-          label: string
-          value: string
-        }
-    )[]
+    children: (GroupMenuRole & {
+      label: string
+      value: string
+    })[]
   }
 }

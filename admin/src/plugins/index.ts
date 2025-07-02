@@ -6,12 +6,16 @@ import config from '@/config'
 import 'ant-design-vue/dist/reset.css'
 import 'nprogress/nprogress.css'
 import '@/styles/tailwindcss.css'
+import * as directions from '@/directions'
 
 const install = (app: App) => {
   app.config.globalProperties.$formatter = formatter
   app.config.globalProperties.$config = config
   app.use(Antd)
   app.use(router)
+  Object.entries(directions).forEach(item => {
+    app.directive(...item)
+  })
 }
 
 export default { install }

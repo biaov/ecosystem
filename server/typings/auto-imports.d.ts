@@ -6,6 +6,7 @@
 // biome-ignore lint: disable
 export {}
 declare global {
+  const APP_GUARD: typeof import('@nestjs/core')['APP_GUARD']
   const APP_INTERCEPTOR: typeof import('@nestjs/core')['APP_INTERCEPTOR']
   const AfterInsert: typeof import('typeorm')['AfterInsert']
   const AfterUpdate: typeof import('typeorm')['AfterUpdate']
@@ -20,9 +21,7 @@ declare global {
   const BizException: typeof import('../src/exceptions/biz')['BizException']
   const Body: typeof import('@nestjs/common')['Body']
   const CaptchaEnum: typeof import('../src/enums/index')['CaptchaEnum']
-  const CaptchaModule: typeof import('../src/platform/common/captcha/captcha.module')['CaptchaModule']
   const Column: typeof import('typeorm')['Column']
-  const CommonModule: typeof import('../src/platform/common/route.module')['CommonModule']
   const Controller: typeof import('@nestjs/common')['Controller']
   const CreateDateColumn: typeof import('typeorm')['CreateDateColumn']
   const CustomRoute: typeof import('../src/common/base.decorator')['CustomRoute']
@@ -31,9 +30,9 @@ declare global {
   const DrawImg: typeof import('../src/utils/draw')['DrawImg']
   const Entity: typeof import('typeorm')['Entity']
   const Get: typeof import('@nestjs/common')['Get']
+  const Global: typeof import('@nestjs/common')['Global']
   const HttpException: typeof import('@nestjs/common')['HttpException']
   const HttpStatus: typeof import('@nestjs/common')['HttpStatus']
-  const IdDto: typeof import('../src/common/base.dot')['IdDto']
   const IdParam: typeof import('../src/common/base.decorator')['IdParam']
   const InjectRedis: typeof import('@nestjs-modules/ioredis')['InjectRedis']
   const InjectRepository: typeof import('@nestjs/typeorm')['InjectRepository']
@@ -53,6 +52,7 @@ declare global {
   const ManyToOne: typeof import('typeorm')['ManyToOne']
   const MaxLength: typeof import('class-validator')['MaxLength']
   const MenuModel: typeof import('../src/models/menu')['MenuModel']
+  const MetaKeyEnum: typeof import('../src/enums/index')['MetaKeyEnum']
   const MigrationsModel: typeof import('../src/models/log')['MigrationsModel']
   const MinLength: typeof import('class-validator')['MinLength']
   const Module: typeof import('@nestjs/common')['Module']
@@ -61,13 +61,16 @@ declare global {
   const OneToOne: typeof import('typeorm')['OneToOne']
   const PagingDot: typeof import('../src/common/base.dot')['PagingDot']
   const Param: typeof import('@nestjs/common')['Param']
+  const ParseIntPipe: typeof import('@nestjs/common')['ParseIntPipe']
   const Patch: typeof import('@nestjs/common')['Patch']
+  const Permission: typeof import('../src/common/base.decorator')['Permission']
+  const PermissionEnum: typeof import('../src/enums/index')['PermissionEnum']
   const Post: typeof import('@nestjs/common')['Post']
   const PrimaryGeneratedColumn: typeof import('typeorm')['PrimaryGeneratedColumn']
   const Put: typeof import('@nestjs/common')['Put']
   const Query: typeof import('@nestjs/common')['Query']
   const RouterModule: typeof import('@nestjs/core')['RouterModule']
-  const TokenModule: typeof import('../src/platform/common/token/token.module')['TokenModule']
+  const SetMetadata: typeof import('@nestjs/common')['SetMetadata']
   const Transform: typeof import('class-transformer')['Transform']
   const Type: typeof import('class-transformer')['Type']
   const TypeOrmModule: typeof import('@nestjs/typeorm')['TypeOrmModule']
@@ -82,9 +85,11 @@ declare global {
   const ValidationPipe: typeof import('@nestjs/common')['ValidationPipe']
   const aesDecrypt: typeof import('../src/utils/crypto')['aesDecrypt']
   const aesEncrypt: typeof import('../src/utils/crypto')['aesEncrypt']
+  const applyDecorators: typeof import('@nestjs/common')['applyDecorators']
   const database: typeof import('../src/config/database')['default']
   const databaseOptions: typeof import('../src/config/database')['databaseOptions']
   const dayjs: typeof import('dayjs')['default']
+  const definePermission: typeof import('../src/utils/utils')['definePermission']
   const findAndCount: typeof import('../src/utils/utils')['findAndCount']
   const getPageQuery: typeof import('../src/utils/utils')['getPageQuery']
   const getRedisKey: typeof import('../src/utils/utils')['getRedisKey']
@@ -93,7 +98,7 @@ declare global {
   const md5: typeof import('../src/utils/crypto')['md5']
   const random: typeof import('../src/utils/utils')['random']
   const randomId: typeof import('../src/utils/utils')['randomId']
-  const useDeleteHandle: typeof import('../src/utils/utils')['useDeleteHandle']
+  const useAffected: typeof import('../src/utils/utils')['useAffected']
   const useTransfrormQuery: typeof import('../src/utils/utils')['useTransfrormQuery']
   const validator: typeof import('../src/utils/validator')['validator']
 }
@@ -121,15 +126,6 @@ declare global {
   export type { DrawImg } from '../src/utils/draw'
   import('../src/utils/draw')
   // @ts-ignore
-  export type { CaptchaEnum, DefaultRoleCodeEnum } from '../src/enums/index'
+  export type { CaptchaEnum, DefaultRoleCodeEnum, PermissionEnum, MetaKeyEnum } from '../src/enums/index'
   import('../src/enums/index')
-  // @ts-ignore
-  export type { CaptchaModule } from '../src/platform/common/captcha/captcha.module'
-  import('../src/platform/common/captcha/captcha.module')
-  // @ts-ignore
-  export type { CommonModule } from '../src/platform/common/route.module'
-  import('../src/platform/common/route.module')
-  // @ts-ignore
-  export type { TokenModule } from '../src/platform/common/token/token.module'
-  import('../src/platform/common/token/token.module')
 }

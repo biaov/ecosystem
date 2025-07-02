@@ -13,6 +13,7 @@ declare global {
   const dayjs: typeof import('dayjs')['default']
   const defineAsyncComponent: typeof import('vue')['defineAsyncComponent']
   const defineComponent: typeof import('vue')['defineComponent']
+  const definePermission: typeof import('../src/composables/usePermission')['definePermission']
   const effectScope: typeof import('vue')['effectScope']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
@@ -41,6 +42,7 @@ declare global {
   const onUnmounted: typeof import('vue')['onUnmounted']
   const onUpdated: typeof import('vue')['onUpdated']
   const onWatcherCleanup: typeof import('vue')['onWatcherCleanup']
+  const permissionEnum: typeof import('../src/enums/index')['permissionEnum']
   const provide: typeof import('vue')['provide']
   const reactive: typeof import('vue')['reactive']
   const readonly: typeof import('vue')['readonly']
@@ -66,23 +68,19 @@ declare global {
   const useLink: typeof import('vue-router')['useLink']
   const useLoadingRequest: typeof import('../src/composables/useRequest')['useLoadingRequest']
   const useModel: typeof import('vue')['useModel']
-  const usePagination: typeof import('../src/composables/pagination')['usePagination']
   const usePagingApiRequest: typeof import('../src/composables/useRequest')['usePagingApiRequest']
+  const usePermission: typeof import('../src/composables/usePermission')['usePermission']
   const useRandomId: typeof import('../src/composables/useUtils')['useRandomId']
   const useRestful: typeof import('../src/composables/useRequest')['useRestful']
   const useRoute: typeof import('vue-router')['useRoute']
   const useRouter: typeof import('vue-router')['useRouter']
-  const useService: (typeof import('../src/composables/useRequest.js'))['useService']
   const useSlots: typeof import('vue')['useSlots']
   const useState: typeof import('../src/composables/useState')['useState']
   const useStore: typeof import('../src/stores/index')['useStore']
-  const useSystemInfo: (typeof import('../src/composables/useConfig.js'))['useSystemInfo']
   const useTemplateRef: typeof import('vue')['useTemplateRef']
   const useToastRequest: typeof import('../src/composables/useRequest')['useToastRequest']
   const useTransformQuery: typeof import('../src/composables/useTransformQuery')['useTransformQuery']
-  const useUpload: (typeof import('../src/composables/useRequest.js'))['useUpload']
   const useValidPhone: typeof import('../src/composables/useUtils')['useValidPhone']
-  const useVisibleAnimation: (typeof import('../src/composables/useState.js'))['useVisibleAnimation']
   const watch: typeof import('vue')['watch']
   const watchEffect: typeof import('vue')['watchEffect']
   const watchPostEffect: typeof import('vue')['watchPostEffect']
@@ -99,4 +97,7 @@ declare global {
   // @ts-ignore
   export type { UserInfo } from '../src/stores/types'
   import('../src/stores/types')
+  // @ts-ignore
+  export type { permissionEnum } from '../src/enums/index'
+  import('../src/enums/index')
 }

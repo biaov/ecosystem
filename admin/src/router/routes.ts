@@ -1,6 +1,16 @@
 import type { RouteRecordRaw } from 'vue-router'
 export const menuRoutes: RouteRecordRaw[] = [
   {
+    path: '403',
+    name: '403',
+    meta: {
+      title: '权限不足',
+      antIcon: 'DashboardOutlined',
+      hidden: true
+    },
+    component: () => import(`@/views/403/index.vue`)
+  },
+  {
     path: 'dashboard',
     name: 'dashboard',
     meta: {
