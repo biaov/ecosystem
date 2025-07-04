@@ -39,12 +39,7 @@ const { formState, setFormRules, validFormState } = useFormState({
 })
 
 setFormRules({
-  username: {
-    validator(value: string) {
-      if (!useValidPhone(value)) return Promise.reject('手机号格式错误')
-      return Promise.resolve()
-    }
-  },
+  username: useValidPhoneForm(true),
   code: {
     validator() {
       const result = smsRef.value!.valid()

@@ -4,7 +4,7 @@ import { LoginService } from './login.service'
 import { TokenService } from '../../common/token/token.service'
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UserModel, UserDetailModel, UserAdminModel, UserRoleModel])],
+  imports: [TypeOrmModule.forFeature([UserModel, UserAdminModel, UserRoleModel])],
   controllers: [LoginController],
   providers: [LoginService, CaptchaService, TokenService],
   exports: [TokenService]

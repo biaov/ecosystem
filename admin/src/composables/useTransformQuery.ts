@@ -1,9 +1,13 @@
 import { toRaw, isRef, isReactive, Reactive } from 'vue'
 
+type Reset<T extends Record<string, any>> = {
+  [K in keyof T]: T[K] extends string ? string : T[K] extends number ? number : string
+}
+
 /**
  * 请求参数转换
  */
-export const useTransformQuery = (query: Record<string, any> | Ref<Record<string, any>> | Reactive<Record<string, any>>, transfomers: Record<string, any> = {}) => {
+export const useTransformQuery = <T extends Record<string, any>>(query: T | Ref<T> | Reactive<T>, transfomers: Record<string, any> = {}, type?: string) => {
   const form = isRef(query) ? query.value : isReactive(query) ? toRaw(query) : query
   const rawQuery = JSON.parse(JSON.stringify(form)) as Record<string, any>
 
@@ -23,5 +27,15 @@ export const useTransformQuery = (query: Record<string, any> | Ref<Record<string
     rawQuery[key] = value
   })
 
-  return rawQuery
+  const data = rawQuery as Reset<T>
+  if (type === 'search') {
+    const dataBak = data as unknown as SearchTransformForm
+    const dataClone = structuredClone(dataBak) as Partial<SearchTransformForm>
+    dataClone[dataBak.type as keyof SearchTransformForm] = dataBak.keyword
+    delete dataClone.type
+    delete dataClone.keyword
+    return dataClone
+  } else {
+    return structuredClone(data)
+  }
 }

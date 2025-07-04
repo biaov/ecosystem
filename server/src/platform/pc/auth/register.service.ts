@@ -11,13 +11,8 @@ export class RegisterService {
     const res = await this.userRepository.save({
       username,
       password: md5(password),
-      user: {
-        username,
-        nickname: username,
-        source,
-        mobile: username,
-        roleCode: DefaultRoleCodeEnum.Visitor
-      }
+      source,
+      mobile: username
     })
 
     return res
@@ -29,13 +24,8 @@ export class RegisterService {
     const res = await this.userAdminRepository.save({
       username,
       password: md5(password),
-      user: {
-        username,
-        nickname: username,
-        source,
-        mobile: username,
-        roleCode: DefaultRoleCodeEnum.Visitor
-      }
+      source,
+      mobile: username
     })
 
     return res

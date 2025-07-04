@@ -130,7 +130,7 @@ export const menuRoutes: RouteRecordRaw[] = [
         component: () => import('@/views/promotion/coupon.vue')
       },
       {
-        path: '',
+        path: 'activity-coupon',
         name: 'promotion-activity-coupon',
         meta: {
           title: '活动发券'
@@ -216,7 +216,7 @@ export const menuRoutes: RouteRecordRaw[] = [
         meta: {
           title: '账号设置'
         },
-        component: () => import('@/views/permission/account.vue')
+        component: () => import('@/views/permission/account/list.vue')
       }
     ]
   },

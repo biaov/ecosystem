@@ -7,6 +7,10 @@ export class RoleDto extends PagingDot {
   @IsOptional()
   @IsString()
   name?: string
+
+  @IsOptional()
+  @IsBoolean()
+  all?: boolean
 }
 
 /**
@@ -46,17 +50,8 @@ export class RolePermissionDto {
  * 菜单验证器
  */
 export class MenuDto extends PagingDot {
-  @IsOptional()
-  @IsString()
-  name?: string
-
-  @IsOptional()
-  @IsString()
-  createdAt?: string
-
-  @IsOptional()
   @IsBoolean()
-  all?: boolean
+  all: boolean
 }
 
 /**
@@ -88,4 +83,57 @@ export class MenuUpdateDto {
   @IsOptional()
   @IsString()
   content: string
+
+  @IsEnum(PermissionType)
+  @IsString()
+  type: string
+}
+
+/**
+ * 账号验证器
+ */
+export class AccountDto extends PagingDot {
+  @IsOptional()
+  @IsString()
+  nickname?: string
+
+  @IsOptional()
+  @IsString()
+  mobile?: string
+
+  @IsOptional()
+  @IsString()
+  roleId?: string
+}
+
+/**
+ * 账号验证器-创建
+ */
+export class AccountCreateDto {
+  @IsString()
+  username: string
+
+  @IsString()
+  @IsNotEmpty()
+  nickname: string
+
+  @IsInt()
+  roleId: number
+}
+
+/**
+ * 账号验证器-更新
+ */
+export class AccountUpdateDto {
+  @IsOptional()
+  @IsString()
+  username?: string
+
+  @IsOptional()
+  @IsString()
+  nickname?: string
+
+  @IsOptional()
+  @IsInt()
+  roleId?: number
 }

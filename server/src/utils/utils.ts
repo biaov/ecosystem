@@ -37,7 +37,7 @@ export const findAndCount = async (promise: Promise<any>, page: Pick<PageOption,
  * 转换查询条件
  */
 export const useTransfrormQuery = (
-  data: Record<string, string | string[] | FindOperator<string> | undefined>,
+  data: Record<string, number | string | string[] | FindOperator<string> | undefined>,
   transform: Record<string, string>
 ): Record<string, string | string[] | FindOperator<string> | undefined> => {
   Object.entries(transform).forEach(([key, value]) => {
@@ -70,22 +70,38 @@ export const useAffected = async (promise: Promise<DeleteResult>) => {
   return true
 }
 
+type PermissionEnumType = typeof PermissionEnum
+
 /**
  * 定义权限
  */
-export const definePermission = <T extends string, U extends Record<string, string>>(prefix: T, action: U = {} as U) => {
+export const definePermission = <T extends string, U extends Record<string, string> | null = null>(prefix: T, action?: U) => {
   const result = Object.entries({
-    ...action,
+    ...(action || {}),
     list: PermissionEnum.list,
     create: PermissionEnum.create,
     update: PermissionEnum.update,
     delete: PermissionEnum.delete
-  }).reduce((prev, [key, value]) => {
-    prev[key] = `${prefix}:${value}`
-    return prev
-  }, {})
-  type PermissionEnumType = typeof PermissionEnum
+  }).reduce(
+    (prev, [key, value]) => {
+      prev[key] = `${prefix}:${value}`
+      return prev
+    },
+    {} as Record<string, string>
+  )
+
   return result as {
-    [K in keyof U | keyof PermissionEnumType]: K extends keyof PermissionEnumType ? `${T}:${PermissionEnumType[K]}` : K extends keyof U ? `${T}:${U[K]}` : never
+    readonly [K in U extends Record<string, string> ? keyof U | keyof PermissionEnumType : keyof PermissionEnumType]: K extends keyof PermissionEnumType
+      ? `${T}:${PermissionEnumType[K]}`
+      : U extends Record<string, string>
+        ? K extends keyof U
+          ? `${T}:${U[K]}`
+          : never
+        : never
   }
 }
+
+/**
+ * 生成随机昵称
+ */
+export const useRandomName = (prefix = '') => `${prefix}${randomId()}`

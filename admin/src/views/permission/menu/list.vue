@@ -1,7 +1,7 @@
 <template>
   <c-layout-list title="权限标识">
     <template #extra>
-      <a-button type="primary" @click="onAdd()">新增</a-button>
+      <a-button type="primary" @click="onAdd()" v-perm="permKey.create">新增</a-button>
     </template>
     <template #list>
       <a-table :data-source="data" row-key="id" :loading="loading" :pagination="false">
@@ -16,10 +16,10 @@
         <a-table-column title="操作" :width="180">
           <template #="{ record }">
             <a-space :size="0">
-              <a-button type="link" size="small" @click="onAdd(record)" v-if="record.type !== MenuTypeEnum.action">新增</a-button>
-              <a-button type="link" size="small" @click="onEdit(record)">编辑</a-button>
+              <a-button type="link" size="small" @click="onAdd(record)" v-if="record.type !== MenuTypeEnum.action" v-perm="permKey.create">新增</a-button>
+              <a-button type="link" size="small" @click="onEdit(record)" v-perm="permKey.update">编辑</a-button>
               <a-popconfirm placement="left" title="你确定要删除这条数据吗?" @confirm="handleDelete(record)">
-                <a-button type="link" size="small" danger>删除</a-button>
+                <a-button type="link" size="small" danger v-perm="permKey.delete">删除</a-button>
               </a-popconfirm>
             </a-space>
           </template>
@@ -32,11 +32,15 @@
 <script lang="ts" setup>
 import { menuApi } from '@/api/permission'
 import { MenuTypeEnum } from '../enums'
-import EditForm from './form.vue'
+import EditForm from './components/form.vue'
+
+const permKey = definePermission('permission:menu')
 
 interface TableType extends IdDataType {
   parentId: number
   type: string
+  name: string
+  content: string
 }
 
 const { data, getData, loading } = useApiRequest<TableType>(() => menuApi.all())

@@ -3,17 +3,9 @@ import { UserRoleModel } from '@/models/user'
 
 export class UserRole1750059785812 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
-    const initRoles = [
-      { code: DefaultRoleCodeEnum.Visitor, name: '游客' },
-      { code: DefaultRoleCodeEnum.Admin, name: '超级管理员' }
-    ]
-    const roleCodes = initRoles.map(({ code }) => ({ code }))
-    const roles = await queryRunner.manager.find(UserRoleModel, { where: roleCodes, select: ['code'] })
-    initRoles.forEach(async item => {
-      if (roles.some(role => role.code === item.code)) return
-      // queryRunner.manager.create(UserRoleModel, item)
-      await queryRunner.manager.save(UserRoleModel, item)
-    })
+    /* ;[{ name: '游客' }, { name: '超级管理员' }]
+    await queryRunner.manager.find(UserRoleModel, { where, select: ['id'] })
+    await queryRunner.manager.save(UserRoleModel, item) */
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {}

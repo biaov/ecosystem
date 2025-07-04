@@ -1,12 +1,9 @@
-import { CaptchaService } from '@/platform/common/captcha/captcha.service'
 import { LoginController } from './login.controller'
 import { LoginService } from './login.service'
-import { TokenService } from '../../common/token/token.service'
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UserModel, UserDetailModel, UserAdminModel, UserRoleModel])],
+  imports: [TypeOrmModule.forFeature([UserModel])],
   controllers: [LoginController],
-  providers: [LoginService, CaptchaService, TokenService],
-  exports: [TokenService]
+  providers: [LoginService]
 })
 export class LoginModule {}

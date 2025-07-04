@@ -14,6 +14,10 @@ export class TokenService {
   @InjectRepository(UserRoleModel)
   private userRoleRepository: Repository<UserRoleModel>
 
+  async getUserInfo(token: string) {
+    const payload = jwt.verify(token, import.meta.env.VITE_JWT_SECRET)
+  }
+
   async verify(context: ExecutionContext, type: 'user' | 'admin' = 'user', permission?: string): Promise<boolean> {
     const request = context.switchToHttp().getRequest()
     const { authorization } = request.headers
@@ -30,12 +34,12 @@ export class TokenService {
 
     // 用户校验
     if (!payload?.userId) throw new BizException('未登录或登录已过期', HttpStatus.UNAUTHORIZED)
-    const userExist = await this[type === 'admin' ? 'userAdminRepository' : 'userRepository'].findOne({ where: { id: +payload.userId }, relations: ['user'] })
+    const userExist = await this[type === 'admin' ? 'userAdminRepository' : 'userRepository'].findOneBy({ id: +payload.userId })
     if (!userExist) throw new BizException('用户不存在', HttpStatus.UNAUTHORIZED)
 
     // 权限校验
-    if (permission) {
-      const role = await this.userRoleRepository.findOneBy({ code: userExist.user.roleCode })
+    if (permission && type === 'admin') {
+      const role = await this.userRoleRepository.findOneBy({ id: (userExist as UserAdminModel).roleId })
       if (!role) throw new BizException('用户角色不存在')
       if (!role.permissions.includes('*') && !role.permissions.includes(permission)) throw new BizException('权限不足', HttpStatus.FORBIDDEN)
     }

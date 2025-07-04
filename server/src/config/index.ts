@@ -5,3 +5,13 @@ export const initPage = {
   current: 1,
   pageSize: 10
 }
+
+/**
+ * 默认密码
+ */
+export const defaultPwd = '88888888'
+
+/**
+ * 默认头像
+ */
+export const defaultAvatar = 'https://ecosystem.biaov.cn/uploads/default-avatar.png'

@@ -9,6 +9,7 @@ declare global {
   const APP_GUARD: typeof import('@nestjs/core')['APP_GUARD']
   const APP_INTERCEPTOR: typeof import('@nestjs/core')['APP_INTERCEPTOR']
   const AfterInsert: typeof import('typeorm')['AfterInsert']
+  const AfterLoad: typeof import('typeorm')['AfterLoad']
   const AfterUpdate: typeof import('typeorm')['AfterUpdate']
   const ArrayNotEmpty: typeof import('class-validator')['ArrayNotEmpty']
   const AuthGuard: typeof import('../src/platform/common/token/token.service')['AuthGuard']
@@ -25,14 +26,17 @@ declare global {
   const Controller: typeof import('@nestjs/common')['Controller']
   const CreateDateColumn: typeof import('typeorm')['CreateDateColumn']
   const CustomRoute: typeof import('../src/common/base.decorator')['CustomRoute']
-  const DefaultRoleCodeEnum: typeof import('../src/enums/index')['DefaultRoleCodeEnum']
   const Delete: typeof import('@nestjs/common')['Delete']
   const DrawImg: typeof import('../src/utils/draw')['DrawImg']
   const Entity: typeof import('typeorm')['Entity']
+  const Exclude: typeof import('class-transformer')['Exclude']
   const Get: typeof import('@nestjs/common')['Get']
   const Global: typeof import('@nestjs/common')['Global']
+  const Header: typeof import('@nestjs/common')['Header']
   const HttpException: typeof import('@nestjs/common')['HttpException']
   const HttpStatus: typeof import('@nestjs/common')['HttpStatus']
+  const IPHeader: (typeof import('../src/common/base.decorator'))['IPHeader']
+  const IPHeaders: (typeof import('../src/common/base.decorator'))['IPHeaders']
   const IdParam: typeof import('../src/common/base.decorator')['IdParam']
   const InjectRedis: typeof import('@nestjs-modules/ioredis')['InjectRedis']
   const InjectRepository: typeof import('@nestjs/typeorm')['InjectRepository']
@@ -72,13 +76,15 @@ declare global {
   const RouterModule: typeof import('@nestjs/core')['RouterModule']
   const SetMetadata: typeof import('@nestjs/common')['SetMetadata']
   const Transform: typeof import('class-transformer')['Transform']
+  const Tree: typeof import('typeorm')['Tree']
+  const TreeChildren: typeof import('typeorm')['TreeChildren']
+  const TreeParent: typeof import('typeorm')['TreeParent']
   const Type: typeof import('class-transformer')['Type']
   const TypeOrmModule: typeof import('@nestjs/typeorm')['TypeOrmModule']
   const UnprocessableEntityException: typeof import('@nestjs/common')['UnprocessableEntityException']
   const UpdateDateColumn: typeof import('typeorm')['UpdateDateColumn']
   const UseGuards: typeof import('@nestjs/common')['UseGuards']
   const UserAdminModel: typeof import('../src/models/user')['UserAdminModel']
-  const UserDetailModel: typeof import('../src/models/user')['UserDetailModel']
   const UserModel: typeof import('../src/models/user')['UserModel']
   const UserRoleModel: typeof import('../src/models/user')['UserRoleModel']
   const ValidateNested: typeof import('class-validator')['ValidateNested']
@@ -89,6 +95,8 @@ declare global {
   const database: typeof import('../src/config/database')['default']
   const databaseOptions: typeof import('../src/config/database')['databaseOptions']
   const dayjs: typeof import('dayjs')['default']
+  const defaultAvatar: typeof import('../src/config/index')['defaultAvatar']
+  const defaultPwd: typeof import('../src/config/index')['defaultPwd']
   const definePermission: typeof import('../src/utils/utils')['definePermission']
   const findAndCount: typeof import('../src/utils/utils')['findAndCount']
   const getPageQuery: typeof import('../src/utils/utils')['getPageQuery']
@@ -99,13 +107,14 @@ declare global {
   const random: typeof import('../src/utils/utils')['random']
   const randomId: typeof import('../src/utils/utils')['randomId']
   const useAffected: typeof import('../src/utils/utils')['useAffected']
+  const useRandomName: typeof import('../src/utils/utils')['useRandomName']
   const useTransfrormQuery: typeof import('../src/utils/utils')['useTransfrormQuery']
   const validator: typeof import('../src/utils/validator')['validator']
 }
 // for type re-export
 declare global {
   // @ts-ignore
-  export type { Repository, FindOperator } from 'typeorm'
+  export type { Repository, FindOperator, TreeRepository } from 'typeorm'
   import('typeorm')
   // @ts-ignore
   export type { Redis } from 'ioredis'
@@ -120,12 +129,12 @@ declare global {
   export type { MenuModel } from '../src/models/menu'
   import('../src/models/menu')
   // @ts-ignore
-  export type { UserModel, UserAdminModel, UserRoleModel, UserDetailModel } from '../src/models/user'
+  export type { UserModel, UserAdminModel, UserRoleModel } from '../src/models/user'
   import('../src/models/user')
   // @ts-ignore
   export type { DrawImg } from '../src/utils/draw'
   import('../src/utils/draw')
   // @ts-ignore
-  export type { CaptchaEnum, DefaultRoleCodeEnum, PermissionEnum, MetaKeyEnum } from '../src/enums/index'
+  export type { CaptchaEnum, PermissionEnum, MetaKeyEnum } from '../src/enums/index'
   import('../src/enums/index')
 }

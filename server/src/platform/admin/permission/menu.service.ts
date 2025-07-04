@@ -10,13 +10,12 @@ interface RecordType {
 @Injectable()
 export class MenuService {
   @InjectRepository(MenuModel)
-  private menuRepository: Repository<MenuModel>
+  private menuRepository: TreeRepository<MenuModel>
 
-  private groupItems(list: RecordType[], group: Record<number, RecordType[]>) {
+  private filterChidren(list: Partial<MenuModel>[]) {
     return list.map(item => {
-      const child = group[item.id]
-      if (child) {
-        item.children = this.groupItems(child, group)
+      if (item.children?.length) {
+        item.children = this.filterChidren(item.children) as MenuModel[]
       } else {
         delete item.children
       }
@@ -24,36 +23,23 @@ export class MenuService {
     })
   }
 
-  private groups(list: MenuModel[]) {
-    const group = Object.groupBy(list, item => item.parentId) as Record<number, RecordType[]>
-
-    return this.groupItems((group['0'] || Object.values(group)[0]) as RecordType[], group) as Record<string, any>[]
-  }
-
-  async list({ skip, take, current, pageSize }: PageOption, { name, createdAt }: Partial<Pick<MenuModel, 'name' | 'createdAt'>>) {
-    const where = useTransfrormQuery({ name, createdAt }, { name: 'like', createdAt: 'between' })
-    const result = await findAndCount(this.menuRepository.findAndCount({ where, skip, take }), { current, pageSize })
-    result.items = this.groups(result.items)
-    return result
-  }
-
   async all() {
-    const result = await this.menuRepository.find()
-    return this.groups(result)
+    const result = await this.menuRepository.findTrees()
+    return this.filterChidren(result)
   }
 
-  private async findSameContent(content?: string, type?: string, parentId?: number) {
-    const isExist = await this.menuRepository.findOneBy({ content, type, parentId })
+  private async findSameContent(content?: string, type?: string) {
+    const isExist = await this.menuRepository.findOneBy({ content, type })
     if (isExist) throw new BizException(`相同权限类型下 \`${content}\` 已存在`)
   }
 
-  async create({ name, content, type, parentId }: Pick<MenuModel, 'name' | 'content' | 'type' | 'parentId'>) {
-    await this.findSameContent(content, type, parentId)
+  async create({ name, content, type, parentId }: Pick<MenuModel, 'name' | 'content' | 'type'> & { parentId: number }) {
+    await this.findSameContent(content, type)
     return this.menuRepository.save({ name, content, type, parentId })
   }
 
-  async update(id: number, { name, content, type, parentId }: Partial<Pick<MenuModel, 'name' | 'content' | 'type' | 'parentId'>>) {
-    await this.findSameContent(content, type, parentId)
+  async update(id: number, { name, content, type }: Partial<Pick<MenuModel, 'name' | 'content' | 'type'>>) {
+    await this.findSameContent(content, type)
     return this.menuRepository.update({ id }, { name, content })
   }
 

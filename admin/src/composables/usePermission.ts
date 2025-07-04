@@ -11,12 +11,14 @@ export const usePermission = (value: string) => {
   return false
 }
 
+type PermissionEnumType = typeof permissionEnum
+
 /**
  * 定义权限
  */
-export const definePermission = <T extends string, U extends Record<string, string>>(prefix: T, action: U = {} as U) => {
+export const definePermission = <T extends string, U extends Record<string, string> | null = null>(prefix: T, action?: U) => {
   const result = Object.entries({
-    ...action,
+    ...(action || {}),
     list: permissionEnum.list,
     create: permissionEnum.create,
     update: permissionEnum.update,
@@ -28,8 +30,14 @@ export const definePermission = <T extends string, U extends Record<string, stri
     },
     {} as Record<string, string>
   )
-  type PermissionEnumType = typeof permissionEnum
+
   return result as {
-    [K in keyof U | keyof PermissionEnumType]: K extends keyof PermissionEnumType ? `${T}:${PermissionEnumType[K]}` : K extends keyof U ? `${T}:${U[K]}` : never
+    readonly [K in U extends Record<string, string> ? keyof U | keyof PermissionEnumType : keyof PermissionEnumType]: K extends keyof PermissionEnumType
+      ? `${T}:${PermissionEnumType[K]}`
+      : U extends Record<string, string>
+        ? K extends keyof U
+          ? `${T}:${U[K]}`
+          : never
+        : never
   }
 }

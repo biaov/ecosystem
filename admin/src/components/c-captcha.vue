@@ -10,14 +10,9 @@ import { Captcha } from './types'
 
 const emit = defineEmits(['success'])
 
-const visible = defineModel('visible', {
-  type: Boolean,
-  default: false
-})
+const visible = defineModel<boolean>('visible', { default: false })
 
-const modelValue = defineModel({
-  type: Object
-})
+const modelValue = defineModel<{ id: string; value: string } | undefined | null>()
 
 const statusCode = ref(-1)
 
@@ -32,12 +27,10 @@ const { data, getData } = useApiRequest<Captcha.DataType>(
 
 const onCheck = async (value: number[]) => {
   try {
-    const res = await captchaVerifyApi.post<
-      ResponseSuccess<{
-        id: string
-        value: string
-      }>
-    >({
+    const res = await captchaVerifyApi.post<{
+      id: string
+      value: string
+    }>({
       id: data.value.id,
       value
     })

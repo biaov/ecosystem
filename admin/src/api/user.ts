@@ -4,6 +4,6 @@
 export const updatePasswordApi = useCommand('admin/user/update-password')
 
 /**
- * 用户权限
+ * 用户信息
  */
-export const permissionApi = useCommand('admin/user/permission')
+export const userApi = useRestful('admin/user')

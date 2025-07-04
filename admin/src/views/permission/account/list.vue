@@ -1,8 +1,11 @@
 <template>
-  <c-layout-list title="角色权限">
+  <c-layout-list title="账号设置">
     <template #filter>
       <a-form-item>
-        <a-input v-model:value.trim="formState.name" placeholder="名称" />
+        <a-input v-model:value.trim="formState.username" placeholder="请输入账号" />
+      </a-form-item>
+      <a-form-item>
+        <role-select v-model="formState.roleId" :role-data="roleData" placeholder="角色" allow-clear />
       </a-form-item>
       <a-form-item>
         <a-button type="primary" @click="setPage">查询</a-button>
@@ -14,12 +17,23 @@
     </template>
     <template #list>
       <a-table :data-source="data.items" row-key="id" :loading="loading" :pagination="$formatter.pagination(data)" @change="setPage">
-        <a-table-column title="名称" data-index="name" />
-        <a-table-column title="更新时间" data-index="updatedAt" :width="200" />
+        <a-table-column title="头像" :width="120">
+          <template #="{ record }">
+            <a-avatar :src="record.avatar" :size="40" />
+          </template>
+        </a-table-column>
+        <a-table-column title="账号" data-index="username" />
+        <a-table-column title="昵称" data-index="nickname" />
+        <a-table-column title="角色" :width="140">
+          <template #="{ record }">
+            {{ roleData.find(item => item.id === record.roleId)?.name }}
+          </template>
+        </a-table-column>
+        <a-table-column title="创建时间" data-index="createdAt" :width="200" />
         <a-table-column title="操作" :width="180">
           <template #="{ record }">
             <a-space :size="0">
-              <a-button type="link" size="small" :href="`/admin/permission/role/${record.id}`" v-perm="permKey.perm">分配权限</a-button>
+              <a-button type="link" size="small" @click="handleResetPwd(record)" v-perm="permKey.reset">重置密码</a-button>
               <a-button type="link" size="small" @click="onEdit(record)" v-perm="permKey.update">编辑</a-button>
               <a-popconfirm placement="left" title="你确定要删除这条数据吗?" @confirm="handleDelete(record)">
                 <a-button type="link" size="small" danger v-perm="permKey.delete">删除</a-button>
@@ -33,28 +47,33 @@
   <edit-form v-model:visible="formVisible" v-model="editForm" @ok="setPage()" />
 </template>
 <script lang="ts" setup>
-import { roleApi } from '@/api/permission'
+import { accountApi, roleApi, accountResetPwdApi } from '@/api/permission'
 import EditForm from './components/form.vue'
+import RoleSelect from './components/role-select.vue'
 
-const permKey = definePermission('permission:role', { perm: 'permission' } as const)
+const permKey = definePermission('permission:account', { reset: 'reset' } as const)
 
-interface TableType extends IdDataType {
-  name: string
-}
-
+const { data: roleData } = useApiRequest<{ name: string; id: number }[]>(roleApi.all)
 const { formState, onRestFormState, resetFormState } = useFormState({
-  name: undefined
+  username: undefined,
+  roleId: undefined
 })
 
 const { data, setPage, loading } = usePagingApiRequest(({ current, pageSize }) =>
-  roleApi.paging({
-    ...formState.value,
+  accountApi.paging({
+    ...useTransformQuery(formState, {}, 'search'),
     current,
     pageSize
   })
 )
 
 onRestFormState(setPage)
+
+interface TableType extends IdDataType {
+  username: string
+  nickname: string
+  roleId: number
+}
 
 const [formVisible, setFormVisible] = useState()
 const editForm = ref<TableType | null>(null)
@@ -69,9 +88,15 @@ const onEdit = (item: TableType) => {
   setFormVisible(true)
 }
 
-const handleDelete = async (item: TableType) => {
-  await roleApi.delete(item.id)
+const handleDelete = async (item: IdDataType) => {
+  await accountApi.delete(item.id)
   message.success('删除成功')
+  setPage()
+}
+
+const handleResetPwd = async (item: IdDataType) => {
+  await accountResetPwdApi(item.id).post()
+  message.success('重置成功')
   setPage()
 }
 </script>

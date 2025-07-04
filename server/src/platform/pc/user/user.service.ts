@@ -8,9 +8,7 @@ export class UserService {
       where: {
         id
       },
-      relations: {
-        user: true
-      }
+      relations: ['role']
     })
   }
 }

@@ -8,8 +8,11 @@
       <div class="flex justify-between items-center h-60 px-24 relative z-10 shadow-sm shadow-gray-200">
         <bread-crumb />
         <a-space>
-          <span class="user-name text-[#333]">欢迎您，{{ adminName }}游客</span>
-          <a-button type="text" title="修改密码" @click="onEditPwd">
+          <div class="user-name text-[#333]" title="修改信息">
+            欢迎您，
+            <a-button type="link" class="p-0" @click="setUserInfoOpen(true)">{{ adminName }}</a-button>
+          </div>
+          <a-button type="text" title="修改密码" @click="setPwdOpen(true)">
             <template #icon>
               <c-ant-icon name="LockOutlined" />
             </template>
@@ -34,41 +37,19 @@
       </div>
     </div>
   </div>
-  <!-- 修改密码 -->
-  <a-modal v-model:open="pwdOpen" title="修改密码" @ok="handleSubmit">
-    <a-form>
-      <a-form-item label="原始密码" required>
-        <a-input-password v-model:value.trim="formState.opassword" placeholder="请输入原始密码" />
-      </a-form-item>
-      <a-form-item label="新设密码" required>
-        <a-input-password v-model:value.trime="formState.password" placeholder="请输入新设密码" />
-      </a-form-item>
-      <a-form-item label="确认密码" required>
-        <a-input-password v-model:value.trime="formState.cpassword" placeholder="请再次输入新设密码" />
-      </a-form-item>
-    </a-form>
-  </a-modal>
   <c-reload-prompt />
+  <user-info v-model:visible="userInfoOpen" />
+  <edit-pwd v-model:visible="pwdOpen" />
 </template>
 <script setup lang="ts">
-import { updatePasswordApi } from '@/api/user'
 import SideBar from './components/side-bar.vue'
 import BreadCrumb from './components/bread-crumb.vue'
+import UserInfo from './components/user-info.vue'
+import EditPwd from './components/edit-pwd.vue'
 
 const { logout } = useStore()
 const isCollapsed = ref(false)
 const minWidth = computed(() => `${isCollapsed.value ? 1200 : 1080}px`)
-const { formState, resetFormState, setFormRules, validFormState } = useFormState({
-  opassword: '',
-  password: '',
-  cpassword: ''
-})
-
-setFormRules({
-  opassword: { required: true, message: '请输入原始密码' },
-  password: { required: true, message: '请输入新设密码' },
-  cpassword: { required: true, message: '请再次输入新设密码' }
-})
 
 const adminName = ref('') // 用户名称
 // 设置页面信息
@@ -81,18 +62,7 @@ onBeforeRouteUpdate(setWebInfo)
 
 const [pwdOpen, setPwdOpen] = useState()
 
-// 点击修改密码
-const onEditPwd = () => {
-  resetFormState()
-  setPwdOpen(true)
-}
-// 点击修改密码模态框确认按钮
-const handleSubmit = async () => {
-  if (!(await validFormState())) return
-  await updatePasswordApi.post(formState.value)
-  setPwdOpen(false)
-  message.success('密码修改成功')
-}
+const [userInfoOpen, setUserInfoOpen] = useState()
 
 const isFullScreen = ref(false)
 const onScreen = () => {

@@ -25,6 +25,7 @@ export default [
       'Param',
       'Query',
       'Body',
+      'Header',
       'UseGuards',
       'HttpException',
       'HttpStatus',
@@ -56,16 +57,20 @@ export default [
       'AfterInsert',
       'AfterUpdate',
       'Like',
-      'Between'
+      'Between',
+      'TreeParent',
+      'TreeChildren',
+      'Tree',
+      'AfterLoad'
     ]
   },
   {
     from: 'typeorm',
-    imports: ['Repository', 'FindOperator'],
+    imports: ['Repository', 'FindOperator', 'TreeRepository'],
     type: true
   },
   {
-    'class-transformer': ['Type', 'Transform']
+    'class-transformer': ['Type', 'Transform', 'Exclude']
   },
   {
     'class-validator': ['IsString', 'MaxLength', 'MinLength', 'IsNotEmpty', 'IsArray', 'ArrayNotEmpty', 'ValidateNested', 'IsNumber', 'IsInt', 'IsOptional', 'IsPositive', 'IsBoolean', 'IsEnum']

@@ -44,3 +44,9 @@ declare module 'virtual:pwa-register/vue' {
     updateServiceWorker: (reloadPage?: boolean) => Promise<void>
   }
 }
+
+interface SearchTransformForm {
+  type: string
+  keyword: string
+  [key: string]: string
+}

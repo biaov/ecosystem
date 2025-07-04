@@ -10,6 +10,10 @@ export class RoleService {
     return findAndCount(this.roleRepository.findAndCount({ where, skip, take }), { current, pageSize })
   }
 
+  all() {
+    return this.roleRepository.find()
+  }
+
   detail(id: number) {
     return this.roleRepository.findOneBy({ id })
   }

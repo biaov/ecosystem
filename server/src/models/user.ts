@@ -1,51 +1,12 @@
-import { AfterLoad, BeforeUpdate, BeforeInsert } from 'typeorm'
 import type { Relation } from 'typeorm'
 
-@Entity('user')
-export class UserModel extends BaseModel {
-  @Column({ length: 32, comment: '用户名' })
-  username: string
-
-  @Column({ length: 64, comment: '密码' })
-  password: string
-
-  @OneToOne(() => UserDetailModel, user => user.user, { cascade: true })
-  user: Relation<UserDetailModel>
-}
-
-@Entity('user_admin')
-export class UserAdminModel extends BaseModel {
-  @Column({ length: 32, comment: '用户名' })
-  username: string
-
-  @Column({ length: 64, comment: '密码', default: '' })
-  password: string
-
-  @OneToOne(() => UserDetailModel, user => user.userAdmin, { cascade: true })
-  user: Relation<UserDetailModel>
-}
-
-@Entity('user_role')
-export class UserRoleModel extends BaseModel {
-  @Column({ length: 24, comment: '名称' })
-  name: string
-
-  @Column({ length: 64, comment: '唯一值', unique: true })
-  code: string
-
-  @Column({ type: 'json', comment: '权限内容, *,页面:行为,模块:页面:行为', nullable: true })
-  permissions: string[]
-
-  @AfterLoad()
-  getPermissions() {
-    !this.permissions && (this.permissions = [])
-  }
-}
-
-@Entity('user_detail')
-export class UserDetailModel extends BaseModel {
+export abstract class UserInfo extends BaseModel {
   @Column({ length: 32, comment: '用户名', unique: true })
   username: string
+
+  @Exclude()
+  @Column({ length: 64, comment: '密码' })
+  password: string
 
   @Column({ length: 32, comment: '昵称', nullable: true })
   nickname: string
@@ -62,17 +23,41 @@ export class UserDetailModel extends BaseModel {
   @Column({ comment: '性别: 0 - 女, 1 - 男, 2 - 保密', default: 2, type: 'tinyint' })
   gender: number
 
-  @Column({ length: 12, comment: '权限码', nullable: true })
-  roleCode: string
-
   @Column({ comment: '注册来源: 1 - PC 官网, 2 - H5 端, 3 - APP 端, 4 - PC 管理后台, 5 - 微信小程序端', nullable: false, type: 'tinyint' })
   source: number
 
-  @OneToOne(() => UserModel)
-  @JoinColumn()
-  user: Relation<UserModel>
+  @AfterLoad()
+  formatMobile() {
+    this.mobile && (this.mobile = this.mobile.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2'))
+    this.username && (this.username = this.username.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2'))
+  }
+}
 
-  @OneToOne(() => UserAdminModel)
+@Entity('user')
+export class UserModel extends UserInfo {}
+
+@Entity('user_admin')
+export class UserAdminModel extends UserInfo {
+  roleId: number
+
+  @ManyToOne(() => UserRoleModel, role => role.users)
   @JoinColumn()
-  userAdmin: Relation<UserAdminModel>
+  role: Relation<UserRoleModel>
+}
+
+@Entity('user_role')
+export class UserRoleModel extends BaseModel {
+  @Column({ length: 24, comment: '名称' })
+  name: string
+
+  @Column({ type: 'json', comment: '权限内容, *,页面:行为,模块:页面:行为', nullable: true })
+  permissions: string[]
+
+  @OneToMany(() => UserAdminModel, user => user.role)
+  users: Relation<UserAdminModel[]>
+
+  @AfterLoad()
+  getPermissions() {
+    !this.permissions && (this.permissions = [])
+  }
 }

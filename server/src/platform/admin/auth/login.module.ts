@@ -2,7 +2,7 @@ import { LoginController } from './login.controller'
 import { LoginService } from './login.service'
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UserDetailModel, UserAdminModel, UserRoleModel])],
+  imports: [TypeOrmModule.forFeature([UserAdminModel])],
   controllers: [LoginController],
   providers: [LoginService]
 })

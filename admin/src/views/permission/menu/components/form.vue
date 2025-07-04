@@ -16,15 +16,10 @@
 
 <script lang="ts" setup>
 import { menuApi } from '@/api/permission'
-import { MenuTypeEnum } from '../enums'
+import { MenuTypeEnum } from '../../enums'
 
-const visible = defineModel('visible', {
-  type: Boolean,
-  default: false
-})
-const modelValue = defineModel({
-  type: Object
-})
+const visible = defineModel<boolean>('visible', { default: false })
+const modelValue = defineModel<Partial<typeof formState.value> | null>()
 const { formState, setFormRules, validFormState, setFormState, resetFormState } = useFormState({
   id: 0,
   parentId: 0,
@@ -55,7 +50,7 @@ const handleSubmit = async () => {
 watch(visible, value => {
   if (!value) return
   if (modelValue.value?.id) {
-    setFormState({ ...modelValue.value })
+    setFormState({ ...modelValue.value } as typeof formState.value)
   } else {
     resetFormState()
     modelValue.value && setFormState({ ...formState.value, ...modelValue.value })

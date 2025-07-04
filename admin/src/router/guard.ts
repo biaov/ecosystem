@@ -19,6 +19,4 @@ export const beforeEach = ({ name }: RouteLocationNormalized) => {
 /**
  * 全局后置守卫
  */
-export const afterEach = () => {
-  NProgress.done()
-}
+export const afterEach = NProgress.done.bind(null, undefined)

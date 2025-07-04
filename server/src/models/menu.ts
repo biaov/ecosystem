@@ -1,4 +1,5 @@
 @Entity('menu')
+@Tree('nested-set')
 export class MenuModel extends BaseModel {
   @Column({ length: 32, comment: '权限名称' })
   name: string
@@ -9,6 +10,9 @@ export class MenuModel extends BaseModel {
   @Column({ length: 8, comment: '权限类型, module:模块 | page:页面 | action:行为' })
   type: string
 
-  @Column({ comment: '父级ID', default: 0 })
-  parentId: number
+  @TreeParent({ onDelete: 'SET NULL' })
+  parent: MenuModel
+
+  @TreeChildren({ cascade: true })
+  children: MenuModel[]
 }

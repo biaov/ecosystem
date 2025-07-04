@@ -7,9 +7,6 @@ export class UserService {
     return this.userRepository.find({
       where: {
         id
-      },
-      relations: {
-        user: true
       }
     })
   }

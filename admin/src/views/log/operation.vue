@@ -8,9 +8,6 @@
         </a-input-group>
       </a-form-item>
       <a-form-item>
-        <!-- <a-select v-model:value="formState.module" :options="moduleList" placeholder="操作模块" /> -->
-      </a-form-item>
-      <a-form-item>
         <a-range-picker v-model:value="formState.createdAt" :placeholder="['开始时间', '结束时间']" show-time value-format="YYYY-MM-DD HH:mm:ss" />
       </a-form-item>
       <a-form-item>
@@ -31,27 +28,17 @@
 </template>
 <script lang="ts" setup>
 import { operationApi } from '@/api/log'
-import { moduleListApi } from '@/api/module'
 import { operationSearchEnum } from './enum'
 
 const { formState, onRestFormState, resetFormState } = useFormState({
   type: operationSearchEnum.nickname,
   keyword: '',
-  module: undefined,
   createdAt: []
 })
 
-// const { data: moduleList } = useApiRequest(() => moduleListApi.all())
 const { data, setPage, loading } = usePagingApiRequest(({ current, pageSize }) => {
-  const param = {
-    ...formState.value
-  } as Record<string, any>
-
-  param[formState.value.type === operationSearchEnum.nickname ? 'nickname' : 'content'] = formState.value.keyword
   return operationApi.paging({
-    ...useTransformQuery(param, {
-      createdAt: 'range'
-    }),
+    ...useTransformQuery(formState, { createdAt: 'range' }, 'search'),
     current,
     pageSize
   })
