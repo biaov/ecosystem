@@ -46,12 +46,12 @@ export const genderEnum = Object.freeze({
   options() {
     return [
       {
-        label: '女',
-        value: this.woman
-      },
-      {
         label: '男',
         value: this.man
+      },
+      {
+        label: '女',
+        value: this.woman
       },
       {
         label: '保密',

@@ -102,6 +102,11 @@ export const definePermission = <T extends string, U extends Record<string, stri
 }
 
 /**
+ * 随机字母
+ */
+export const useRandomLetter = (length = 1) => Array.from({ length }, () => String.fromCharCode(random(91, 65)).toLowerCase()).join('')
+
+/**
  * 生成随机昵称
  */
-export const useRandomName = (prefix = '') => `${prefix}${randomId()}`
+export const useRandomName = (prefix = '') => `${prefix}${randomId().slice(0, 17)}`

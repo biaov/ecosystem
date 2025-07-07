@@ -18,5 +18,4 @@ app.useGlobalPipes(
 )
 app.useGlobalFilters(new HttpErrorFilter()) // 错误过滤器
 // app.enableCors() // 启用 CORS - 这里不开, 使用反向代理
-
 import.meta.env.PROD && app.listen(import.meta.env.VITE_PORT)

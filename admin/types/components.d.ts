@@ -14,6 +14,7 @@ declare module 'vue' {
     CLayoutList: typeof import('./../src/components/c-layout-list.vue')['default']
     CReloadPrompt: typeof import('./../src/components/c-reload-prompt.vue')['default']
     CSms: typeof import('./../src/components/c-sms.vue')['default']
+    CUpload: typeof import('./../src/components/c-upload.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     UAntIcon: typeof import('../src/components/c-ant-icon.vue')['default']

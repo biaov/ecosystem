@@ -62,7 +62,7 @@ onBeforeRouteUpdate(setWebInfo)
 
 const [pwdOpen, setPwdOpen] = useState()
 
-const [userInfoOpen, setUserInfoOpen] = useState()
+const [userInfoOpen, setUserInfoOpen] = useState(true)
 
 const isFullScreen = ref(false)
 const onScreen = () => {

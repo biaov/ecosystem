@@ -1,17 +1,17 @@
 <template>
-  <a-modal v-model:open="visible" title="编辑用户信息" @ok="handleSubmit">
+  <a-modal v-model:open="visible" title="修改信息" @ok="handleSubmit">
     <a-form v-bind="$config.modalCols">
       <a-form-item label="头像" required>
-        <c-upload v-model:value="formState.avatar" />
+        <c-upload v-model="formState.avatar" />
       </a-form-item>
       <a-form-item label="昵称" required>
-        <a-input v-model:value="formState.nickname" placeholder="请输入昵称" />
+        <a-input v-model:value="formState.nickname" placeholder="请输入昵称" allow-clear />
       </a-form-item>
       <a-form-item label="性别" required>
-        <a-select v-model:value="formState.gender" :options="genderEnum.options()" placeholder="请选择性别" />
+        <a-select v-model:value="formState.gender" :options="genderEnum.options()" placeholder="请选择性别" allow-clear />
       </a-form-item>
       <a-form-item label="邮箱" required>
-        <a-input v-model:value="formState.email" placeholder="请输入邮箱" />
+        <a-input v-model:value="formState.email" placeholder="请输入邮箱" allow-clear />
       </a-form-item>
     </a-form>
   </a-modal>

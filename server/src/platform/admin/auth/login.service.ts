@@ -11,7 +11,6 @@ export class LoginService {
       },
       relations: ['role']
     })
-    console.log(result)
     if (!result) throw new BizException('用户名或密码错误')
     return result
   }

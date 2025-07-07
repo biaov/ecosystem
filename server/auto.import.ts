@@ -6,6 +6,8 @@ import { resolve } from 'path'
 const getPath = path => resolve(import.meta.dirname, path).replace(/\\/g, '/')
 
 export default [
+  { '@nestjs/platform-express': ['FileInterceptor'] },
+  { multer: ['diskStorage'] },
   {
     '@nestjs/core': ['APP_INTERCEPTOR', 'APP_GUARD', 'RouterModule', 'NestFactory']
   },
@@ -34,7 +36,9 @@ export default [
       'Global',
       'applyDecorators',
       'SetMetadata',
-      'ParseIntPipe'
+      'ParseIntPipe',
+      'UploadedFile',
+      'UseInterceptors'
     ]
   },
   {

@@ -13,7 +13,7 @@ export const useRestful = (path: string) => ({
 
 export const useCommand = (path: string) => ({
   get: (query = {}) => service.get(path, { params: query }) as Promise<Record<string, unknown>>,
-  post: <T>(data = {}) => service.post(path, data) as Promise<T>
+  post: <T>(data = {}, config = {}) => service.post(path, data, config) as Promise<T>
 })
 
 /**
