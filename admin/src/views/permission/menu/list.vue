@@ -18,7 +18,7 @@
             <a-space :size="0">
               <a-button type="link" size="small" @click="onAdd(record)" v-if="record.type !== MenuTypeEnum.action" v-perm="permKey.create">新增</a-button>
               <a-button type="link" size="small" @click="onEdit(record)" v-perm="permKey.update">编辑</a-button>
-              <a-popconfirm placement="left" title="你确定要删除这条数据吗?" @confirm="handleDelete(record)">
+              <a-popconfirm placement="left" :title="`${record.children?.length ? '删除这条数据会把所有的子数据都删除，' : ''}你确定要删除这条数据吗?`" @confirm="handleDelete(record)">
                 <a-button type="link" size="small" danger v-perm="permKey.delete">删除</a-button>
               </a-popconfirm>
             </a-space>
@@ -27,11 +27,11 @@
       </a-table>
     </template>
   </c-layout-list>
-  <edit-form v-model:visible="formVisible" v-model="editForm" @ok="getData()" />
+  <edit-form v-model:visible="formVisible" v-model="editForm" @ok="getData" />
 </template>
 <script lang="ts" setup>
 import { menuApi } from '@/api/permission'
-import { MenuTypeEnum } from '../enums'
+import { MenuTypeEnum } from '@/enums'
 import EditForm from './components/form.vue'
 
 const permKey = definePermission('permission:menu')

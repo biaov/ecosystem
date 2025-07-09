@@ -13,11 +13,12 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint ./src"
+    "lint": "eslint ./src",
+    "route-sql": "node --experimental-strip-types scripts/route-sql.ts"
   },
   "types": "module",
   "engines": {
-    "node": ">=20.12"
+    "node": ">=22.11"
   },
   "keywords": [
     "Project",

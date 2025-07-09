@@ -1,11 +1,11 @@
 <template>
-  <c-layout-list title="迁移日志">
+  <c-layout-list title="菜单管理">
     <template #filter>
       <a-form-item>
         <a-input v-model:value.trim="formState.name" placeholder="标题" />
       </a-form-item>
       <a-form-item>
-        <a-range-picker v-model:value="formState.createdAt" show-time value-format="YYYY-MM-DD HH:mm:ss" />
+        <a-range-picker v-model:value="formState.createdAt" show-time />
       </a-form-item>
       <a-form-item>
         <a-button type="primary" @click="setPage">查询</a-button>
@@ -15,14 +15,13 @@
     <template #extra></template>
     <template #list>
       <a-table :data-source="data.items" row-key="id" :loading="loading" :pagination="$formatter.pagination(data)" @change="setPage">
-        <a-table-column title="操作名称" data-index="name" />
-        <a-table-column title="操作时间" data-index="createdAt" />
+        <a-table-column title="标题" data-index="title" ellipsis />
       </a-table>
     </template>
   </c-layout-list>
 </template>
 <script lang="ts" setup>
-import { migrationApi } from '@/api/log'
+import { operationApi } from '@/api/log'
 
 const { formState, onRestFormState, resetFormState } = useFormState({
   name: undefined,
@@ -30,7 +29,7 @@ const { formState, onRestFormState, resetFormState } = useFormState({
 })
 
 const { data, setPage, loading } = usePagingApiRequest(({ current, pageSize }) =>
-  migrationApi.paging({
+  operationApi.paging({
     ...useTransformQuery(formState, {
       name: 'like',
       createdAt: 'range'

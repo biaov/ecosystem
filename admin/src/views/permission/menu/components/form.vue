@@ -2,7 +2,7 @@
   <a-modal v-model:open="visible" :title="`${formState.id ? '编辑' : '新增'}权限标识`" @ok="handleSubmit">
     <a-form v-bind="$config.modalCols">
       <a-form-item label="权限类型" required>
-        <a-select v-model:value="formState.type" :options="MenuTypeEnum.filterOptions(!formState.parentId)" :disabled="!!formState.id" />
+        <a-select v-model:value="formState.type" :options="MenuTypeEnum.filterOptions(!formState.parentId)" :disabled="!!formState.id || !!formState.parentId" />
       </a-form-item>
       <a-form-item label="权限名称" required>
         <a-input v-model:value="formState.name" placeholder="请输入权限名称" />
@@ -16,7 +16,7 @@
 
 <script lang="ts" setup>
 import { menuApi } from '@/api/permission'
-import { MenuTypeEnum } from '../../enums'
+import { MenuTypeEnum } from '@/enums'
 
 const visible = defineModel<boolean>('visible', { default: false })
 const modelValue = defineModel<Partial<typeof formState.value> | null>()

@@ -5,7 +5,7 @@
         <a-input v-model:value.trim="formState.username" placeholder="请输入账号" />
       </a-form-item>
       <a-form-item>
-        <role-select v-model="formState.roleId" :role-data="roleData" placeholder="角色" allow-clear />
+        <c-role-select v-model="formState.roleId" :role-data="roleData" placeholder="角色" allow-clear />
       </a-form-item>
       <a-form-item>
         <a-button type="primary" @click="setPage">查询</a-button>
@@ -49,7 +49,6 @@
 <script lang="ts" setup>
 import { accountApi, roleApi, accountResetPwdApi } from '@/api/permission'
 import EditForm from './components/form.vue'
-import RoleSelect from './components/role-select.vue'
 
 const permKey = definePermission('permission:account', { reset: 'reset' } as const)
 

@@ -1,5 +1,5 @@
 import { AppModule } from './app.module'
-import { HttpErrorFilter } from './http.interceptor'
+import { HttpErrorFilter } from './common/base.interceptor'
 import { TransfromPipe } from './transfrom.pipe'
 
 export const app = await NestFactory.create(AppModule)

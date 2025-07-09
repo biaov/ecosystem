@@ -14,6 +14,7 @@ declare global {
   const ArrayNotEmpty: typeof import('class-validator')['ArrayNotEmpty']
   const AuthGuard: typeof import('../src/platform/common/token/token.service')['AuthGuard']
   const AuthGuardAdmin: typeof import('../src/platform/common/token/token.service')['AuthGuardAdmin']
+  const AuthGuardAll: typeof import('../src/platform/common/token/token.service')['AuthGuardAll']
   const BaseEntity: typeof import('typeorm')['BaseEntity']
   const BaseModel: typeof import('../src/common/base.model')['BaseModel']
   const BeforeInsert: typeof import('typeorm')['BeforeInsert']
@@ -31,17 +32,18 @@ declare global {
   const Entity: typeof import('typeorm')['Entity']
   const Exclude: typeof import('class-transformer')['Exclude']
   const FileInterceptor: typeof import('@nestjs/platform-express')['FileInterceptor']
+  const GenderEnum: typeof import('../src/enums/index')['GenderEnum']
   const Get: typeof import('@nestjs/common')['Get']
   const Global: typeof import('@nestjs/common')['Global']
   const Header: typeof import('@nestjs/common')['Header']
+  const HttpErrorFilter: typeof import('../src/common/base.interceptor')['HttpErrorFilter']
   const HttpException: typeof import('@nestjs/common')['HttpException']
   const HttpStatus: typeof import('@nestjs/common')['HttpStatus']
-  const IPHeader: (typeof import('../src/common/base.decorator'))['IPHeader']
-  const IPHeaders: (typeof import('../src/common/base.decorator'))['IPHeaders']
   const IdParam: typeof import('../src/common/base.decorator')['IdParam']
   const InjectRedis: typeof import('@nestjs-modules/ioredis')['InjectRedis']
   const InjectRepository: typeof import('@nestjs/typeorm')['InjectRepository']
   const Injectable: typeof import('@nestjs/common')['Injectable']
+  const Ip: typeof import('@nestjs/common')['Ip']
   const IsArray: typeof import('class-validator')['IsArray']
   const IsBoolean: typeof import('class-validator')['IsBoolean']
   const IsEnum: typeof import('class-validator')['IsEnum']
@@ -53,6 +55,8 @@ declare global {
   const IsString: typeof import('class-validator')['IsString']
   const JoinColumn: typeof import('typeorm')['JoinColumn']
   const Like: typeof import('typeorm')['Like']
+  const Log: typeof import('../src/common/base.decorator')['Log']
+  const LogInterceptor: typeof import('../src/common/base.interceptor')['LogInterceptor']
   const LogModel: typeof import('../src/models/log')['LogModel']
   const ManyToOne: typeof import('typeorm')['ManyToOne']
   const MaxLength: typeof import('class-validator')['MaxLength']
@@ -61,6 +65,7 @@ declare global {
   const MigrationsModel: typeof import('../src/models/log')['MigrationsModel']
   const MinLength: typeof import('class-validator')['MinLength']
   const Module: typeof import('@nestjs/common')['Module']
+  const ModuleLabelEnum: typeof import('../src/enums/index')['ModuleLabelEnum']
   const NestFactory: typeof import('@nestjs/core')['NestFactory']
   const OneToMany: typeof import('typeorm')['OneToMany']
   const OneToOne: typeof import('typeorm')['OneToOne']
@@ -70,6 +75,7 @@ declare global {
   const Patch: typeof import('@nestjs/common')['Patch']
   const Permission: typeof import('../src/common/base.decorator')['Permission']
   const PermissionEnum: typeof import('../src/enums/index')['PermissionEnum']
+  const PermissionKeyEnum: typeof import('../src/enums/index')['PermissionKeyEnum']
   const Post: typeof import('@nestjs/common')['Post']
   const PrimaryGeneratedColumn: typeof import('typeorm')['PrimaryGeneratedColumn']
   const Put: typeof import('@nestjs/common')['Put']
@@ -77,6 +83,7 @@ declare global {
   const RouterModule: typeof import('@nestjs/core')['RouterModule']
   const SetMetadata: typeof import('@nestjs/common')['SetMetadata']
   const Transform: typeof import('class-transformer')['Transform']
+  const TransformResponseInterceptor: typeof import('../src/common/base.interceptor')['TransformResponseInterceptor']
   const Tree: typeof import('typeorm')['Tree']
   const TreeChildren: typeof import('typeorm')['TreeChildren']
   const TreeParent: typeof import('typeorm')['TreeParent']
@@ -140,6 +147,9 @@ declare global {
   export type { DrawImg } from '../src/utils/draw'
   import('../src/utils/draw')
   // @ts-ignore
-  export type { CaptchaEnum, PermissionEnum, MetaKeyEnum } from '../src/enums/index'
+  export type { CaptchaEnum, PermissionEnum, MetaKeyEnum, GenderEnum, PermissionKeyEnum, ModuleLabelEnum } from '../src/enums/index'
   import('../src/enums/index')
+  // @ts-ignore
+  export type { HttpErrorFilter, TransformResponseInterceptor, LogInterceptor } from '../src/common/base.interceptor'
+  import('../src/common/base.interceptor')
 }

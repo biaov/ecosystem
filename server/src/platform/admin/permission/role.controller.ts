@@ -1,12 +1,15 @@
+import { FindController } from '@/common/base.controller'
 import { RoleService } from './role.service'
 import { RoleDto, RoleCreateDto, RoleUpdateDto, RolePermissionDto } from './permission.dto'
 
-const permKey = definePermission('permission:role', { psermission: 'psermission' } as const)
+const permKey = definePermission(PermissionKeyEnum.permissionRole, { permission: 'permission' } as const)
 
 @UseGuards(AuthGuardAdmin)
 @Controller('role')
-export class RoleController {
-  constructor(private readonly roleService: RoleService) {}
+export class RoleController extends FindController {
+  constructor(private readonly roleService: RoleService) {
+    super(roleService)
+  }
 
   @Permission(permKey.list)
   @Get()
@@ -20,27 +23,32 @@ export class RoleController {
     return this.roleService.detail(id)
   }
 
+  @Log(ModuleLabelEnum.permissionRole, '创建角色：[name]')
   @Permission(permKey.create)
   @Post()
-  create(@Body() { name, code }: RoleCreateDto) {
-    return this.roleService.create({ name, code })
+  create(@Body() { name }: RoleCreateDto) {
+    return this.roleService.create({ name })
   }
 
+  @Log(ModuleLabelEnum.permissionRole, '更新角色：[name]')
   @Permission(permKey.update)
   @Patch(':id')
-  update(@IdParam() id: number, @Body() { name, code }: RoleUpdateDto) {
-    return this.roleService.update(id, { name, code })
+  async update(@IdParam() id: number, @Body() { name }: RoleUpdateDto) {
+    await this.roleService.update(id, { name })
+    return await this.roleService.detail(id)
   }
 
+  @Log(ModuleLabelEnum.permissionRole, '删除角色：[name]')
   @Permission(permKey.delete)
   @Delete(':id')
   delete(@IdParam() id: number) {
-    return this.roleService.delete(id)
+    return this.find(this.roleService.delete(id), id, 'delete')
   }
 
-  @Permission(permKey.psermission)
+  @Log(ModuleLabelEnum.permissionRole, '分配角色权限：[name]')
+  @Permission(permKey.permission)
   @Post(':id/permission')
   permission(@IdParam() id: number, @Body() { permissions }: RolePermissionDto) {
-    return this.roleService.permission(id, { permissions })
+    return this.find(this.roleService.permission(id, { permissions }), id)
   }
 }

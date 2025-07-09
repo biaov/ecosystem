@@ -69,7 +69,7 @@ export const menuRoutes: RouteRecordRaw[] = [
         path: 'category',
         name: 'gift-category',
         meta: {
-          title: '商品分类'
+          title: '礼品分类'
         },
         component: () => import('@/views/gift/category.vue')
       },
@@ -108,6 +108,14 @@ export const menuRoutes: RouteRecordRaw[] = [
           title: '积分订单'
         },
         component: () => import('@/views/order/credit.vue')
+      },
+      {
+        path: 'sales',
+        name: 'order-sales',
+        meta: {
+          title: '售后退款'
+        },
+        component: () => import('@/views/order/sales.vue')
       }
     ]
   },
@@ -138,7 +146,7 @@ export const menuRoutes: RouteRecordRaw[] = [
         component: () => import('@/views/promotion/activity-coupon.vue')
       },
       {
-        path: 'order',
+        path: 'distribute',
         name: 'promotion-distribute-coupon',
         meta: {
           title: '手动发券'

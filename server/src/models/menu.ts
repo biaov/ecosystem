@@ -10,7 +10,10 @@ export class MenuModel extends BaseModel {
   @Column({ length: 8, comment: '权限类型, module:模块 | page:页面 | action:行为' })
   type: string
 
-  @TreeParent({ onDelete: 'SET NULL' })
+  @Column({ type: 'int', nullable: true })
+  parentId: number
+
+  @TreeParent({ onDelete: 'CASCADE' })
   parent: MenuModel
 
   @TreeChildren({ cascade: true })

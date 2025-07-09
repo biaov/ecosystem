@@ -12,6 +12,7 @@
     "InjectionKey": true,
     "MaybeRef": true,
     "MaybeRefOrGetter": true,
+    "MenuTypeEnum": true,
     "PagingResponse": true,
     "PropType": true,
     "Ref": true,

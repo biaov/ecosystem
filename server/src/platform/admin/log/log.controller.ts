@@ -1,8 +1,8 @@
 import { LogService } from './log.service'
 import { LogDto, MigrationLogDto } from './log.dto'
 
-const migraPermKey = definePermission('log:migration')
-const logPermKey = definePermission('log:operation')
+const migraPermKey = definePermission(PermissionKeyEnum.logMigration)
+const logPermKey = definePermission(PermissionKeyEnum.logOperation)
 
 @UseGuards(AuthGuardAdmin)
 @Controller('log')

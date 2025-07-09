@@ -18,12 +18,12 @@ export class RoleService {
     return this.roleRepository.findOneBy({ id })
   }
 
-  create({ name, code }: Pick<UserRoleModel, 'name' | 'code'>) {
-    return this.roleRepository.save({ name, code })
+  create({ name }: Pick<UserRoleModel, 'name'>) {
+    return this.roleRepository.save({ name })
   }
 
-  update(id: number, { name, code }: Partial<Pick<UserRoleModel, 'name' | 'code'>>) {
-    return this.roleRepository.update({ id }, { name, code })
+  update(id: number, { name }: Partial<Pick<UserRoleModel, 'name'>>) {
+    return useAffected(this.roleRepository.update({ id }, { name }))
   }
 
   delete(id: number) {

@@ -15,8 +15,8 @@ export class LogDto extends PagingDot {
   content?: string
 
   @IsOptional()
-  @IsString({ each: true })
-  createdAt?: string[]
+  @IsString()
+  createdAt?: string
 
   @IsOptional()
   @IsString()
@@ -27,9 +27,11 @@ export class LogDto extends PagingDot {
  * 迁移日志验证器
  */
 export class MigrationLogDto extends PagingDot {
+  @IsOptional()
   @IsString()
   name?: string
 
+  @IsOptional()
   @IsString()
   createdAt?: string
 }

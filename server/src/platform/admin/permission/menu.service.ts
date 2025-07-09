@@ -28,19 +28,42 @@ export class MenuService {
     return this.filterChidren(result)
   }
 
-  private async findSameContent(content?: string, type?: string) {
-    const isExist = await this.menuRepository.findOneBy({ content, type })
-    if (isExist) throw new BizException(`相同权限类型下 \`${content}\` 已存在`)
+  detail(id: number) {
+    return this.menuRepository.findOneBy({ id })
+  }
+
+  private async findSameContent(content?: string, type?: string, parentId?: number) {
+    const isExist = await this.menuRepository.existsBy({ content, type, parentId: parentId || undefined })
+    if (isExist) throw new BizException(`相同类型下 \`${content}\` 已存在`)
+    if (parentId) {
+      const parent = await this.menuRepository.findOneBy({ id: parentId })
+      if (!parent) throw new BizException(`父级不存在`)
+
+      switch (parent.type) {
+        case PermissionType.Module:
+          if (type !== PermissionType.Page) throw new BizException(`模块下只能创建页面`)
+          break
+        case PermissionType.Page:
+          if (type !== PermissionType.Action) throw new BizException(`页面下只能创建行为`)
+          break
+        case PermissionType.Action:
+          throw new BizException(`行为下不能创建`)
+      }
+    }
   }
 
   async create({ name, content, type, parentId }: Pick<MenuModel, 'name' | 'content' | 'type'> & { parentId: number }) {
-    await this.findSameContent(content, type)
-    return this.menuRepository.save({ name, content, type, parentId })
+    await this.findSameContent(content, type, parentId)
+    if (parentId) {
+      return this.menuRepository.save({ name, content, type, parent: { id: parentId } })
+    } else {
+      return this.menuRepository.insert({ name, content, type })
+    }
   }
 
   async update(id: number, { name, content, type }: Partial<Pick<MenuModel, 'name' | 'content' | 'type'>>) {
     await this.findSameContent(content, type)
-    return this.menuRepository.update({ id }, { name, content })
+    return useAffected(this.menuRepository.update({ id }, { name, content }))
   }
 
   delete(id: number) {

@@ -8,7 +8,7 @@
         <a-input v-model:value="formState.nickname" placeholder="请输入昵称" />
       </a-form-item>
       <a-form-item label="角色" required>
-        <role-select v-model="formState.roleId" placeholder="请选择角色" />
+        <c-role-select v-model="formState.roleId" placeholder="请选择角色" />
       </a-form-item>
     </a-form>
   </a-modal>
@@ -16,7 +16,6 @@
 
 <script lang="ts" setup>
 import { accountApi } from '@/api/permission'
-import RoleSelect from './role-select.vue'
 
 interface FormStateType {
   id: number

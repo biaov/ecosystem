@@ -1,4 +1,4 @@
-@UseGuards(AuthGuardAdmin)
+@UseGuards(AuthGuardAll)
 @Controller('upload')
 export class UploadController {
   @UseInterceptors(

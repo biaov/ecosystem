@@ -1,6 +1,6 @@
 import { ServeStaticModule } from '@nestjs/serve-static'
 import { join } from 'path'
-import { TransformResponseInterceptor } from '@/http.interceptor'
+import { TransformResponseInterceptor, LogInterceptor } from '@/common/base.interceptor'
 import { RedisCacheModule } from '@/redis.module'
 
 const moduleSync = import.meta.glob('@/platform/**/*.module.ts', { eager: true }) as Record<string, Record<string, new () => void>>
@@ -38,6 +38,10 @@ if (!import.meta.env.PROD) {
     {
       provide: APP_INTERCEPTOR,
       useClass: TransformResponseInterceptor
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: LogInterceptor
     }
   ]
 })

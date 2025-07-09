@@ -14,11 +14,7 @@ export class TokenService {
   @InjectRepository(UserRoleModel)
   private userRoleRepository: Repository<UserRoleModel>
 
-  async getUserInfo(token: string) {
-    const payload = jwt.verify(token, import.meta.env.VITE_JWT_SECRET)
-  }
-
-  async verify(context: ExecutionContext, type: 'user' | 'admin' = 'user', permission?: string): Promise<boolean> {
+  async getPayload(context: ExecutionContext) {
     const request = context.switchToHttp().getRequest()
     const { authorization } = request.headers
     // token 校验
@@ -34,7 +30,15 @@ export class TokenService {
 
     // 用户校验
     if (!payload?.userId) throw new BizException('未登录或登录已过期', HttpStatus.UNAUTHORIZED)
-    const userExist = await this[type === 'admin' ? 'userAdminRepository' : 'userRepository'].findOneBy({ id: +payload.userId })
+
+    return { userId: +payload.userId }
+  }
+
+  async verify(context: ExecutionContext, type: 'user' | 'admin' | 'all' = 'user', permission?: string): Promise<boolean> {
+    const payload = await this.getPayload(context)
+    // 所有用户都可以访问
+    if (type === 'all') return true
+    const userExist = await this[type === 'admin' ? 'userAdminRepository' : 'userRepository'].findOneBy({ id: payload.userId })
     if (!userExist) throw new BizException('用户不存在', HttpStatus.UNAUTHORIZED)
 
     // 权限校验
@@ -79,7 +83,40 @@ export class AuthGuardAdmin implements CanActivate {
   ) {}
 
   canActivate(context: ExecutionContext) {
-    const permission = this.reflector.getAllAndOverride<string>(MetaKeyEnum.permission, [context.getHandler(), context.getClass()])
+    const permission = this.reflector.get<string>(MetaKeyEnum.permission, context.getHandler())
     return this.tokenService.verify(context, 'admin', permission)
+  }
+}
+
+/**
+ * 授权守卫
+ * token 校验守卫
+ * 用于控制台或者前端用户
+ */
+@Injectable()
+export class AuthGuardAll implements CanActivate {
+  constructor(private tokenService: TokenService) {}
+
+  canActivate(context: ExecutionContext) {
+    return this.tokenService.verify(context, 'all')
+  }
+}
+
+/**
+ * 日志
+ * 用于控制台用户
+ */
+@Injectable()
+export class LogGuard implements CanActivate {
+  constructor(
+    private reflector: Reflector,
+    private tokenService: TokenService
+  ) {}
+
+  canActivate(context: ExecutionContext) {
+    const logInfo = this.reflector.getAllAndOverride<string>(MetaKeyEnum.log, [context.getHandler(), context.getClass()])
+    // return this.tokenService.verify(context, 'admin', permission)
+    console.log(logInfo)
+    return true
   }
 }

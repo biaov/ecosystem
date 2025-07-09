@@ -11,13 +11,12 @@
     @remove="onRemove"
   >
     <div class="text-gray-400" v-if="multiple ? fileList.length < maxCount : fileList.length < 1">
-      <c-ant-icon name="LoadingOutlined" v-if="uploading" />
-      <c-ant-icon name="PlusOutlined" v-else />
+      <c-ant-icon name="PlusOutlined" />
       上传
     </div>
   </a-upload>
   <!-- 图片预览 -->
-  <a-modal v-model:visible="previewVisible" title="图片预览" :footer="null">
+  <a-modal v-model:open="previewVisible" title="图片预览" :footer="null">
     <a-image :src="previewURL" width="100%" :preview="false" />
   </a-modal>
 </template>
@@ -26,12 +25,11 @@ import type { UploadFile } from 'ant-design-vue'
 import { uploadImageApi } from '@/api/common'
 
 interface FileListItem {
-  status?: string
-  url?: string
+  url: string
   uid?: string
-  name?: string
 }
-const props = withDefaults(
+
+withDefaults(
   defineProps<{
     multiple?: boolean
     maxCount?: number
@@ -56,26 +54,25 @@ const onBeforeUpload = (file: Required<UploadFile>) => {
 
   return true
 }
-const uploading = ref(false)
 const handleUpload = async ({ file }: { file: UploadFile }) => {
-  uploading.value = true
-  try {
+  useLoadingRequest(async () => {
     const { url } = await uploadImageApi.post<{ url: string }>({ file }, { headers: { 'Content-Type': 'multipart/form-data' } })
     fileList.value = [...fileList.value, { url }]
     modelValue.value = url
-  } finally {
-    uploading.value = false
-  }
+  })
 }
 modelValue.value && !fileList.value.length && (fileList.value = [{ url: modelValue.value }])
 const previewURL = ref('')
 const [previewVisible, setPreviewVisible] = useState(false)
 const onPreview = ({ url }: FileListItem) => {
-  previewURL.value = url as string
+  previewURL.value = url
   setPreviewVisible(true)
 }
 
-const onRemove = () => {}
+const onRemove = ({ uid }: UploadFile) => {
+  fileList.value = fileList.value.filter(item => item.uid !== uid)
+  modelValue.value = ''
+}
 </script>
 
 <style lang="less">

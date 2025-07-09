@@ -64,9 +64,9 @@ export const useTransfrormQuery = (
 /**
  * 删除处理
  */
-export const useAffected = async (promise: Promise<DeleteResult>) => {
+export const useAffected = async (promise: Promise<DeleteResult>, message = '操作失败') => {
   const result = await promise
-  if (!result.affected) throw new BizException('删除失败，数据不存在或已被删除')
+  if (!result.affected) throw new BizException(message)
   return true
 }
 

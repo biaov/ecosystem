@@ -20,8 +20,8 @@
 </template>
 <script lang="ts" setup>
 import { roleApi, rolePermissionApi, menuApi } from '@/api/permission'
+import { MenuTypeEnum } from '@/enums'
 import type { PermissionName } from '@/api/types'
-import { MenuTypeEnum } from '../enums'
 
 const { id } = useRoute().params
 const router = useRouter()

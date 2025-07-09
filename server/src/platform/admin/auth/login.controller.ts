@@ -1,17 +1,14 @@
 import { TokenService } from '@/platform/common/token/token.service'
 import { CaptchaService } from '@/platform/common/captcha/captcha.service'
-import { LogService } from '@/platform/admin/log/log.service'
 import { LoginService } from './login.service'
 import { LoginDto, MobileLoginDto } from './auto.dto'
-import { Ip } from '@nestjs/common'
 
 @Controller('login')
 export class LoginController {
   constructor(
     private readonly loginService: LoginService,
     private readonly captchaService: CaptchaService,
-    private readonly tokenService: TokenService,
-    private readonly logService: LogService
+    private readonly tokenService: TokenService
   ) {}
 
   private async codeValidator(code: { id: string; value: string }) {
@@ -25,6 +22,7 @@ export class LoginController {
     const token = this.tokenService.getToken({ userId: result.id })
     return { ...result, token }
   }
+  @Log('授权/登录', '登录系统', 'nickname')
   @Post()
   async login(@Ip() ip: string, @Body() { username, password, type, code }: LoginDto & MobileLoginDto) {
     let result
@@ -36,7 +34,6 @@ export class LoginController {
       result = await this.getToken(this.loginService.login(username, password))
     }
 
-    await this.logService.createOperation({ nickname: result.nickname, module: '授权/登录', content: '登录系统', ip })
     return result
   }
 }

@@ -14,7 +14,10 @@ export const useTransformQuery = <T extends Record<string, any>>(query: T | Ref<
   Object.keys(transfomers).forEach(key => {
     let value = rawQuery[key]
     if (!value) return
-    if (typeof transfomers[key] === 'function') return transfomers[key](value, rawQuery)
+    if (typeof transfomers[key] === 'function') {
+      rawQuery[key] = transfomers[key](value, rawQuery)
+      return
+    }
 
     transfomers[key].split(/\|/g).forEach((transfomer: string) => {
       switch (transfomer) {

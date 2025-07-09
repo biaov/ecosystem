@@ -49,3 +49,9 @@ export const IdParam = () => {
  * 方法修饰器
  */
 export const Permission = (permission: string) => applyDecorators(SetMetadata(MetaKeyEnum.permission, permission))
+
+/**
+ * 操作日志
+ * 方法修饰器
+ */
+export const Log = (module: string, content: string, field?: string) => applyDecorators(SetMetadata(MetaKeyEnum.log, { module, content, field }))

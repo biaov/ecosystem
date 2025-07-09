@@ -4,8 +4,7 @@ export abstract class UserInfo extends BaseModel {
   @Column({ length: 32, comment: '用户名', unique: true })
   username: string
 
-  @Exclude()
-  @Column({ length: 64, comment: '密码' })
+  @Column({ length: 64, comment: '密码', select: false })
   password: string
 
   @Column({ length: 32, comment: '昵称', nullable: true })
@@ -38,6 +37,7 @@ export class UserModel extends UserInfo {}
 
 @Entity('user_admin')
 export class UserAdminModel extends UserInfo {
+  @Column({ comment: '角色 ID' })
   roleId: number
 
   @ManyToOne(() => UserRoleModel, role => role.users)

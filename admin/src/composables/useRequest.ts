@@ -7,7 +7,7 @@ export const useRestful = (path: string) => ({
   get: <T extends Record<string, any>>(id: number) => service.get(`${path}/${id}`) as Promise<T>,
   create: (data = {}) => service.post(path, data),
   delete: (id: number) => service.delete(`${path}/${id}`),
-  update: (id: number, data = {}) => service.patch(`${path}/${id}`, data),
+  update: <T = boolean>(id: number, data = {}) => service.patch(`${path}/${id}`, data) as Promise<T>,
   replace: (id: number, data = {}) => service.put(`${path}/${id}`, data)
 })
 
@@ -20,7 +20,7 @@ export const useCommand = (path: string) => ({
  * 请求提示/请求锁
  */
 let loadingRequestLock = false
-export const useLoadingRequest = async <T = unknown>(fn: () => Promise<T>, title = '') => {
+export const useLoadingRequest = async <T = unknown>(fn: () => Promise<T>) => {
   if (loadingRequestLock) return
   loadingRequestLock = true
   return fn().finally(() => {

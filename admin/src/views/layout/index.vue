@@ -38,7 +38,7 @@
     </div>
   </div>
   <c-reload-prompt />
-  <user-info v-model:visible="userInfoOpen" />
+  <user-info v-model:visible="userInfoOpen" @ok="setWebInfo" />
   <edit-pwd v-model:visible="pwdOpen" />
 </template>
 <script setup lang="ts">
@@ -62,7 +62,7 @@ onBeforeRouteUpdate(setWebInfo)
 
 const [pwdOpen, setPwdOpen] = useState()
 
-const [userInfoOpen, setUserInfoOpen] = useState(true)
+const [userInfoOpen, setUserInfoOpen] = useState()
 
 const isFullScreen = ref(false)
 const onScreen = () => {

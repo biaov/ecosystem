@@ -38,7 +38,8 @@ export default [
       'SetMetadata',
       'ParseIntPipe',
       'UploadedFile',
-      'UseInterceptors'
+      'UseInterceptors',
+      'Ip'
     ]
   },
   {
@@ -74,7 +75,7 @@ export default [
     type: true
   },
   {
-    'class-transformer': ['Type', 'Transform', 'Exclude']
+    'class-transformer': ['Type', 'Transform']
   },
   {
     'class-validator': ['IsString', 'MaxLength', 'MinLength', 'IsNotEmpty', 'IsArray', 'ArrayNotEmpty', 'ValidateNested', 'IsNumber', 'IsInt', 'IsOptional', 'IsPositive', 'IsBoolean', 'IsEnum']
@@ -92,7 +93,7 @@ export default [
   },
   {
     from: getPath('./src/platform/common/token/token.service.ts'),
-    imports: ['AuthGuard', 'AuthGuardAdmin'],
+    imports: ['AuthGuard', 'AuthGuardAdmin', 'AuthGuardAll'],
     type: false
   }
 ]

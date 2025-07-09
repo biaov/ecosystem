@@ -22,7 +22,7 @@
     "node"
   ],
   "engines": {
-    "node": ">=22.11.0"
+    "node": ">=22.12"
   },
   "author": {
     "name": "biaov",

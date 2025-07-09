@@ -19,9 +19,6 @@ export class RoleDto extends PagingDot {
 export class RoleCreateDto {
   @IsString()
   name: string
-
-  @IsString()
-  code: string
 }
 
 /**
@@ -30,11 +27,7 @@ export class RoleCreateDto {
 export class RoleUpdateDto {
   @IsOptional()
   @IsString()
-  name?: string
-
-  @IsOptional()
-  @IsString()
-  code: string
+  name: string
 }
 
 /**
@@ -65,7 +58,6 @@ export class MenuCreateDto {
   content: string
 
   @IsEnum(PermissionType)
-  @IsString()
   type: string
 
   @IsInt()
