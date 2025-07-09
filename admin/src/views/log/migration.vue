@@ -5,9 +5,6 @@
         <a-input v-model:value.trim="formState.name" placeholder="标题" />
       </a-form-item>
       <a-form-item>
-        <a-range-picker v-model:value="formState.createdAt" show-time value-format="YYYY-MM-DD HH:mm:ss" />
-      </a-form-item>
-      <a-form-item>
         <a-button type="primary" @click="setPage">查询</a-button>
         <a-button @click="resetFormState">重置</a-button>
       </a-form-item>
@@ -25,16 +22,12 @@
 import { migrationApi } from '@/api/log'
 
 const { formState, onRestFormState, resetFormState } = useFormState({
-  name: undefined,
-  createdAt: []
+  name: undefined
 })
 
 const { data, setPage, loading } = usePagingApiRequest(({ current, pageSize }) =>
   migrationApi.paging({
-    ...useTransformQuery(formState, {
-      name: 'like',
-      createdAt: 'range'
-    }),
+    ...formState.value,
     current,
     pageSize
   })

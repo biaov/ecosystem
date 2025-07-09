@@ -50,7 +50,7 @@
 import { accountApi, roleApi, accountResetPwdApi } from '@/api/permission'
 import EditForm from './components/form.vue'
 
-const permKey = definePermission('permission:account', { reset: 'reset' } as const)
+const permKey = definePermission(PermissionKeyEnum.permissionAccount, { reset: 'reset' } as const)
 
 const { data: roleData } = useApiRequest<{ name: string; id: number }[]>(roleApi.all)
 const { formState, onRestFormState, resetFormState } = useFormState({

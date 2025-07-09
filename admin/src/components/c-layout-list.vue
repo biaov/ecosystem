@@ -1,7 +1,7 @@
 <template>
   <!-- 列表页基础组件 -->
   <div class="layout-list">
-    <a-space direction="vertical" :size="20" :class="{ 'fixed-filter': fixedFilter }">
+    <a-space direction="vertical" :size="20" class="w-full">
       <a-card v-if="$slots.filter" class="std-filter">
         <a-form layout="inline">
           <slot name="filter"></slot>
@@ -21,39 +21,20 @@
   </div>
 </template>
 <script lang="ts" setup>
-defineProps({
-  // 标题
-  title: {
-    type: String,
-    default: ''
-  },
-  /**
-   * 无主体
-   */
-  noBody: {
-    type: Boolean,
-    default: false
-  },
-  /**
-   * 固定查询
-   */
-  fixedFilter: {
-    type: Boolean,
-    default: false
+withDefaults(
+  defineProps<{
+    title?: string
+    noBody?: boolean
+  }>(),
+  {
+    title: '',
+    noBody: false
   }
-})
+)
 </script>
 <style scoped lang="less">
 .layout-list {
   @margin-filter: 10px;
-
-  > :deep(.ant-space) {
-    width: 100%;
-  }
-
-  :deep(.ant-form-inline .ant-form-item) {
-    margin-bottom: @margin-filter;
-  }
 
   .std-filter {
     :deep(.ant-card-body) {
@@ -107,20 +88,6 @@ defineProps({
         &:last-child {
           margin-right: 0;
         }
-      }
-    }
-  }
-
-  .fixed-filter {
-    :deep(> .ant-space-item) {
-      position: relative;
-      z-index: 1;
-
-      &:first-child {
-        position: sticky;
-        top: 0;
-        left: 0;
-        z-index: 2;
       }
     }
   }

@@ -9,7 +9,7 @@ VALUES
   ('用户管理', NULL, 'user', 'module'),
   ('权限管理', NULL, 'permission', 'module'),
   ('日志管理', NULL, 'log', 'module'),
-  ('用户设置', NULL, 'setting', 'module');
+  ('系统设置', NULL, 'setting', 'module');
 
 INSERT INTO
   `eco_menu` (`name`, `parentId`, `content`, `type`)

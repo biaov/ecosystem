@@ -33,7 +33,13 @@ export abstract class UserInfo extends BaseModel {
 }
 
 @Entity('user')
-export class UserModel extends UserInfo {}
+export class UserModel extends UserInfo {
+  @Column({ comment: '是否黑名单,false-正常,true-拉黑名单', default: false })
+  blocklist: boolean
+
+  @Column({ length: 64, comment: '黑名单原因', nullable: true })
+  reason: string
+}
 
 @Entity('user_admin')
 export class UserAdminModel extends UserInfo {

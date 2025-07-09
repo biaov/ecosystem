@@ -15,8 +15,8 @@ export class LogDto extends PagingDot {
   content?: string
 
   @IsOptional()
-  @IsString()
-  createdAt?: string
+  @IsString({ each: true })
+  createdAt?: string[]
 
   @IsOptional()
   @IsString()
@@ -30,8 +30,4 @@ export class MigrationLogDto extends PagingDot {
   @IsOptional()
   @IsString()
   name?: string
-
-  @IsOptional()
-  @IsString()
-  createdAt?: string
 }

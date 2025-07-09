@@ -3,12 +3,12 @@ const { state } = useStore()
 /**
  * 权限校验
  */
-export const usePermission = (value: string) => {
+export const usePermission = (value: string | string[]) => {
   if (!state.userInfo?.role) return false
   const { permissions } = state.userInfo.role
   if (permissions.includes('*')) return true
-  if (permissions.includes(value)) return true
-  return false
+  if (Array.isArray(value)) return !value.some(item => !permissions.includes(item))
+  return permissions.includes(value)
 }
 
 type PermissionEnumType = typeof permissionEnum

@@ -37,7 +37,7 @@ export const findAndCount = async (promise: Promise<any>, page: Pick<PageOption,
  * 转换查询条件
  */
 export const useTransfrormQuery = (
-  data: Record<string, number | string | string[] | FindOperator<string> | undefined>,
+  data: Record<string, boolean | number | string | string[] | FindOperator<string> | undefined>,
   transform: Record<string, string>
 ): Record<string, string | string[] | FindOperator<string> | undefined> => {
   Object.entries(transform).forEach(([key, value]) => {
@@ -54,7 +54,7 @@ export const useTransfrormQuery = (
   })
 
   const filterValue = Object.entries(data).reduce((prev, [key, value]) => {
-    value && (prev[key] = value)
+    value !== undefined && value !== null && value !== '' && (prev[key] = value)
     return prev
   }, {})
 

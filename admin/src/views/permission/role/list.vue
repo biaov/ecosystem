@@ -36,7 +36,7 @@
 import { roleApi } from '@/api/permission'
 import EditForm from './components/form.vue'
 
-const permKey = definePermission('permission:role', { perm: 'permission' } as const)
+const permKey = definePermission(PermissionKeyEnum.permissionRole, { perm: 'permission' } as const)
 
 interface TableType extends IdDataType {
   name: string

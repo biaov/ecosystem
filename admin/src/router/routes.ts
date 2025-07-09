@@ -263,7 +263,7 @@ export const menuRoutes: RouteRecordRaw[] = [
       name: 'setting-user'
     },
     meta: {
-      title: '用户设置',
+      title: '系统设置',
       antIcon: 'SettingOutlined'
     },
     children: [

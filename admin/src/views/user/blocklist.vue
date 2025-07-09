@@ -1,11 +1,14 @@
 <template>
-  <c-layout-list title="账号设置">
+  <c-layout-list title="拉黑名单">
     <template #filter>
       <a-form-item>
-        <a-input v-model:value.trim="formState.name" placeholder="标题" />
+        <a-input-group compact>
+          <a-select v-model:value="formState.type" :options="userSearchEnum.options()" />
+          <a-input v-model:value.trim="formState.keyword" placeholder="请输入关键词" />
+        </a-input-group>
       </a-form-item>
       <a-form-item>
-        <a-range-picker v-model:value="formState.createdAt" show-time />
+        <reason-select v-model="formState.reason" placeholder="拉黑原因" class="w-200!" />
       </a-form-item>
       <a-form-item>
         <a-button type="primary" @click="setPage">查询</a-button>
@@ -15,29 +18,47 @@
     <template #extra></template>
     <template #list>
       <a-table :data-source="data.items" row-key="id" :loading="loading" :pagination="$formatter.pagination(data)" @change="setPage">
-        <a-table-column title="标题" data-index="title" ellipsis />
+        <a-table-column title="用户昵称" data-index="nickname" />
+        <a-table-column title="手机号码" data-index="mobile" />
+        <a-table-column title="拉黑原因" data-index="reason" />
+        <a-table-column title="操作" :width="120">
+          <template #="{ record }">
+            <a-popconfirm placement="left" title="你确定要移出这个用户吗?" @confirm="handleDelete(record)">
+              <a-button type="link" size="small" danger v-perm="permKey.delete">移出</a-button>
+            </a-popconfirm>
+          </template>
+        </a-table-column>
       </a-table>
     </template>
   </c-layout-list>
 </template>
 <script lang="ts" setup>
-import { operationApi } from '@/api/log'
+import { userBlocklistApi } from '@/api/user'
+import ReasonSelect from './components/reason-select.vue'
+import { userSearchEnum } from './enums'
 
+const permKey = definePermission(PermissionKeyEnum.userBlocklist)
 const { formState, onRestFormState, resetFormState } = useFormState({
-  name: undefined,
-  createdAt: []
+  type: userSearchEnum.nickname,
+  keyword: '',
+  reason: undefined
 })
 
+interface TableType extends IdDataType {}
+
 const { data, setPage, loading } = usePagingApiRequest(({ current, pageSize }) =>
-  operationApi.paging({
-    ...useTransformQuery(formState, {
-      name: 'like',
-      createdAt: 'range'
-    }),
+  userBlocklistApi.paging({
+    ...useTransformQuery(formState, {}, 'search'),
     current,
     pageSize
   })
 )
 
 onRestFormState(setPage)
+
+const handleDelete = async (item: TableType) => {
+  await userBlocklistApi.delete(item.id)
+  message.success('移出成功')
+  setPage()
+}
 </script>

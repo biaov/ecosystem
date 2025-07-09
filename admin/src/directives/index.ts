@@ -1,7 +1,7 @@
 import type { Directive } from 'vue'
 
 export const perm: Directive = {
-  mounted(el, { value }) {
+  mounted(el, { value }: { value: string | string[] }) {
     if (usePermission(value)) return
     el.setAttribute('disabled', true)
     el.parentNode.title = '权限不足，无法操作'

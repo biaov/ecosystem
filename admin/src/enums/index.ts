@@ -131,3 +131,49 @@ export const MenuTypeEnum = {
     return list
   }
 }
+
+/**
+ * admin 权限枚举
+ */
+export enum PermissionKeyEnum {
+  // 仪表面板
+  dashboard = 'dashboard:list',
+
+  // 商品管理
+  goodsList = 'goods:list',
+  goodsCategory = 'goods:category',
+
+  // 礼品管理
+  giftList = 'gift:list',
+  giftCategory = 'gift:category',
+  giftShopping = 'gift:shopping',
+
+  // 订单管理
+  orderList = 'order:list',
+  orderCredit = 'order:credit',
+  orderSales = 'order:sales',
+
+  // 促销活动
+  promotionList = 'promotion:coupon',
+  promotionActivity = 'promotion:activity-coupon',
+  promotionDistribute = 'promotion:distribute-coupon',
+
+  // 用户管理
+  userList = 'user:list',
+  userBlocklist = 'user:blocklist',
+
+  // 权限管理
+  permissionMenu = 'permission:menu',
+  permissionRole = 'permission:role',
+  permissionAccount = 'permission:account',
+
+  // 日志管理
+  logOperation = 'log:operation',
+  logMigration = 'log:migration',
+
+  // 系统设置
+  settingUser = 'setting:user',
+  settingProtocol = 'setting:protocol',
+  settingOrder = 'setting:order',
+  settingHotkeyword = 'setting:hotkeyword'
+}

@@ -93,7 +93,7 @@ export enum PermissionKeyEnum {
 
   // 用户管理
   userList = 'user:list',
-  userBlacklist = 'user:blacklist',
+  userBlocklist = 'user:blocklist',
 
   // 权限管理
   permissionMenu = 'permission:menu',
@@ -104,7 +104,7 @@ export enum PermissionKeyEnum {
   logOperation = 'log:operation',
   logMigration = 'log:migration',
 
-  // 用户设置
+  // 系统设置
   settingUser = 'setting:user',
   settingProtocol = 'setting:protocol',
   settingOrder = 'setting:order',
@@ -136,16 +136,16 @@ export enum ModuleLabelEnum {
 
   // 用户管理
   userList = '用户管理/全部用户',
-  userBlacklist = '用户管理/拉黑名单',
+  userBlocklist = '用户管理/拉黑名单',
 
   // 权限管理
   permissionMenu = '权限管理/权限标识',
   permissionRole = '权限管理/角色权限',
-  permissionAccount = '用户设置/账号设置',
+  permissionAccount = '权限管理/账号设置',
 
-  // 用户设置
-  settingUser = '用户设置/用户设置',
-  settingProtocol = '用户设置/隐私协议',
-  settingOrder = '用户设置/订单设置',
-  settingHotkeyword = '用户设置/热搜词设置'
+  // 系统设置
+  settingUser = '系统设置/用户设置',
+  settingProtocol = '系统设置/隐私协议',
+  settingOrder = '系统设置/订单设置',
+  settingHotkeyword = '系统设置/热搜词设置'
 }

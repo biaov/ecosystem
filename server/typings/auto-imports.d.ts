@@ -50,6 +50,7 @@ declare global {
   const IsInt: typeof import('class-validator')['IsInt']
   const IsNotEmpty: typeof import('class-validator')['IsNotEmpty']
   const IsNumber: typeof import('class-validator')['IsNumber']
+  const IsObject: typeof import('class-validator')['IsObject']
   const IsOptional: typeof import('class-validator')['IsOptional']
   const IsPositive: typeof import('class-validator')['IsPositive']
   const IsString: typeof import('class-validator')['IsString']
@@ -82,6 +83,7 @@ declare global {
   const Query: typeof import('@nestjs/common')['Query']
   const RouterModule: typeof import('@nestjs/core')['RouterModule']
   const SetMetadata: typeof import('@nestjs/common')['SetMetadata']
+  const SettingModel: typeof import('../src/models/setting')['SettingModel']
   const Transform: typeof import('class-transformer')['Transform']
   const TransformResponseInterceptor: typeof import('../src/common/base.interceptor')['TransformResponseInterceptor']
   const Tree: typeof import('typeorm')['Tree']
@@ -140,6 +142,9 @@ declare global {
   // @ts-ignore
   export type { MenuModel } from '../src/models/menu'
   import('../src/models/menu')
+  // @ts-ignore
+  export type { SettingModel } from '../src/models/setting'
+  import('../src/models/setting')
   // @ts-ignore
   export type { UserModel, UserAdminModel, UserRoleModel } from '../src/models/user'
   import('../src/models/user')

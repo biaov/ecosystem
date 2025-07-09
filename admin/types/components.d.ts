@@ -8,10 +8,12 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    c: typeof import('./.../src/components/c-role-select c.vuefault']
     CAntIcon: typeof import('./../src/components/c-ant-icon.vue')['default']
     CCaptcha: typeof import('./../src/components/c-captcha.vue')['default']
     CLayoutForm: typeof import('./../src/components/c-layout-form.vue')['default']
     CLayoutList: typeof import('./../src/components/c-layout-list.vue')['default']
+    copy: typeof import('./../src/components/c-role-select copy.vue')['default']
     CReloadPrompt: typeof import('./../src/components/c-reload-prompt.vue')['default']
     CRoleSelect: typeof import('./../src/components/c-role-select.vue')['default']
     CSms: typeof import('./../src/components/c-sms.vue')['default']

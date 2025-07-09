@@ -47,7 +47,8 @@ const three = threeGroup
   .map(item => {
     const actions: Omit<MenuItem, 'id'>[] = keys
       .filter(value => {
-        if (item.name === '仪表面板') return [permissionEnum.list].includes(value)
+        if (item.name === '全部用户') return [permissionEnum.list, permissionEnum.create].includes(value)
+        if (['仪表面板', '拉黑名单'].includes(item.name)) return permissionEnum.list === value
         if (['用户设置', '隐私协议', '订单设置', '热搜词设置'].includes(item.name)) return value !== permissionEnum.delete
         return true
       })
@@ -89,6 +90,15 @@ const three = threeGroup
         name: '重置密码',
         parentId: item.id,
         content: 'reset-pwd',
+        type: 'action'
+      })
+    }
+
+    if (item.content === 'blocklist' && item.name === '拉黑名单') {
+      actions.push({
+        name: '拉黑',
+        parentId: item.id,
+        content: 'block',
         type: 'action'
       })
     }

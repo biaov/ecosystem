@@ -4,7 +4,7 @@
       <a-form-item>
         <a-input-group compact>
           <a-select v-model:value="formState.type" :options="operationSearchEnum.options()" />
-          <a-input v-model:value.trim="formState.keyword" placeholder="请输入内容" />
+          <a-input v-model:value.trim="formState.keyword" placeholder="请输入关键词" />
         </a-input-group>
       </a-form-item>
       <a-form-item>
@@ -32,7 +32,7 @@
 <script lang="ts" setup>
 import { operationApi } from '@/api/log'
 import { menuApi } from '@/api/permission'
-import { operationSearchEnum } from './enum'
+import { operationSearchEnum } from './enums'
 
 const { formState, onRestFormState, resetFormState } = useFormState({
   type: operationSearchEnum.nickname,

@@ -1,4 +1,4 @@
-import { LogModel } from '@/models/log'
+import { LogModel, MigrationsModel } from '@/models/log'
 
 @Injectable()
 export class LogService {
@@ -8,10 +8,10 @@ export class LogService {
   @InjectRepository(LogModel)
   private logRepository: Repository<LogModel>
 
-  migration({ skip, take, current, pageSize }: PageOption, { name, createdAt }) {
+  migration({ skip, take, current, pageSize }: PageOption, { name }: Partial<Pick<MigrationsModel, 'name'>>) {
     return findAndCount(
       this.migrationRepository.findAndCount({
-        where: { name, createdAt },
+        where: { name },
         skip,
         take,
         order: {
@@ -21,7 +21,7 @@ export class LogService {
       { current, pageSize }
     )
   }
-  operation({ skip, take, current, pageSize }: PageOption, { nickname, module, content, createdAt, ip }: Partial<Pick<LogModel, 'nickname' | 'module' | 'content' | 'createdAt' | 'ip'>>) {
+  operation({ skip, take, current, pageSize }: PageOption, { nickname, module, content, createdAt, ip }: Partial<Pick<LogModel, 'nickname' | 'module' | 'content' | 'ip'> & { createdAt: string[] }>) {
     const where = useTransfrormQuery({ nickname, module, content, createdAt, ip }, { nickname: 'like', content: 'like', createdAt: 'between' })
     return findAndCount(
       this.logRepository.findAndCount({

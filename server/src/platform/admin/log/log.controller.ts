@@ -11,8 +11,8 @@ export class LogController {
 
   @Permission(migraPermKey.list)
   @Get('migration')
-  migration(@Query() { name, createdAt, current, pageSize }: MigrationLogDto) {
-    return this.logService.migration(getPageQuery({ current, pageSize }), { name, createdAt })
+  migration(@Query() { name, current, pageSize }: MigrationLogDto) {
+    return this.logService.migration(getPageQuery({ current, pageSize }), { name })
   }
   @Permission(logPermKey.list)
   @Get('operation')

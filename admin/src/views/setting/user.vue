@@ -1,43 +1,49 @@
 <template>
-  <c-layout-list title="菜单管理">
-    <template #filter>
-      <a-form-item>
-        <a-input v-model:value.trim="formState.name" placeholder="标题" />
+  <c-layout-form cancel-text="" ok-text="">
+    <a-card title="拉黑设置">
+      <a-form-item label="拉黑原因" required>
+        <a-textarea v-model:value="formState.reason" placeholder="请输入黑名单原因，每行一个" :auto-size="{ minRows: 6, maxRows: 6 }" />
       </a-form-item>
-      <a-form-item>
-        <a-range-picker v-model:value="formState.createdAt" show-time />
-      </a-form-item>
-      <a-form-item>
-        <a-button type="primary" @click="setPage">查询</a-button>
-        <a-button @click="resetFormState">重置</a-button>
-      </a-form-item>
+    </a-card>
+    <template #button>
+      <a-button type="primary" @click="handleSubmit" v-perm="[permKey.create, permKey.update]">保存</a-button>
     </template>
-    <template #extra></template>
-    <template #list>
-      <a-table :data-source="data.items" row-key="id" :loading="loading" :pagination="$formatter.pagination(data)" @change="setPage">
-        <a-table-column title="标题" data-index="title" ellipsis />
-      </a-table>
-    </template>
-  </c-layout-list>
+  </c-layout-form>
 </template>
 <script lang="ts" setup>
-import { operationApi } from '@/api/log'
+import { userSettingApi } from '@/api/setting'
 
-const { formState, onRestFormState, resetFormState } = useFormState({
-  name: undefined,
-  createdAt: []
+const permKey = definePermission(PermissionKeyEnum.settingUser)
+const { formState, setFormState, setFormRules, validFormState } = useFormState({
+  id: 0,
+  reason: ''
 })
 
-const { data, setPage, loading } = usePagingApiRequest(({ current, pageSize }) =>
-  operationApi.paging({
-    ...useTransformQuery(formState, {
-      name: 'like',
-      createdAt: 'range'
-    }),
-    current,
-    pageSize
-  })
-)
+const { getData } = useApiRequest(async () => {
+  const res = await userSettingApi.get<{ id: number; value: { reason: string[] } } | null>()
+  if (!res) return
+  setFormState({ id: res.id, reason: res.value.reason.join('\n') })
+})
 
-onRestFormState(setPage)
+setFormRules({
+  reason: {
+    required: true,
+    message: '请输入拉黑原因',
+    validator(value: string) {
+      const reason = value.split('\n').filter(item => item.trim())
+      formState.value.reason = reason.join('\n')
+      if (!reason.length) return Promise.reject('请输入拉黑原因')
+      if ([...new Set(reason)].length !== reason.length) return Promise.reject('拉黑原因不能重复')
+      return Promise.resolve(true)
+    }
+  }
+})
+
+const handleSubmit = async () => {
+  if (!(await validFormState())) return
+  const param = { value: { reason: formState.value.reason.split('\n') } }
+  await (formState.value.id ? userSettingApi.update(param) : userSettingApi.post(param))
+  message.success('保存成功')
+  getData()
+}
 </script>

@@ -1,38 +1,39 @@
 <template>
   <!-- 详情页基础组件 -->
-  <div class="layout-form">
+  <div class="layout-form relative">
     <a-form v-bind="$config.cols">
       <a-space direction="vertical" :size="20">
         <slot></slot>
       </a-space>
     </a-form>
-    <div class="submit-bar">
-      <a-space :size="10">
+    <div class="h-60 fixed bottom-6 left-0 z-9 flex justify-end items-center w-full bg-white shadow">
+      <a-space :size="10" class="pr-10 justify-end">
         <a-button v-if="cancelText" @click="onCancel">{{ cancelText }}</a-button>
-        <a-button v-if="submitText" type="primary" :loading="loading" @click="onSave">{{ submitText }}</a-button>
+        <a-button v-if="okText" type="primary" :loading="loading" @click="onSave">{{ okText }}</a-button>
         <slot name="button"></slot>
       </a-space>
     </div>
-    <div class="submit-bar-place"></div>
+    <div class="h-60"></div>
   </div>
 </template>
 <script lang="ts" setup>
 const router = useRouter()
-const emit = defineEmits(['cancel', 'submit'])
+const emit = defineEmits<{
+  (e: 'cancel'): void
+  (e: 'ok'): void
+}>()
 const [loading, setLoading] = useState()
 
-defineProps({
-  submitText: {
-    // 保存按钮显示
-    type: String,
-    default: '保存'
-  },
-  cancelText: {
-    // 取消按钮显示
-    type: String,
-    default: '取消'
+withDefaults(
+  defineProps<{
+    okText?: string
+    cancelText?: string
+  }>(),
+  {
+    okText: '保存',
+    cancelText: '取消'
   }
-})
+)
 // 点击取消
 const onCancel = () => {
   router.back()
@@ -43,7 +44,7 @@ const onSave = async () => {
   setTimeout(async () => {
     setLoading(true)
     try {
-      await emit('submit')
+      await emit('ok')
     } finally {
       setLoading(false)
     }
@@ -52,8 +53,6 @@ const onSave = async () => {
 </script>
 <style scoped lang="less">
 .layout-form {
-  position: relative;
-
   :deep(.ant-space) {
     width: 100%;
     display: flex;
@@ -71,29 +70,6 @@ const onSave = async () => {
     .ant-input-wrapper,
     .ant-picker {
       max-width: 500px !important;
-    }
-  }
-
-  .submit-bar {
-    &,
-    &-place {
-      height: 60px;
-    }
-
-    position: fixed;
-    bottom: 6px;
-    left: 0;
-    z-index: 9;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    width: 100%;
-    background: #fff;
-    box-shadow: 0 0px 8px #f0f1f2;
-
-    :deep(.ant-space) {
-      padding-right: 10px;
-      justify-content: flex-end;
     }
   }
 }

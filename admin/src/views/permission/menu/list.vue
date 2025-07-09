@@ -34,7 +34,7 @@ import { menuApi } from '@/api/permission'
 import { MenuTypeEnum } from '@/enums'
 import EditForm from './components/form.vue'
 
-const permKey = definePermission('permission:menu')
+const permKey = definePermission(PermissionKeyEnum.permissionMenu)
 
 interface TableType extends IdDataType {
   parentId: number
