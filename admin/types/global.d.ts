@@ -50,3 +50,16 @@ interface SearchTransformForm {
   keyword: string
   [key: string]: string
 }
+
+declare module 'quill-image-uploader'
+declare module 'quill-emoji'
+
+interface Document {
+  caretPositionFromPoint(
+    x: number,
+    y: number
+  ): {
+    offsetNode: Node
+    offset: number
+  }
+}

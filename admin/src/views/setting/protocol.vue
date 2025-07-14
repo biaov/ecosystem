@@ -1,43 +1,43 @@
 <template>
-  <c-layout-list title="菜单管理">
-    <template #filter>
-      <a-form-item>
-        <a-input v-model:value.trim="formState.name" placeholder="标题" />
-      </a-form-item>
-      <a-form-item>
-        <a-range-picker v-model:value="formState.createdAt" show-time />
-      </a-form-item>
-      <a-form-item>
-        <a-button type="primary" @click="setPage">查询</a-button>
-        <a-button @click="resetFormState">重置</a-button>
-      </a-form-item>
+  <c-layout-form cancel-text="" ok-text="">
+    <a-card title="隐私协议">
+      <a-space direction="vertical" :size="20">
+        <a-input v-model:value="formState.title" placeholder="请输入协议标题" allow-clear />
+        <c-rich-text v-model="formState.content" placeholder="请输入协议内容" height="calc(100vh - 376px)" />
+      </a-space>
+    </a-card>
+    <template #button>
+      <a-button type="primary" @click="handleSubmit" v-perm="[permKey.create, permKey.update]">保存</a-button>
     </template>
-    <template #extra></template>
-    <template #list>
-      <a-table :data-source="data.items" row-key="id" :loading="loading" :pagination="$formatter.pagination(data)" @change="setPage">
-        <a-table-column title="标题" data-index="title" ellipsis />
-      </a-table>
-    </template>
-  </c-layout-list>
+  </c-layout-form>
 </template>
 <script lang="ts" setup>
-import { operationApi } from '@/api/log'
+import { protocolSettingApi } from '@/api/setting'
 
-const { formState, onRestFormState, resetFormState } = useFormState({
-  name: undefined,
-  createdAt: []
+const permKey = definePermission(PermissionKeyEnum.settingProtocol)
+const { formState, setFormState, setFormRules, validFormState } = useFormState({
+  id: 0,
+  title: '',
+  content: ''
 })
 
-const { data, setPage, loading } = usePagingApiRequest(({ current, pageSize }) =>
-  operationApi.paging({
-    ...useTransformQuery(formState, {
-      name: 'like',
-      createdAt: 'range'
-    }),
-    current,
-    pageSize
-  })
-)
+const { getData } = useApiRequest(async () => {
+  const res = await protocolSettingApi.get<{ id: number; value: { title: string; content: string } } | null>()
+  if (!res) return
+  setFormState({ id: res.id, ...res.value })
+})
 
-onRestFormState(setPage)
+setFormRules({
+  title: { required: true, message: '请输入标题' },
+  content: { required: true, message: '请输入内容' }
+})
+
+const handleSubmit = async () => {
+  if (!(await validFormState())) return
+  const { title, content } = formState.value
+  const param = { value: { title, content } }
+  await (formState.value.id ? protocolSettingApi.update(param) : protocolSettingApi.post(param))
+  message.success('保存成功')
+  getData()
+}
 </script>
