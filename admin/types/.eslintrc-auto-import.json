@@ -96,6 +96,7 @@
     "useTemplateRef": true,
     "useToastRequest": true,
     "useTransformQuery": true,
+    "useTransfromTextarea": true,
     "useValidEmail": true,
     "useValidEmailForm": true,
     "useValidPhone": true,

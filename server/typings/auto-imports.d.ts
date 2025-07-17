@@ -35,6 +35,9 @@ declare global {
   const GenderEnum: typeof import('../src/enums/index')['GenderEnum']
   const Get: typeof import('@nestjs/common')['Get']
   const Global: typeof import('@nestjs/common')['Global']
+  const GoodsCategoryModel: typeof import('../src/models/goods')['GoodsCategoryModel']
+  const GoodsModel: typeof import('../src/models/goods')['GoodsModel']
+  const GoodsSpecModel: typeof import('../src/models/goods')['GoodsSpecModel']
   const Header: typeof import('@nestjs/common')['Header']
   const HttpErrorFilter: typeof import('../src/common/base.interceptor')['HttpErrorFilter']
   const HttpException: typeof import('@nestjs/common')['HttpException']
@@ -136,6 +139,9 @@ declare global {
   // @ts-ignore
   export type { BizException } from '../src/exceptions/biz'
   import('../src/exceptions/biz')
+  // @ts-ignore
+  export type { GoodsModel, GoodsCategoryModel, GoodsSpecModel } from '../src/models/goods'
+  import('../src/models/goods')
   // @ts-ignore
   export type { MigrationsModel, LogModel } from '../src/models/log'
   import('../src/models/log')

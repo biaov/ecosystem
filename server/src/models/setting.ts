@@ -4,5 +4,5 @@ export class SettingModel extends BaseModel {
   key: string
 
   @Column({ type: 'json', comment: '设置的值' })
-  value: Record<string, any>
+  value: any
 }

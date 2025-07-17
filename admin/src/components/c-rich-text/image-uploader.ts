@@ -5,6 +5,9 @@ import Toolbar from 'quill/modules/toolbar'
 
 const InlineBlot = Quill.import('blots/block') as typeof Block
 
+/**
+ * 加载图片
+ */
 class LoadingImage extends InlineBlot {
   static create(src: string | boolean) {
     const node = super.create(src)
@@ -28,9 +31,11 @@ class LoadingImage extends InlineBlot {
 LoadingImage.blotName = 'imageBlot'
 LoadingImage.className = 'image-uploading'
 LoadingImage.tagName = 'span'
-
 Quill.register({ 'formats/imageBlot': LoadingImage })
 
+/**
+ * 图片上传
+ */
 class ImageUploader {
   private quill: Quill
   private options: QuillOptions & { upload?: (file: File) => Promise<string> }
@@ -55,6 +60,9 @@ class ImageUploader {
     this.quill.root.addEventListener('paste', this.handlePaste, false)
   }
 
+  /**
+   * 选择本地图片
+   */
   selectLocalImage() {
     this.quill.focus()
     this.range = this.quill.getSelection()
@@ -74,20 +82,43 @@ class ImageUploader {
     })
   }
 
+  /**
+   * 拖拽图片进入编辑区
+   */
   handleDrop(evt: DragEvent) {
-    if (evt.dataTransfer && evt.dataTransfer.files && evt.dataTransfer.files.length) {
-      evt.stopPropagation()
-      evt.preventDefault()
-      const selection = document.getSelection()
-      const range = document.caretPositionFromPoint(evt.clientX, evt.clientY)
-      if (selection && range) {
-        selection.setBaseAndExtent(range.offsetNode, range.offset, range.offsetNode, range.offset)
-      }
+    if (!(evt.dataTransfer && evt.dataTransfer.files && evt.dataTransfer.files.length)) return
+    evt.stopPropagation()
+    evt.preventDefault()
+    const selection = document.getSelection()
+    const range = document.caretPositionFromPoint(evt.clientX, evt.clientY)
+    selection && range && selection.setBaseAndExtent(range.offsetNode, range.offset, range.offsetNode, range.offset)
 
+    this.quill.focus()
+    this.range = this.quill.getSelection()
+    let file = evt.dataTransfer.files[0]
+
+    setTimeout(() => {
       this.quill.focus()
       this.range = this.quill.getSelection()
-      let file = evt.dataTransfer.files[0]
+      this.readAndUploadFile(file)
+    }, 0)
+  }
 
+  /**
+   * 粘贴操作
+   */
+  handlePaste(evt: ClipboardEvent) {
+    const clipboard = evt.clipboardData
+    if (!(clipboard && (clipboard.items || clipboard.files))) return
+    const items = clipboard.items || clipboard.files
+    const imgTypeRege = /^image\/(jpe?g|gif|png|svg|webp)$/i
+    for (let i = 0; i < items.length; i++) {
+      if (!imgTypeRege.test(items[i].type)) return
+      let file = items[i].getAsFile()
+      if (!file) return
+      this.quill.focus()
+      this.range = this.quill.getSelection()
+      evt.preventDefault()
       setTimeout(() => {
         this.quill.focus()
         this.range = this.quill.getSelection()
@@ -96,48 +127,23 @@ class ImageUploader {
     }
   }
 
-  handlePaste(evt: ClipboardEvent) {
-    let clipboard = evt.clipboardData
-    if (clipboard && (clipboard.items || clipboard.files)) {
-      let items = clipboard.items || clipboard.files
-      const IMAGE_MIME_REGEX = /^image\/(jpe?g|gif|png|svg|webp)$/i
-      for (let i = 0; i < items.length; i++) {
-        if (IMAGE_MIME_REGEX.test(items[i].type)) {
-          let file = items[i].getAsFile()
-          if (!file) return
-          this.quill.focus()
-          this.range = this.quill.getSelection()
-          evt.preventDefault()
-          setTimeout(() => {
-            this.quill.focus()
-            this.range = this.quill.getSelection()
-            this.readAndUploadFile(file)
-          }, 0)
-        }
-      }
-    }
-  }
-
+  /**
+   * 读取并上传文件
+   */
   readAndUploadFile(file: File) {
     let isUploadReject = false
-
     const fileReader = new FileReader()
-
     fileReader.addEventListener(
       'load',
       () => {
-        if (!isUploadReject) {
-          let base64ImageSrc = fileReader.result as string
-          this.insertBase64Image(base64ImageSrc)
-        }
+        if (isUploadReject) return
+        let base64ImageSrc = fileReader.result as string
+        this.insertBase64Image(base64ImageSrc)
       },
       false
     )
 
-    if (file) {
-      fileReader.readAsDataURL(file)
-    }
-
+    file && fileReader.readAsDataURL(file)
     this.options.upload!(file).then(
       imageUrl => {
         this.insertToEditor(imageUrl)
@@ -150,17 +156,25 @@ class ImageUploader {
     )
   }
 
+  /**
+   * 文件更改
+   */
   fileChanged() {
     if (!this.fileHolder) return
     const file = this.fileHolder.files![0]
     this.readAndUploadFile(file)
   }
 
+  /**
+   * 插入 base64 图片
+   */
   insertBase64Image(url: string) {
-    const range = this.range!
-    this.placeholderDelta = this.quill.insertEmbed(range.index, LoadingImage.blotName, `${url}`, 'user')
+    this.placeholderDelta = this.quill.insertEmbed(this.range!.index, LoadingImage.blotName, `${url}`, 'user')
   }
 
+  /**
+   * 插入图片
+   */
   insertToEditor(url: string) {
     const range = this.range!
     const lengthToDelete = this.calculatePlaceholderInsertLength()
@@ -170,6 +184,9 @@ class ImageUploader {
     this.quill.setSelection(range, 'user')
   }
 
+  /**
+   * 计算占位符长度
+   */
   calculatePlaceholderInsertLength() {
     return this.placeholderDelta!.ops.reduce((accumulator, deltaOperation) => {
       if (deltaOperation.hasOwnProperty('insert')) accumulator++
@@ -177,11 +194,13 @@ class ImageUploader {
     }, 0)
   }
 
+  /**
+   * 移除本地 base64 图片
+   */
   removeBase64Image() {
     const { index } = this.range!
     const lengthToDelete = this.calculatePlaceholderInsertLength()
     this.quill.deleteText(index, lengthToDelete, 'user')
   }
 }
-
 Quill.register('modules/imageUploader', ImageUploader)

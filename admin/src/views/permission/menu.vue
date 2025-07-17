@@ -27,12 +27,12 @@
       </a-table>
     </template>
   </c-layout-list>
-  <edit-form v-model:visible="formVisible" v-model="editForm" @ok="getData" />
+  <menu-form v-model:visible="formVisible" v-model="editForm" @ok="getData" />
 </template>
 <script lang="ts" setup>
 import { menuApi } from '@/api/permission'
 import { MenuTypeEnum } from '@/enums'
-import EditForm from './components/form.vue'
+import MenuForm from './components/menu-form.vue'
 
 const permKey = definePermission(PermissionKeyEnum.permissionMenu)
 
@@ -43,7 +43,7 @@ interface TableType extends IdDataType {
   content: string
 }
 
-const { data, getData, loading } = useApiRequest<TableType>(() => menuApi.all())
+const { data, getData, loading } = useApiRequest<TableType>(menuApi.all)
 
 const [formVisible, setFormVisible] = useState()
 const editForm = ref<Partial<TableType> | null>(null)

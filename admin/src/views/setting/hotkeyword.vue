@@ -1,49 +1,86 @@
 <template>
-  <c-layout-form cancel-text="" ok-text="">
-    <a-card title="拉黑设置">
-      <a-form-item label="拉黑原因" required>
-        <a-textarea v-model:value="formState.reason" placeholder="请输入黑名单原因，每行一个" :auto-size="{ minRows: 6, maxRows: 6 }" />
-      </a-form-item>
-    </a-card>
-    <template #button>
-      <a-button type="primary" @click="handleSubmit" v-perm="[permKey.create, permKey.update]">保存</a-button>
+  <c-layout-list title="热搜词设置">
+    <template #extra>
+      <a-button type="primary" v-perm="permKey.create" @click="onAdd">新增热搜词</a-button>
     </template>
-  </c-layout-form>
+    <template #list>
+      <a-table :data-source="data" row-key="id" :loading="loading" :pagination="false">
+        <a-table-column title="名称" data-index="name" />
+        <a-table-column title="排序">
+          <template #="{ record }">
+            <a-input-number v-model:value="record.sort" :min="1" :max="99" :precision="0" @blur="handleUpdateData()" />
+          </template>
+        </a-table-column>
+        <a-table-column title="操作" :width="100">
+          <template #="{ index }">
+            <a-popconfirm placement="left" title="你确定要删除这条数据吗?" @confirm="handleDelete(index)">
+              <a-button type="link" size="small" danger v-perm="permKey.delete">删除</a-button>
+            </a-popconfirm>
+          </template>
+        </a-table-column>
+      </a-table>
+    </template>
+  </c-layout-list>
+  <a-modal title="新增热搜词" v-model:open="visible" @ok="onSubmit">
+    <a-form v-bind="$config.modalCols">
+      <a-form-item label="名称" required>
+        <a-input v-model:value="formState.name" placeholder="请输入名称" :maxlength="10" />
+      </a-form-item>
+      <a-form-item label="排序" required>
+        <a-input-number v-model:value="formState.sort" :min="1" :max="99" placeholder="请输入排序" :precision="0" class="w-full" />
+      </a-form-item>
+    </a-form>
+  </a-modal>
 </template>
 <script lang="ts" setup>
-import { userSettingApi } from '@/api/setting'
+import { hotkeywordSettingApi } from '@/api/setting'
 
-const permKey = definePermission(PermissionKeyEnum.settingUser)
-const { formState, setFormState, setFormRules, validFormState } = useFormState({
-  id: 0,
-  reason: ''
+const permKey = definePermission(PermissionKeyEnum.settingHotkeyword)
+
+let id: number
+interface TableType {
+  name: string
+  sort: number
+}
+const { data, loading, getData } = useApiRequest<TableType[]>(async () => {
+  const res = await hotkeywordSettingApi.get<{ id: number; value: TableType[] }>()
+  if (!res) return []
+  id = res.id
+  return res.value
 })
 
-const { getData } = useApiRequest(async () => {
-  const res = await userSettingApi.get<{ id: number; value: { reason: string[] } } | null>()
-  if (!res) return
-  setFormState({ id: res.id, reason: res.value.reason.join('\n') })
+const [visible, setVisible] = useState()
+const { formState, setFormRules, validFormState, resetFormState } = useFormState({
+  name: '',
+  sort: undefined
 })
-
 setFormRules({
-  reason: {
-    required: true,
-    message: '请输入拉黑原因',
-    validator(value: string) {
-      const reason = value.split('\n').filter(item => item.trim())
-      formState.value.reason = reason.join('\n')
-      if (!reason.length) return Promise.reject('请输入拉黑原因')
-      if ([...new Set(reason)].length !== reason.length) return Promise.reject('拉黑原因不能重复')
-      return Promise.resolve(true)
-    }
-  }
+  name: { required: true, message: '请输入名称' },
+  sort: { required: true, message: '请输入排序' }
 })
 
-const handleSubmit = async () => {
-  if (!(await validFormState())) return
-  const param = { value: { reason: formState.value.reason.split('\n') } }
-  await (formState.value.id ? userSettingApi.update(param) : userSettingApi.post(param))
-  message.success('保存成功')
+const onAdd = () => {
+  resetFormState()
+  setVisible(true)
+}
+
+const handleUpdateData = async (value?: TableType[]) => {
+  !value && (value = JSON.parse(JSON.stringify(data.value)))
+  const param = { value }
+  await (id ? hotkeywordSettingApi.update(param) : hotkeywordSettingApi.post(param))
+  message.success('操作成功')
   getData()
+}
+const onSubmit = async () => {
+  if (!(await validFormState())) return
+  const dataClone = JSON.parse(JSON.stringify(data.value))
+  dataClone.push({ ...formState.value })
+  await handleUpdateData(dataClone)
+  setVisible(false)
+}
+
+const handleDelete = (index: number) => {
+  data.value.splice(index, 1)
+  handleUpdateData()
 }
 </script>

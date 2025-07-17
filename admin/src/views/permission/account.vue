@@ -44,11 +44,11 @@
       </a-table>
     </template>
   </c-layout-list>
-  <edit-form v-model:visible="formVisible" v-model="editForm" @ok="setPage()" />
+  <account-form v-model:visible="formVisible" v-model="editForm" @ok="setPage()" />
 </template>
 <script lang="ts" setup>
 import { accountApi, roleApi, accountResetPwdApi } from '@/api/permission'
-import EditForm from './components/form.vue'
+import AccountForm from './components/account-form.vue'
 
 const permKey = definePermission(PermissionKeyEnum.permissionAccount, { reset: 'reset' } as const)
 

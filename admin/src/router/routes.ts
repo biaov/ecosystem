@@ -30,6 +30,14 @@ export const menuRoutes: RouteRecordRaw[] = [
     },
     children: [
       {
+        path: 'category',
+        name: 'goods-category',
+        meta: {
+          title: '商品分类'
+        },
+        component: () => import('@/views/goods/category.vue')
+      },
+      {
         path: 'list',
         name: 'goods-list',
         meta: {
@@ -38,12 +46,39 @@ export const menuRoutes: RouteRecordRaw[] = [
         component: () => import('@/views/goods/list.vue')
       },
       {
-        path: 'category',
-        name: 'goods-category',
+        path: 'add',
+        name: 'goods-add',
         meta: {
-          title: '商品分类'
+          title: '新增商品',
+          hidden: true
         },
-        component: () => import('@/views/goods/category.vue')
+        component: () => import('@/views/goods/detail.vue')
+      },
+      {
+        path: 'edit/:id',
+        name: 'goods-edit',
+        meta: {
+          title: '编辑商品',
+          hidden: true
+        },
+        component: () => import('@/views/goods/detail.vue')
+      },
+      {
+        path: 'detail/:id',
+        name: 'goods-detail',
+        meta: {
+          title: '商品详情',
+          hidden: true
+        },
+        component: () => import('@/views/goods/detail.vue')
+      },
+      {
+        path: 'stock',
+        name: 'goods-stock',
+        meta: {
+          title: '商品库存'
+        },
+        component: () => import('@/views/goods/stock.vue')
       }
     ]
   },
@@ -199,7 +234,7 @@ export const menuRoutes: RouteRecordRaw[] = [
         meta: {
           title: '权限标识'
         },
-        component: () => import('@/views/permission/menu/list.vue')
+        component: () => import('@/views/permission/menu.vue')
       },
       {
         path: 'role',
@@ -207,7 +242,7 @@ export const menuRoutes: RouteRecordRaw[] = [
         meta: {
           title: '角色权限'
         },
-        component: () => import('@/views/permission/role/list.vue')
+        component: () => import('@/views/permission/role.vue')
       },
       {
         path: 'role/:id',
@@ -216,7 +251,7 @@ export const menuRoutes: RouteRecordRaw[] = [
           title: '分配权限',
           hidden: true
         },
-        component: () => import('@/views/permission/role/permission.vue')
+        component: () => import('@/views/permission/role-permission.vue')
       },
       {
         path: 'account',
@@ -224,7 +259,7 @@ export const menuRoutes: RouteRecordRaw[] = [
         meta: {
           title: '账号设置'
         },
-        component: () => import('@/views/permission/account/list.vue')
+        component: () => import('@/views/permission/account.vue')
       }
     ]
   },

@@ -1,43 +1,69 @@
 <template>
-  <c-layout-list title="菜单管理">
-    <template #filter>
-      <a-form-item>
-        <a-input v-model:value.trim="formState.name" placeholder="标题" />
-      </a-form-item>
-      <a-form-item>
-        <a-range-picker v-model:value="formState.createdAt" show-time />
-      </a-form-item>
-      <a-form-item>
-        <a-button type="primary" @click="setPage">查询</a-button>
-        <a-button @click="resetFormState">重置</a-button>
-      </a-form-item>
+  <c-layout-list title="商品分类">
+    <template #extra>
+      <a-button type="primary" @click="onAdd()" v-perm="permKey.create">新增</a-button>
     </template>
-    <template #extra></template>
     <template #list>
-      <a-table :data-source="data.items" row-key="id" :loading="loading" :pagination="$formatter.pagination(data)" @change="setPage">
-        <a-table-column title="标题" data-index="title" ellipsis />
+      <a-table :data-source="data" row-key="id" :loading="loading" :pagination="false">
+        <a-table-column title="名称" data-index="name" />
+        <a-table-column title="排序">
+          <template #="{ record }">
+            <a-input-number v-model:value="record.sort" :min="1" :max="99" :precision="0" @blur="handleUpdateData(record)" />
+          </template>
+        </a-table-column>
+        <a-table-column title="更新时间" data-index="updatedAt" :width="200" />
+        <a-table-column title="操作" :width="180">
+          <template #="{ record }">
+            <a-space :size="0">
+              <a-button type="link" size="small" @click="onAdd(record)" v-perm="permKey.create">新增</a-button>
+              <a-button type="link" size="small" @click="onEdit(record)" v-perm="permKey.update">编辑</a-button>
+              <a-popconfirm placement="left" :title="`${record.children?.length ? '删除这条数据会把所有的子数据都删除，' : ''}你确定要删除这条数据吗?`" @confirm="handleDelete(record)">
+                <a-button type="link" size="small" danger v-perm="permKey.delete">删除</a-button>
+              </a-popconfirm>
+            </a-space>
+          </template>
+        </a-table-column>
       </a-table>
     </template>
   </c-layout-list>
+  <category-form v-model:visible="formVisible" v-model="editForm" @ok="getData" />
 </template>
 <script lang="ts" setup>
-import { operationApi } from '@/api/log'
+import { goodsCategoryApi } from '@/api/goods'
+import CategoryForm from './components/category-form.vue'
 
-const { formState, onRestFormState, resetFormState } = useFormState({
-  name: undefined,
-  createdAt: []
-})
+const permKey = definePermission(PermissionKeyEnum.goodsCategory)
 
-const { data, setPage, loading } = usePagingApiRequest(({ current, pageSize }) =>
-  operationApi.paging({
-    ...useTransformQuery(formState, {
-      name: 'like',
-      createdAt: 'range'
-    }),
-    current,
-    pageSize
-  })
-)
+interface TableType extends IdDataType {
+  parentId: number
+  name: string
+  sort: number
+}
 
-onRestFormState(setPage)
+const { data, getData, loading } = useApiRequest<TableType[]>(goodsCategoryApi.all)
+
+const [formVisible, setFormVisible] = useState()
+const editForm = ref<Partial<TableType> | null>(null)
+
+const onAdd = (item?: TableType) => {
+  editForm.value = {
+    parentId: item?.id || 0
+  }
+  setFormVisible(true)
+}
+
+const onEdit = (item: TableType) => {
+  editForm.value = item
+  setFormVisible(true)
+}
+const handleDelete = async (item: TableType) => {
+  await goodsCategoryApi.delete(item.id)
+  message.success('删除成功')
+  getData()
+}
+
+const handleUpdateData = async (item: TableType) => {
+  await goodsCategoryApi.update(item.id, { sort: item.sort })
+  message.success('更新成功')
+}
 </script>

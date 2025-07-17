@@ -11,6 +11,7 @@ declare module 'vue' {
     c: typeof import('./.../src/components/c-role-select c.vuefault']
     CAntIcon: typeof import('./../src/components/c-ant-icon.vue')['default']
     CCaptcha: typeof import('./../src/components/c-captcha.vue')['default']
+    CCascader: typeof import('./../src/components/c-cascader/c-cascader.vue')['default']
     CLayoutForm: typeof import('./../src/components/c-layout-form.vue')['default']
     CLayoutList: typeof import('./../src/components/c-layout-list.vue')['default']
     copy: typeof import('./../src/components/c-role-select copy.vue')['default']

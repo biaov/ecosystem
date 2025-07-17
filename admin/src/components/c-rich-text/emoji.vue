@@ -41,12 +41,7 @@ const [visible, setVisible] = useState()
 const onShowEmoji = () => {
   props.quill().getSelection
   const selection = props.quill().getSelection()
-  if (selection) {
-    range.value = selection
-  } else {
-    const index = props.quill().getLength() - 1
-    range.value = { index, length: 0 }
-  }
+  selection && (range.value = selection)
 }
 const onEmoji = (value: string) => {
   props.quill().insertText(range.value.index, value, Quill.sources.USER)

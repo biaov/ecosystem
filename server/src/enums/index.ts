@@ -75,6 +75,7 @@ export enum PermissionKeyEnum {
   // 商品管理
   goodsList = 'goods:list',
   goodsCategory = 'goods:category',
+  goodsStock = 'goods:stock',
 
   // 礼品管理
   giftList = 'gift:list',
@@ -118,6 +119,7 @@ export enum ModuleLabelEnum {
   // 商品管理
   goodsList = '商品管理/全部商品',
   goodsCategory = '商品管理/商品分类',
+  goodsStock = '商品管理/商品库存',
 
   // 礼品管理
   giftList = '礼品管理/全部商品',

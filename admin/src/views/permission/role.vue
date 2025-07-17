@@ -30,11 +30,11 @@
       </a-table>
     </template>
   </c-layout-list>
-  <edit-form v-model:visible="formVisible" v-model="editForm" @ok="setPage()" />
+  <role-form v-model:visible="formVisible" v-model="editForm" @ok="setPage()" />
 </template>
 <script lang="ts" setup>
 import { roleApi } from '@/api/permission'
-import EditForm from './components/form.vue'
+import RoleForm from './components/role-form.vue'
 
 const permKey = definePermission(PermissionKeyEnum.permissionRole, { perm: 'permission' } as const)
 

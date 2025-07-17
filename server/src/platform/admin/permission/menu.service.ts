@@ -1,12 +1,6 @@
 import { MenuModel } from '@/models/menu'
 import { PermissionType } from './enums'
 
-interface RecordType {
-  id: number
-  parentId: number
-  children?: RecordType[]
-}
-
 @Injectable()
 export class MenuService {
   @InjectRepository(MenuModel)

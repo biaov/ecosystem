@@ -73,4 +73,6 @@ const { data, setPage, loading } = usePagingApiRequest(({ current, pageSize }) =
 )
 
 onRestFormState(setPage)
+
+const onAdd = () => {}
 </script>

@@ -16,4 +16,4 @@ export const orderSettingApi = useCommand('admin/setting/order')
 /**
  * 热搜词设置
  */
-export const hotSearchSettingApi = useCommand('admin/setting/hotsearch')
+export const hotkeywordSettingApi = useCommand('admin/setting/hotkeyword')

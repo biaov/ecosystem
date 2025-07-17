@@ -3,6 +3,5 @@
  */
 export class UpdateSettingDto {
   @IsNotEmpty()
-  @IsObject()
-  value: Record<string, any>
+  value: any
 }

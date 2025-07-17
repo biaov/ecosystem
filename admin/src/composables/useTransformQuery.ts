@@ -1,4 +1,4 @@
-import { toRaw, isRef, isReactive, Reactive } from 'vue'
+import type { Reactive } from 'vue'
 
 type Reset<T extends Record<string, any>> = {
   [K in keyof T]: T[K] extends string ? string : T[K] extends number ? number : string
@@ -40,5 +40,41 @@ export const useTransformQuery = <T extends Record<string, any>>(query: T | Ref<
     return dataClone
   } else {
     return structuredClone(data)
+  }
+}
+
+/**
+ * 文本域转换
+ */
+export const useTransfromTextarea = {
+  transfromToForm: <T extends Record<string, any>, R extends keyof T>(data: T, fields: R[]) => {
+    const dataClone = JSON.parse(JSON.stringify(data))
+    fields.forEach(field => {
+      Array.isArray(dataClone[field]) && (dataClone[field] = dataClone[field].join('\n'))
+    })
+    return dataClone as {
+      [K in keyof T]: K extends R ? string : T[K]
+    }
+  },
+  transfromToData: <T extends Record<string, any>, R extends keyof T, O extends keyof T>(data: T, fields: R[], options?: O[]) => {
+    const dataClone = JSON.parse(JSON.stringify(data))
+    fields.forEach(field => {
+      dataClone[field] = dataClone[field].split('\n')
+    })
+    if (options?.length) {
+      return options.reduce(
+        (prev, key) => {
+          prev[key] = dataClone[key]
+          return prev
+        },
+        {} as {
+          [K in O]: K extends R ? string[] : T[K]
+        }
+      )
+    } else {
+      return dataClone as {
+        [K in keyof T]: K extends R ? string[] : T[K]
+      }
+    }
   }
 }

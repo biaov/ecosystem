@@ -71,6 +71,9 @@ const onSave = async () => {
     .ant-picker {
       max-width: 500px !important;
     }
+    .ant-input-number-group-wrapper {
+      width: 500px;
+    }
   }
 }
 </style>

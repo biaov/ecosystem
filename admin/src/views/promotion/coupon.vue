@@ -31,7 +31,6 @@ const { formState, onRestFormState, resetFormState } = useFormState({
 const { data, setPage, loading } = usePagingApiRequest(({ current, pageSize }) =>
   operationApi.paging({
     ...useTransformQuery(formState, {
-      name: 'like',
       createdAt: 'range'
     }),
     current,

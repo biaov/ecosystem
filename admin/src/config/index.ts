@@ -24,5 +24,8 @@ export default {
     wrapperCol: {
       span: 19
     }
+  },
+  textarea: {
+    autoSize: { minRows: 6, maxRows: 6 }
   }
 }

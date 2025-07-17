@@ -142,6 +142,7 @@ export enum PermissionKeyEnum {
   // 商品管理
   goodsList = 'goods:list',
   goodsCategory = 'goods:category',
+  goodsStock = 'goods:stock',
 
   // 礼品管理
   giftList = 'gift:list',

@@ -83,6 +83,7 @@ declare global {
   const useTemplateRef: typeof import('vue')['useTemplateRef']
   const useToastRequest: typeof import('../src/composables/useRequest')['useToastRequest']
   const useTransformQuery: typeof import('../src/composables/useTransformQuery')['useTransformQuery']
+  const useTransfromTextarea: typeof import('../src/composables/useTransformQuery')['useTransfromTextarea']
   const useValidEmail: typeof import('../src/composables/useUtils')['useValidEmail']
   const useValidEmailForm: typeof import('../src/composables/useUtils')['useValidEmailForm']
   const useValidPhone: typeof import('../src/composables/useUtils')['useValidPhone']

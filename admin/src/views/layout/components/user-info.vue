@@ -2,7 +2,7 @@
   <a-modal v-model:open="visible" title="修改信息" @ok="handleSubmit">
     <a-form v-bind="$config.modalCols">
       <a-form-item label="手机号">
-        <a-input :model-value="userInfo.mobile" disabled />
+        <a-input :value="userInfo.mobile" disabled />
       </a-form-item>
       <a-form-item label="角色">
         <c-role-select :model-value="userInfo.roleId" disabled />
