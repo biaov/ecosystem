@@ -64,9 +64,11 @@ export const useTransfrormQuery = (
 /**
  * 删除处理
  */
-export const useAffected = async (promise: Promise<DeleteResult>, message = '操作失败') => {
+export const useAffected = async (promise: Promise<DeleteResult | DeleteResult[]>, message = '操作失败') => {
   const result = await promise
-  if (!result.affected) throw new BizException(message)
+  if (Array.isArray(result)) {
+    if (result.some(item => !item.affected)) throw new BizException(message)
+  } else if (!result.affected) throw new BizException(message)
   return true
 }
 

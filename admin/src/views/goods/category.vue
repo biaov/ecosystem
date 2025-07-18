@@ -8,7 +8,7 @@
         <a-table-column title="名称" data-index="name" />
         <a-table-column title="排序">
           <template #="{ record }">
-            <a-input-number v-model:value="record.sort" :min="1" :max="99" :precision="0" @blur="handleUpdateData(record)" />
+            <a-input-number v-model:value="record.sort" :min="1" :max="99" :precision="0" @blur="handleUpdateData(record)" v-perm="permKey.update"  />
           </template>
         </a-table-column>
         <a-table-column title="更新时间" data-index="updatedAt" :width="200" />

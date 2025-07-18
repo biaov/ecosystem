@@ -8,7 +8,7 @@ export class GoodsModel extends BaseModel {
   @Column({ type: 'json', comment: '商品图片' })
   photos: string[]
 
-  @Column({ length: 256, comment: '商品视频' })
+  @Column({ length: 256, comment: '商品视频', nullable: true })
   video: string
 
   @Column({ type: 'text', comment: '商品描述' })
@@ -20,8 +20,10 @@ export class GoodsModel extends BaseModel {
   @Column({ comment: '销售数量', default: 0 })
   saleNum: number
 
-  @ManyToOne(() => GoodsSpecModel, spec => spec.sku)
-  @JoinColumn({ name: 'defaultSku' })
+  @Column({ comment: '默认价格' })
+  defaultPrice: number
+
+  @Column({ length: 32, comment: '默认SKU' })
   defaultSku: string
 
   @Column({ comment: '分类ID' })
@@ -64,10 +66,7 @@ interface Attr {
 
 @Entity('goods_spec')
 export class GoodsSpecModel extends BaseModel {
-  @Column({ length: 32, comment: '名称' })
-  name: string
-
-  @Column({ length: 32, comment: 'SKU' })
+  @Column({ length: 32, comment: 'SKU', unique: true })
   sku: string
 
   @Column({ type: 'json', comment: '属性' })

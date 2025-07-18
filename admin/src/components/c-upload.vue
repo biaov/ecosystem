@@ -7,13 +7,17 @@
     :max-count="multiple ? maxCount : 1"
     :custom-request="handleUpload"
     :before-upload="onBeforeUpload"
+    :disabled="disabled"
+    :show-upload-list="size > maxSize"
+    :title="title"
     @preview="onPreview"
     @remove="onRemove"
   >
     <div class="text-gray-400" v-if="multiple ? fileList.length < maxCount : fileList.length < 1">
       <c-ant-icon name="PlusOutlined" />
-      上传
+      <template v-if="size > maxSize">上传</template>
     </div>
+    <img :src="modelValue" width="100%" height="100%" class="rounded-lg block object-cover" v-else-if="size <= maxSize" />
   </a-upload>
   <!-- 图片预览 -->
   <a-modal v-model:open="previewVisible" title="图片预览" :footer="null">
@@ -24,22 +28,33 @@
 import type { UploadFile } from 'ant-design-vue'
 import { uploadImageApi } from '@/api/common'
 
+const maxSize = 60
 interface FileListItem {
   url: string
   uid?: string
 }
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     multiple?: boolean
     maxCount?: number
+    disabled?: boolean
+    size?: number
+    title?: string
   }>(),
   {
     multiple: false,
-    maxCount: 9
+    maxCount: 9,
+    disabled: false,
+    size: 102
   }
 )
-const fileList = defineModel<FileListItem[]>('fileList', { default: [] })
+const gap = computed(() => (props.multiple ? 8 : 0))
+const sizepx = computed(() => `${props.size}px`)
+const minHeight = computed(() => `${props.size + gap.value}px`)
+const margin = computed(() => `${gap.value}px`)
+const list = defineModel<string[]>('list', { default: () => [] })
+const fileList = ref<FileListItem[]>([])
 const modelValue = defineModel<string>()
 const onBeforeUpload = (file: Required<UploadFile>) => {
   if (!['image/jpeg', 'image/jpg', 'image/png'].includes(file.type)) {
@@ -73,10 +88,35 @@ const onRemove = ({ uid }: UploadFile) => {
   fileList.value = fileList.value.filter(item => item.uid !== uid)
   modelValue.value = ''
 }
+
+watch(
+  fileList,
+  value => {
+    list.value = value.map(item => item.url)
+  },
+  { immediate: true, deep: true }
+)
+watch(
+  list,
+  value => {
+    const urls = fileList.value.map(item => item.url)
+    const newFileList = value.filter(url => !urls.includes(url)).map(url => ({ url }))
+    newFileList.length && (fileList.value = newFileList)
+  },
+  { immediate: true, deep: true }
+)
 </script>
 
 <style lang="less">
 .custom-upload {
-  min-height: 110px;
+  min-height: v-bind(minHeight);
+  .ant-upload,
+  .ant-upload-list-item-container {
+    width: v-bind(sizepx) !important;
+    height: v-bind(sizepx) !important;
+    margin-inline-end: v-bind(margin) !important;
+    margin-bottom: v-bind(margin) !important;
+    overflow: hidden;
+  }
 }
 </style>

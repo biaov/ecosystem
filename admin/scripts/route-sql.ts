@@ -47,7 +47,8 @@ const three = threeGroup
   .map(item => {
     const actions: Omit<MenuItem, 'id'>[] = keys
       .filter(value => {
-        if (item.name === '全部用户') return [permissionEnum.list, permissionEnum.create].includes(value)
+        if (['商品库存', '礼品库存'].includes(item.name)) return [permissionEnum.list, permissionEnum.update].includes(value)
+        if (['全部用户'].includes(item.name)) return [permissionEnum.list, permissionEnum.create].includes(value)
         if (['仪表面板', '拉黑名单'].includes(item.name)) return permissionEnum.list === value
         if (['用户设置', '隐私协议', '订单设置', '热搜词设置'].includes(item.name)) return value !== permissionEnum.delete
         return true
@@ -83,6 +84,44 @@ const three = threeGroup
         content: 'permission',
         type: 'action'
       })
+    }
+
+    if (item.content === 'stock' && item.name === '商品库存') {
+      actions.push(
+        ...[
+          {
+            name: '下载模板',
+            parentId: item.id,
+            content: 'downloadTemplate',
+            type: 'action'
+          },
+          {
+            name: '导入库存',
+            parentId: item.id,
+            content: 'importStock',
+            type: 'action'
+          }
+        ]
+      )
+    }
+
+    if (item.content === 'stock' && item.name === '礼品库存') {
+      actions.push(
+        ...[
+          {
+            name: '下载模板',
+            parentId: item.id,
+            content: 'downloadTemplate',
+            type: 'action'
+          },
+          {
+            name: '导入库存',
+            parentId: item.id,
+            content: 'importStock',
+            type: 'action'
+          }
+        ]
+      )
     }
 
     if (item.content === 'account' && item.name === '账号设置') {

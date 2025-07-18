@@ -3,12 +3,12 @@
  */
 abstract class PagingDot {
   @IsOptional()
-  @IsString()
-  current: string
+  @IsInt()
+  current: number
 
   @IsOptional()
-  @IsString()
-  pageSize: string
+  @IsInt()
+  pageSize: number
 }
 
 export { PagingDot }

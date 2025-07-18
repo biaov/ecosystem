@@ -12,8 +12,7 @@
     "lint": "eslint ./src/**/*.ts --fix",
     "migration:create": "node --experimental-strip-types ./scripts/migration.ts -n",
     "migration:run": "typeorm -d ./config/database.js migration:run",
-    "migration:revert": "typeorm -d ./config/database.js migration:revert",
-    "install": "node --experimental-strip-types ./scripts/install.ts"
+    "migration:revert": "typeorm -d ./config/database.js migration:revert"
   },
   "type": "module",
   "keywords": [

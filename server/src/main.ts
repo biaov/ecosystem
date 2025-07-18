@@ -10,6 +10,9 @@ app.useGlobalPipes(
   new TransfromPipe(),
   new ValidationPipe({
     transform: true, // 自动转换 DTO 中的类型
+    transformOptions: {
+      enableImplicitConversion: true // 根据 class-transformer 类型自动转换
+    },
     whitelist: true, // 自动过滤掉 DTO 中未定义的属性
     errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY, // 错误状态码改为 422
     stopAtFirstError: true, // 第一次错误就停止

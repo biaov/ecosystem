@@ -10,7 +10,7 @@
       </select>
       <button :class="`ql-${item.class}`" :title="item.title" v-else></button>
     </template>
-    <emoji :quill="onGetQuill" />
+    <emoji :quill="onGetQuill" :disabled="disabled" />
   </div>
   <div id="editor"></div>
 </template>
@@ -27,10 +27,12 @@ const props = withDefaults(
   defineProps<{
     placeholder?: string
     height?: string
+    disabled?: boolean
   }>(),
   {
     height: '60vh',
-    placeholder: '请输入...'
+    placeholder: '请输入...',
+    disabled: false
   }
 )
 
@@ -59,6 +61,7 @@ onMounted(() => {
   })
 
   qlEditor = editor.container.querySelector('.ql-editor')
+  qlEditor?.setAttribute('contenteditable', `${!props.disabled}`)
   qlEditor?.addEventListener('blur', onBlur)
 })
 onBeforeUnmount(() => {

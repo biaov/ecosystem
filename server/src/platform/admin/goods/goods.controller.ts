@@ -1,19 +1,49 @@
 import { FindController } from '@/common/base.controller'
 import { GoodsService, GoodsCategoryService } from './goods.service'
-import { GoodsDto, GoodsCategoryDto, GoodsCategoryCreateDto, GoodsCategoryUpdateDto } from './goods.dto'
+import { GoodsDto, GoodsCreateDto, GoodsCategoryDto, GoodsCategoryCreateDto, GoodsCategoryUpdateDto } from './goods.dto'
+import { PermissionKeyEnum } from '@/enums'
 
 const goodsPermKey = definePermission(PermissionKeyEnum.goodsList)
 const goodsCategoryPermKey = definePermission(PermissionKeyEnum.goodsCategory)
 
-@UseGuards(AuthGuardAdmin)
+// @UseGuards(AuthGuardAdmin)
 @Controller('goods')
-export class GoodsController {
-  constructor(private readonly goodsService: GoodsService) {}
+export class GoodsController extends FindController {
+  constructor(private readonly goodsService: GoodsService) {
+    super(goodsService)
+  }
 
   @Permission(goodsPermKey.list)
   @Get()
   list(@Query() { name, sku, categoryId, onsale, current, pageSize }: GoodsDto) {
     return this.goodsService.list(getPageQuery({ current, pageSize }), { name, sku, categoryId, onsale })
+  }
+
+  @Permission(goodsPermKey.list)
+  @Get(':id')
+  detail(@IdParam() id: number) {
+    return this.goodsService.detail(id)
+  }
+
+  @Log(ModuleLabelEnum.goodsList, '创建商品：[name]')
+  @Permission(goodsPermKey.create)
+  @Post()
+  create(@Body() { categoryId, name, onsale, photos, specs, desc, defaultSku }: GoodsCreateDto) {
+    return this.goodsService.create({ categoryId, name, onsale, photos, defaultSku, specs, desc })
+  }
+
+  @Log(ModuleLabelEnum.goodsList, '更新商品：[name]')
+  @Permission(goodsPermKey.update)
+  @Patch(':id')
+  update(@IdParam() id: number, @Body() { categoryId, name, onsale, photos, defaultSku, specs, desc }: GoodsCreateDto) {
+    return this.find(this.goodsService.update(id, { categoryId, name, onsale, defaultSku, photos, specs, desc }), id)
+  }
+
+  @Log(ModuleLabelEnum.goodsList, '删除商品：[name]')
+  @Permission(goodsPermKey.delete)
+  @Delete(':id')
+  delete(@IdParam() id: number) {
+    return this.find(this.goodsService.delete(id), id, 'delete')
   }
 }
 

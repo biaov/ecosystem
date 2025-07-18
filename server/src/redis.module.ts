@@ -4,7 +4,10 @@ import { RedisModule } from '@nestjs-modules/ioredis'
   imports: [
     RedisModule.forRoot({
       type: 'single',
-      url: `redis://${import.meta.env.VITE_REDIS_HOST}:${import.meta.env.VITE_REDIS_PROT}`
+      url: `redis://${import.meta.env.VITE_REDIS_HOST}:${import.meta.env.VITE_REDIS_PROT}`,
+      options: {
+        password: import.meta.env.VITE_REDIS_PASSWORD
+      }
     })
   ]
 })

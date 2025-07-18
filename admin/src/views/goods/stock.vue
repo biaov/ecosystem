@@ -8,65 +8,56 @@
         </a-input-group>
       </a-form-item>
       <a-form-item>
-        <select-category v-model="formState.categoryId" placeholder="商品分类" />
-      </a-form-item>
-      <a-form-item>
-        <a-select v-model:value="formState.onsale" :options="onsaleEnum.options()" placeholder="上下架" />
-      </a-form-item>
-      <a-form-item>
         <a-button type="primary" @click="setPage">查询</a-button>
         <a-button @click="resetFormState">重置</a-button>
       </a-form-item>
     </template>
     <template #extra>
-      <a-button type="primary" href="/goods/add" v-perm="permKey.create">新增商品</a-button>
+      <a-space>
+        <a-button type="primary" href="/goods/add" v-perm="permKey.download">下载模板</a-button>
+        <a-button type="primary" href="/goods/add" v-perm="permKey.import">导入库存</a-button>
+      </a-space>
     </template>
     <template #list>
       <a-table :data-source="data.items" row-key="id" :loading="loading" :pagination="$formatter.pagination(data)" @change="setPage">
-        <a-table-column title="商品图" :width="120">
+        <a-table-column title="商品名称" :data-index="['product', 'name']" :width="240" ellipsis />
+        <a-table-column title="商品SKU" data-index="sku" />
+        <a-table-column title="库存" :width="200">
           <template #="{ record }">
-            <a-image :src="record.photos[0]" :width="80" :height="80" />
+            <a-input-number v-model:value="record.stock" :min="0" :max="9999" :precision="0" placeholder="商品库存" @blur="handleUpdate(record)" v-perm="permKey.update" class="w-full" />
           </template>
         </a-table-column>
-        <a-table-column title="商品名称" data-index="name" :width="240" ellipsis />
-        <a-table-column title="商品分类">
+        <a-table-column title="可售" :width="200">
           <template #="{ record }">
-            {{ record.category?.name }}
+            {{ (record.stock - record.hold).toLocaleString() }}
           </template>
         </a-table-column>
-        <a-table-column title="价格" :width="120">
+        <a-table-column title="占用" :width="200">
           <template #="{ record }">
-            {{ record.price.toLocaleString() }}
+            {{ record.hold.toLocaleString() }}
           </template>
         </a-table-column>
-        <a-table-column title="已售" :width="120">
-          <template #="{ record }">
-            {{ record.price.toLocaleString() }}
-          </template>
-        </a-table-column>
-        <a-table-column title="操作内容" data-index="content" ellipsis />
-        <a-table-column title="操作IP" data-index="ip" :width="180" />
-        <a-table-column title="操作时间" data-index="createdAt" :width="180" />
       </a-table>
     </template>
   </c-layout-list>
 </template>
 <script lang="ts" setup>
-import { goodsApi } from '@/api/goods'
-import { goodsSearchEnum, onsaleEnum } from './enums'
-import SelectCategory from './components/select-category.vue'
+import { goodsStockApi } from '@/api/goods'
+import { goodsSearchEnum } from './enums'
 
-const permKey = definePermission(PermissionKeyEnum.goodsList)
+const checked = ref(false)
+interface TableType extends IdDataType {
+  stock: number
+}
+const permKey = definePermission(PermissionKeyEnum.goodsList, { download: 'downloadTemplate', import: 'importStock' } as const)
 const { formState, onRestFormState, resetFormState } = useFormState({
   type: goodsSearchEnum.name,
-  keyword: '',
-  categoryId: [],
-  onsale: undefined
+  keyword: ''
 })
 
 const { data, setPage, loading } = usePagingApiRequest(({ current, pageSize }) =>
-  goodsApi.paging({
-    ...useTransformQuery(formState, { categoryId: (value: number[]) => value.at(-1) }, 'search'),
+  goodsStockApi.paging({
+    ...useTransformQuery(formState, {}, 'search'),
     current,
     pageSize
   })
@@ -74,5 +65,8 @@ const { data, setPage, loading } = usePagingApiRequest(({ current, pageSize }) =
 
 onRestFormState(setPage)
 
-const onAdd = () => {}
+const handleUpdate = async (item: TableType) => {
+  await goodsStockApi.update(item.id, { stock: item.stock })
+  message.success('操作成功')
+}
 </script>

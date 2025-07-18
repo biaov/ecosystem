@@ -11,7 +11,7 @@
         <select-category v-model="formState.categoryId" placeholder="商品分类" />
       </a-form-item>
       <a-form-item>
-        <a-select v-model:value="formState.onsale" :options="onsaleEnum.options()" placeholder="上下架" />
+        <a-select v-model:value="formState.onsale" :options="onsaleEnum.options()" placeholder="上架状态" />
       </a-form-item>
       <a-form-item>
         <a-button type="primary" @click="setPage">查询</a-button>
@@ -23,30 +23,44 @@
     </template>
     <template #list>
       <a-table :data-source="data.items" row-key="id" :loading="loading" :pagination="$formatter.pagination(data)" @change="setPage">
-        <a-table-column title="商品图" :width="120">
+        <a-table-column title="商品图">
           <template #="{ record }">
             <a-image :src="record.photos[0]" :width="80" :height="80" />
           </template>
         </a-table-column>
-        <a-table-column title="商品名称" data-index="name" :width="240" ellipsis />
+        <a-table-column title="商品名称" data-index="name" ellipsis />
         <a-table-column title="商品分类">
           <template #="{ record }">
             {{ record.category?.name }}
           </template>
         </a-table-column>
-        <a-table-column title="价格" :width="120">
+        <a-table-column title="价格">
           <template #="{ record }">
-            {{ record.price.toLocaleString() }}
+            {{ record.defaultPrice.toLocaleString() }}
           </template>
         </a-table-column>
-        <a-table-column title="已售" :width="120">
+        <a-table-column title="销量">
           <template #="{ record }">
-            {{ record.price.toLocaleString() }}
+            {{ record.saleNum.toLocaleString() }}
           </template>
         </a-table-column>
-        <a-table-column title="操作内容" data-index="content" ellipsis />
-        <a-table-column title="操作IP" data-index="ip" :width="180" />
-        <a-table-column title="操作时间" data-index="createdAt" :width="180" />
+        <a-table-column title="上架状态" :width="120">
+          <template #="{ record }">
+            <a-switch v-model:checked="record.onsale" @change="handleUpdate(record)" v-perm="permKey.update" />
+          </template>
+        </a-table-column>
+        <a-table-column title="更新时间" data-index="updateTime" :width="200" />
+        <a-table-column title="操作" :width="180">
+          <template #="{ record }">
+            <a-space :size="0">
+              <a-button type="link" size="small" :href="`/goods/detail/${record.id}`" v-perm="permKey.list">详情</a-button>
+              <a-button type="link" size="small" :href="`/goods/edit/${record.id}`" v-perm="permKey.update">编辑</a-button>
+              <a-popconfirm placement="left" title="你确定要删除这条数据吗?" @confirm="handleDelete(record)">
+                <a-button type="link" size="small" danger v-perm="permKey.delete">删除</a-button>
+              </a-popconfirm>
+            </a-space>
+          </template>
+        </a-table-column>
       </a-table>
     </template>
   </c-layout-list>
@@ -56,21 +70,35 @@ import { goodsApi } from '@/api/goods'
 import { goodsSearchEnum, onsaleEnum } from './enums'
 import SelectCategory from './components/select-category.vue'
 
+interface TableType extends IdDataType {
+  onsale: boolean
+}
 const permKey = definePermission(PermissionKeyEnum.goodsList)
 const { formState, onRestFormState, resetFormState } = useFormState({
   type: goodsSearchEnum.name,
   keyword: '',
-  categoryId: [],
+  categoryId: undefined,
   onsale: undefined
 })
 
 const { data, setPage, loading } = usePagingApiRequest(({ current, pageSize }) =>
   goodsApi.paging({
-    ...useTransformQuery(formState, { categoryId: (value: number[]) => value.at(-1) }, 'search'),
+    ...useTransformQuery(formState, { categoryId: (value: number[]) => Number(value.at(-1)) || undefined }, 'search'),
     current,
     pageSize
   })
 )
 
 onRestFormState(setPage)
+
+const handleUpdate = async (item: TableType) => {
+  await goodsApi.update(item.id, { onsale: item.onsale })
+  message.success('操作成功')
+}
+
+const handleDelete = async (item: TableType) => {
+  await goodsApi.delete(item.id)
+  message.success('删除成功')
+  setPage()
+}
 </script>

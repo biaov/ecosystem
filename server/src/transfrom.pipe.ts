@@ -17,7 +17,6 @@ export class TransfromPipe implements PipeTransform {
         .map(item => item.trim())
       filterVal.length === 2 && (value[field] = filterVal)
     })
-    value?.all === 'true' && (value.all = true)
     return value
   }
 }

@@ -4,6 +4,6 @@ dist
 .git
 .idea
 .DS_Store
-.env.production
+.env.*
 /media
 /uploads

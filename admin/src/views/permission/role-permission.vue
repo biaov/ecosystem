@@ -1,5 +1,5 @@
 <template>
-  <c-layout-form @submit="handleSubmit" v-if="!loading">
+  <c-layout-form @ok="handleSubmit" v-if="!loading">
     <a-card title="分配权限">
       <a-space :size="24" direction="vertical">
         <a-space direction="vertical" v-for="(item, index) in data" :key="index">

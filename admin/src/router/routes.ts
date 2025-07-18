@@ -43,7 +43,7 @@ export const menuRoutes: RouteRecordRaw[] = [
         meta: {
           title: '全部商品'
         },
-        component: () => import('@/views/goods/list.vue')
+        component: () => import('@/views/goods/goods.vue')
       },
       {
         path: 'add',
@@ -52,7 +52,7 @@ export const menuRoutes: RouteRecordRaw[] = [
           title: '新增商品',
           hidden: true
         },
-        component: () => import('@/views/goods/detail.vue')
+        component: () => import('@/views/goods/goods-detail.vue')
       },
       {
         path: 'edit/:id',
@@ -61,7 +61,7 @@ export const menuRoutes: RouteRecordRaw[] = [
           title: '编辑商品',
           hidden: true
         },
-        component: () => import('@/views/goods/detail.vue')
+        component: () => import('@/views/goods/goods-detail.vue')
       },
       {
         path: 'detail/:id',
@@ -70,7 +70,7 @@ export const menuRoutes: RouteRecordRaw[] = [
           title: '商品详情',
           hidden: true
         },
-        component: () => import('@/views/goods/detail.vue')
+        component: () => import('@/views/goods/goods-detail.vue')
       },
       {
         path: 'stock',
