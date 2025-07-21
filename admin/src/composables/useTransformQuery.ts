@@ -34,7 +34,7 @@ export const useTransformQuery = <T extends Record<string, any>>(query: T | Ref<
   if (type === 'search') {
     const dataBak = data as unknown as SearchTransformForm
     const dataClone = structuredClone(dataBak) as Partial<SearchTransformForm>
-    dataClone[dataBak.type as keyof SearchTransformForm] = dataBak.keyword
+    dataBak.keyword && (dataClone[dataBak.type as keyof SearchTransformForm] = dataBak.keyword)
     delete dataClone.type
     delete dataClone.keyword
     return dataClone

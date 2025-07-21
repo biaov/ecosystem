@@ -84,6 +84,7 @@ declare global {
   const PrimaryGeneratedColumn: typeof import('typeorm')['PrimaryGeneratedColumn']
   const Put: typeof import('@nestjs/common')['Put']
   const Query: typeof import('@nestjs/common')['Query']
+  const Res: typeof import('@nestjs/common')['Res']
   const RouterModule: typeof import('@nestjs/core')['RouterModule']
   const SetMetadata: typeof import('@nestjs/common')['SetMetadata']
   const SettingModel: typeof import('../src/models/setting')['SettingModel']
@@ -126,6 +127,7 @@ declare global {
   const useRandomLetter: typeof import('../src/utils/utils')['useRandomLetter']
   const useRandomName: typeof import('../src/utils/utils')['useRandomName']
   const useTransfrormQuery: typeof import('../src/utils/utils')['useTransfrormQuery']
+  const useXlsx: typeof import('../src/utils/utils')['useXlsx']
   const validator: typeof import('../src/utils/validator')['validator']
 }
 // for type re-export

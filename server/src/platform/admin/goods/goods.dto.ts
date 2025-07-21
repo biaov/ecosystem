@@ -124,3 +124,11 @@ export class GoodsCategoryUpdateDto {
   @IsInt()
   sort?: number
 }
+
+/**
+ * 商品库存验证器-更新
+ */
+export class GoodsStockDto {
+  @IsInt()
+  stock: number
+}

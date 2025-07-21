@@ -89,7 +89,7 @@ export const menuRoutes: RouteRecordRaw[] = [
     },
     meta: {
       title: '礼品管理',
-      antIcon: 'SlackOutlined'
+      antIcon: 'GiftOutlined'
     },
     children: [
       {

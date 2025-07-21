@@ -80,6 +80,7 @@
     "Query": true,
     "Redis": true,
     "Repository": true,
+    "Res": true,
     "RouterModule": true,
     "SetMetadata": true,
     "SettingModel": true,
@@ -123,6 +124,7 @@
     "useRandomLetter": true,
     "useRandomName": true,
     "useTransfrormQuery": true,
+    "useXlsx": true,
     "validator": true
   }
 }

@@ -23,9 +23,9 @@
     </template>
     <template #list>
       <a-table :data-source="data.items" row-key="id" :loading="loading" :pagination="$formatter.pagination(data)" @change="setPage">
-        <a-table-column title="商品图">
+        <a-table-column title="商品图" :width="100">
           <template #="{ record }">
-            <a-image :src="record.photos[0]" :width="80" :height="80" />
+            <a-image :src="record.photos[0]" :width="50" :height="50" />
           </template>
         </a-table-column>
         <a-table-column title="商品名称" data-index="name" ellipsis />
@@ -44,12 +44,12 @@
             {{ record.saleNum.toLocaleString() }}
           </template>
         </a-table-column>
-        <a-table-column title="上架状态" :width="120">
+        <a-table-column title="上架状态" :width="140">
           <template #="{ record }">
-            <a-switch v-model:checked="record.onsale" @change="handleUpdate(record)" v-perm="permKey.update" />
+            <a-switch :checked="record.onsale" @change="handleUpdate(record)" v-perm="permKey.update" />
           </template>
         </a-table-column>
-        <a-table-column title="更新时间" data-index="updateTime" :width="200" />
+        <a-table-column title="更新时间" data-index="updatedAt" :width="180" />
         <a-table-column title="操作" :width="180">
           <template #="{ record }">
             <a-space :size="0">
@@ -66,7 +66,7 @@
   </c-layout-list>
 </template>
 <script lang="ts" setup>
-import { goodsApi } from '@/api/goods'
+import { goodsApi, goodsOnsaleApi } from '@/api/goods'
 import { goodsSearchEnum, onsaleEnum } from './enums'
 import SelectCategory from './components/select-category.vue'
 
@@ -83,7 +83,7 @@ const { formState, onRestFormState, resetFormState } = useFormState({
 
 const { data, setPage, loading } = usePagingApiRequest(({ current, pageSize }) =>
   goodsApi.paging({
-    ...useTransformQuery(formState, { categoryId: (value: number[]) => Number(value.at(-1)) || undefined }, 'search'),
+    ...useTransformQuery(formState, {}, 'search'),
     current,
     pageSize
   })
@@ -92,8 +92,9 @@ const { data, setPage, loading } = usePagingApiRequest(({ current, pageSize }) =
 onRestFormState(setPage)
 
 const handleUpdate = async (item: TableType) => {
-  await goodsApi.update(item.id, { onsale: item.onsale })
+  await goodsOnsaleApi(item.id).post({ onsale: item.onsale })
   message.success('操作成功')
+  setPage()
 }
 
 const handleDelete = async (item: TableType) => {

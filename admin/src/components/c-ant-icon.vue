@@ -39,7 +39,7 @@ const propsColor = computed(() => props.color)
 };
 
 .cur-icon {
-  display: block !important;
+  // display: block !important;
   each(@type, {
     &.@{key} {
       color: @value !important;

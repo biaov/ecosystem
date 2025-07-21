@@ -39,7 +39,8 @@ export default [
       'ParseIntPipe',
       'UploadedFile',
       'UseInterceptors',
-      'Ip'
+      'Ip',
+      'Res'
     ]
   },
   {

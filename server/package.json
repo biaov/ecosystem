@@ -45,7 +45,8 @@
     "multer": "^2.0.1",
     "mysql2": "^3.14.1",
     "rxjs": "^7.8.2",
-    "typeorm": "^0.3.24"
+    "typeorm": "^0.3.24",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",

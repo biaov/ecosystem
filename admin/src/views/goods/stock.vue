@@ -13,9 +13,21 @@
       </a-form-item>
     </template>
     <template #extra>
-      <a-space>
-        <a-button type="primary" href="/goods/add" v-perm="permKey.download">下载模板</a-button>
-        <a-button type="primary" href="/goods/add" v-perm="permKey.import">导入库存</a-button>
+      <a-space :size="0">
+        <a-button type="link" :href="goodsStockTemplateDownloadApi" v-perm="permKey.download">
+          <template #icon>
+            <c-ant-icon name="DownloadOutlined" />
+          </template>
+          下载模板
+        </a-button>
+        <a-upload :action="goodsStockImportApi" :show-upload-list="false" @change="$onExport($event, setPage)">
+          <a-button type="link" v-perm="permKey.import">
+            <template #icon>
+              <c-ant-icon name="ImportOutlined" />
+            </template>
+            导入库存
+          </a-button>
+        </a-upload>
       </a-space>
     </template>
     <template #list>
@@ -42,7 +54,7 @@
   </c-layout-list>
 </template>
 <script lang="ts" setup>
-import { goodsStockApi } from '@/api/goods'
+import { goodsStockApi, goodsStockTemplateDownloadApi, goodsStockImportApi } from '@/api/goods'
 import { goodsSearchEnum } from './enums'
 
 const checked = ref(false)

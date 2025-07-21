@@ -25,31 +25,30 @@ export class GoodsService {
 
   list({ skip, take, current, pageSize }: PageOption, { name, sku, categoryId, onsale }: Partial<Pick<GoodsModel, 'name' | 'categoryId' | 'onsale'> & { sku: string }>) {
     const where = useTransfrormQuery({ name, categoryId, onsale }, { name: 'like', sku: 'like' })
-    return findAndCount(
-      this.goodsRepository
-        .createQueryBuilder('goods')
-        .orderBy({ 'goods.createdAt': 'DESC' })
-        .leftJoinAndSelect('goods.specs', 'spec')
-        .where(where)
-        .andWhere('spec.sku = :sku', { sku })
-        .skip(skip)
-        .take(take)
-        .getManyAndCount(),
-      { current, pageSize }
-    )
     // return findAndCount(
-    //   this.goodsRepository.findAndCount({
-    //     where: { ...where, spec: { sku } } as any,
-    //     skip,
-    //     take,
-    //     order: {
-    //       createdAt: 'DESC'
-    //     },
-    //     relationLoadStrategy: 'join',
-    //     relations: ['category']
-    //   }),
+    //   this.goodsRepository
+    //     .createQueryBuilder('goods')
+    //     .orderBy({ 'goods.createdAt': 'DESC' })
+    //     .leftJoinAndSelect('goods.specs', 'spec')
+    //     .where(where)
+    //     .where('spec.sku = :sku', { sku: sku || undefined })
+    //     .skip(skip)
+    //     .take(take)
+    //     .getManyAndCount(),
     //   { current, pageSize }
     // )
+    return findAndCount(
+      this.goodsRepository.findAndCount({
+        where,
+        skip,
+        take,
+        order: {
+          createdAt: 'DESC'
+        },
+        relations: ['category']
+      }),
+      { current, pageSize }
+    )
   }
   detail(id: number) {
     return this.goodsRepository.findOne({ where: { id }, relations: ['category', 'specs'] })
@@ -88,6 +87,11 @@ export class GoodsService {
       Promise.all([...existIdSpecs.map(item => this.goodsSpecRepository.update(item.id, item)), this.goodsRepository.update(id, { categoryId, name, onsale, photos, desc, defaultPrice })])
     )
   }
+
+  updateOnsale(id: number, { onsale }: Pick<GoodsModel, 'onsale'>) {
+    return useAffected(this.goodsRepository.update(id, { onsale }))
+  }
+
   async delete(id: number) {
     const goods = await this.existGoods(id)
     await useAffected(this.goodsSpecRepository.delete(goods.specs.map(({ id }) => id)))
@@ -143,5 +147,39 @@ export class GoodsCategoryService {
 
   delete(id: number) {
     return useAffected(this.goodsCategoryRepository.delete({ id }))
+  }
+}
+
+@Injectable()
+export class GoodsStockService {
+  @InjectRepository(GoodsSpecModel)
+  private goodsSpecRepository: TreeRepository<GoodsSpecModel>
+
+  list({ skip, take, current, pageSize }: PageOption, { name, sku, categoryId, onsale }: Partial<Pick<GoodsModel, 'name' | 'categoryId' | 'onsale'> & { sku: string }>) {
+    const where = useTransfrormQuery({ sku }, { sku: 'like' })
+    where.product = useTransfrormQuery({ name }, { name: 'like' }) as Record<string, string | FindOperator<string>>
+
+    return findAndCount(
+      this.goodsSpecRepository.findAndCount({
+        where,
+        skip,
+        take,
+        order: {
+          createdAt: 'DESC'
+        },
+        relations: ['product']
+      }),
+      { current, pageSize }
+    )
+  }
+  detail(id: number) {
+    return this.goodsSpecRepository.findOneBy({ id })
+  }
+
+  update(id: number, { stock }: Partial<Pick<GoodsSpecModel, 'stock'>>) {
+    return useAffected(this.goodsSpecRepository.update({ id }, { stock }))
+  }
+  betachUpdate(specs: Pick<GoodsSpecModel, 'sku' | 'stock'>[]) {
+    return useAffected(Promise.all(specs.filter(item => item.sku).map(({ sku, stock }) => this.goodsSpecRepository.update({ sku: `${sku}` }, { stock: stock || 0 }))))
   }
 }

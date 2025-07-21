@@ -1,4 +1,6 @@
-import { DeleteResult } from 'typeorm'
+import type { DeleteResult, FindOperator } from 'typeorm'
+import * as xlsx from 'xlsx'
+
 /**
  * [min, max) 随机数
  */
@@ -33,13 +35,14 @@ export const findAndCount = async (promise: Promise<any>, page: Pick<PageOption,
   return { items, total, ...page }
 }
 
+type USETransfrormQueryOption = boolean | number | string | string[] | FindOperator<string> | undefined
 /**
  * 转换查询条件
  */
 export const useTransfrormQuery = (
-  data: Record<string, boolean | number | string | string[] | FindOperator<string> | undefined>,
+  data: Record<string, USETransfrormQueryOption>,
   transform: Record<string, string>
-): Record<string, string | string[] | FindOperator<string> | undefined> => {
+): Record<string, USETransfrormQueryOption | Record<string, USETransfrormQueryOption>> => {
   Object.entries(transform).forEach(([key, value]) => {
     if (!data[key]) return
     switch (value) {
@@ -112,3 +115,22 @@ export const useRandomLetter = (length = 1) => Array.from({ length }, () => Stri
  * 生成随机昵称
  */
 export const useRandomName = (prefix = '') => `${prefix}${randomId().slice(0, 17)}`
+
+/**
+ * 解析 Excel 文件
+ */
+export const useXlsx = <T extends Record<string, any>, R extends Record<string, string> = Record<string, string>>(file: Express.Multer.File, field: R) => {
+  const workbook = xlsx.read(file.buffer)
+  const sheetName = workbook.SheetNames[0] // 获取第一个工作表名称
+  const sheet = workbook.Sheets[sheetName]
+  const jsonData = xlsx.utils.sheet_to_json(sheet) as Record<string, string | number>[]
+  return jsonData.map(item => {
+    const reduce = {}
+    Object.entries(item).forEach(([key, value]) => {
+      Object.entries(field).forEach(([fieldKey, fieldValue]) => {
+        key.toLowerCase() === fieldKey && value && (reduce[fieldValue] = value)
+      })
+    })
+    return reduce as T
+  })
+}

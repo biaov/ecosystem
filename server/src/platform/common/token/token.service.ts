@@ -16,10 +16,11 @@ export class TokenService {
 
   async getPayload(context: ExecutionContext) {
     const request = context.switchToHttp().getRequest()
+    let { token } = request.query
     const { authorization } = request.headers
     // token 校验
-    if (!authorization) throw new BizException('未登录', HttpStatus.UNAUTHORIZED)
-    const token = authorization.split(' ')[1]
+    if (!authorization && !token) throw new BizException('未登录', HttpStatus.UNAUTHORIZED)
+    !token && (token = authorization.split(' ')[1])
     if (!token) throw new BizException('未登录', HttpStatus.UNAUTHORIZED)
     let payload: TokenValue
     try {

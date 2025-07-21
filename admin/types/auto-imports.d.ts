@@ -66,6 +66,7 @@ declare global {
   const useCommand: typeof import('../src/composables/useRequest')['useCommand']
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVars: typeof import('vue')['useCssVars']
+  const useDownloadURL: typeof import('../src/composables/useUtils')['useDownloadURL']
   const useFormState: typeof import('../src/composables/useFormState')['useFormState']
   const useId: typeof import('vue')['useId']
   const useLink: typeof import('vue-router')['useLink']

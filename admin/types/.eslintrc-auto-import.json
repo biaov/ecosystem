@@ -79,6 +79,7 @@
     "useCommand": true,
     "useCssModule": true,
     "useCssVars": true,
+    "useDownloadURL": true,
     "useFormState": true,
     "useId": true,
     "useLink": true,

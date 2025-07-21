@@ -31,6 +31,7 @@ interface Option {
   children?: Option[]
 }
 const initCascaderValue = (list: Option[], reduce: number[] = []) => {
+  if (!modelValue.value) return []
   const result = list.some(item => {
     if (item.id === modelValue.value) {
       reduce.push(item.id)
@@ -43,10 +44,12 @@ const initCascaderValue = (list: Option[], reduce: number[] = []) => {
   return result ? reduce : []
 }
 
+let loading = true
 const { data } = useApiRequest(async () => {
   const res = await goodsCategoryApi.all<Option>()
   const result = initCascaderValue(res)
   tempVal && (cascaderValue.value = result)
+  loading = false
   return res
 })
 const modelValue = defineModel<number>()
@@ -59,6 +62,10 @@ watch(
   modelValue,
   (val?: number) => {
     tempVal = val !== cascaderValue.value?.at?.(-1)
+    if (!loading && tempVal) {
+      const result = initCascaderValue(data.value)
+      cascaderValue.value = result
+    }
   },
   { immediate: true }
 )
