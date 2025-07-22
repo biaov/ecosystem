@@ -17,3 +17,8 @@ export const orderSettingApi = useCommand('admin/setting/order')
  * 热搜词设置
  */
 export const hotkeywordSettingApi = useCommand('admin/setting/hotkeyword')
+
+/**
+ * 弹窗广告设置
+ */
+export const advSettingApi = useCommand('admin/setting/adv')

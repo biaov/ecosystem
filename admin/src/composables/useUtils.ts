@@ -33,8 +33,3 @@ export const useValidEmailForm = (isObj = false) => {
   }
   return isObj ? { validator } : validator
 }
-
-/**
- * 下载文件的 URL
- */
-export const useDownloadURL = (path: string) => `/api/${path}?token=${useStore().state.token}`

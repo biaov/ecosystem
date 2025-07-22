@@ -147,7 +147,6 @@ export enum PermissionKeyEnum {
   // 礼品管理
   giftList = 'gift:list',
   giftCategory = 'gift:category',
-  giftShopping = 'gift:shopping',
 
   // 订单管理
   orderList = 'order:list',
@@ -176,5 +175,26 @@ export enum PermissionKeyEnum {
   settingUser = 'setting:user',
   settingProtocol = 'setting:protocol',
   settingOrder = 'setting:order',
-  settingHotkeyword = 'setting:hotkeyword'
+  settingHotkeyword = 'setting:hotkeyword',
+  settingAdv = 'setting:adv'
 }
+
+/**
+ * 上下架
+ */
+export const onsaleEnum = Object.freeze({
+  true: true,
+  false: false,
+  options() {
+    return [
+      {
+        label: '上架',
+        value: `${this.true}`
+      },
+      {
+        label: '下架',
+        value: `${this.false}`
+      }
+    ]
+  }
+})

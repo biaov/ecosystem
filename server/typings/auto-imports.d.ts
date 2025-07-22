@@ -34,6 +34,8 @@ declare global {
   const FileInterceptor: typeof import('@nestjs/platform-express')['FileInterceptor']
   const GenderEnum: typeof import('../src/enums/index')['GenderEnum']
   const Get: typeof import('@nestjs/common')['Get']
+  const GiftCategoryModel: typeof import('../src/models/gift')['GiftCategoryModel']
+  const GiftModel: typeof import('../src/models/gift')['GiftModel']
   const Global: typeof import('@nestjs/common')['Global']
   const GoodsCategoryModel: typeof import('../src/models/goods')['GoodsCategoryModel']
   const GoodsModel: typeof import('../src/models/goods')['GoodsModel']
@@ -141,6 +143,9 @@ declare global {
   // @ts-ignore
   export type { BizException } from '../src/exceptions/biz'
   import('../src/exceptions/biz')
+  // @ts-ignore
+  export type { GiftModel, GiftCategoryModel } from '../src/models/gift'
+  import('../src/models/gift')
   // @ts-ignore
   export type { GoodsModel, GoodsCategoryModel, GoodsSpecModel } from '../src/models/goods'
   import('../src/models/goods')

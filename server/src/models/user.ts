@@ -39,6 +39,9 @@ export class UserModel extends UserInfo {
 
   @Column({ length: 64, comment: '黑名单原因', nullable: true })
   reason: string
+
+  @Column({ comment: '用户积分' })
+  credit: number
 }
 
 @Entity('user_admin')

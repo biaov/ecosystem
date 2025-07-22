@@ -31,14 +31,12 @@ export const useFormState = <T extends Record<string, unknown> = {}>(initFormSta
       ([key, value]) =>
         () =>
           new Promise((resolve, reject) => {
-            const { required, message: msg, validator } = value as FormRule
+            const { required, message: msg, validator, allowable } = value as FormRule
             const formVal = formState.value[key]
-            if (required) {
-              if (!formVal || (Array.isArray(formVal) && !formVal.length)) {
-                msg && message.error(msg)
-                reject(false)
-                return
-              }
+            if (required && (!formVal || (Array.isArray(formVal) && !formVal.length)) && ((allowable && formVal != '0') || !allowable)) {
+              msg && message.error(msg)
+              reject(false)
+              return
             }
 
             if (validator) {

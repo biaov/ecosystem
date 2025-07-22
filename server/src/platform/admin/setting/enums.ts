@@ -18,4 +18,8 @@ export enum SettingKeyEnum {
    * 热搜词设置
    */
   hotkeyword = 'hotkeyword'
+  /**
+   * 弹窗广告设置
+   */
+  adv = 'adv'
 }

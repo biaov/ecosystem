@@ -15,7 +15,9 @@ export const useTransformQuery = <T extends Record<string, any>>(query: T | Ref<
     let value = rawQuery[key]
     if (!value) return
     if (typeof transfomers[key] === 'function') {
-      rawQuery[key] = transfomers[key](value, rawQuery)
+      const reuslt = transfomers[key](value, rawQuery)
+      delete rawQuery[key]
+      reuslt !== undefined && (rawQuery[key] = reuslt)
       return
     }
 

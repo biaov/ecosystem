@@ -28,6 +28,8 @@
     "FindOperator": true,
     "GenderEnum": true,
     "Get": true,
+    "GiftCategoryModel": true,
+    "GiftModel": true,
     "Global": true,
     "GoodsCategoryModel": true,
     "GoodsModel": true,

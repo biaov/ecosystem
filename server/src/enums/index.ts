@@ -80,7 +80,6 @@ export enum PermissionKeyEnum {
   // 礼品管理
   giftList = 'gift:list',
   giftCategory = 'gift:category',
-  giftShopping = 'gift:shopping',
 
   // 订单管理
   orderList = 'order:list',
@@ -109,7 +108,8 @@ export enum PermissionKeyEnum {
   settingUser = 'setting:user',
   settingProtocol = 'setting:protocol',
   settingOrder = 'setting:order',
-  settingHotkeyword = 'setting:hotkeyword'
+  settingHotkeyword = 'setting:hotkeyword',
+  settingAdv = 'setting:adv'
 }
 
 /**
@@ -124,7 +124,6 @@ export enum ModuleLabelEnum {
   // 礼品管理
   giftList = '礼品管理/全部商品',
   giftCategory = '礼品管理/礼品分类',
-  giftShopping = '礼品管理/积分商城',
 
   // 订单管理
   orderList = '订单管理/购物订单',
@@ -149,5 +148,6 @@ export enum ModuleLabelEnum {
   settingUser = '系统设置/用户设置',
   settingProtocol = '系统设置/隐私协议',
   settingOrder = '系统设置/订单设置',
-  settingHotkeyword = '系统设置/热搜词设置'
+  settingHotkeyword = '系统设置/热搜词设置',
+  settingAdv = '系统设置/弹窗广告设置'
 }

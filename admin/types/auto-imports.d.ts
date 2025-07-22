@@ -45,6 +45,7 @@ declare global {
   const onUnmounted: typeof import('vue')['onUnmounted']
   const onUpdated: typeof import('vue')['onUpdated']
   const onWatcherCleanup: typeof import('vue')['onWatcherCleanup']
+  const onsaleEnum: typeof import('../src/enums/index')['onsaleEnum']
   const permissionEnum: typeof import('../src/enums/index')['permissionEnum']
   const provide: typeof import('vue')['provide']
   const reactive: typeof import('vue')['reactive']

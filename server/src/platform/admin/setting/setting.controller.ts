@@ -7,6 +7,7 @@ const permUserKey = definePermission(PermissionKeyEnum.settingUser)
 const permProtocolKey = definePermission(PermissionKeyEnum.settingProtocol)
 const permOrderKey = definePermission(PermissionKeyEnum.settingOrder)
 const permHotkeywordKey = definePermission(PermissionKeyEnum.settingHotkeyword)
+const permAdvKey = definePermission(PermissionKeyEnum.settingAdv)
 
 @UseGuards(AuthGuardAdmin)
 @Controller('setting')
@@ -95,5 +96,26 @@ export class SettingController {
   @Post(`${SettingKeyEnum.hotkeyword}/update`)
   updateHotkeyword(@Body() { value }: UpdateSettingDto) {
     return this.settingService.update({ key: SettingKeyEnum.hotkeyword, value })
+  }
+
+  // 弹窗广告设置
+  @Permission(permAdvKey.list)
+  @Get(SettingKeyEnum.adv)
+  findAdv() {
+    return this.settingService.find(SettingKeyEnum.adv)
+  }
+
+  @Log(ModuleLabelEnum.settingAdv, '创建内容')
+  @Permission(permAdvKey.create)
+  @Post(SettingKeyEnum.adv)
+  createAdv(@Body() { value }: UpdateSettingDto) {
+    return this.settingService.create({ key: SettingKeyEnum.adv, value })
+  }
+
+  @Log(ModuleLabelEnum.settingAdv, '更新内容')
+  @Permission(permAdvKey.update)
+  @Post(`${SettingKeyEnum.adv}/update`)
+  updateAdv(@Body() { value }: UpdateSettingDto) {
+    return this.settingService.update({ key: SettingKeyEnum.adv, value })
   }
 }

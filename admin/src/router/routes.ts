@@ -93,14 +93,6 @@ export const menuRoutes: RouteRecordRaw[] = [
     },
     children: [
       {
-        path: 'list',
-        name: 'gift-list',
-        meta: {
-          title: '全部礼品'
-        },
-        component: () => import('@/views/gift/list.vue')
-      },
-      {
         path: 'category',
         name: 'gift-category',
         meta: {
@@ -109,12 +101,39 @@ export const menuRoutes: RouteRecordRaw[] = [
         component: () => import('@/views/gift/category.vue')
       },
       {
-        path: 'shopping',
-        name: 'gift-shopping',
+        path: 'list',
+        name: 'gift-list',
         meta: {
-          title: '积分商城'
+          title: '全部礼品'
         },
-        component: () => import('@/views/gift/shopping.vue')
+        component: () => import('@/views/gift/gift.vue')
+      },
+      {
+        path: 'add',
+        name: 'gift-add',
+        meta: {
+          title: '新增礼品',
+          hidden: true
+        },
+        component: () => import('@/views/gift/gift-detail.vue')
+      },
+      {
+        path: 'edit/:id',
+        name: 'gift-edit',
+        meta: {
+          title: '编辑礼品',
+          hidden: true
+        },
+        component: () => import('@/views/gift/gift-detail.vue')
+      },
+      {
+        path: 'detail/:id',
+        name: 'gift-detail',
+        meta: {
+          title: '礼品详情',
+          hidden: true
+        },
+        component: () => import('@/views/gift/gift-detail.vue')
       }
     ]
   },
@@ -333,6 +352,14 @@ export const menuRoutes: RouteRecordRaw[] = [
           title: '热搜词设置'
         },
         component: () => import('@/views/setting/hotkeyword.vue')
+      },
+      {
+        path: 'adv',
+        name: 'setting-adv',
+        meta: {
+          title: '广告设置'
+        },
+        component: () => import('@/views/setting/adv.vue')
       }
     ]
   }

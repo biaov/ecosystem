@@ -22,7 +22,8 @@
       <a-button type="primary" href="/goods/add" v-perm="permKey.create">新增商品</a-button>
     </template>
     <template #list>
-      <a-table :data-source="data.items" row-key="id" :loading="loading" :pagination="$formatter.pagination(data)" @change="setPage">
+      <a-table :data-source="data.items" row-key="id" :loading="loading" :pagination="$formatter.pagination(data)"
+        @change="setPage">
         <a-table-column title="商品图" :width="100">
           <template #="{ record }">
             <a-image :src="record.photos[0]" :width="50" :height="50" />
@@ -53,8 +54,10 @@
         <a-table-column title="操作" :width="180">
           <template #="{ record }">
             <a-space :size="0">
-              <a-button type="link" size="small" :href="`/goods/detail/${record.id}`" v-perm="permKey.list">详情</a-button>
-              <a-button type="link" size="small" :href="`/goods/edit/${record.id}`" v-perm="permKey.update">编辑</a-button>
+              <a-button type="link" size="small" :href="`/goods/detail/${record.id}`"
+                v-perm="permKey.list">详情</a-button>
+              <a-button type="link" size="small" :href="`/goods/edit/${record.id}`"
+                v-perm="permKey.update">编辑</a-button>
               <a-popconfirm placement="left" title="你确定要删除这条数据吗?" @confirm="handleDelete(record)">
                 <a-button type="link" size="small" danger v-perm="permKey.delete">删除</a-button>
               </a-popconfirm>
@@ -67,7 +70,8 @@
 </template>
 <script lang="ts" setup>
 import { goodsApi, goodsOnsaleApi } from '@/api/goods'
-import { goodsSearchEnum, onsaleEnum } from './enums'
+import { onsaleEnum } from '@/enums'
+import { goodsSearchEnum, } from './enums'
 import SelectCategory from './components/select-category.vue'
 
 interface TableType extends IdDataType {

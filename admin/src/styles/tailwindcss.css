@@ -26,6 +26,10 @@
   color: #f56c6c;
 }
 
+.text-special {
+  color: #722ed1;
+}
+
 .bg-radial {
   background: #f5f5f5;
   /* background: linear-gradient(-60deg, #48c6ef, #6f86d6, #ee7752, #23a6d5, #23d5ab);

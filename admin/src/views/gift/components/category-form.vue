@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts" setup>
-import { goodsCategoryApi } from '@/api/goods'
+import { giftCategoryApi } from '@/api/gift'
 
 interface FormStateType {
   id: number
@@ -41,7 +41,7 @@ setFormRules({
 const handleSubmit = async () => {
   if (!(await validFormState())) return
   const param = { ...formState.value, children: undefined }
-  await (param.id ? goodsCategoryApi.update(param.id, param) : goodsCategoryApi.create(param))
+  await (param.id ? giftCategoryApi.update(param.id, param) : giftCategoryApi.create(param))
   message.success('操作成功')
   visible.value = false
   emit('ok', formState.value)
