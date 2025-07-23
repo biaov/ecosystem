@@ -2,6 +2,9 @@ import type { Relation } from 'typeorm'
 
 @Entity('goods')
 export class GoodsModel extends BaseModel {
+  @Column({ length: 8, comment: '商品类型, entity: 实物商品, invented: 虚拟商品' })
+  type: string
+
   @Column({ length: 64, comment: '商品名称' })
   name: string
 
@@ -14,7 +17,7 @@ export class GoodsModel extends BaseModel {
   @Column({ type: 'text', comment: '商品描述' })
   desc: string
 
-  @Column({ comment: '是否上架, true-上架, false-下架', default: false })
+  @Column({ comment: '是否上架, true: 上架, false: 下架', default: false })
   onsale: boolean
 
   @Column({ comment: '销售数量', default: 0 })

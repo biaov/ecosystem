@@ -8,6 +8,7 @@ export {}
 declare global {
   const APP_GUARD: typeof import('@nestjs/core')['APP_GUARD']
   const APP_INTERCEPTOR: typeof import('@nestjs/core')['APP_INTERCEPTOR']
+  const AddressModel: typeof import('../src/common/base.model')['AddressModel']
   const AfterInsert: typeof import('typeorm')['AfterInsert']
   const AfterLoad: typeof import('typeorm')['AfterLoad']
   const AfterUpdate: typeof import('typeorm')['AfterUpdate']
@@ -26,6 +27,7 @@ declare global {
   const Column: typeof import('typeorm')['Column']
   const Controller: typeof import('@nestjs/common')['Controller']
   const CreateDateColumn: typeof import('typeorm')['CreateDateColumn']
+  const CreditOrderModel: typeof import('../src/models/order')['CreditOrderModel']
   const CustomRoute: typeof import('../src/common/base.decorator')['CustomRoute']
   const Delete: typeof import('@nestjs/common')['Delete']
   const DrawImg: typeof import('../src/utils/draw')['DrawImg']
@@ -75,6 +77,8 @@ declare global {
   const NestFactory: typeof import('@nestjs/core')['NestFactory']
   const OneToMany: typeof import('typeorm')['OneToMany']
   const OneToOne: typeof import('typeorm')['OneToOne']
+  const OrderItemsModel: typeof import('../src/models/order')['OrderItemsModel']
+  const OrderModel: typeof import('../src/models/order')['OrderModel']
   const PagingDot: typeof import('../src/common/base.dot')['PagingDot']
   const Param: typeof import('@nestjs/common')['Param']
   const ParseIntPipe: typeof import('@nestjs/common')['ParseIntPipe']
@@ -155,6 +159,9 @@ declare global {
   // @ts-ignore
   export type { MenuModel } from '../src/models/menu'
   import('../src/models/menu')
+  // @ts-ignore
+  export type { OrderModel, OrderItemsModel, CreditOrderModel } from '../src/models/order'
+  import('../src/models/order')
   // @ts-ignore
   export type { SettingModel } from '../src/models/setting'
   import('../src/models/setting')

@@ -1,4 +1,5 @@
 import type { Relation } from 'typeorm'
+import { OrderModel, CreditOrderModel } from './order'
 
 export abstract class UserInfo extends BaseModel {
   @Column({ length: 32, comment: '用户名', unique: true })
@@ -42,6 +43,12 @@ export class UserModel extends UserInfo {
 
   @Column({ comment: '用户积分' })
   credit: number
+
+  @OneToMany(() => OrderModel, order => order.user)
+  orders: Relation<OrderModel[]>
+
+  @OneToMany(() => CreditOrderModel, order => order.user)
+  creditOrders: Relation<CreditOrderModel[]>
 }
 
 @Entity('user_admin')

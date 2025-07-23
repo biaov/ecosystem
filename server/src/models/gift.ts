@@ -2,6 +2,9 @@ import type { Relation } from 'typeorm'
 
 @Entity('gift')
 export class GiftModel extends BaseModel {
+  @Column({ length: 8, comment: '商品类型, entity: 实物商品, invented: 虚拟商品' })
+  type: string
+  
   @Column({ length: 64, comment: '礼品名称' })
   name: string
 
