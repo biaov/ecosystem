@@ -1,0 +1,196 @@
+import { themeColor } from '@/config/color'
+
+/**
+ * 订单搜索
+ */
+export const orderSearchEnum = Object.freeze({
+  sn: 'sn',
+  nickname: 'nickname',
+  mobile: 'mobile',
+  name: 'name',
+  sku: 'sku',
+  options() {
+    return [
+      {
+        label: '订单编号',
+        value: this.sn
+      },
+      {
+        label: '用户昵称',
+        value: this.nickname
+      },
+      {
+        label: '用户手机号',
+        value: this.mobile
+      },
+      {
+        label: '商品名称',
+        value: this.name
+      },
+      {
+        label: '商品SKU',
+        value: this.sku
+      }
+    ]
+  }
+})
+
+/**
+ * 订单状态
+ */
+export const orderStatusEnum = Object.freeze({
+  pay: 'pay',
+  paid: 'paid',
+  shipped: 'shipped',
+  completed: 'completed',
+  cancelled: 'cancelled',
+  options() {
+    return [
+      {
+        label: '待支付',
+        value: this.pay,
+        color: themeColor.primary
+      },
+      {
+        label: '待发货',
+        value: this.paid,
+        color: themeColor.danger
+      },
+      {
+        label: '待收货',
+        value: this.shipped,
+        color: themeColor.warning
+      },
+      {
+        label: '已完成',
+        value: this.completed,
+        color: themeColor.success
+      },
+      {
+        label: '已取消',
+        value: this.cancelled,
+        color: themeColor.disabled
+      }
+    ]
+  },
+  filter(status: string) {
+    return this.options().find(item => item.value === status)
+  },
+  filterStatus(status: string) {
+    return ([this.completed, this.cancelled] as string[]).includes(status) ? 'default' : 'processing'
+  }
+})
+
+/**
+ * 售后订单状态
+ */
+export const returnOrderStatusEnum = Object.freeze({
+  normal: 'normal',
+  refunded: 'refunded',
+  rejected: 'rejected',
+  closed: 'closed',
+  options() {
+    return [
+      {
+        label: '申请中',
+        value: this.normal,
+        color: themeColor.primary
+      },
+      {
+        label: '已退款',
+        value: this.refunded,
+        color: themeColor.success
+      },
+      {
+        label: '已拒绝',
+        value: this.rejected,
+        color: themeColor.danger
+      },
+      {
+        label: '已关闭',
+        value: this.closed,
+        color: themeColor.disabled
+      }
+    ]
+  },
+  filter(status: string) {
+    return this.options().find(item => item.value === status)
+  },
+  filterStatus(status: string) {
+    return ([this.closed, this.refunded] as string[]).includes(status) ? 'default' : 'processing'
+  }
+})
+
+/**
+ * 订单类型
+ */
+export const orderTypeEnum = Object.freeze({
+  entity: 'entity',
+  virtual: 'virtual',
+  options() {
+    return [
+      {
+        label: '实物商品',
+        value: this.entity
+      },
+      {
+        label: '虚拟商品',
+        value: this.virtual
+      }
+    ]
+  },
+  filter(status: string) {
+    return this.options().find(item => item.value === status)
+  }
+})
+
+/**
+ * 支付方式
+ */
+export const payTypeEnum = Object.freeze({
+  wechat: 'wechat',
+  alipay: 'alipay',
+  bank: 'bank',
+  options() {
+    return [
+      {
+        label: '微信',
+        value: this.wechat
+      },
+      {
+        label: '支付宝',
+        value: this.alipay
+      },
+      {
+        label: '银行卡',
+        value: this.bank
+      }
+    ]
+  },
+  filter(status: string) {
+    return this.options().find(item => item.value === status)
+  }
+})
+
+/**
+ * 发票类型
+ */
+export const invoiceTypeEnum = Object.freeze({
+  normal: 'normal',
+  vat: 'vat',
+  options() {
+    return [
+      {
+        label: '普通发票',
+        value: this.normal
+      },
+      {
+        label: '增值税发票',
+        value: this.vat
+      }
+    ]
+  },
+  filter(status: string) {
+    return this.options().find(item => item.value === status)
+  }
+})

@@ -30,6 +30,7 @@ export default [
   ...tseslint.configs.recommended,
   ...pluginVue.configs['flat/essential'],
   ...compat.config({ extends: ['./types/.eslintrc-auto-import.json'] }),
+  ...compat.config({ extends: ['./types/.eslintrc-global.json'] }),
   {
     rules: {
       'no-unused-vars': developmentOff,

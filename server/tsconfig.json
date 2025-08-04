@@ -35,6 +35,6 @@
     "strictPropertyInitialization": false,
     "noImplicitAny": false
   },
-  "include": ["src/**/*.ts", "typings/*.d.ts"],
+  "include": ["typings/*.d.ts", "src/**/*.ts"],
   "exclude": ["node_modules", ".vscode/dist"]
 }

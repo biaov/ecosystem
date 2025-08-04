@@ -74,7 +74,7 @@ export class RegisterDto {
   @IsNotEmpty({ message: 'code 必传' })
   code: Code
 
-  @IsNumber({}, { message: 'source 必须是数字' })
+  @IsEnum(SourceEnum)
   @IsNotEmpty({ message: 'source 必传' })
-  source: number
+  source: string
 }

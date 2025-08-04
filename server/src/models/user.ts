@@ -23,12 +23,12 @@ export abstract class UserInfo extends BaseModel {
   @Column({ comment: '性别: 0 - 女, 1 - 男, 2 - 保密', default: 2, type: 'tinyint' })
   gender: number
 
-  @Column({ comment: '注册来源: 1 - PC 官网, 2 - H5 端, 3 - APP 端, 4 - PC 管理后台, 5 - 微信小程序端', nullable: false, type: 'tinyint' })
-  source: number
+  @Column({ length: 16, comment: '注册来源: pc - PC 官网, h5 - H5 端, app - APP 端, admin - PC 管理后台, miniprogram - 微信小程序端' })
+  source: string
 
   @AfterLoad()
   formatMobile() {
-    this.mobile && (this.mobile = this.mobile.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2'))
+    useFormatMobile.call(this)
     this.username && (this.username = this.username.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2'))
   }
 }

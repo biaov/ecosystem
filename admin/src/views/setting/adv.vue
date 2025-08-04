@@ -19,7 +19,7 @@
           <template #="{ record }">{{ record.startShowTime }} ~ {{ record.endShowTime || '永久显示' }}</template>
         </a-table-column>
         <a-table-column title="操作" :width="180">
-          <template #="{ record }">
+          <template #="{ record, index }">
             <a-button type="link" size="small" @click="onEdit(record)">编辑</a-button>
             <a-popconfirm placement="left" title="你确定要删除这条数据吗?" @confirm="onDelete(index)">
               <a-button type="link" size="small" danger v-perm="permKey.delete">删除</a-button>
@@ -53,9 +53,12 @@ import { advType } from './enums'
 const permKey = definePermission(PermissionKeyEnum.settingAdv)
 
 let id: number
-interface TableType {
-  name: string
-  sort: number
+interface TableType extends IdDataType {
+  type: string
+  photo?: string
+  startShowTime?: string
+  endShowTime?: string
+  [key: string]: unknown
 }
 const { data, loading, getData } = useApiRequest<TableType[]>(async () => {
   const res = await advSettingApi.get<{ id: number; value: TableType[] }>()
@@ -65,8 +68,8 @@ const { data, loading, getData } = useApiRequest<TableType[]>(async () => {
 })
 
 const [visible, setVisible] = useState()
-const disabled = ref(false)
-const { formState, setFormRules, validFormState, resetFormState, setFormState } = useFormState({
+const { formState, setFormRules, validFormState, resetFormState, setFormState } = useFormState<TableType>({
+  id: 0,
   type: advType.everyday,
   photo: undefined,
   startShowTime: undefined,
@@ -78,7 +81,7 @@ setFormRules({
   startShowTime: {
     required: true,
     message: '请选择展示时间',
-    validator: value => {
+    validator: (value?: string) => {
       const { endShowTime } = formState.value
       if (endShowTime && dayjs(value) > dayjs(endShowTime)) return Promise.reject('开始时间不能大于结束时间')
       return Promise.resolve()

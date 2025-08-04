@@ -17,9 +17,13 @@ export enum SettingKeyEnum {
   /**
    * 热搜词设置
    */
-  hotkeyword = 'hotkeyword'
+  hotkeyword = 'hotkeyword',
   /**
    * 弹窗广告设置
    */
-  adv = 'adv'
+  adv = 'adv',
+  /**
+   * 物流设置
+   */
+  express = 'express'
 }

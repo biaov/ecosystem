@@ -34,16 +34,8 @@
             {{ record.category?.name }}
           </template>
         </a-table-column>
-        <a-table-column title="价格">
-          <template #="{ record }">
-            {{ record.defaultPrice.toLocaleString() }}
-          </template>
-        </a-table-column>
-        <a-table-column title="销量">
-          <template #="{ record }">
-            {{ record.saleNum.toLocaleString() }}
-          </template>
-        </a-table-column>
+        <a-table-column title="价格" :custom-render="$formatter.customRender('defaultPrice')" />
+        <a-table-column title="销量" :custom-render="$formatter.customRender('saleNum')" />
         <a-table-column title="上架状态" :width="140">
           <template #="{ record }">
             <a-switch :checked="record.onsale" @change="handleUpdate(record)" v-perm="permKey.update" />

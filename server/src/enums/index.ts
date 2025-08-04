@@ -109,7 +109,8 @@ export enum PermissionKeyEnum {
   settingProtocol = 'setting:protocol',
   settingOrder = 'setting:order',
   settingHotkeyword = 'setting:hotkeyword',
-  settingAdv = 'setting:adv'
+  settingAdv = 'setting:adv',
+  settingExpress = 'setting:express'
 }
 
 /**
@@ -149,5 +150,91 @@ export enum ModuleLabelEnum {
   settingProtocol = '系统设置/隐私协议',
   settingOrder = '系统设置/订单设置',
   settingHotkeyword = '系统设置/热搜词设置',
-  settingAdv = '系统设置/弹窗广告设置'
+  settingAdv = '系统设置/弹窗广告设置',
+  settingExpress = '系统设置/物流设置'
+}
+
+/**
+ * 订单状态枚举
+ */
+export enum OrderStatusEnum {
+  /**
+   * 待支付
+   */
+  pay = 'pay',
+
+  /**
+   * 已支付/待发货
+   */
+  paid = 'paid',
+
+  /**
+   * 已发货/待收货
+   */
+  shipped = 'shipped',
+
+  /**
+   * 已完成
+   */
+  completed = 'completed',
+
+  /**
+   * 已取消
+   */
+  cancelled = 'cancelled'
+}
+
+/**
+ * 订单类型枚举
+ */
+export enum OrderTypeEnum {
+  /**
+   * 实物商品
+   */
+  entity = 'entity',
+
+  /**
+   * 虚拟商品
+   */
+  virtual = 'virtual'
+}
+
+/**
+ * 订单来源/注册来源
+ */
+export enum SourceEnum {
+  /**
+   *  PC 官网
+   */
+  pc = 'pc',
+  /**
+   *  H5 端
+   */
+  h5 = 'h5',
+  /**
+   *  APP 端
+   */
+  app = 'app',
+  /**
+   *  后台管理
+   */
+  admin = 'admin',
+  /**
+   *  小程序端
+   */
+  miniprogram = 'miniprogram'
+}
+
+/**
+ * 发票类型枚举
+ */
+export enum InvoiceTypeEnum {
+  /**
+   * 普通发票
+   */
+  normal = 'normal',
+  /**
+   * 增值税专用发票
+   */
+  vat = 'vat'
 }

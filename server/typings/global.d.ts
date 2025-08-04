@@ -13,3 +13,5 @@ interface PageOption {
   current: number
   pageSize: number
 }
+
+type AddressUnion = 'province' | 'city' | 'district' | 'address' | 'name' | 'mobile'

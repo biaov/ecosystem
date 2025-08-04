@@ -8,6 +8,7 @@ const permProtocolKey = definePermission(PermissionKeyEnum.settingProtocol)
 const permOrderKey = definePermission(PermissionKeyEnum.settingOrder)
 const permHotkeywordKey = definePermission(PermissionKeyEnum.settingHotkeyword)
 const permAdvKey = definePermission(PermissionKeyEnum.settingAdv)
+const permExpressKey = definePermission(PermissionKeyEnum.settingExpress)
 
 @UseGuards(AuthGuardAdmin)
 @Controller('setting')
@@ -117,5 +118,26 @@ export class SettingController {
   @Post(`${SettingKeyEnum.adv}/update`)
   updateAdv(@Body() { value }: UpdateSettingDto) {
     return this.settingService.update({ key: SettingKeyEnum.adv, value })
+  }
+
+  // 物流设置
+  @Permission(permExpressKey.list)
+  @Get(SettingKeyEnum.express)
+  findExpress() {
+    return this.settingService.find(SettingKeyEnum.express)
+  }
+
+  @Log(ModuleLabelEnum.settingExpress, '创建内容')
+  @Permission(permExpressKey.create)
+  @Post(SettingKeyEnum.express)
+  createExpress(@Body() { value }: UpdateSettingDto) {
+    return this.settingService.create({ key: SettingKeyEnum.express, value })
+  }
+
+  @Log(ModuleLabelEnum.settingExpress, '更新内容')
+  @Permission(permExpressKey.update)
+  @Post(`${SettingKeyEnum.express}/update`)
+  updateExpress(@Body() { value }: UpdateSettingDto) {
+    return this.settingService.update({ key: SettingKeyEnum.express, value })
   }
 }

@@ -93,7 +93,8 @@ export default [
       'IsPositive',
       'IsBoolean',
       'IsEnum',
-      'IsObject'
+      'IsObject',
+      'Validate'
     ]
   },
   {

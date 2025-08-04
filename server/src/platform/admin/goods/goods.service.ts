@@ -24,29 +24,16 @@ export class GoodsService {
   }
 
   list({ skip, take, current, pageSize }: PageOption, { name, sku, categoryId, onsale }: Partial<Pick<GoodsModel, 'name' | 'categoryId' | 'onsale'> & { sku: string }>) {
-    const where = useTransfrormQuery({ name, categoryId, onsale }, { name: 'like', sku: 'like' })
-    // return findAndCount(
-    //   this.goodsRepository
-    //     .createQueryBuilder('goods')
-    //     .orderBy({ 'goods.createdAt': 'DESC' })
-    //     .leftJoinAndSelect('goods.specs', 'spec')
-    //     .where(where)
-    //     .where('spec.sku = :sku', { sku: sku || undefined })
-    //     .skip(skip)
-    //     .take(take)
-    //     .getManyAndCount(),
-    //   { current, pageSize }
-    // )
     return findAndCount(
-      this.goodsRepository.findAndCount({
-        where,
-        skip,
-        take,
-        order: {
-          createdAt: 'DESC'
-        },
-        relations: ['category']
-      }),
+      this.goodsRepository
+        .createQueryBuilder('goods')
+        .leftJoinAndSelect('goods.specs', 'spec')
+        .where(useTransfrormQuery({ name, categoryId, onsale }, { name: 'like', sku: 'like' }))
+        .andWhere(...useTransfrormQuery<[string, {}]>({ 'spec.sku': sku }, { 'spec.sku': 'like' }))
+        .skip(skip)
+        .take(take)
+        .orderBy('goods.createdAt', 'DESC')
+        .getManyAndCount(),
       { current, pageSize }
     )
   }

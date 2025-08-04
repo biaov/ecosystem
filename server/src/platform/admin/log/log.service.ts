@@ -9,9 +9,10 @@ export class LogService {
   private logRepository: Repository<LogModel>
 
   migration({ skip, take, current, pageSize }: PageOption, { name }: Partial<Pick<MigrationsModel, 'name'>>) {
+    const where = useTransfrormQuery({ name }, { name: 'like' })
     return findAndCount(
       this.migrationRepository.findAndCount({
-        where: { name },
+        where,
         skip,
         take,
         order: {

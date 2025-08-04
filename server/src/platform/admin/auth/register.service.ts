@@ -3,7 +3,7 @@ export class RegisterService {
   @InjectRepository(UserAdminModel)
   private userAdminRepository: Repository<UserAdminModel>
 
-  async register(username: string, password: string, source: number) {
+  async register(username: string, password: string, source: string) {
     const exist = await this.userAdminRepository.findOneBy({ username })
     if (exist) throw new BizException('账号已存在')
 

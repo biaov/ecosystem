@@ -1,0 +1,9 @@
+{
+  "globals": {
+    "IdDataType": true,
+    "PageDataType": true,
+    "Page": true,
+    "ResponseSuccess": true,
+    "ResponseError": true
+  }
+}

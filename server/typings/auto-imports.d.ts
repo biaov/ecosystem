@@ -27,12 +27,13 @@ declare global {
   const Column: typeof import('typeorm')['Column']
   const Controller: typeof import('@nestjs/common')['Controller']
   const CreateDateColumn: typeof import('typeorm')['CreateDateColumn']
+  const CreditOrderItemModel: typeof import('../src/models/order')['CreditOrderItemModel']
   const CreditOrderModel: typeof import('../src/models/order')['CreditOrderModel']
   const CustomRoute: typeof import('../src/common/base.decorator')['CustomRoute']
   const Delete: typeof import('@nestjs/common')['Delete']
   const DrawImg: typeof import('../src/utils/draw')['DrawImg']
   const Entity: typeof import('typeorm')['Entity']
-  const Exclude: typeof import('class-transformer')['Exclude']
+  const Exclude: (typeof import('class-transformer'))['Exclude']
   const FileInterceptor: typeof import('@nestjs/platform-express')['FileInterceptor']
   const GenderEnum: typeof import('../src/enums/index')['GenderEnum']
   const Get: typeof import('@nestjs/common')['Get']
@@ -50,6 +51,7 @@ declare global {
   const InjectRedis: typeof import('@nestjs-modules/ioredis')['InjectRedis']
   const InjectRepository: typeof import('@nestjs/typeorm')['InjectRepository']
   const Injectable: typeof import('@nestjs/common')['Injectable']
+  const InvoiceTypeEnum: typeof import('../src/enums/index')['InvoiceTypeEnum']
   const Ip: typeof import('@nestjs/common')['Ip']
   const IsArray: typeof import('class-validator')['IsArray']
   const IsBoolean: typeof import('class-validator')['IsBoolean']
@@ -77,8 +79,12 @@ declare global {
   const NestFactory: typeof import('@nestjs/core')['NestFactory']
   const OneToMany: typeof import('typeorm')['OneToMany']
   const OneToOne: typeof import('typeorm')['OneToOne']
-  const OrderItemsModel: typeof import('../src/models/order')['OrderItemsModel']
+  const OrderInvoiceModel: typeof import('../src/models/order')['OrderInvoiceModel']
+  const OrderItemModel: typeof import('../src/models/order')['OrderItemModel']
   const OrderModel: typeof import('../src/models/order')['OrderModel']
+  const OrderStatusEnum: typeof import('../src/enums/index')['OrderStatusEnum']
+  const OrderTraceModel: typeof import('../src/models/order')['OrderTraceModel']
+  const OrderTypeEnum: typeof import('../src/enums/index')['OrderTypeEnum']
   const PagingDot: typeof import('../src/common/base.dot')['PagingDot']
   const Param: typeof import('@nestjs/common')['Param']
   const ParseIntPipe: typeof import('@nestjs/common')['ParseIntPipe']
@@ -94,6 +100,7 @@ declare global {
   const RouterModule: typeof import('@nestjs/core')['RouterModule']
   const SetMetadata: typeof import('@nestjs/common')['SetMetadata']
   const SettingModel: typeof import('../src/models/setting')['SettingModel']
+  const SourceEnum: typeof import('../src/enums/index')['SourceEnum']
   const Transform: typeof import('class-transformer')['Transform']
   const TransformResponseInterceptor: typeof import('../src/common/base.interceptor')['TransformResponseInterceptor']
   const Tree: typeof import('typeorm')['Tree']
@@ -109,6 +116,7 @@ declare global {
   const UserAdminModel: typeof import('../src/models/user')['UserAdminModel']
   const UserModel: typeof import('../src/models/user')['UserModel']
   const UserRoleModel: typeof import('../src/models/user')['UserRoleModel']
+  const Validate: typeof import('class-validator')['Validate']
   const ValidateNested: typeof import('class-validator')['ValidateNested']
   const ValidationPipe: typeof import('@nestjs/common')['ValidationPipe']
   const aesDecrypt: typeof import('../src/utils/crypto')['aesDecrypt']
@@ -130,8 +138,10 @@ declare global {
   const random: typeof import('../src/utils/utils')['random']
   const randomId: typeof import('../src/utils/utils')['randomId']
   const useAffected: typeof import('../src/utils/utils')['useAffected']
+  const useFormatMobile: typeof import('../src/utils/utils')['useFormatMobile']
   const useRandomLetter: typeof import('../src/utils/utils')['useRandomLetter']
   const useRandomName: typeof import('../src/utils/utils')['useRandomName']
+  const useTransformLike: typeof import('../src/utils/utils')['useTransformLike']
   const useTransfrormQuery: typeof import('../src/utils/utils')['useTransfrormQuery']
   const useXlsx: typeof import('../src/utils/utils')['useXlsx']
   const validator: typeof import('../src/utils/validator')['validator']
@@ -160,7 +170,7 @@ declare global {
   export type { MenuModel } from '../src/models/menu'
   import('../src/models/menu')
   // @ts-ignore
-  export type { OrderModel, OrderItemsModel, CreditOrderModel } from '../src/models/order'
+  export type { OrderModel, OrderItemModel, OrderTraceModel, OrderInvoiceModel, CreditOrderModel, CreditOrderItemModel } from '../src/models/order'
   import('../src/models/order')
   // @ts-ignore
   export type { SettingModel } from '../src/models/setting'
@@ -172,7 +182,7 @@ declare global {
   export type { DrawImg } from '../src/utils/draw'
   import('../src/utils/draw')
   // @ts-ignore
-  export type { CaptchaEnum, PermissionEnum, MetaKeyEnum, GenderEnum, PermissionKeyEnum, ModuleLabelEnum } from '../src/enums/index'
+  export type { CaptchaEnum, PermissionEnum, MetaKeyEnum, GenderEnum, PermissionKeyEnum, ModuleLabelEnum, OrderStatusEnum, OrderTypeEnum, SourceEnum, InvoiceTypeEnum } from '../src/enums/index'
   import('../src/enums/index')
   // @ts-ignore
   export type { HttpErrorFilter, TransformResponseInterceptor, LogInterceptor } from '../src/common/base.interceptor'

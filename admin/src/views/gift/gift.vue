@@ -61,26 +61,10 @@
           </template>
         </a-table-column>
         <a-table-column title="礼品SKU" data-index="sku" :min-width="200" />
-        <a-table-column title="兑换积分" :width="120">
-          <template #="{ record }">
-            {{ record.credit.toLocaleString() }}
-          </template>
-        </a-table-column>
-        <a-table-column title="销量" :width="120">
-          <template #="{ record }">
-            {{ record.saleNum.toLocaleString() }}
-          </template>
-        </a-table-column>
-        <a-table-column title="可售" :width="120">
-          <template #="{ record }">
-            {{ (record.stock - record.hold).toLocaleString() }}
-          </template>
-        </a-table-column>
-        <a-table-column title="占用" :width="120">
-          <template #="{ record }">
-            {{ record.hold.toLocaleString() }}
-          </template>
-        </a-table-column>
+        <a-table-column title="兑换积分" :width="120" :custom-render="$formatter.customRender('credit')" />
+        <a-table-column title="销量" :width="120" :custom-render="$formatter.customRender('saleNum')" />
+        <a-table-column title="可售" :width="120" :custom-render="$formatter.customRender('stock', 'hold', '-')" />
+        <a-table-column title="占用" :width="120" :custom-render="$formatter.customRender('hold')" />
         <a-table-column title="更新时间" data-index="updatedAt" :width="180" />
         <a-table-column title="上架状态" :width="140" fixed="right">
           <template #="{ record }">
@@ -115,6 +99,7 @@ import { giftSearchEnum, giftTagEnum } from './enums'
 
 interface TableType extends IdDataType {
   onsale: boolean
+  stock: number
 }
 const permKey = definePermission(PermissionKeyEnum.giftList, { download: 'downloadTemplate', import: 'importStock' } as const)
 const { formState, onRestFormState, resetFormState } = useFormState({
@@ -130,7 +115,7 @@ const { data, setPage, loading } = usePagingApiRequest(({ current, pageSize }) =
     ...useTransformQuery(
       formState,
       {
-        tag(value, rawQuery) {
+        tag(value: string, rawQuery: Record<string, unknown>) {
           value && (rawQuery[value] = true)
         }
       },
@@ -143,7 +128,7 @@ const { data, setPage, loading } = usePagingApiRequest(({ current, pageSize }) =
 
 onRestFormState(setPage)
 
-const handleUpdate = async (item: TableType, field) => {
+const handleUpdate = async (item: TableType, field: keyof TableType) => {
   await giftApi.update(item.id, { [field]: item[field] })
   message.success('操作成功')
   setPage()

@@ -5,5 +5,14 @@ declare module 'vue' {
   interface ComponentCustomProperties {
     $formatter: typeof formatter
     $config: typeof config
+    $onExport: (
+      data: {
+        file: {
+          status: string
+          response?: { message: string }
+        }
+      },
+      callback?: () => void
+    ) => void
   }
 }

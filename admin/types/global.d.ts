@@ -22,6 +22,8 @@ interface PageDataType<T = Record<string, unknown>> {
 
 interface IdDataType {
   id: number
+  createdAt: string
+  updatedAt: string
 }
 
 /**
@@ -62,4 +64,9 @@ interface Document {
     offsetNode: Node
     offset: number
   }
+}
+
+interface Option {
+  label: string
+  value: string
 }

@@ -30,6 +30,6 @@
     /* 校验 */
     "strict": true
   },
-  "include": ["src/**/*.ts", "src/**/*.vue", "types/*.d.ts", "package.json", "scripts/route-sql.ts"],
+  "include": ["types/*.d.ts", "src/**/*.ts", "src/**/*.vue", "scripts/route-sql.ts"],
   "exclude": ["node_modules", "dist"]
 }

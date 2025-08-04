@@ -21,3 +21,75 @@ export namespace PermissionName {
     })[]
   }
 }
+
+export namespace UserName {
+  export interface UserInfo extends IdDataType {
+    nickname: string
+    avatar: string
+    mobile: string
+    email: string
+  }
+}
+
+interface AddressType {
+  province: string
+  city: string
+  district: string
+  address: string
+  name: string
+  mobile: string
+}
+
+export namespace OrderName {
+  interface InvoiceType {
+    type: string
+    title: string
+    no: string
+    bank?: string
+    bankAccount?: string
+    mobile?: string
+    address?: string
+  }
+  export interface OrderItemType extends IdDataType {
+    sku: string
+    goodsName: string
+    goodsPrice: string
+    goodsPhoto: string
+    quantity: string
+  }
+  export interface OrderTraceType extends IdDataType {
+    expressSn: string
+    expressCode: string
+    traces: {
+      date: string
+      message: string
+    }[]
+  }
+  export interface OrderDataType extends AddressType, IdDataType {
+    sn: string
+    status: string
+    source: string
+    totalAmount: string
+    payAmount: number
+    discountAmount: number
+    remark: string
+    payTime: string
+    type: string
+    payType: string
+    user: UserName.UserInfo
+    items: OrderItemType[]
+    trace: OrderTraceType
+    invoice: InvoiceType
+  }
+  export interface CreditOrderDataType extends AddressType, IdDataType {
+    sn: string
+    status: string
+    source: string
+    credit: number
+    remark: string
+    type: string
+    user: UserName.UserInfo
+    items: OrderItemType[]
+    trace: OrderTraceType
+  }
+}

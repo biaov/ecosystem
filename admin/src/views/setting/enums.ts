@@ -16,7 +16,7 @@ export const advType = Object.freeze({
       }
     ]
   },
-  filter(value) {
+  filter(value: string) {
     return this.options().find(item => item.value === value)
   }
 })

@@ -39,16 +39,8 @@
             <a-input-number v-model:value="record.stock" :min="0" :max="9999" :precision="0" placeholder="商品库存" @blur="handleUpdate(record)" v-perm="permKey.update" class="w-full" />
           </template>
         </a-table-column>
-        <a-table-column title="可售" :width="200">
-          <template #="{ record }">
-            {{ (record.stock - record.hold).toLocaleString() }}
-          </template>
-        </a-table-column>
-        <a-table-column title="占用" :width="200">
-          <template #="{ record }">
-            {{ record.hold.toLocaleString() }}
-          </template>
-        </a-table-column>
+        <a-table-column title="可售" :width="200" :custom-render="$formatter.customRender('stock', 'hold', '-')" />
+        <a-table-column title="占用" :width="200" :custom-render="$formatter.customRender('hold')" />
       </a-table>
     </template>
   </c-layout-list>
@@ -57,7 +49,6 @@
 import { goodsStockApi, goodsStockTemplateDownloadApi, goodsStockImportApi } from '@/api/goods'
 import { goodsSearchEnum } from './enums'
 
-const checked = ref(false)
 interface TableType extends IdDataType {
   stock: number
 }

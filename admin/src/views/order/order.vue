@@ -1,5 +1,5 @@
 <template>
-  <c-layout-list title="积分订单">
+  <c-layout-list title="购物订单">
     <template #filter>
       <a-form-item>
         <a-input-group compact>
@@ -35,7 +35,7 @@
             <div v-for="(item, index) in record.items" :key="index" class="text-ellipsis">{{ item.sku }} | x{{ item.quantity }} | {{ item.goodsName }}</div>
           </template>
         </a-table-column>
-        <a-table-column title="兑换积分" :custom-render="$formatter.customRender('credit')" :width="120" />
+        <a-table-column title="应付金额" :custom-render="$formatter.customRender('payAmount')" :width="120" />
         <a-table-column title="订单类型" :width="120">
           <template #="{ record }">
             {{ orderTypeEnum.filter(record.type)?.label }}
@@ -66,10 +66,10 @@
       </a-table>
     </template>
   </c-layout-list>
-  <modal-send v-model:visible="visible" :form="editForm" type="credit" @ok="setPage" />
+  <modal-send v-model:visible="visible" :form="editForm" @ok="setPage" />
 </template>
 <script lang="ts" setup>
-import { creditOrderApi } from '@/api/order'
+import { orderApi } from '@/api/order'
 import { sourceEnum } from '@/enums'
 import ModalSend from './components/modal-send.vue'
 import { orderSearchEnum, orderStatusEnum, orderTypeEnum } from './enums'
@@ -88,7 +88,7 @@ interface TableType extends IdDataType {
 }
 
 const { data, setPage, loading } = usePagingApiRequest(({ current, pageSize }) =>
-  creditOrderApi.paging({
+  orderApi.paging({
     ...useTransformQuery(formState, {}, 'search'),
     type: formState.value.orderType,
     orderType: undefined,

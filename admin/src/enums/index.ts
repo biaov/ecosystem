@@ -2,11 +2,11 @@
  * 注册来源
  */
 export const sourceEnum = Object.freeze({
-  pc: 1,
-  h5: 2,
-  app: 3,
-  admin: 4,
-  miniProgram: 5,
+  pc: 'pc',
+  h5: 'h5',
+  app: 'app',
+  admin: 'admin',
+  miniprogram: 'miniprogram',
   options() {
     return [
       {
@@ -21,17 +21,17 @@ export const sourceEnum = Object.freeze({
         label: 'APP',
         value: this.app
       },
-      {
-        label: '控制台',
-        value: this.admin
-      },
+      // {
+      //   label: '控制台',
+      //   value: this.admin
+      // },
       {
         label: '微信小程序',
-        value: this.miniProgram
+        value: this.miniprogram
       }
     ]
   },
-  filter(value: number) {
+  filter(value: string) {
     return this.options().find(item => item.value === value)
   }
 })
@@ -176,7 +176,8 @@ export enum PermissionKeyEnum {
   settingProtocol = 'setting:protocol',
   settingOrder = 'setting:order',
   settingHotkeyword = 'setting:hotkeyword',
-  settingAdv = 'setting:adv'
+  settingAdv = 'setting:adv',
+  settingExpress = 'setting:express',
 }
 
 /**

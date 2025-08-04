@@ -8,24 +8,18 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    c: typeof import('./.../src/components/c-role-select c.vuefault']
     CAntIcon: typeof import('./../src/components/c-ant-icon.vue')['default']
     CCaptcha: typeof import('./../src/components/c-captcha.vue')['default']
     CCascader: typeof import('./../src/components/c-cascader/c-cascader.vue')['default']
     CLayoutForm: typeof import('./../src/components/c-layout-form.vue')['default']
     CLayoutList: typeof import('./../src/components/c-layout-list.vue')['default']
-    copy: typeof import('./../src/components/c-role-select copy.vue')['default']
     CReloadPrompt: typeof import('./../src/components/c-reload-prompt.vue')['default']
     CRichText: typeof import('./../src/components/c-rich-text/c-rich-text.vue')['default']
     CRoleSelect: typeof import('./../src/components/c-role-select.vue')['default']
     CSms: typeof import('./../src/components/c-sms.vue')['default']
     CUpload: typeof import('./../src/components/c-upload.vue')['default']
     Emoji: typeof import('./../src/components/c-rich-text/emoji.vue')['default']
-    RoleSelect: typeof import('../src/components/c-role-select.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    UAntIcon: typeof import('../src/components/c-ant-icon.vue')['default']
-    ULayoutForm: typeof import('../src/components/c-layout-form.vue')['default']
-    ULayoutList: typeof import('../src/components/c-layout-list.vue')['default']
   }
 }

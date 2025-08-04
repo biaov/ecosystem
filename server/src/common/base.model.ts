@@ -34,6 +34,11 @@ class AddressModel extends BaseModel {
 
   @Column({ length: 12, comment: '手机号', nullable: true })
   mobile: string
+
+  @AfterLoad()
+  formatMobile() {
+    useFormatMobile.call(this)
+  }
 }
 
 export { BaseModel, AddressModel }

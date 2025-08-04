@@ -29,5 +29,6 @@ export class LogDto extends PagingDot {
 export class MigrationLogDto extends PagingDot {
   @IsOptional()
   @IsString()
+  @IsNotEmpty()
   name?: string
 }

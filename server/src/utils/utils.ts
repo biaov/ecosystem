@@ -36,13 +36,15 @@ export const findAndCount = async (promise: Promise<any>, page: Pick<PageOption,
 }
 
 type USETransfrormQueryOption = boolean | number | string | string[] | FindOperator<string> | undefined
+
 /**
  * 转换查询条件
  */
-export const useTransfrormQuery = (
+export const useTransfrormQuery = <T = Record<string, USETransfrormQueryOption | Record<string, USETransfrormQueryOption>>>(
   data: Record<string, USETransfrormQueryOption>,
   transform: Record<string, string>
-): Record<string, USETransfrormQueryOption | Record<string, USETransfrormQueryOption>> => {
+) => {
+  // 转换查询条件
   Object.entries(transform).forEach(([key, value]) => {
     if (!data[key]) return
     switch (value) {
@@ -55,13 +57,41 @@ export const useTransfrormQuery = (
         break
     }
   })
+  // 转换为数组
+  const dataEntries = Object.entries(data)
+  let result: [{}] | [string, {}] | Record<string, unknown>
+  // 关联表查询
+  if (dataEntries[0][0].includes('.')) {
+    result = dataEntries.reduce(
+      (prev, [key, value]) => {
+        const keyArr = key.split('.')
+        if (value !== 0 && value) {
+          let newValue = value
+          let symbol = '='
 
-  const filterValue = Object.entries(data).reduce((prev, [key, value]) => {
-    value !== undefined && value !== null && value !== '' && (prev[key] = value)
-    return prev
-  }, {})
+          if (transform[key] === 'like') {
+            newValue = (value as FindOperator<string>).value
+            symbol = 'LIKE'
+          }
 
-  return filterValue
+          const prop = keyArr[1]
+          prev[0] += `${prev[0] ? ' AND ' : ''}${key} ${symbol} :${prop}`
+          prev[1][prop] = newValue
+        }
+
+        return prev
+      },
+      ['', {}]
+    )
+    !result[0] && (result = [{}])
+  } else {
+    // 普通查询
+    result = dataEntries.reduce((prev, [key, value]) => {
+      value !== 0 && value && (prev[key] = value)
+      return prev
+    }, {})
+  }
+  return result as T
 }
 
 /**
@@ -133,4 +163,20 @@ export const useXlsx = <T extends Record<string, any>, R extends Record<string, 
     })
     return reduce as T
   })
+}
+
+/**
+ * 转换 like
+ */
+export const useTransformLike = (data: Record<string, string | number | undefined>) =>
+  Object.entries(data).reduce((prev, [key, value]) => {
+    prev[key] = `%${value || ''}%`
+    return prev
+  }, {})
+
+/**
+ * 格式化手机号
+ */
+export function useFormatMobile(this: { mobile: string }) {
+  this.mobile && (this.mobile = this.mobile.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2'))
 }

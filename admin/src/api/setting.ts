@@ -22,3 +22,8 @@ export const hotkeywordSettingApi = useCommand('admin/setting/hotkeyword')
  * 弹窗广告设置
  */
 export const advSettingApi = useCommand('admin/setting/adv')
+
+/**
+ * 物流设置
+ */
+export const expressSettingApi = useCommand('admin/setting/express')

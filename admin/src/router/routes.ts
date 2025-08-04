@@ -153,7 +153,16 @@ export const menuRoutes: RouteRecordRaw[] = [
         meta: {
           title: '购物订单'
         },
-        component: () => import('@/views/order/list.vue')
+        component: () => import('@/views/order/order.vue')
+      },
+      {
+        path: 'detail/:id',
+        name: 'order-detail',
+        meta: {
+          title: '购物订单详情',
+          hidden: true
+        },
+        component: () => import('@/views/order/order-detail.vue')
       },
       {
         path: 'credit',
@@ -162,6 +171,15 @@ export const menuRoutes: RouteRecordRaw[] = [
           title: '积分订单'
         },
         component: () => import('@/views/order/credit.vue')
+      },
+      {
+        path: 'detail/:id',
+        name: 'order-credit-detail',
+        meta: {
+          title: '积分订单详情',
+          hidden: true
+        },
+        component: () => import('@/views/order/order-detail.vue')
       },
       {
         path: 'sales',
@@ -360,6 +378,14 @@ export const menuRoutes: RouteRecordRaw[] = [
           title: '广告设置'
         },
         component: () => import('@/views/setting/adv.vue')
+      },
+      {
+        path: 'express',
+        name: 'setting-express',
+        meta: {
+          title: '物流设置'
+        },
+        component: () => import('@/views/setting/express.vue')
       }
     ]
   }
