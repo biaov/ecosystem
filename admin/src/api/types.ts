@@ -92,4 +92,15 @@ export namespace OrderName {
     items: OrderItemType[]
     trace: OrderTraceType
   }
+  export interface SaleOrderDataType extends IdDataType {
+    sn: string
+    status: string
+    type: string
+    reason: string
+    result: string
+    refundAmount: number
+    user: UserName.UserInfo
+    order: OrderDataType
+    trace: OrderTraceType
+  }
 }

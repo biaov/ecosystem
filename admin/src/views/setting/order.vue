@@ -26,9 +26,6 @@
       <a-form-item label="退款理由" required>
         <a-textarea v-model:value="formState.refundReason" placeholder="请输入退款理由，每行一个" v-bind="$config.textarea" />
       </a-form-item>
-      <a-form-item label="退货理由" required>
-        <a-textarea v-model:value="formState.returnReason" placeholder="请输入退货理由，每行一个" v-bind="$config.textarea" />
-      </a-form-item>
       <a-form-item label="退货须知" required>
         <a-textarea v-model:value="formState.returnInstructions" placeholder="请输入退货须知" v-bind="$config.textarea" />
       </a-form-item>
@@ -53,7 +50,6 @@ const { formState, setFormState, setFormRules, validFormState } = useFormState({
   district: '',
   address: '',
   refundReason: '',
-  returnReason: '',
   returnInstructions: ''
 })
 
@@ -67,19 +63,18 @@ setFormRules({
   district: { required: true, message: '请选择所在城市' },
   address: { required: true, message: '请输入详细地址' },
   refundReason: { required: true, message: '请输入退款理由' },
-  returnReason: { required: true, message: '请输入退货理由' },
   returnInstructions: { required: true, message: '请输入退货须知' }
 })
 
 const { getData } = useApiRequest(async () => {
   const res = await orderSettingApi.get<{ id: number; value: Omit<typeof formState.value, 'id'> } | null>()
   if (!res) return
-  setFormState({ id: res.id, ...useTransfromTextarea.transfromToForm(res.value, ['refundReason', 'returnReason']) })
+  setFormState({ id: res.id, ...useTransfromTextarea.transfromToForm(res.value, ['refundReason']) })
 })
 
 const handleSubmit = async () => {
   if (!(await validFormState())) return
-  const param = { value: useTransfromTextarea.transfromToData(formState.value, ['refundReason', 'returnReason']) }
+  const param = { value: useTransfromTextarea.transfromToData(formState.value, ['refundReason']) }
   await (formState.value.id ? orderSettingApi.update(param) : orderSettingApi.post(param))
   message.success('保存成功')
   getData()

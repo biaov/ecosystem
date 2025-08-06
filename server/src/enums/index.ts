@@ -84,7 +84,7 @@ export enum PermissionKeyEnum {
   // 订单管理
   orderList = 'order:list',
   orderCredit = 'order:credit',
-  orderSales = 'order:sales',
+  orderSale = 'order:sale',
 
   // 促销活动
   promotionList = 'promotion:coupon',
@@ -129,7 +129,7 @@ export enum ModuleLabelEnum {
   // 订单管理
   orderList = '订单管理/购物订单',
   orderCredit = '订单管理/积分订单',
-  orderSales = '订单管理/售后退款',
+  orderSale = '订单管理/售后退款',
 
   // 促销活动
   promotionList = '促销活动/优惠券',
@@ -237,4 +237,59 @@ export enum InvoiceTypeEnum {
    * 增值税专用发票
    */
   vat = 'vat'
+}
+
+/**
+ * 售后订单状态枚举
+ */
+export enum SaleOrderStatusEnum {
+  /**
+   * 申请中
+   */
+  normal = 'normal',
+
+  /**
+   * 已同意/待发货
+   */
+  agreed = 'agreed',
+
+  /**
+   * 待签收
+   */
+  receiving = 'receiving',
+
+  /**
+   * 待退款
+   */
+  refunding = 'refunding',
+
+  /**
+   * 已退款
+   */
+  refunded = 'refunded',
+
+  /**
+   * 已拒绝
+   */
+  rejected = 'rejected',
+
+  /**
+   * 已关闭
+   */
+  closed = 'closed'
+}
+
+/**
+ * 售后订单类型枚举
+ */
+export enum SaleOrderTypeEnum {
+  /**
+   * 仅退款
+   */
+  refund = 'refund',
+
+  /**
+   * 退货退款
+   */
+  return = 'return'
 }

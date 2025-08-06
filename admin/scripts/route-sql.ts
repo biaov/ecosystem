@@ -77,10 +77,11 @@ const three = threeGroup
           type: 'action'
         }
       })
+    const parentId = item.id
     if (item.content === 'role' && item.name === '角色权限') {
       actions.push({
+        parentId,
         name: '分配权限',
-        parentId: item.id,
         content: 'permission',
         type: 'action'
       })
@@ -90,14 +91,14 @@ const three = threeGroup
       actions.push(
         ...[
           {
+            parentId,
             name: '下载模板',
-            parentId: item.id,
             content: 'downloadTemplate',
             type: 'action'
           },
           {
+            parentId,
             name: '导入库存',
-            parentId: item.id,
             content: 'importStock',
             type: 'action'
           }
@@ -109,14 +110,14 @@ const three = threeGroup
       actions.push(
         ...[
           {
+            parentId,
             name: '下载模板',
-            parentId: item.id,
             content: 'downloadTemplate',
             type: 'action'
           },
           {
+            parentId,
             name: '导入库存',
-            parentId: item.id,
             content: 'importStock',
             type: 'action'
           }
@@ -126,8 +127,8 @@ const three = threeGroup
 
     if (item.content === 'account' && item.name === '账号设置') {
       actions.push({
+        parentId,
         name: '重置密码',
-        parentId: item.id,
         content: 'reset-pwd',
         type: 'action'
       })
@@ -135,11 +136,30 @@ const three = threeGroup
 
     if (item.content === 'blocklist' && item.name === '拉黑名单') {
       actions.push({
+        parentId,
         name: '拉黑',
-        parentId: item.id,
         content: 'block',
         type: 'action'
       })
+    }
+
+    if (item.content === 'sale' && item.name === '售后退款') {
+      actions.push(
+        ...[
+          {
+            parentId,
+            name: '签收',
+            content: 'receive',
+            type: 'action'
+          },
+          {
+            parentId,
+            name: '退款',
+            content: 'refund',
+            type: 'action'
+          }
+        ]
+      )
     }
 
     return actions

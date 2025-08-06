@@ -21,7 +21,7 @@ VALUES
   ('积分商城', 3, 'shopping', 'page'),
   ('购物订单', 4, 'list', 'page'),
   ('积分订单', 4, 'credit', 'page'),
-  ('售后退款', 4, 'sales', 'page'),
+  ('售后退款', 4, 'sale', 'page'),
   ('优惠券', 5, 'coupon', 'page'),
   ('活动发券', 5, 'activity-coupon', 'page'),
   ('手动发券', 5, 'distribute', 'page'),

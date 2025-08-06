@@ -173,21 +173,30 @@ export const menuRoutes: RouteRecordRaw[] = [
         component: () => import('@/views/order/credit.vue')
       },
       {
-        path: 'detail/:id',
+        path: 'credit-detail/:id',
         name: 'order-credit-detail',
         meta: {
           title: '积分订单详情',
           hidden: true
         },
-        component: () => import('@/views/order/order-detail.vue')
+        component: () => import('@/views/order/credit-detail.vue')
       },
       {
-        path: 'sales',
-        name: 'order-sales',
+        path: 'sale',
+        name: 'order-sale',
         meta: {
           title: '售后退款'
         },
-        component: () => import('@/views/order/sales.vue')
+        component: () => import('@/views/order/sale.vue')
+      },
+      {
+        path: 'sale-detail/:id',
+        name: 'order-sale-detail',
+        meta: {
+          title: '售后退款详情',
+          hidden: true
+        },
+        component: () => import('@/views/order/sale-detail.vue')
       }
     ]
   },

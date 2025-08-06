@@ -23,7 +23,7 @@ export class GoodsModel extends BaseModel {
   @Column({ comment: '销售数量', default: 0 })
   saleNum: number
 
-  @Column({ type: 'decimal', comment: '默认价格', precision: 10, scale: 2 })
+  @Column({ type: 'float', comment: '默认价格', precision: 10, scale: 2 })
   defaultPrice: number
 
   @Column({ length: 32, comment: '默认SKU' })
@@ -78,7 +78,7 @@ export class GoodsSpecModel extends BaseModel {
   @Column({ length: 256, comment: '图片' })
   photo: string
 
-  @Column({ type: 'decimal', comment: '价格', precision: 10, scale: 2 })
+  @Column({ type: 'float', comment: '价格', precision: 10, scale: 2 })
   price: number
 
   @Column({ comment: '库存', default: 0 })

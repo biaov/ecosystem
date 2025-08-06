@@ -1,10 +1,11 @@
 import { FindController } from '@/common/base.controller'
 import { PermissionKeyEnum } from '@/enums'
-import { OrderService, CreditOrderService } from './order.service'
-import { OrderDto, CreditOrderDto, UpdateShippedDto } from './order.dto'
+import { OrderService, CreditOrderService, SaleOrderService } from './order.service'
+import { OrderDto, CreditOrderDto, UpdateShippedDto, UpdateExamineDto, SaleOrderDto } from './order.dto'
 
 const orderPermKey = definePermission(PermissionKeyEnum.orderList)
 const creditOrderPermKey = definePermission(PermissionKeyEnum.orderCredit)
+const saleOrderPermKey = definePermission(PermissionKeyEnum.orderSale, { receive: 'receive', refund: 'refund' } as const)
 
 @UseGuards(AuthGuardAdmin)
 @Controller('order')
@@ -57,5 +58,45 @@ export class CreditOrderController extends FindController {
   @Post(':id/shipped')
   updateShipped(@IdParam() id: number, @Body() { expressCode, expressSn }: UpdateShippedDto) {
     return this.find(this.creditOrderService.updateShipped(id, { expressCode, expressSn }), id)
+  }
+}
+
+@UseGuards(AuthGuardAdmin)
+@Controller('sale-order')
+export class SaleOrderController extends FindController {
+  constructor(private readonly saleOrderService: SaleOrderService) {
+    super(saleOrderService)
+  }
+
+  @Permission(saleOrderPermKey.list)
+  @Get()
+  list(@Query() { orderSn, sn, nickname, mobile, sku, name, status, type, current, pageSize }: SaleOrderDto) {
+    return this.saleOrderService.list(getPageQuery({ current, pageSize }), { orderSn, sn, nickname, mobile, sku, name, status, type })
+  }
+
+  @Permission(saleOrderPermKey.list)
+  @Get(':id')
+  detail(@IdParam() id: number) {
+    return this.saleOrderService.detail(id)
+  }
+
+  @Log(ModuleLabelEnum.orderSale, '售后订单审核：[sn]')
+  @Permission(saleOrderPermKey.update)
+  @Post(':id/examine')
+  updateExamine(@IdParam() id: number, @Body() { result, type }: UpdateExamineDto) {
+    return this.find(this.saleOrderService.updateExamine(id, { result, type }), id)
+  }
+
+  @Log(ModuleLabelEnum.orderSale, '售后订单签收：[sn]')
+  @Permission(saleOrderPermKey.receive)
+  @Post(':id/receive')
+  updateReceive(@IdParam() id: number) {
+    return this.find(this.saleOrderService.updateReceive(id), id)
+  }
+  @Log(ModuleLabelEnum.orderSale, '售后订单退款：[sn]')
+  @Permission(saleOrderPermKey.refund)
+  @Post(':id/refund')
+  updateRefund(@IdParam() id: number, @Body() { result, type }: UpdateExamineDto) {
+    return this.find(this.saleOrderService.updateRefund(id, { result, type }), id)
   }
 }

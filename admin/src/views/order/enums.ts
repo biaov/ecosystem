@@ -82,46 +82,6 @@ export const orderStatusEnum = Object.freeze({
 })
 
 /**
- * 售后订单状态
- */
-export const returnOrderStatusEnum = Object.freeze({
-  normal: 'normal',
-  refunded: 'refunded',
-  rejected: 'rejected',
-  closed: 'closed',
-  options() {
-    return [
-      {
-        label: '申请中',
-        value: this.normal,
-        color: themeColor.primary
-      },
-      {
-        label: '已退款',
-        value: this.refunded,
-        color: themeColor.success
-      },
-      {
-        label: '已拒绝',
-        value: this.rejected,
-        color: themeColor.danger
-      },
-      {
-        label: '已关闭',
-        value: this.closed,
-        color: themeColor.disabled
-      }
-    ]
-  },
-  filter(status: string) {
-    return this.options().find(item => item.value === status)
-  },
-  filterStatus(status: string) {
-    return ([this.closed, this.refunded] as string[]).includes(status) ? 'default' : 'processing'
-  }
-})
-
-/**
  * 订单类型
  */
 export const orderTypeEnum = Object.freeze({
@@ -187,6 +147,150 @@ export const invoiceTypeEnum = Object.freeze({
       {
         label: '增值税发票',
         value: this.vat
+      }
+    ]
+  },
+  filter(status: string) {
+    return this.options().find(item => item.value === status)
+  }
+})
+
+/**
+ * 售后订单搜索
+ */
+export const saleOrderSearchEnum = Object.freeze({
+  orderSn: 'orderSn',
+  sn: 'sn',
+  nickname: 'nickname',
+  mobile: 'mobile',
+  name: 'name',
+  sku: 'sku',
+  options() {
+    return [
+      {
+        label: '订单编号',
+        value: this.orderSn
+      },
+      {
+        label: '服务单号',
+        value: this.sn
+      },
+      {
+        label: '用户昵称',
+        value: this.nickname
+      },
+      {
+        label: '用户手机号',
+        value: this.mobile
+      },
+      {
+        label: '商品名称',
+        value: this.name
+      },
+      {
+        label: '商品SKU',
+        value: this.sku
+      }
+    ]
+  }
+})
+
+/**
+ * 售后订单状态
+ */
+export const saleOrderStatusEnum = Object.freeze({
+  normal: 'normal',
+  agreed: 'agreed',
+  receiving: 'receiving',
+  refunding: 'refunding',
+  refunded: 'refunded',
+  rejected: 'rejected',
+  closed: 'closed',
+  options() {
+    return [
+      {
+        label: '申请中',
+        value: this.normal,
+        color: themeColor.primary
+      },
+      {
+        label: '待发货',
+        value: this.agreed,
+        color: themeColor.primary
+      },
+      {
+        label: '待签收',
+        value: this.receiving,
+        color: themeColor.warning
+      },
+      {
+        label: '待退款',
+        value: this.refunding,
+        color: themeColor.warning
+      },
+      {
+        label: '已退款',
+        value: this.refunded,
+        color: themeColor.success
+      },
+      {
+        label: '已拒绝',
+        value: this.rejected,
+        color: themeColor.danger
+      },
+      {
+        label: '已关闭',
+        value: this.closed,
+        color: themeColor.disabled
+      }
+    ]
+  },
+  filter(status: string) {
+    return this.options().find(item => item.value === status)
+  },
+  filterStatus(status: string) {
+    return ([this.closed, this.refunded] as string[]).includes(status) ? 'default' : 'processing'
+  }
+})
+
+/**
+ * 售后订单类型
+ */
+export const saleOrderTypeEnum = Object.freeze({
+  refund: 'refund',
+  return: 'return',
+  options() {
+    return [
+      {
+        label: '仅退款',
+        value: this.refund
+      },
+      {
+        label: '退货退款',
+        value: this.return
+      }
+    ]
+  },
+  filter(status: string) {
+    return this.options().find(item => item.value === status)
+  }
+})
+
+/**
+ * 售后审核状态
+ */
+export const saleOrderExamineStatusEnum = Object.freeze({
+  agree: 'agree',
+  reject: 'reject',
+  options() {
+    return [
+      {
+        label: '同意',
+        value: this.agree
+      },
+      {
+        label: '拒绝',
+        value: this.reject
       }
     ]
   },

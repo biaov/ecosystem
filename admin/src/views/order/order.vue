@@ -21,13 +21,13 @@
         <a-button @click="resetFormState">重置</a-button>
       </a-form-item>
     </template>
-    <template #extra></template>
     <template #list>
-      <a-table :data-source="data.items" row-key="id" :loading="loading" :pagination="$formatter.pagination(data)" :scroll="{ x: 1340 }" @change="setPage">
+      <a-table :data-source="data.items" row-key="id" :loading="loading" :pagination="$formatter.pagination(data)" :scroll="{ x: 1100 }" @change="setPage">
         <a-table-column title="订单编号/下单时间" :width="200">
           <template #="{ record }">
-            <div>{{ record.sn }}</div>
-            <div>{{ record.createdAt }}</div>
+            {{ record.sn }}
+            <br />
+            {{ record.createdAt }}
           </template>
         </a-table-column>
         <a-table-column title="商品信息" :width="300">
@@ -48,18 +48,19 @@
         </a-table-column>
         <a-table-column title="下单用户" :width="180">
           <template #="{ record }">
-            <div>{{ record.user.nickname }}</div>
-            <div>{{ record.user.mobile }}</div>
+            {{ record.user.nickname }}
+            <br />
+            {{ record.user.mobile }}
           </template>
         </a-table-column>
-        <a-table-column title="订单状态" :width="180">
+        <a-table-column title="订单状态" :width="120">
           <template #="{ record }">
             <a-badge :color="orderStatusEnum.filter(record.status)?.color" :text="orderStatusEnum.filter(record.status)?.label" :status="orderStatusEnum.filterStatus(record.status)" />
           </template>
         </a-table-column>
-        <a-table-column title="操作" :width="120">
+        <a-table-column title="操作" :width="120" fixed="right">
           <template #="{ record }">
-            <a-button type="link" size="small" :href="`/order/detail/${record.id}`" v-perm="permKey.update">详情</a-button>
+            <a-button type="link" size="small" :href="`/order/detail/${record.id}`" v-perm="permKey.list">详情</a-button>
             <a-button type="link" size="small" @click="onSend(record)" v-perm="permKey.update" v-if="record.status === orderStatusEnum.paid">发货</a-button>
           </template>
         </a-table-column>

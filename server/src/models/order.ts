@@ -45,6 +45,9 @@ export class OrderModel extends AddressModel {
 
   @OneToOne(() => OrderInvoiceModel, invoice => invoice.order)
   invoice: Relation<OrderInvoiceModel>
+
+  @ManyToOne(() => SaleOrderModel, order => order.order)
+  sale: Relation<SaleOrderModel>
 }
 
 @Entity('order_item')
@@ -55,7 +58,7 @@ export class OrderItemModel extends BaseModel {
   @Column({ length: 256, comment: '图片' })
   goodsPhoto: string
 
-  @Column({ type: 'decimal', comment: '价格', precision: 10, scale: 2 })
+  @Column({ type: 'float', comment: '价格', precision: 10, scale: 2 })
   goodsPrice: number
 
   @Column({ length: 64, comment: '商品名称' })
@@ -92,6 +95,10 @@ export class OrderTraceModel extends BaseModel {
   @OneToOne(() => CreditOrderModel, order => order.trace)
   @JoinColumn()
   creditOrder: Relation<CreditOrderModel>
+
+  @ManyToOne(() => SaleOrderModel, order => order.trace)
+  @JoinColumn()
+  sale: Relation<SaleOrderModel>
 }
 
 @Entity('order_invoice')
@@ -166,7 +173,7 @@ export class CreditOrderItemModel extends BaseModel {
   @Column({ length: 256, comment: '图片' })
   giftPhoto: string
 
-  @Column({ type: 'decimal', comment: '价格', precision: 10, scale: 2 })
+  @Column({ comment: '积分' })
   giftCredit: number
 
   @Column({ length: 64, comment: '礼品名称' })
@@ -178,4 +185,36 @@ export class CreditOrderItemModel extends BaseModel {
   @ManyToOne(() => CreditOrderModel, order => order.items)
   @JoinColumn()
   order: Relation<CreditOrderModel>
+}
+
+@Entity('sale_order')
+export class SaleOrderModel extends BaseModel {
+  @Column({ length: 64, comment: '服务单号' })
+  sn: string
+
+  @Column({ length: 64, comment: '退款类型, refund: 仅退款, return: 退货退款' })
+  type: string
+
+  @Column({ length: 16, comment: '售后订单状态, normal: 申请中, agreed: 已同意/待发货, receiving: 待签收,refunding: 待退款, refunded: 已退款, rejected: 已拒绝, closed: 已关闭' })
+  status: string
+
+  @Column({ length: 64, comment: '退款原因' })
+  reason: string
+
+  @Column({ length: 64, comment: '拒绝理由', nullable: true })
+  result: string
+
+  @Column({ type: 'float', comment: '价格', precision: 10, scale: 2 })
+  refundAmount: number
+
+  @OneToOne(() => OrderModel, item => item.sale)
+  @JoinColumn()
+  order: Relation<OrderModel>
+
+  @ManyToOne(() => UserModel, user => user.orders)
+  @JoinColumn()
+  user: Relation<UserModel>
+
+  @OneToOne(() => OrderTraceModel, trace => trace.sale)
+  trace: Relation<OrderTraceModel>
 }

@@ -98,6 +98,9 @@ declare global {
   const Query: typeof import('@nestjs/common')['Query']
   const Res: typeof import('@nestjs/common')['Res']
   const RouterModule: typeof import('@nestjs/core')['RouterModule']
+  const SaleOrderModel: typeof import('../src/models/order')['SaleOrderModel']
+  const SaleOrderStatusEnum: typeof import('../src/enums/index')['SaleOrderStatusEnum']
+  const SaleOrderTypeEnum: typeof import('../src/enums/index')['SaleOrderTypeEnum']
   const SetMetadata: typeof import('@nestjs/common')['SetMetadata']
   const SettingModel: typeof import('../src/models/setting')['SettingModel']
   const SourceEnum: typeof import('../src/enums/index')['SourceEnum']
@@ -170,7 +173,7 @@ declare global {
   export type { MenuModel } from '../src/models/menu'
   import('../src/models/menu')
   // @ts-ignore
-  export type { OrderModel, OrderItemModel, OrderTraceModel, OrderInvoiceModel, CreditOrderModel, CreditOrderItemModel } from '../src/models/order'
+  export type { OrderModel, OrderItemModel, OrderTraceModel, OrderInvoiceModel, CreditOrderModel, CreditOrderItemModel, SaleOrderModel } from '../src/models/order'
   import('../src/models/order')
   // @ts-ignore
   export type { SettingModel } from '../src/models/setting'
@@ -182,7 +185,7 @@ declare global {
   export type { DrawImg } from '../src/utils/draw'
   import('../src/utils/draw')
   // @ts-ignore
-  export type { CaptchaEnum, PermissionEnum, MetaKeyEnum, GenderEnum, PermissionKeyEnum, ModuleLabelEnum, OrderStatusEnum, OrderTypeEnum, SourceEnum, InvoiceTypeEnum } from '../src/enums/index'
+  export type { CaptchaEnum, PermissionEnum, MetaKeyEnum, GenderEnum, PermissionKeyEnum, ModuleLabelEnum, OrderStatusEnum, OrderTypeEnum, SourceEnum, InvoiceTypeEnum, SaleOrderStatusEnum, SaleOrderTypeEnum } from '../src/enums/index'
   import('../src/enums/index')
   // @ts-ignore
   export type { HttpErrorFilter, TransformResponseInterceptor, LogInterceptor } from '../src/common/base.interceptor'

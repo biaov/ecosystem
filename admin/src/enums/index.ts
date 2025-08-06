@@ -151,7 +151,7 @@ export enum PermissionKeyEnum {
   // 订单管理
   orderList = 'order:list',
   orderCredit = 'order:credit',
-  orderSales = 'order:sales',
+  orderSale = 'order:sale',
 
   // 促销活动
   promotionList = 'promotion:coupon',

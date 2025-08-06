@@ -77,7 +77,6 @@ import type { OrderName } from '@/api/types'
 import { orderTypeEnum, orderStatusEnum, payTypeEnum, invoiceTypeEnum } from './enums'
 
 const { id } = useRoute().params
-const router = useRouter()
 const { data, loading } = useApiRequest<OrderName.OrderDataType>(() => orderApi.get(+id), true, null)
 
 const { data: expressOptions } = useApiRequest<Option[]>(async () => {

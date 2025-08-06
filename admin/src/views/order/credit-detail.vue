@@ -11,20 +11,20 @@
         <a-col :span="8">订单备注：{{ data.remark }}</a-col>
       </a-row>
     </a-card>
-    <a-card title="商品信息">
+    <a-card title="礼品信息">
       <a-table :data-source="data.items" row-key="id" :pagination="false">
-        <a-table-column title="商品信息">
+        <a-table-column title="礼品信息">
           <template #="{ record }">
             <a-space>
-              <a-image :src="record.goodsPhoto" :width="40" :height="40" />
-              <span>{{ record.goodsName }}</span>
+              <a-image :src="record.giftPhoto" :width="40" :height="40" />
+              <span>{{ record.giftName }}</span>
             </a-space>
           </template>
         </a-table-column>
         <a-table-column title="SKU" data-index="sku" />
-        <a-table-column title="价格" :custom-render="$formatter.customRender('goodsCredit')" />
+        <a-table-column title="积分" :custom-render="$formatter.customRender('giftCredit')" />
         <a-table-column title="数量" data-index="quantity" />
-        <a-table-column title="小计" :custom-render="$formatter.customRender('goodsCredit', 'quantity', '*')" />
+        <a-table-column title="小计" :custom-render="$formatter.customRender('giftCredit', 'quantity', '*')" />
       </a-table>
       <a-row justify="end" class="pt-12">
         <a-space>
@@ -33,7 +33,7 @@
         </a-space>
       </a-row>
     </a-card>
-    <a-card title="收货信息">
+    <a-card title="收货信息" v-if="data.name">
       <a-space direction="vertical" :size="20">
         <span>收货人：{{ data.name }}</span>
         <span>手机号：{{ data.mobile }}</span>
@@ -46,15 +46,14 @@
   </a-space>
 </template>
 <script lang="ts" setup>
-import { orderApi } from '@/api/order'
+import { creditOrderApi } from '@/api/order'
 import { expressSettingApi } from '@/api/setting'
 import { sourceEnum } from '@/enums'
 import type { OrderName } from '@/api/types'
 import { orderTypeEnum, orderStatusEnum } from './enums'
 
 const { id } = useRoute().params
-const router = useRouter()
-const { data, loading } = useApiRequest<OrderName.CreditOrderDataType>(() => orderApi.get(+id), true, null)
+const { data, loading } = useApiRequest<OrderName.CreditOrderDataType>(() => creditOrderApi.get(+id), true, null)
 
 const { data: expressOptions } = useApiRequest<Option[]>(async () => {
   const res = await expressSettingApi.get()
