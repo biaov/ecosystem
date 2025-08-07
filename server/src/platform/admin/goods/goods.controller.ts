@@ -3,7 +3,6 @@ import type { Response } from 'express'
 import { FindController } from '@/common/base.controller'
 import { GoodsService, GoodsCategoryService, GoodsStockService } from './goods.service'
 import { GoodsDto, GoodsCreateDto, GoodsCategoryDto, GoodsCategoryCreateDto, GoodsCategoryUpdateDto, GoodsStockDto } from './goods.dto'
-import { PermissionKeyEnum } from '@/enums'
 
 const goodsPermKey = definePermission(PermissionKeyEnum.goodsList)
 const goodsCategoryPermKey = definePermission(PermissionKeyEnum.goodsCategory)

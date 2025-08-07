@@ -55,6 +55,9 @@ export const useTransfrormQuery = <T = Record<string, USETransfrormQueryOption |
         const val = data[key]
         data[key] = Array.isArray(val) && val.length === 2 ? Between(val[0], val[1]) : undefined
         break
+      case 'datetime':
+        data[key] = dayjs(data[key]).format('YYYY-MM-DD hh:mm:ss')
+        break
     }
   })
   // 转换为数组

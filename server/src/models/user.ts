@@ -1,5 +1,6 @@
 import type { Relation } from 'typeorm'
 import { OrderModel, CreditOrderModel } from './order'
+import { UserCouponModel } from './promotion'
 
 export abstract class UserInfo extends BaseModel {
   @Column({ length: 32, comment: '用户名', unique: true })
@@ -41,7 +42,7 @@ export class UserModel extends UserInfo {
   @Column({ length: 64, comment: '黑名单原因', nullable: true })
   reason: string
 
-  @Column({ comment: '用户积分' })
+  @Column({ comment: '用户积分', default: 0 })
   credit: number
 
   @OneToMany(() => OrderModel, order => order.user)
@@ -49,6 +50,9 @@ export class UserModel extends UserInfo {
 
   @OneToMany(() => CreditOrderModel, order => order.user)
   creditOrders: Relation<CreditOrderModel[]>
+
+  @OneToMany(() => UserCouponModel, coupon => coupon.user)
+  userCoupons: Relation<UserCouponModel[]>
 }
 
 @Entity('user_admin')

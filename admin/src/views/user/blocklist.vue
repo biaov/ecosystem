@@ -44,8 +44,6 @@ const { formState, onRestFormState, resetFormState } = useFormState({
   reason: undefined
 })
 
-interface TableType extends IdDataType {}
-
 const { data, setPage, loading } = usePagingApiRequest(({ current, pageSize }) =>
   userBlocklistApi.paging({
     ...useTransformQuery(formState, {}, 'search'),
@@ -56,7 +54,7 @@ const { data, setPage, loading } = usePagingApiRequest(({ current, pageSize }) =
 
 onRestFormState(setPage)
 
-const handleDelete = async (item: TableType) => {
+const handleDelete = async (item: IdDataType) => {
   await userBlocklistApi.delete(item.id)
   message.success('移出成功')
   setPage()

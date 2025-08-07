@@ -44,8 +44,6 @@ const { formState, onRestFormState, resetFormState } = useFormState({
   createdAt: []
 })
 
-interface TableType extends IdDataType {}
-
 const { data, setPage, loading } = usePagingApiRequest(({ current, pageSize }) =>
   userApi.paging({
     ...useTransformQuery(formState, { createdAt: 'range' }, 'search'),
@@ -56,9 +54,9 @@ const { data, setPage, loading } = usePagingApiRequest(({ current, pageSize }) =
 
 onRestFormState(setPage)
 
-const blocklistForm = ref<TableType | null>(null)
+const blocklistForm = ref<IdDataType | null>(null)
 const [blocklistVisible, setBlocklistVisible] = useState()
-const onBlocklist = (item: TableType) => {
+const onBlocklist = (item: IdDataType) => {
   blocklistForm.value = item
   setBlocklistVisible(true)
 }

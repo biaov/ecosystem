@@ -15,6 +15,7 @@ declare global {
   const dayjs: typeof import('dayjs')['default']
   const defineAsyncComponent: typeof import('vue')['defineAsyncComponent']
   const defineComponent: typeof import('vue')['defineComponent']
+  const defineEnum: typeof import('../src/composables/usePermission')['defineEnum']
   const definePermission: typeof import('../src/composables/usePermission')['definePermission']
   const effectScope: typeof import('vue')['effectScope']
   const genderEnum: typeof import('../src/enums/index')['genderEnum']

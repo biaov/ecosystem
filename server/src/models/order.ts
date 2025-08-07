@@ -1,5 +1,6 @@
 import type { Relation } from 'typeorm'
 import { UserModel } from './user'
+import { UserCouponModel } from './promotion'
 
 @Entity('order')
 export class OrderModel extends AddressModel {
@@ -48,6 +49,9 @@ export class OrderModel extends AddressModel {
 
   @ManyToOne(() => SaleOrderModel, order => order.order)
   sale: Relation<SaleOrderModel>
+
+  @OneToMany(() => UserCouponModel, coupon => coupon.order)
+  coupons: Relation<UserCouponModel>
 }
 
 @Entity('order_item')

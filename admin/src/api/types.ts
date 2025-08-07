@@ -104,3 +104,11 @@ export namespace OrderName {
     trace: OrderTraceType
   }
 }
+
+export namespace CouponName {
+  export interface CouponType extends IdDataType {
+    send: number
+    used: number
+    expired: number
+  }
+}

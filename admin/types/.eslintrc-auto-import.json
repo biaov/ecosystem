@@ -28,6 +28,7 @@
     "dayjs": true,
     "defineAsyncComponent": true,
     "defineComponent": true,
+    "defineEnum": true,
     "definePermission": true,
     "effectScope": true,
     "genderEnum": true,

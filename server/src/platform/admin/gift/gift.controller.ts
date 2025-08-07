@@ -3,7 +3,6 @@ import type { Response } from 'express'
 import { FindController } from '@/common/base.controller'
 import { GiftService, GiftCategoryService } from './gift.service'
 import { GiftDto, GiftCreateDto, GiftCategoryDto, GiftCategoryCreateDto, GiftCategoryUpdateDto, GiftUpdateDto } from './gift.dto'
-import { PermissionKeyEnum } from '@/enums'
 
 const giftPermKey = definePermission(PermissionKeyEnum.giftList, { download: 'downloadTemplate', import: 'importStock' } as const)
 const giftCategoryPermKey = definePermission(PermissionKeyEnum.giftCategory)

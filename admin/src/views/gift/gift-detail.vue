@@ -36,8 +36,6 @@
 <script lang="ts" setup>
 import { giftApi } from '@/api/gift'
 import SelectCategory from './components/select-category.vue'
-import SelectSpec, { SpecType } from './components/select-spec.vue'
-import { specEnum } from './enums'
 
 const {
   params: { id },

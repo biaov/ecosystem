@@ -18,13 +18,11 @@
         <a-table-column title="更新时间" data-index="updatedAt" :width="200" />
         <a-table-column title="操作" :width="180">
           <template #="{ record }">
-            <a-space :size="0">
-              <a-button type="link" size="small" :href="`/admin/permission/role/${record.id}`" v-perm="permKey.perm">分配权限</a-button>
-              <a-button type="link" size="small" @click="onEdit(record)" v-perm="permKey.update">编辑</a-button>
-              <a-popconfirm placement="left" title="你确定要删除这条数据吗?" @confirm="handleDelete(record)">
-                <a-button type="link" size="small" danger v-perm="permKey.delete">删除</a-button>
-              </a-popconfirm>
-            </a-space>
+            <a-button type="link" size="small" :href="`/admin/permission/role/${record.id}`" v-perm="permKey.perm">分配权限</a-button>
+            <a-button type="link" size="small" @click="onEdit(record)" v-perm="permKey.update">编辑</a-button>
+            <a-popconfirm placement="left" title="你确定要删除这条数据吗?" @confirm="handleDelete(record)">
+              <a-button type="link" size="small" danger v-perm="permKey.delete">删除</a-button>
+            </a-popconfirm>
           </template>
         </a-table-column>
       </a-table>

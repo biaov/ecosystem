@@ -8,19 +8,17 @@
         <a-table-column title="名称" data-index="name" />
         <a-table-column title="排序">
           <template #="{ record }">
-            <a-input-number v-model:value="record.sort" :min="1" :max="99" :precision="0" @blur="handleUpdateData(record)" v-perm="permKey.update"  />
+            <a-input-number v-model:value="record.sort" :min="1" :max="99" :precision="0" @blur="handleUpdateData(record)" v-perm="permKey.update" />
           </template>
         </a-table-column>
         <a-table-column title="更新时间" data-index="updatedAt" :width="200" />
         <a-table-column title="操作" :width="180">
           <template #="{ record }">
-            <a-space :size="0">
-              <a-button type="link" size="small" @click="onAdd(record)" v-perm="permKey.create">新增</a-button>
-              <a-button type="link" size="small" @click="onEdit(record)" v-perm="permKey.update">编辑</a-button>
-              <a-popconfirm placement="left" :title="`${record.children?.length ? '删除这条数据会把所有的子数据都删除，' : ''}你确定要删除这条数据吗?`" @confirm="handleDelete(record)">
-                <a-button type="link" size="small" danger v-perm="permKey.delete">删除</a-button>
-              </a-popconfirm>
-            </a-space>
+            <a-button type="link" size="small" @click="onAdd(record)" v-perm="permKey.create">新增</a-button>
+            <a-button type="link" size="small" @click="onEdit(record)" v-perm="permKey.update">编辑</a-button>
+            <a-popconfirm placement="left" :title="`${record.children?.length ? '删除这条数据会把所有的子数据都删除，' : ''}你确定要删除这条数据吗?`" @confirm="handleDelete(record)">
+              <a-button type="link" size="small" danger v-perm="permKey.delete">删除</a-button>
+            </a-popconfirm>
           </template>
         </a-table-column>
       </a-table>

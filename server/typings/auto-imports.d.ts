@@ -8,6 +8,7 @@ export {}
 declare global {
   const APP_GUARD: typeof import('@nestjs/core')['APP_GUARD']
   const APP_INTERCEPTOR: typeof import('@nestjs/core')['APP_INTERCEPTOR']
+  const ActivityCouponModel: typeof import('../src/models/promotion')['ActivityCouponModel']
   const AddressModel: typeof import('../src/common/base.model')['AddressModel']
   const AfterInsert: typeof import('typeorm')['AfterInsert']
   const AfterLoad: typeof import('typeorm')['AfterLoad']
@@ -26,11 +27,14 @@ declare global {
   const CaptchaEnum: typeof import('../src/enums/index')['CaptchaEnum']
   const Column: typeof import('typeorm')['Column']
   const Controller: typeof import('@nestjs/common')['Controller']
+  const CouponModel: typeof import('../src/models/promotion')['CouponModel']
+  const CouponTypeEnum: typeof import('../src/enums/coupon')['CouponTypeEnum']
   const CreateDateColumn: typeof import('typeorm')['CreateDateColumn']
   const CreditOrderItemModel: typeof import('../src/models/order')['CreditOrderItemModel']
   const CreditOrderModel: typeof import('../src/models/order')['CreditOrderModel']
   const CustomRoute: typeof import('../src/common/base.decorator')['CustomRoute']
   const Delete: typeof import('@nestjs/common')['Delete']
+  const DistributeCouponModel: typeof import('../src/models/promotion')['DistributeCouponModel']
   const DrawImg: typeof import('../src/utils/draw')['DrawImg']
   const Entity: typeof import('typeorm')['Entity']
   const Exclude: (typeof import('class-transformer'))['Exclude']
@@ -75,23 +79,23 @@ declare global {
   const MigrationsModel: typeof import('../src/models/log')['MigrationsModel']
   const MinLength: typeof import('class-validator')['MinLength']
   const Module: typeof import('@nestjs/common')['Module']
-  const ModuleLabelEnum: typeof import('../src/enums/index')['ModuleLabelEnum']
+  const ModuleLabelEnum: typeof import('../src/enums/menu')['ModuleLabelEnum']
   const NestFactory: typeof import('@nestjs/core')['NestFactory']
   const OneToMany: typeof import('typeorm')['OneToMany']
   const OneToOne: typeof import('typeorm')['OneToOne']
   const OrderInvoiceModel: typeof import('../src/models/order')['OrderInvoiceModel']
   const OrderItemModel: typeof import('../src/models/order')['OrderItemModel']
   const OrderModel: typeof import('../src/models/order')['OrderModel']
-  const OrderStatusEnum: typeof import('../src/enums/index')['OrderStatusEnum']
+  const OrderStatusEnum: typeof import('../src/enums/order')['OrderStatusEnum']
   const OrderTraceModel: typeof import('../src/models/order')['OrderTraceModel']
-  const OrderTypeEnum: typeof import('../src/enums/index')['OrderTypeEnum']
+  const OrderTypeEnum: typeof import('../src/enums/order')['OrderTypeEnum']
   const PagingDot: typeof import('../src/common/base.dot')['PagingDot']
   const Param: typeof import('@nestjs/common')['Param']
   const ParseIntPipe: typeof import('@nestjs/common')['ParseIntPipe']
   const Patch: typeof import('@nestjs/common')['Patch']
   const Permission: typeof import('../src/common/base.decorator')['Permission']
   const PermissionEnum: typeof import('../src/enums/index')['PermissionEnum']
-  const PermissionKeyEnum: typeof import('../src/enums/index')['PermissionKeyEnum']
+  const PermissionKeyEnum: typeof import('../src/enums/menu')['PermissionKeyEnum']
   const Post: typeof import('@nestjs/common')['Post']
   const PrimaryGeneratedColumn: typeof import('typeorm')['PrimaryGeneratedColumn']
   const Put: typeof import('@nestjs/common')['Put']
@@ -99,8 +103,8 @@ declare global {
   const Res: typeof import('@nestjs/common')['Res']
   const RouterModule: typeof import('@nestjs/core')['RouterModule']
   const SaleOrderModel: typeof import('../src/models/order')['SaleOrderModel']
-  const SaleOrderStatusEnum: typeof import('../src/enums/index')['SaleOrderStatusEnum']
-  const SaleOrderTypeEnum: typeof import('../src/enums/index')['SaleOrderTypeEnum']
+  const SaleOrderStatusEnum: typeof import('../src/enums/order')['SaleOrderStatusEnum']
+  const SaleOrderTypeEnum: typeof import('../src/enums/order')['SaleOrderTypeEnum']
   const SetMetadata: typeof import('@nestjs/common')['SetMetadata']
   const SettingModel: typeof import('../src/models/setting')['SettingModel']
   const SourceEnum: typeof import('../src/enums/index')['SourceEnum']
@@ -117,6 +121,8 @@ declare global {
   const UseGuards: typeof import('@nestjs/common')['UseGuards']
   const UseInterceptors: typeof import('@nestjs/common')['UseInterceptors']
   const UserAdminModel: typeof import('../src/models/user')['UserAdminModel']
+  const UserCouponModel: typeof import('../src/models/promotion')['UserCouponModel']
+  const UserCouponStatusEnum: typeof import('../src/enums/coupon')['UserCouponStatusEnum']
   const UserModel: typeof import('../src/models/user')['UserModel']
   const UserRoleModel: typeof import('../src/models/user')['UserRoleModel']
   const Validate: typeof import('class-validator')['Validate']
@@ -176,6 +182,9 @@ declare global {
   export type { OrderModel, OrderItemModel, OrderTraceModel, OrderInvoiceModel, CreditOrderModel, CreditOrderItemModel, SaleOrderModel } from '../src/models/order'
   import('../src/models/order')
   // @ts-ignore
+  export type { CouponModel, UserCouponModel, ActivityCouponModel, DistributeCouponModel } from '../src/models/promotion'
+  import('../src/models/promotion')
+  // @ts-ignore
   export type { SettingModel } from '../src/models/setting'
   import('../src/models/setting')
   // @ts-ignore
@@ -185,8 +194,17 @@ declare global {
   export type { DrawImg } from '../src/utils/draw'
   import('../src/utils/draw')
   // @ts-ignore
-  export type { CaptchaEnum, PermissionEnum, MetaKeyEnum, GenderEnum, PermissionKeyEnum, ModuleLabelEnum, OrderStatusEnum, OrderTypeEnum, SourceEnum, InvoiceTypeEnum, SaleOrderStatusEnum, SaleOrderTypeEnum } from '../src/enums/index'
+  export type { CouponTypeEnum, UserCouponStatusEnum } from '../src/enums/coupon'
+  import('../src/enums/coupon')
+  // @ts-ignore
+  export type { CaptchaEnum, PermissionEnum, MetaKeyEnum, GenderEnum, SourceEnum, InvoiceTypeEnum } from '../src/enums/index'
   import('../src/enums/index')
+  // @ts-ignore
+  export type { PermissionKeyEnum, ModuleLabelEnum } from '../src/enums/menu'
+  import('../src/enums/menu')
+  // @ts-ignore
+  export type { OrderStatusEnum, OrderTypeEnum, SaleOrderStatusEnum, SaleOrderTypeEnum } from '../src/enums/order'
+  import('../src/enums/order')
   // @ts-ignore
   export type { HttpErrorFilter, TransformResponseInterceptor, LogInterceptor } from '../src/common/base.interceptor'
   import('../src/common/base.interceptor')

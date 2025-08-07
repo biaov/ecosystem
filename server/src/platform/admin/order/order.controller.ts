@@ -1,5 +1,4 @@
 import { FindController } from '@/common/base.controller'
-import { PermissionKeyEnum } from '@/enums'
 import { OrderService, CreditOrderService, SaleOrderService } from './order.service'
 import { OrderDto, CreditOrderDto, UpdateShippedDto, UpdateExamineDto, SaleOrderDto } from './order.dto'
 
