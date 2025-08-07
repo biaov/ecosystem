@@ -25,15 +25,6 @@ export class CouponModel extends BaseModel {
   @Column({ type: 'timestamp', comment: '结束时间', nullable: true })
   endTime: string
 
-  @Column({ comment: '发放数量', default: 0 })
-  send: number
-
-  @Column({ comment: '核销数量', default: 0 })
-  used: number
-
-  @Column({ comment: '过期数量', default: 0 })
-  expired: number
-
   @OneToMany(() => UserCouponModel, userCoupon => userCoupon.coupon)
   userCoupons: Relation<UserCouponModel[]>
 }
@@ -46,6 +37,9 @@ export class UserCouponModel extends BaseModel {
   @ManyToOne(() => CouponModel, coupon => coupon.userCoupons)
   @JoinColumn()
   coupon: Relation<CouponModel>
+
+  @Column({ comment: '用户 ID' })
+  userId: number
 
   @ManyToOne(() => UserModel, user => user.userCoupons)
   @JoinColumn()
@@ -60,4 +54,27 @@ export class UserCouponModel extends BaseModel {
 export class ActivityCouponModel extends BaseModel {}
 
 @Entity('distribute_coupon')
-export class DistributeCouponModel extends BaseModel {}
+export class DistributeCouponModel extends BaseModel {
+  @Column({ length: 40, comment: '发放主题' })
+  title: string
+
+  @Column({ type: 'json', comment: '发放范围' })
+  range: string
+
+  @OneToMany(() => DistributeCouponRuleModel, rule => rule.distributeCoupon)
+  rules: Relation<DistributeCouponRuleModel>
+}
+
+@Entity('distribute_coupon_rule')
+export class DistributeCouponRuleModel extends BaseModel {
+  @Column({ comment: '发放数量' })
+  quantity: number
+
+  @ManyToOne(() => CouponModel)
+  @JoinColumn()
+  coupon: Relation<CouponModel>
+
+  @ManyToOne(() => DistributeCouponModel, coupon => coupon.rules)
+  @JoinColumn()
+  distributeCoupon: Relation<DistributeCouponModel>
+}

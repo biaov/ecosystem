@@ -8,22 +8,41 @@ export class CouponService {
   @InjectRepository(UserCouponModel)
   private userCouponRepository: Repository<UserCouponModel>
 
-  list({ skip, take, current, pageSize }: PageOption, { name, type }: Partial<Pick<CouponModel, 'name' | 'type'>>) {
+  private transformCoupon(item: CouponModel) {
+    let send = item.userCoupons.length
+    let used = 0
+    let expired = 0
+    const userIds = item.userCoupons.map(useCoupon => {
+      switch (useCoupon.status) {
+        case UserCouponStatusEnum.used:
+          used++
+          break
+        case UserCouponStatusEnum.expired:
+          expired++
+          break
+      }
+      return useCoupon.userId
+    })
+    const userCount = [...new Set(userIds)].length
+    return { ...item, send, used, expired, userCount, userCoupons: undefined }
+  }
+
+  async list({ skip, take, current, pageSize }: PageOption, { name, type }: Partial<Pick<CouponModel, 'name' | 'type'>>) {
     const where = useTransfrormQuery({ name, type }, { name: 'like' })
-    return findAndCount(
-      this.couponRepository.findAndCount({
-        where,
-        skip,
-        take,
-        order: {
-          createdAt: 'DESC'
-        }
-      }),
-      { current, pageSize }
-    )
+    const [items, total] = await this.couponRepository.findAndCount({
+      where,
+      skip,
+      take,
+      order: {
+        createdAt: 'DESC'
+      },
+      relations: ['userCoupons']
+    })
+    const newItems = items.map(this.transformCoupon)
+    return { items: newItems, total, current, pageSize }
   }
   detail(id: number) {
-    return this.couponRepository.findOneBy({ id })
+    return this.couponRepository.findOne({ where: { id }, relations: ['userCoupons'] })
   }
   create({ name, type, value, condition, startTime, endTime }: Pick<CouponModel, 'name' | 'type' | 'value' | 'startTime'> & { endTime?: string; condition?: number }) {
     const code = useRandomName()
@@ -37,16 +56,13 @@ export class CouponService {
   async delete(id: number) {
     const coupon = await this.detail(id)
     if (!coupon) throw new BizException('优惠券不存在')
-    if (coupon.send) throw new BizException('优惠券已发放，不能删除')
+    if (coupon.userCoupons.length) throw new BizException('优惠券已发放，不能删除')
     return useAffected(this.couponRepository.delete({ id }))
   }
-  statisticInfo(id: number) {
-    return this.couponRepository
-      .createQueryBuilder('coupon')
-      .leftJoinAndSelect('coupon.userCoupons', 'userCoupons')
-      .where({ id })
-      .select(['send', 'used', 'COUNT(distinct userCoupons.userId) AS userCount'])
-      .getRawOne()
+  async statisticInfo(id: number) {
+    const coupon = await this.detail(id)
+    if (!coupon) throw new BizException('优惠券不存在')
+    return this.transformCoupon(coupon)
   }
   statistic(id: number, { skip, take, current, pageSize }: PageOption, { status, nickname, mobile }: { status?: string; nickname?: string; mobile?: string }) {
     return findAndCount(

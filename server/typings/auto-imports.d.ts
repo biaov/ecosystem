@@ -35,6 +35,7 @@ declare global {
   const CustomRoute: typeof import('../src/common/base.decorator')['CustomRoute']
   const Delete: typeof import('@nestjs/common')['Delete']
   const DistributeCouponModel: typeof import('../src/models/promotion')['DistributeCouponModel']
+  const DistributeCouponRuleModel: typeof import('../src/models/promotion')['DistributeCouponRuleModel']
   const DrawImg: typeof import('../src/utils/draw')['DrawImg']
   const Entity: typeof import('typeorm')['Entity']
   const Exclude: (typeof import('class-transformer'))['Exclude']
@@ -182,7 +183,7 @@ declare global {
   export type { OrderModel, OrderItemModel, OrderTraceModel, OrderInvoiceModel, CreditOrderModel, CreditOrderItemModel, SaleOrderModel } from '../src/models/order'
   import('../src/models/order')
   // @ts-ignore
-  export type { CouponModel, UserCouponModel, ActivityCouponModel, DistributeCouponModel } from '../src/models/promotion'
+  export type { CouponModel, UserCouponModel, ActivityCouponModel, DistributeCouponModel, DistributeCouponRuleModel } from '../src/models/promotion'
   import('../src/models/promotion')
   // @ts-ignore
   export type { SettingModel } from '../src/models/setting'

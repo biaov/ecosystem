@@ -22,6 +22,7 @@
         <a-table-column title="发放" data-index="send" />
         <a-table-column title="核销" data-index="used" />
         <a-table-column title="过期" data-index="expired" />
+        <a-table-column title="创建时间" data-index="createdAt" :width="180" />
         <a-table-column title="操作" :width="180">
           <template #="{ record }">
             <a-button type="link" size="small" :href="`/promotion/coupon-data/${record.id}`" v-perm="permKey.list">数据</a-button>

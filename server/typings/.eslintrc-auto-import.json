@@ -29,6 +29,7 @@
     "CustomRoute": true,
     "Delete": true,
     "DistributeCouponModel": true,
+    "DistributeCouponRuleModel": true,
     "DrawImg": true,
     "Entity": true,
     "FileInterceptor": true,
