@@ -13,8 +13,8 @@ export class CouponController extends FindController {
 
   @Permission(couponPermKey.list)
   @Get()
-  list(@Query() { name, type, current, pageSize }: CouponDto) {
-    return this.couponService.list(getPageQuery({ current, pageSize }), { name, type })
+  list(@Query() { name, type, current, pageSize, all }: CouponDto) {
+    return all ? this.couponService.all() : this.couponService.list(getPageQuery({ current, pageSize }), { name, type })
   }
 
   @Permission(couponPermKey.list)

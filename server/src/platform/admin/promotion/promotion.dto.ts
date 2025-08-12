@@ -9,6 +9,10 @@ export class CouponDto extends PagingDot {
   @IsOptional()
   @IsString()
   type?: string
+
+  @IsOptional()
+  @IsBoolean()
+  all?: boolean
 }
 
 /**
@@ -67,4 +71,45 @@ export class CouponStatisticDto extends PagingDot {
   @IsOptional()
   @IsString()
   mobile?: string
+}
+
+/**
+ * 分发优惠券证器
+ */
+export class DistributeCouponDto extends PagingDot {
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
+  title?: string
+
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
+  mobile?: string
+}
+
+class RuleDto {
+  @IsInt()
+  couponId: number
+
+  @IsInt()
+  quantity: number
+}
+
+/**
+ * 分发优惠券证器 - 新增
+ */
+export class DistributeCouponCreateDto {
+  @IsString()
+  @IsNotEmpty()
+  title: string
+
+  @IsArray()
+  @IsString({ each: true })
+  @IsNotEmpty({ each: true })
+  range: string[]
+
+  @ValidateNested()
+  @Type(() => RuleDto)
+  rules: RuleDto[]
 }

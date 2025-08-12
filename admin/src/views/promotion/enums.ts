@@ -81,3 +81,23 @@ export const couponDataSearchEnum = defineEnum({
     ]
   }
 })
+
+/**
+ * 手动发券查询类型
+ */
+export const distributeCouponSearchEnum = defineEnum({
+  title: 'title',
+  mobile: 'mobile',
+  options() {
+    return [
+      {
+        label: '发券主题',
+        value: this.title
+      },
+      {
+        label: '手机号码',
+        value: this.mobile
+      }
+    ]
+  }
+})

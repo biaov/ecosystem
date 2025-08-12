@@ -254,12 +254,48 @@ export const menuRoutes: RouteRecordRaw[] = [
         component: () => import('@/views/promotion/activity-coupon.vue')
       },
       {
-        path: 'distribute',
+        path: 'activity-coupon-add',
+        name: 'promotion-activity-coupon-add',
+        meta: {
+          title: '新增活动发券',
+          hidden: true
+        },
+        component: () => import('@/views/promotion/activity-coupon-detail.vue')
+      },
+      {
+        path: 'activity-coupon-edit/:id',
+        name: 'promotion-activity-coupon-edit',
+        meta: {
+          title: '编辑活动发券',
+          hidden: true
+        },
+        component: () => import('@/views/promotion/activity-coupon-detail.vue')
+      },
+      {
+        path: 'distribute-coupon',
         name: 'promotion-distribute-coupon',
         meta: {
           title: '手动发券'
         },
         component: () => import('@/views/promotion/distribute-coupon.vue')
+      },
+      {
+        path: 'distribute-coupon-add',
+        name: 'promotion-distribute-coupon-add',
+        meta: {
+          title: '新增手动发券',
+          hidden: true
+        },
+        component: () => import('@/views/promotion/distribute-coupon-detail.vue')
+      },
+      {
+        path: 'distribute-coupon-detail/:id',
+        name: 'promotion-distribute-coupon-detail',
+        meta: {
+          title: '手动发券详情',
+          hidden: true
+        },
+        component: () => import('@/views/promotion/distribute-coupon-detail.vue')
       }
     ]
   },

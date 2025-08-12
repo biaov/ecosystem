@@ -9,7 +9,7 @@ export class CouponService {
   private userCouponRepository: Repository<UserCouponModel>
 
   private transformCoupon(item: CouponModel) {
-    let send = item.userCoupons.length
+    const send = item.userCoupons.length
     let used = 0
     let expired = 0
     const userIds = item.userCoupons.map(useCoupon => {
@@ -40,6 +40,9 @@ export class CouponService {
     })
     const newItems = items.map(this.transformCoupon)
     return { items: newItems, total, current, pageSize }
+  }
+  all() {
+    return this.couponRepository.find({ order: { createdAt: 'DESC' } })
   }
   detail(id: number) {
     return this.couponRepository.findOne({ where: { id }, relations: ['userCoupons'] })

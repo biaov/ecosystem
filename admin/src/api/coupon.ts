@@ -12,3 +12,13 @@ export const couponStatisticInfoApi = (couponId: number) => useCommand(`admin/co
  * 优惠券统计
  */
 export const couponStatisticApi = (couponId: number) => useRestful(`admin/coupon/${couponId}/statistic`)
+
+/**
+ * 活动发券信息
+ */
+export const activityCouponApi = useRestful('admin/activity-coupon')
+
+/**
+ * 手动发券信息
+ */
+export const distributeCouponApi = useRestful('admin/distribute-coupon')

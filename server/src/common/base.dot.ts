@@ -4,11 +4,11 @@
 abstract class PagingDot {
   @IsOptional()
   @IsInt()
-  current: number
+  current?: number
 
   @IsOptional()
   @IsInt()
-  pageSize: number
+  pageSize?: number
 }
 
 export { PagingDot }

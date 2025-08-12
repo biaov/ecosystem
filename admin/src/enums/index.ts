@@ -177,7 +177,7 @@ export enum PermissionKeyEnum {
   settingOrder = 'setting:order',
   settingHotkeyword = 'setting:hotkeyword',
   settingAdv = 'setting:adv',
-  settingExpress = 'setting:express',
+  settingExpress = 'setting:express'
 }
 
 /**
@@ -195,6 +195,31 @@ export const onsaleEnum = Object.freeze({
       {
         label: '下架',
         value: `${this.false}`
+      }
+    ]
+  }
+})
+
+/**
+ * 活动状态
+ */
+export const activityStatusEnum = Object.freeze({
+  notStart: 'notStart',
+  normal: 'normal',
+  ended: 'ended',
+  options() {
+    return [
+      {
+        label: '未开始',
+        value: this.notStart
+      },
+      {
+        label: '进行中',
+        value: this.normal
+      },
+      {
+        label: '已结束',
+        value: this.ended
       }
     ]
   }
