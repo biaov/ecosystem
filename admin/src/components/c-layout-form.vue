@@ -1,6 +1,6 @@
 <template>
   <!-- 详情页基础组件 -->
-  <div class="layout-form relative">
+  <div class="layout-form relative pb-60">
     <a-form v-bind="$config.cols">
       <a-space direction="vertical" :size="20">
         <slot></slot>
@@ -13,7 +13,6 @@
         <slot name="button"></slot>
       </a-space>
     </div>
-    <div class="h-60"></div>
   </div>
 </template>
 <script lang="ts" setup>

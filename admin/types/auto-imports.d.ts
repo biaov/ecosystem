@@ -9,24 +9,27 @@ declare global {
   const EffectScope: typeof import('vue')['EffectScope']
   const MenuTypeEnum: typeof import('../src/enums/index')['MenuTypeEnum']
   const PermissionKeyEnum: typeof import('../src/enums/index')['PermissionKeyEnum']
+  const activityStatusEnum: typeof import('../src/enums/index')['activityStatusEnum']
   const computed: typeof import('vue')['computed']
   const createApp: typeof import('vue')['createApp']
   const customRef: typeof import('vue')['customRef']
   const dayjs: typeof import('dayjs')['default']
   const defineAsyncComponent: typeof import('vue')['defineAsyncComponent']
   const defineComponent: typeof import('vue')['defineComponent']
-  const defineEnum: typeof import('../src/composables/usePermission')['defineEnum']
+  const defineEnum: typeof import('../src/composables/defineEnum')['defineEnum']
   const definePermission: typeof import('../src/composables/usePermission')['definePermission']
   const effectScope: typeof import('vue')['effectScope']
   const genderEnum: typeof import('../src/enums/index')['genderEnum']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
+  const getCurrentWatcher: typeof import('vue')['getCurrentWatcher']
   const h: typeof import('vue')['h']
   const inject: typeof import('vue')['inject']
   const isProxy: typeof import('vue')['isProxy']
   const isReactive: typeof import('vue')['isReactive']
   const isReadonly: typeof import('vue')['isReadonly']
   const isRef: typeof import('vue')['isRef']
+  const isShallow: typeof import('vue')['isShallow']
   const markRaw: typeof import('vue')['markRaw']
   const message: typeof import('ant-design-vue')['message']
   const nextTick: typeof import('vue')['nextTick']
@@ -98,7 +101,7 @@ declare global {
 // for type re-export
 declare global {
   // @ts-ignore
-  export type { Component, Slot, Slots, ComponentPublicInstance, ComputedRef, DirectiveBinding, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, MaybeRef, MaybeRefOrGetter, VNode, WritableComputedRef } from 'vue'
+  export type { Component, Slot, Slots, ComponentPublicInstance, ComputedRef, DirectiveBinding, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, ShallowRef, MaybeRef, MaybeRefOrGetter, VNode, WritableComputedRef } from 'vue'
   import('vue')
   // @ts-ignore
   export type { FormRule, PagingResponse } from '../src/composables/types'

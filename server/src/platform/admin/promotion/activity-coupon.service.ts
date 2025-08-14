@@ -1,39 +1,100 @@
-import { ActivityCouponModel } from '@/models/promotion'
+import { ActivityCouponModel, CouponRuleModel } from '@/models/promotion'
 
 @Injectable()
 export class ActivityCouponService {
   @InjectRepository(ActivityCouponModel)
   private activityCouponRepository: Repository<ActivityCouponModel>
 
-  list({ skip, take, current, pageSize }: PageOption, { name, type }: Partial<Pick<ActivityCouponModel, 'name' | 'type'>>) {
-    const where = useTransfrormQuery({ name, type }, { name: 'like' })
-    return findAndCount(
-      this.activityCouponRepository.find({
-        where,
-        skip,
-        take,
-        order: {
-          createdAt: 'DESC'
+  @InjectRepository(CouponRuleModel)
+  private couponRuleRepository: Repository<CouponRuleModel>
+
+  private transformCoupon(item: ActivityCouponModel) {
+    let used = 0
+    let expired = 0
+
+    const send = item.rules.reduce((prev, rule) => {
+      rule.userCoupons.forEach(useCoupon => {
+        switch (useCoupon.status) {
+          case UserCouponStatusEnum.used:
+            used++
+            break
+          case UserCouponStatusEnum.expired:
+            expired++
+            break
         }
-      }),
-      { current, pageSize }
-    )
+      })
+      return prev + rule.quantity
+    }, 0)
+
+    return { ...item, send, used, expired, rules: undefined, setting: undefined }
+  }
+
+  async list({ skip, take, current, pageSize }: PageOption, { name, status }: Partial<Pick<ActivityCouponModel, 'name' | 'status'>>) {
+    const where = useTransfrormQuery({ name, status }, { name: 'like' })
+    const [items, total] = await this.activityCouponRepository
+      .createQueryBuilder('activityCoupon')
+      .leftJoinAndSelect('activityCoupon.rules', 'rules')
+      .leftJoinAndSelect('rules.userCoupons', 'userCoupons')
+      .where(where)
+      .take(take)
+      .skip(skip)
+      .orderBy('activityCoupon.createdAt', 'DESC')
+      .getManyAndCount()
+    const newItems = items.map(this.transformCoupon)
+    return { items: newItems, total, current, pageSize }
   }
   detail(id: number) {
-    return this.activityCouponRepository.findOneBy({ id })
+    return this.activityCouponRepository.findOne({ where: { id }, relations: ['rules'] })
   }
-  create({ name, type, value, startTime, endTime }: Pick<ActivityCouponModel, 'name' | 'type' | 'value' | 'startTime'> & { endTime?: string }) {
-    const option = useTransfrormQuery({ name, type, value, startTime, endTime }, { startTime: 'datetime', endTime: 'datetime' })
-    return this.activityCouponRepository.save(option)
+
+  private getStatus({ now, start, end }) {
+    let status
+    if (now < start) {
+      status = ActivityStatusEnum.notStart
+    } else if (now > end) {
+      status = ActivityStatusEnum.ended
+    } else {
+      status = ActivityStatusEnum.normal
+    }
+    return status
   }
-  update(id: number, { name, endTime }: Partial<Pick<ActivityCouponModel, 'name' | 'endTime'>>) {
-    const option = useTransfrormQuery({ name, endTime }, { endTime: 'datetime' })
+  async create({
+    name,
+    startTime,
+    endTime,
+    setting,
+    rules,
+    desc
+  }: Pick<ActivityCouponModel, 'name' | 'startTime' | 'endTime' | 'setting' | 'desc'> & { rules: Pick<CouponRuleModel, 'quantity' | 'couponId'>[] }) {
+    const now = dayjs()
+    const start = dayjs(startTime)
+    const end = dayjs(endTime)
+    if (end <= start) throw new BizException('结束时间不能早于开始时间')
+    const status = this.getStatus({ now, start, end })
+    const option = useTransfrormQuery({ name, startTime, endTime, setting, desc, status }, { startTime: 'datetime', endTime: 'datetime' })
+    const activityCoupon = await this.activityCouponRepository.save(option)
+    const newRules = rules.map(({ couponId, quantity }) => ({ couponId, quantity, activityCoupon: { id: activityCoupon.id } }))
+    await this.couponRuleRepository.save(newRules)
+    return activityCoupon
+  }
+  async update(id: number, { name, endTime, setting, desc }: Partial<Pick<ActivityCouponModel, 'name' | 'endTime' | 'setting' | 'desc'>>) {
+    const activityCoupon = await this.detail(id)
+    if (!activityCoupon) throw new BizException('优惠券不存在')
+    if (activityCoupon.status === ActivityStatusEnum.ended) throw new BizException('活动已结束，不能修改')
+
+    const now = dayjs()
+    const start = dayjs(activityCoupon.startTime)
+    const end = dayjs(endTime)
+    if (end <= start) throw new BizException('结束时间不能早于开始时间')
+    const status = this.getStatus({ now, start, end })
+    const option = useTransfrormQuery({ name, endTime, setting, desc, status }, { endTime: 'datetime' })
     return useAffected(this.activityCouponRepository.update(id, option))
   }
   async delete(id: number) {
-    const coupon = await this.detail(id)
-    if (!coupon) throw new BizException('优惠券不存在')
-    if (coupon.send) throw new BizException('优惠券已发放，不能删除')
+    const activityCoupon = await this.detail(id)
+    if (!activityCoupon) throw new BizException('优惠券不存在')
+    if (activityCoupon.status !== ActivityStatusEnum.notStart) throw new BizException('活动已开始，不能删除')
+    await this.couponRuleRepository.delete({ activityCoupon: { id } })
     return useAffected(this.activityCouponRepository.delete({ id }))
   }
 }

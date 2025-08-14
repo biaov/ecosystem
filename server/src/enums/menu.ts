@@ -67,7 +67,7 @@ export enum ModuleLabelEnum {
   // 促销活动
   promotionList = '促销活动/优惠券',
   promotionActivity = '促销活动/活动发券',
-  promotionDesignted = '促销活动/手动发券',
+  promotionDistribute = '促销活动/手动发券',
 
   // 用户管理
   userList = '用户管理/全部用户',

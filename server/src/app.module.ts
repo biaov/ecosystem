@@ -2,6 +2,7 @@ import { ServeStaticModule } from '@nestjs/serve-static'
 import { join } from 'path'
 import { TransformResponseInterceptor, LogInterceptor } from '@/common/base.interceptor'
 import { RedisCacheModule } from '@/redis.module'
+import { GroupModule } from '@/modules'
 
 const moduleSync = import.meta.glob('@/platform/**/*.module.ts', { eager: true }) as Record<string, Record<string, new () => void>>
 const modules = Object.values(moduleSync).map(value => Object.values(value)[0])
@@ -18,7 +19,8 @@ const imports = [
     autoLoadEntities: true,
     synchronize: isSyns
   }),
-  RedisCacheModule
+  RedisCacheModule,
+  GroupModule
 ]
 
 if (!import.meta.env.PROD) {

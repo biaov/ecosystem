@@ -3,7 +3,7 @@ import { themeColor } from '@/config/color'
 /**
  * 订单搜索
  */
-export const orderSearchEnum = Object.freeze({
+export const orderSearchEnum = defineEnum({
   sn: 'sn',
   nickname: 'nickname',
   mobile: 'mobile',
@@ -38,7 +38,7 @@ export const orderSearchEnum = Object.freeze({
 /**
  * 订单状态
  */
-export const orderStatusEnum = Object.freeze({
+export const orderStatusEnum = defineEnum({
   pay: 'pay',
   paid: 'paid',
   shipped: 'shipped',
@@ -73,9 +73,6 @@ export const orderStatusEnum = Object.freeze({
       }
     ]
   },
-  filter(status: string) {
-    return this.options().find(item => item.value === status)
-  },
   filterStatus(status: string) {
     return ([this.completed, this.cancelled] as string[]).includes(status) ? 'default' : 'processing'
   }
@@ -84,7 +81,7 @@ export const orderStatusEnum = Object.freeze({
 /**
  * 订单类型
  */
-export const orderTypeEnum = Object.freeze({
+export const orderTypeEnum = defineEnum({
   entity: 'entity',
   virtual: 'virtual',
   options() {
@@ -98,16 +95,13 @@ export const orderTypeEnum = Object.freeze({
         value: this.virtual
       }
     ]
-  },
-  filter(status: string) {
-    return this.options().find(item => item.value === status)
   }
 })
 
 /**
  * 支付方式
  */
-export const payTypeEnum = Object.freeze({
+export const payTypeEnum = defineEnum({
   wechat: 'wechat',
   alipay: 'alipay',
   bank: 'bank',
@@ -126,16 +120,13 @@ export const payTypeEnum = Object.freeze({
         value: this.bank
       }
     ]
-  },
-  filter(status: string) {
-    return this.options().find(item => item.value === status)
   }
 })
 
 /**
  * 发票类型
  */
-export const invoiceTypeEnum = Object.freeze({
+export const invoiceTypeEnum = defineEnum({
   normal: 'normal',
   vat: 'vat',
   options() {
@@ -149,16 +140,13 @@ export const invoiceTypeEnum = Object.freeze({
         value: this.vat
       }
     ]
-  },
-  filter(status: string) {
-    return this.options().find(item => item.value === status)
   }
 })
 
 /**
  * 售后订单搜索
  */
-export const saleOrderSearchEnum = Object.freeze({
+export const saleOrderSearchEnum = defineEnum({
   orderSn: 'orderSn',
   sn: 'sn',
   nickname: 'nickname',
@@ -198,7 +186,7 @@ export const saleOrderSearchEnum = Object.freeze({
 /**
  * 售后订单状态
  */
-export const saleOrderStatusEnum = Object.freeze({
+export const saleOrderStatusEnum = defineEnum({
   normal: 'normal',
   agreed: 'agreed',
   receiving: 'receiving',
@@ -245,9 +233,6 @@ export const saleOrderStatusEnum = Object.freeze({
       }
     ]
   },
-  filter(status: string) {
-    return this.options().find(item => item.value === status)
-  },
   filterStatus(status: string) {
     return ([this.closed, this.refunded] as string[]).includes(status) ? 'default' : 'processing'
   }
@@ -256,7 +241,7 @@ export const saleOrderStatusEnum = Object.freeze({
 /**
  * 售后订单类型
  */
-export const saleOrderTypeEnum = Object.freeze({
+export const saleOrderTypeEnum = defineEnum({
   refund: 'refund',
   return: 'return',
   options() {
@@ -270,16 +255,13 @@ export const saleOrderTypeEnum = Object.freeze({
         value: this.return
       }
     ]
-  },
-  filter(status: string) {
-    return this.options().find(item => item.value === status)
   }
 })
 
 /**
  * 售后审核状态
  */
-export const saleOrderExamineStatusEnum = Object.freeze({
+export const saleOrderExamineStatusEnum = defineEnum({
   agree: 'agree',
   reject: 'reject',
   options() {
@@ -293,8 +275,5 @@ export const saleOrderExamineStatusEnum = Object.freeze({
         value: this.reject
       }
     ]
-  },
-  filter(status: string) {
-    return this.options().find(item => item.value === status)
   }
 })

@@ -1,7 +1,7 @@
 /**
  * 用户搜索/黑名单搜索
  */
-export const userSearchEnum = Object.freeze({
+export const userSearchEnum = defineEnum({
   nickname: 'nickname',
   mobile: 'mobile',
   options() {

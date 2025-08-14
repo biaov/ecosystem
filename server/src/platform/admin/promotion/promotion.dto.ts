@@ -113,3 +113,89 @@ export class DistributeCouponCreateDto {
   @Type(() => RuleDto)
   rules: RuleDto[]
 }
+
+/**
+ * 分发优惠券证器
+ */
+export class ActivityCouponDto extends PagingDot {
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
+  name?: string
+
+  @IsOptional()
+  @IsEnum(ActivityStatusEnum)
+  status?: string
+}
+
+class SettingDto {
+  @IsString()
+  @IsNotEmpty()
+  theme: string
+
+  @IsString()
+  @IsNotEmpty()
+  background: string
+
+  @IsString()
+  @IsNotEmpty()
+  bgURL: string
+
+  @IsString()
+  @IsNotEmpty()
+  textURL: string
+}
+
+/**
+ * 分发优惠券证器 - 新增
+ */
+export class ActivityCouponCreateDto {
+  @IsString()
+  @IsNotEmpty()
+  name: string
+
+  @IsString()
+  @IsNotEmpty()
+  startTime: string
+
+  @IsString()
+  @IsNotEmpty()
+  endTime: string
+
+  @ValidateNested()
+  @Type(() => SettingDto)
+  setting: SettingDto
+
+  @ValidateNested()
+  @Type(() => RuleDto)
+  rules: RuleDto[]
+
+  @IsString()
+  @IsNotEmpty()
+  desc: string
+}
+
+/**
+ * 分发优惠券证器 - 新增
+ */
+export class ActivityCouponUpdateDto {
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
+  name?: string
+
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
+  endTime?: string
+
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => SettingDto)
+  setting?: SettingDto
+
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
+  desc?: string
+}

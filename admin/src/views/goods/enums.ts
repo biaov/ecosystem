@@ -1,7 +1,7 @@
 /**
  * 商品搜索
  */
-export const goodsSearchEnum = Object.freeze({
+export const goodsSearchEnum = defineEnum({
   name: 'name',
   sku: 'sku',
   options() {
@@ -21,7 +21,7 @@ export const goodsSearchEnum = Object.freeze({
 /**
  * 规格
  */
-export const specEnum = Object.freeze({
+export const specEnum = defineEnum({
   category: '分类',
   color: '颜色',
   quantity: '数量',

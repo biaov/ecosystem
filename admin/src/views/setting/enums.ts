@@ -1,7 +1,7 @@
 /**
  * 弹窗广告类型
  */
-export const advType = Object.freeze({
+export const advType = defineEnum({
   everyday: 'everyday',
   once: 'once',
   options() {
@@ -15,8 +15,5 @@ export const advType = Object.freeze({
         value: this.once
       }
     ]
-  },
-  filter(value: string) {
-    return this.options().find(item => item.value === value)
   }
 })

@@ -1,7 +1,8 @@
+import { themeColor } from '@/config/color'
 /**
  * 注册来源
  */
-export const sourceEnum = Object.freeze({
+export const sourceEnum = defineEnum({
   pc: 'pc',
   h5: 'h5',
   app: 'app',
@@ -30,16 +31,13 @@ export const sourceEnum = Object.freeze({
         value: this.miniprogram
       }
     ]
-  },
-  filter(value: string) {
-    return this.options().find(item => item.value === value)
   }
 })
 
 /**
  * 性别
  */
-export const genderEnum = Object.freeze({
+export const genderEnum = defineEnum({
   woman: 0,
   man: 1,
   other: 2,
@@ -58,9 +56,6 @@ export const genderEnum = Object.freeze({
         value: this.other
       }
     ]
-  },
-  filter(value: number) {
-    return this.options().find(item => item.value === value)
   }
 })
 
@@ -92,7 +87,7 @@ export enum permissionEnum {
  * 权限类型
  * 菜单类型
  */
-export const MenuTypeEnum = {
+export const MenuTypeEnum = defineEnum({
   module: 'module',
   page: 'page',
   action: 'action',
@@ -116,9 +111,6 @@ export const MenuTypeEnum = {
     const options = this.options()
     return isFilter ? options.filter(item => item.value !== this.action) : options
   },
-  filter(value: string) {
-    return this.options().find(item => item.value === value)
-  },
   transformToOptions(data: any[]) {
     const list = structuredClone(data)
     list.forEach(item => {
@@ -130,7 +122,7 @@ export const MenuTypeEnum = {
     })
     return list
   }
-}
+})
 
 /**
  * admin 权限枚举
@@ -183,7 +175,7 @@ export enum PermissionKeyEnum {
 /**
  * 上下架
  */
-export const onsaleEnum = Object.freeze({
+export const onsaleEnum = defineEnum({
   true: true,
   false: false,
   options() {
@@ -203,7 +195,7 @@ export const onsaleEnum = Object.freeze({
 /**
  * 活动状态
  */
-export const activityStatusEnum = Object.freeze({
+export const activityStatusEnum = defineEnum({
   notStart: 'notStart',
   normal: 'normal',
   ended: 'ended',
@@ -211,15 +203,18 @@ export const activityStatusEnum = Object.freeze({
     return [
       {
         label: '未开始',
-        value: this.notStart
+        value: this.notStart,
+        color: themeColor.primary
       },
       {
         label: '进行中',
-        value: this.normal
+        value: this.normal,
+        color: themeColor.success
       },
       {
         label: '已结束',
-        value: this.ended
+        value: this.ended,
+        color: themeColor.disabled
       }
     ]
   }

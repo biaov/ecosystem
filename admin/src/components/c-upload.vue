@@ -3,6 +3,7 @@
   <a-upload
     list-type="picture-card"
     class="custom-upload"
+    :class="{ single: !multiple }"
     :file-list="fileList"
     :max-count="multiple ? maxCount : 1"
     :custom-request="handleUpload"
@@ -15,7 +16,7 @@
   >
     <div class="text-gray-400" v-if="multiple ? fileList.length < maxCount : fileList.length < 1">
       <c-ant-icon name="PlusOutlined" />
-      <template v-if="size > maxSize">上传</template>
+      <div v-if="size > maxSize">{{ tip }}</div>
     </div>
     <img :src="modelValue" width="100%" height="100%" class="rounded-lg block object-cover" v-else-if="size <= maxSize" />
   </a-upload>
@@ -41,12 +42,14 @@ const props = withDefaults(
     disabled?: boolean
     size?: number
     title?: string
+    tip?: string
   }>(),
   {
     multiple: false,
     maxCount: 9,
     disabled: false,
-    size: 102
+    size: 102,
+    tip: '上传'
   }
 )
 const gap = computed(() => (props.multiple ? 8 : 0))
@@ -109,7 +112,13 @@ watch(
 
 <style lang="less">
 .custom-upload {
+  position: relative;
   min-height: v-bind(minHeight);
+  &.single {
+    width: v-bind(minHeight);
+    height: v-bind(minHeight);
+    overflow: hidden;
+  }
   .ant-upload,
   .ant-upload-list-item-container {
     width: v-bind(sizepx) !important;

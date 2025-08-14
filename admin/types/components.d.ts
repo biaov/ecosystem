@@ -11,6 +11,7 @@ declare module 'vue' {
     CAntIcon: typeof import('./../src/components/c-ant-icon.vue')['default']
     CCaptcha: typeof import('./../src/components/c-captcha.vue')['default']
     CCascader: typeof import('./../src/components/c-cascader/c-cascader.vue')['default']
+    CColorPicker: typeof import('./../src/components/c-color-picker.vue')['default']
     CLayoutForm: typeof import('./../src/components/c-layout-form.vue')['default']
     CLayoutList: typeof import('./../src/components/c-layout-list.vue')['default']
     CReloadPrompt: typeof import('./../src/components/c-reload-prompt.vue')['default']

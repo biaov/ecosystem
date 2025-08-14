@@ -1,7 +1,7 @@
 /**
  * 操作日志搜索
  */
-export const operationSearchEnum = Object.freeze({
+export const operationSearchEnum = defineEnum({
   content: 'content',
   nickname: 'nickname',
   options() {

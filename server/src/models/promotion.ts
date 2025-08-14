@@ -52,15 +52,40 @@ export class UserCouponModel extends BaseModel {
   @JoinColumn({ name: 'orderSn' })
   order: Relation<OrderModel>
 
-  @ManyToOne(() => DistributeCouponRuleModel, rule => rule.userCoupons)
+  @ManyToOne(() => CouponRuleModel, rule => rule.userCoupons)
   @JoinColumn()
-  distributeCouponRule: Relation<DistributeCouponRuleModel>
+  couponRule: Relation<CouponRuleModel>
+}
+
+interface Setting {
+  theme: string
+  background: string
+  bgURL: string
+  textURL: string
 }
 
 @Entity('activity_coupon')
 export class ActivityCouponModel extends BaseModel {
-  @OneToMany(() => DistributeCouponRuleModel, rule => rule.distributeCoupon)
-  rules: Relation<DistributeCouponRuleModel[]>
+  @Column({ length: 64, comment: '活动名称' })
+  name: string
+
+  @Column({ type: 'timestamp', comment: '开始时间' })
+  startTime: string
+
+  @Column({ type: 'timestamp', comment: '结束时间', nullable: true })
+  endTime: string
+
+  @Column({ length: 24, comment: '状态, notStart: 未开始, noraml: 进行中, ended: 已结束' })
+  status: string
+
+  @Column({ type: 'json', comment: '页面设置' })
+  setting: Setting
+
+  @Column({ type: 'text', comment: '页面描述' })
+  desc: string
+
+  @OneToMany(() => CouponRuleModel, rule => rule.activityCoupon)
+  rules: Relation<CouponRuleModel[]>
 }
 
 @Entity('distribute_coupon')
@@ -71,12 +96,12 @@ export class DistributeCouponModel extends BaseModel {
   @Column({ type: 'json', comment: '发放范围' })
   range: string[]
 
-  @OneToMany(() => DistributeCouponRuleModel, rule => rule.distributeCoupon)
-  rules: Relation<DistributeCouponRuleModel[]>
+  @OneToMany(() => CouponRuleModel, rule => rule.distributeCoupon)
+  rules: Relation<CouponRuleModel[]>
 }
 
-@Entity('distribute_coupon_rule')
-export class DistributeCouponRuleModel extends BaseModel {
+@Entity('coupon_rule')
+export class CouponRuleModel extends BaseModel {
   @Column({ comment: '发放数量' })
   quantity: number
 
@@ -95,6 +120,6 @@ export class DistributeCouponRuleModel extends BaseModel {
   @JoinColumn()
   activityCoupon: Relation<ActivityCouponModel>
 
-  @OneToMany(() => UserCouponModel, userCoupon => userCoupon.distributeCouponRule)
+  @OneToMany(() => UserCouponModel, userCoupon => userCoupon.couponRule)
   userCoupons: Relation<UserCouponModel[]>
 }

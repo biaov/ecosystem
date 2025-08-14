@@ -1,8 +1,8 @@
 import { FindController } from '@/common/base.controller'
 import { ActivityCouponService } from './activity-coupon.service'
-import { CouponDto, CouponCreateDto, CouponUpdateDto } from './promotion.dto'
+import { ActivityCouponDto, ActivityCouponCreateDto, ActivityCouponUpdateDto } from './promotion.dto'
 
-const couponPermKey = definePermission(PermissionKeyEnum.promotionList)
+const permKey = definePermission(PermissionKeyEnum.promotionActivity)
 
 @UseGuards(AuthGuardAdmin)
 @Controller('activity-coupon')
@@ -11,34 +11,34 @@ export class ActivityCouponController extends FindController {
     super(activityCouponService)
   }
 
-  @Permission(couponPermKey.list)
+  @Permission(permKey.list)
   @Get()
-  list(@Query() { name, type, current, pageSize }: CouponDto) {
-    return this.activityCouponService.list(getPageQuery({ current, pageSize }), { name, type })
+  list(@Query() { name, status, current, pageSize }: ActivityCouponDto) {
+    return this.activityCouponService.list(getPageQuery({ current, pageSize }), { name, status })
   }
 
-  @Permission(couponPermKey.list)
+  @Permission(permKey.list)
   @Get(':id')
   detail(@IdParam() id: number) {
     return this.activityCouponService.detail(id)
   }
 
-  @Log(ModuleLabelEnum.promotionList, '创建优惠券：[name]')
-  @Permission(couponPermKey.create)
+  @Log(ModuleLabelEnum.promotionActivity, '创建活动发券：[name]')
+  @Permission(permKey.create)
   @Post()
-  create(@Body() { name, type, value, startTime, endTime }: CouponCreateDto) {
-    return this.activityCouponService.create({ name, type, value, startTime, endTime })
+  create(@Body() { name, rules, setting, startTime, endTime, desc }: ActivityCouponCreateDto) {
+    return this.activityCouponService.create({ name, rules, setting, startTime, endTime, desc })
   }
 
-  @Log(ModuleLabelEnum.promotionList, '更新优惠券：[name]')
-  @Permission(couponPermKey.update)
+  @Log(ModuleLabelEnum.promotionActivity, '更新活动发券：[name]')
+  @Permission(permKey.update)
   @Patch(':id')
-  update(@IdParam() id: number, @Body() { name, endTime }: CouponUpdateDto) {
-    return this.find(this.activityCouponService.update(id, { name, endTime }), id)
+  update(@IdParam() id: number, @Body() { name, setting, endTime, desc }: ActivityCouponUpdateDto) {
+    return this.find(this.activityCouponService.update(id, { name, setting, endTime, desc }), id)
   }
 
-  @Log(ModuleLabelEnum.goodsList, '删除优惠券：[name]')
-  @Permission(couponPermKey.delete)
+  @Log(ModuleLabelEnum.promotionActivity, '删除活动发券：[name]')
+  @Permission(permKey.delete)
   @Delete(':id')
   delete(@IdParam() id: number) {
     return this.find(this.activityCouponService.delete(id), id, 'delete')

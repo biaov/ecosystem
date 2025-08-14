@@ -1,7 +1,7 @@
 <template>
   <!-- 菜单栏 -->
   <div class="h-full flex flex-col transition-200 transition-[width] z-10 shadow-xl shadow-gray-300" :style="{ width: sidebarWidth }">
-    <router-link to="/" class="flex justify-center items-center h-80" title="回到首页">
+    <router-link to="/" class="flex! justify-center items-center h-80" title="回到首页">
       <img src="/logo.svg" class="w-40" />
     </router-link>
     <div class="flex-grow h-0 overflow-auto">
@@ -20,7 +20,7 @@
 import { createVNode } from 'vue'
 import type { RouteRecordRaw, RouteLocationNormalizedLoadedGeneric } from 'vue-router'
 import { menuRoutes } from '@/router/routes'
-import UAntIcon from '@/components/c-ant-icon.vue'
+import CAntIcon from '@/components/c-ant-icon.vue'
 
 const props = defineProps({
   // 收缩状态
@@ -41,7 +41,7 @@ const items = menuRoutes
     if (item.meta?.hidden) return
     return {
       key: item.path,
-      icon: item.meta?.antIcon ? createVNode(UAntIcon, { name: item.meta.antIcon }) : null,
+      icon: item.meta?.antIcon ? createVNode(CAntIcon, { name: item.meta.antIcon }) : null,
       label: item.meta?.title,
       children: item.children
         ? item.children

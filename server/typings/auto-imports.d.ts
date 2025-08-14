@@ -9,6 +9,7 @@ declare global {
   const APP_GUARD: typeof import('@nestjs/core')['APP_GUARD']
   const APP_INTERCEPTOR: typeof import('@nestjs/core')['APP_INTERCEPTOR']
   const ActivityCouponModel: typeof import('../src/models/promotion')['ActivityCouponModel']
+  const ActivityStatusEnum: typeof import('../src/enums/activity')['ActivityStatusEnum']
   const AddressModel: typeof import('../src/common/base.model')['AddressModel']
   const AfterInsert: typeof import('typeorm')['AfterInsert']
   const AfterLoad: typeof import('typeorm')['AfterLoad']
@@ -28,6 +29,7 @@ declare global {
   const Column: typeof import('typeorm')['Column']
   const Controller: typeof import('@nestjs/common')['Controller']
   const CouponModel: typeof import('../src/models/promotion')['CouponModel']
+  const CouponRuleModel: typeof import('../src/models/promotion')['CouponRuleModel']
   const CouponTypeEnum: typeof import('../src/enums/coupon')['CouponTypeEnum']
   const CreateDateColumn: typeof import('typeorm')['CreateDateColumn']
   const CreditOrderItemModel: typeof import('../src/models/order')['CreditOrderItemModel']
@@ -35,7 +37,6 @@ declare global {
   const CustomRoute: typeof import('../src/common/base.decorator')['CustomRoute']
   const Delete: typeof import('@nestjs/common')['Delete']
   const DistributeCouponModel: typeof import('../src/models/promotion')['DistributeCouponModel']
-  const DistributeCouponRuleModel: typeof import('../src/models/promotion')['DistributeCouponRuleModel']
   const DrawImg: typeof import('../src/utils/draw')['DrawImg']
   const Entity: typeof import('typeorm')['Entity']
   const Exclude: (typeof import('class-transformer'))['Exclude']
@@ -183,7 +184,7 @@ declare global {
   export type { OrderModel, OrderItemModel, OrderTraceModel, OrderInvoiceModel, CreditOrderModel, CreditOrderItemModel, SaleOrderModel } from '../src/models/order'
   import('../src/models/order')
   // @ts-ignore
-  export type { CouponModel, UserCouponModel, ActivityCouponModel, DistributeCouponModel, DistributeCouponRuleModel } from '../src/models/promotion'
+  export type { CouponModel, UserCouponModel, ActivityCouponModel, DistributeCouponModel, CouponRuleModel } from '../src/models/promotion'
   import('../src/models/promotion')
   // @ts-ignore
   export type { SettingModel } from '../src/models/setting'
@@ -194,6 +195,9 @@ declare global {
   // @ts-ignore
   export type { DrawImg } from '../src/utils/draw'
   import('../src/utils/draw')
+  // @ts-ignore
+  export type { ActivityStatusEnum } from '../src/enums/activity'
+  import('../src/enums/activity')
   // @ts-ignore
   export type { CouponTypeEnum, UserCouponStatusEnum } from '../src/enums/coupon'
   import('../src/enums/coupon')

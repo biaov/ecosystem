@@ -35,7 +35,7 @@ export const findAndCount = async (promise: Promise<any>, page: Pick<PageOption,
   return { items, total, ...page }
 }
 
-type USETransfrormQueryOption = boolean | number | string | string[] | FindOperator<string> | undefined
+type USETransfrormQueryOption = boolean | number | string | string[] | FindOperator<string> | undefined | Record<string, any>
 
 /**
  * 转换查询条件
@@ -62,7 +62,7 @@ export const useTransfrormQuery = <T = Record<string, USETransfrormQueryOption |
   })
   // 转换为数组
   const dataEntries = Object.entries(data)
-  let result: [{}] | [string, {}] | Record<string, unknown>
+  let result: [{}] | [string, {}] | Record<string, unknown> | [string, USETransfrormQueryOption]
   // 关联表查询
   if (dataEntries[0][0].includes('.')) {
     result = dataEntries.reduce(
@@ -79,7 +79,7 @@ export const useTransfrormQuery = <T = Record<string, USETransfrormQueryOption |
 
           const prop = keyArr[1]
           prev[0] += `${prev[0] ? ' AND ' : ''}${key} ${symbol} :${prop}`
-          prev[1][prop] = newValue
+          prev[1]![prop] = newValue
         }
 
         return prev

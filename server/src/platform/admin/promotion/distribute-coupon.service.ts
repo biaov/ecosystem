@@ -1,12 +1,12 @@
-import { DistributeCouponModel, DistributeCouponRuleModel } from '@/models/promotion'
+import { DistributeCouponModel, CouponRuleModel } from '@/models/promotion'
 
 @Injectable()
 export class DistributeCouponService {
   @InjectRepository(DistributeCouponModel)
   private distributeCouponRepository: Repository<DistributeCouponModel>
 
-  @InjectRepository(DistributeCouponRuleModel)
-  private distributeCouponRuleRepository: Repository<DistributeCouponRuleModel>
+  @InjectRepository(CouponRuleModel)
+  private couponRuleRepository: Repository<CouponRuleModel>
 
   @InjectRepository(UserCouponModel)
   private userCouponRepository: Repository<UserCouponModel>
@@ -54,7 +54,7 @@ export class DistributeCouponService {
   detail(id: number) {
     return this.distributeCouponRepository.findOne({ where: { id }, relations: ['rules'] })
   }
-  async create({ title, range, rules }: Pick<DistributeCouponModel, 'title' | 'range'> & { rules: Pick<DistributeCouponRuleModel, 'quantity' | 'couponId'>[] }) {
+  async create({ title, range, rules }: Pick<DistributeCouponModel, 'title' | 'range'> & { rules: Pick<CouponRuleModel, 'quantity' | 'couponId'>[] }) {
     const list = [...new Set(range.filter(item => validator.mobile(item)))]
     if (!list.length) throw new BizException('请输入正确的手机号')
     const option = useTransfrormQuery({ title, range: list }, {})
@@ -68,13 +68,13 @@ export class DistributeCouponService {
      */
     const users = await this.userRepository.find({ where: list.map(mobile => ({ mobile })), select: ['id'] })
 
-    const ruleData = await this.distributeCouponRuleRepository.save(rules.map(item => ({ quantity: item.quantity, couponId: item.couponId, distributeCoupon: { id: distributeCoupon.id } })))
+    const ruleData = await this.couponRuleRepository.save(rules.map(item => ({ quantity: item.quantity, couponId: item.couponId, distributeCoupon: { id: distributeCoupon.id } })))
 
     const sendCouponOptions = ruleData
       .map(item =>
         users.map(userInfo =>
           Array.from({ length: item.quantity }, () => ({
-            distributeCouponRule: { id: item.id },
+            couponRule: { id: item.id },
             userId: userInfo.id,
             couponId: item.couponId,
             status: UserCouponStatusEnum.normal

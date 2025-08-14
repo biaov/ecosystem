@@ -1,7 +1,7 @@
 /**
  * 礼品搜索
  */
-export const giftSearchEnum = Object.freeze({
+export const giftSearchEnum = defineEnum({
   name: 'name',
   sku: 'sku',
   options() {
@@ -21,7 +21,7 @@ export const giftSearchEnum = Object.freeze({
 /**
  * 礼品标签
  */
-export const giftTagEnum = Object.freeze({
+export const giftTagEnum = defineEnum({
   recommend: 'recommend',
   newest: 'newest',
   preferential: 'preferential',
@@ -40,8 +40,5 @@ export const giftTagEnum = Object.freeze({
         value: this.preferential
       }
     ]
-  },
-  filter(value) {
-    return this.options().find(item => item.value === value)
   }
 })

@@ -4,7 +4,7 @@ import { DistributeCouponService } from './distribute-coupon.service'
 
 @Global()
 @Module({
-  imports: [TypeOrmModule.forFeature([DistributeCouponModel, DistributeCouponRuleModel, UserCouponModel, UserModel])],
+  imports: [TypeOrmModule.forFeature([DistributeCouponModel, CouponRuleModel, UserCouponModel, UserModel])],
   controllers: [DistributeCouponController],
   providers: [DistributeCouponService]
 })

@@ -3,7 +3,7 @@ import { themeColor } from '@/config/color'
 /**
  * 优惠券类型
  */
-export const couponTypeEnum = Object.freeze({
+export const couponTypeEnum = defineEnum({
   cash: 'cash',
   discount: 'discount',
   full: 'full',
@@ -23,15 +23,12 @@ export const couponTypeEnum = Object.freeze({
       }
     ]
   },
-  filter() {
-    return this.options().find(item => item.value)
-  }
 })
 
 /**
  * 用户优惠券状态
  */
-export const couponStatusEnum = Object.freeze({
+export const couponStatusEnum = defineEnum({
   normal: 'normal',
   used: 'used',
   expired: 'expired',
@@ -53,9 +50,6 @@ export const couponStatusEnum = Object.freeze({
         color: themeColor.info
       }
     ]
-  },
-  filter(value: string) {
-    return this.options().find(item => item.value === value)
   },
   filterStatus(status: string) {
     return ([this.expired] as string[]).includes(status) ? 'default' : 'processing'
