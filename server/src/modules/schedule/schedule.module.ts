@@ -1,8 +1,10 @@
 import { ScheduleModule } from '@nestjs/schedule'
-import { ScheduleService } from './schedule.service'
+import { ActivityCouponService } from './activity-coupon.service'
+
+const servies = import.meta.glob('./**/*.service.ts', { eager: true })
 
 @Module({
-  imports: [ScheduleModule.forRoot(), TypeOrmModule.forFeature([ActivityCouponModel, OrderModel])],
-  providers: [ScheduleService]
+  imports: [ScheduleModule.forRoot(), TypeOrmModule.forFeature([ActivityCouponModel, OrderModel, CreditOrderModel, SettingModel])],
+  providers: [ActivityCouponService]
 })
 export class ScheduleAppModule {}

@@ -1,6 +1,5 @@
 import { SettingService } from './setting.service'
 import { UpdateSettingDto } from './setting.dot'
-import { SettingKeyEnum } from './enums'
 
 const permUserKey = definePermission(PermissionKeyEnum.settingUser)
 const permProtocolKey = definePermission(PermissionKeyEnum.settingProtocol)

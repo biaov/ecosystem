@@ -34,6 +34,7 @@ declare global {
   const CreateDateColumn: typeof import('typeorm')['CreateDateColumn']
   const CreditOrderItemModel: typeof import('../src/models/order')['CreditOrderItemModel']
   const CreditOrderModel: typeof import('../src/models/order')['CreditOrderModel']
+  const Cron: typeof import('@nestjs/schedule')['Cron']
   const CustomRoute: typeof import('../src/common/base.decorator')['CustomRoute']
   const Delete: typeof import('@nestjs/common')['Delete']
   const DistributeCouponModel: typeof import('../src/models/promotion')['DistributeCouponModel']
@@ -70,6 +71,7 @@ declare global {
   const IsPositive: typeof import('class-validator')['IsPositive']
   const IsString: typeof import('class-validator')['IsString']
   const JoinColumn: typeof import('typeorm')['JoinColumn']
+  const LessThan: typeof import('typeorm')['LessThan']
   const Like: typeof import('typeorm')['Like']
   const Log: typeof import('../src/common/base.decorator')['Log']
   const LogInterceptor: typeof import('../src/common/base.interceptor')['LogInterceptor']
@@ -108,6 +110,7 @@ declare global {
   const SaleOrderStatusEnum: typeof import('../src/enums/order')['SaleOrderStatusEnum']
   const SaleOrderTypeEnum: typeof import('../src/enums/order')['SaleOrderTypeEnum']
   const SetMetadata: typeof import('@nestjs/common')['SetMetadata']
+  const SettingKeyEnum: typeof import('../src/enums/setting')['SettingKeyEnum']
   const SettingModel: typeof import('../src/models/setting')['SettingModel']
   const SourceEnum: typeof import('../src/enums/index')['SourceEnum']
   const Transform: typeof import('class-transformer')['Transform']
@@ -210,6 +213,9 @@ declare global {
   // @ts-ignore
   export type { OrderStatusEnum, OrderTypeEnum, SaleOrderStatusEnum, SaleOrderTypeEnum } from '../src/enums/order'
   import('../src/enums/order')
+  // @ts-ignore
+  export type { SettingKeyEnum } from '../src/enums/setting'
+  import('../src/enums/setting')
   // @ts-ignore
   export type { HttpErrorFilter, TransformResponseInterceptor, LogInterceptor } from '../src/common/base.interceptor'
   import('../src/common/base.interceptor')

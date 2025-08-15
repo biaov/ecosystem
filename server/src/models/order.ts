@@ -31,6 +31,9 @@ export class OrderModel extends AddressModel {
   @Column({ type: 'timestamp', comment: '支付时间', nullable: true })
   payTime: string
 
+  @Column({ type: 'timestamp', comment: '发货时间', nullable: true })
+  shippedTime: string
+
   @Column({ length: 16, comment: '订单来源: pc - PC 官网, h5 - H5 端, app - APP 端, miniprogram - 微信小程序端' })
   source: string
 
@@ -152,8 +155,12 @@ export class CreditOrderModel extends AddressModel {
   @Column({ comment: '兑换积分' })
   credit: number
 
+  @Column({ type: 'timestamp', comment: '发货时间', nullable: true })
+  shippedTime: string
+
   @Column({ length: 128, comment: '订单备注', nullable: true })
   remark: string
+  
 
   @Column({ length: 16, comment: '订单来源: pc - PC 官网, h5 - H5 端, app - APP 端, miniprogram - 微信小程序端' })
   source: string

@@ -67,7 +67,8 @@ export default [
       'TreeParent',
       'TreeChildren',
       'Tree',
-      'AfterLoad'
+      'AfterLoad',
+      'LessThan'
     ]
   },
   {
@@ -99,6 +100,9 @@ export default [
   },
   {
     '@nestjs-modules/ioredis': ['InjectRedis']
+  },
+  {
+    '@nestjs/schedule': ['Cron']
   },
   {
     from: 'ioredis',

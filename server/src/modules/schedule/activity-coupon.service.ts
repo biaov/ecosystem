@@ -1,13 +1,7 @@
-import { Cron, Interval } from '@nestjs/schedule'
-import { LessThan } from 'typeorm'
-
 @Injectable()
-export class ScheduleService {
+export class ActivityCouponService {
   @InjectRepository(ActivityCouponModel)
   private activityCouponRepository: Repository<ActivityCouponModel>
-
-  @InjectRepository(OrderModel)
-  private orderRepository: Repository<OrderModel>
 
   private getStatus({ now, start, end }) {
     let status
@@ -21,8 +15,7 @@ export class ScheduleService {
     return status
   }
 
-  // @Cron('*/1 * * * *')
-  @Interval(60000)
+  @Cron('*/60 * * * * *')
   async handleCron() {
     const now = dayjs()
     const nowLessThan = LessThan(now.toDate())
@@ -39,7 +32,6 @@ export class ScheduleService {
         const end = dayjs(endTime)
         const newStatus = this.getStatus({ now, start, end })
         if (newStatus !== status) await this.activityCouponRepository.update(id, { status: newStatus })
-        return { id, status }
       })
     )
   }

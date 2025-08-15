@@ -88,7 +88,7 @@ export class OrderService {
     ]
 
     await this.orderTraceRepository.save({ orderId: id, expressCode, expressSn, traces })
-    return useAffected(this.orderRepository.update(id, { status: OrderStatusEnum.shipped }))
+    return useAffected(this.orderRepository.update(id, { status: OrderStatusEnum.shipped, shippedTime: dayjs().format('YYYY-MM-DD hh:mm:ss') }))
   }
 }
 
@@ -152,7 +152,7 @@ export class CreditOrderService {
     ]
 
     await this.orderTraceRepository.save({ orderId: id, expressCode, expressSn, traces })
-    return useAffected(this.creditOrderRepository.update(id, { status: OrderStatusEnum.shipped }))
+    return useAffected(this.creditOrderRepository.update(id, { status: OrderStatusEnum.shipped, shippedTime: dayjs().format('YYYY-MM-DD hh:mm:ss') }))
   }
 }
 

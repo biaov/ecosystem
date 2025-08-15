@@ -31,7 +31,7 @@
         </a-table-column>
         <a-table-column title="操作" :width="120">
           <template #="{ record }">
-            <a-button type="link" size="small" :href="`/promotion/activity-coupon-edit/${record.id}`" v-perm="permKey.update">编辑</a-button>
+            <a-button type="link" size="small" :href="`/promotion/activity-coupon-edit/${record.id}`" v-perm="permKey.update" v-if="record.status !== activityStatusEnum.ended">编辑</a-button>
             <a-popconfirm placement="left" title="你确定要删除这条数据吗?" @confirm="handleDelete(record)" v-if="record.status === activityStatusEnum.notStart">
               <a-button type="link" size="small" :href="`/promotion/activity-coupon-edit/${record.id}`" danger v-perm="permKey.delete">删除</a-button>
             </a-popconfirm>
