@@ -5,4 +5,4 @@ dist
 .idea
 .DS_Store
 .env.production
-scripts/menu.sql
+scripts/*.sql

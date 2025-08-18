@@ -35,6 +35,8 @@
     "strictPropertyInitialization": false,
     "noImplicitAny": false
   },
-  "include": ["typings/*.d.ts", "src/**/*.ts"],
-  "exclude": ["node_modules", ".vscode/dist"]
+  "allowDefaultProject": true,
+  "include": ["typings/*.d.ts", "src/**/*.ts", "vite.config.ts", "scripts", "auto.import.ts"],
+
+  "exclude": ["node_modules", ".vscode", "dist"]
 }

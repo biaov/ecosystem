@@ -23,4 +23,3 @@ export default new DataSource({
   migrations: [resolve(import.meta.dirname, '../migrations/*.js')],
   migrationsTableName: 'eco_migrations'
 })
-

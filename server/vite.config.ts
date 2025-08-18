@@ -3,7 +3,7 @@ import { VitePluginNode } from 'vite-plugin-node'
 import { resolve } from 'path'
 import autoImport from 'unplugin-auto-import/vite'
 import eslint from 'vite-plugin-eslint'
-import imports from './auto.import'
+import imports from './auto.import.ts'
 import rollupPluginBuild from './scripts/rollup-plugin-build'
 import { globSync } from 'fs'
 
@@ -18,10 +18,10 @@ export default defineConfig({
   },
   esbuild: false,
   plugins: [
-    // eslint({
-    //   lintOnStart: true,
-    //   exclude: ['node_modules', 'dist']
-    // }),
+    eslint({
+      lintOnStart: true,
+      exclude: ['node_modules', 'dist']
+    }),
     autoImport({
       include: /\.ts$/,
       imports,

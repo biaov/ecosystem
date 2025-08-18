@@ -1,7 +1,12 @@
+import { Timestamp } from 'typeorm'
+
 @Entity('migrations')
 export class MigrationsModel extends BaseModel {
   @Column({ length: 32, comment: '名称' })
   name: string
+
+  @Column({ type: 'bigint', comment: '时间' })
+  timestamp: number
 }
 
 @Entity('log')

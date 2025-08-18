@@ -31,12 +31,14 @@ export default tseslint.config(
   {
     rules: {
       'no-console': developmentOff,
-      '@typescript-eslint/no-unused-vars': developmentOff
-      // '@typescript-eslint/no-unused-expressions': 'off',
-      // '@typescript-eslint/no-unsafe-function-type': 'off',
-      // '@typescript-eslint/no-namespace': 'off',
-      // '@typescript-eslint/no-empty-object-type': 'off',
-      // '@typescript-eslint/no-non-null-asserted-optional-chain': 'off'
+      '@typescript-eslint/no-unused-vars': developmentOff,
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-unused-expressions': 'off',
+      '@typescript-eslint/no-unsafe-function-type': 'off',
+      '@typescript-eslint/no-namespace': 'off',
+      '@typescript-eslint/no-empty-object-type': 'off',
+      '@typescript-eslint/no-non-null-asserted-optional-chain': 'off',
+      'no-fallthrough': 'off'
     }
   }
 )

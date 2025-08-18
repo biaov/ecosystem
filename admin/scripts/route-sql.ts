@@ -5,7 +5,8 @@ import type { permissionEnum as permissionEnums } from '../src/enums/index.ts'
 type keyValue = keyof typeof permissionEnums
 const permissionEnum: Record<keyValue, keyValue> = { list: 'list', create: 'create', update: 'update', delete: 'delete' }
 const menuRoutesFilter = menuRoutes.filter(route => route.name !== '403')
-const getRoutes = (list: any[], parentId = 0) => {
+const roleData: string[] = []
+const getRoutes = (list: any[], parentId = 0, parentPath = '') => {
   const second: any[] = []
   const first = list
     .filter(item => !item.meta.hidden)
@@ -14,9 +15,10 @@ const getRoutes = (list: any[], parentId = 0) => {
       let type = 'module'
       const newParentId = parentId + id
       if (item.children?.length) {
-        second.push(...getRoutes(item.children, newParentId)[0])
+        second.push(...getRoutes(item.children, newParentId, item.path)[0])
       } else {
         type = 'page'
+        roleData.push(`${parentPath}${parentPath ? ':' : ''}${item.path}:list`)
       }
       return {
         id,
@@ -38,7 +40,7 @@ interface MenuItem {
 }
 
 const getValue = (list: MenuItem[]) =>
-  `INSERT INTO \`eco_menu\` (\`name\`, \`parentId\`, \`content\`, \`type\`) VALUES ${list.reduce((prev, item, i) => `${prev}${i ? ',' : ''}('${item.name}', ${item.parentId || 'NULL'}, '${item.content}', '${item.type}')`, '')};`
+  `${list.reduce((prev, item, i) => `${prev}${i ? ',' : ''}('${item.name}', ${item.parentId || 'NULL'}, '${item.content}', '${item.type}')`, '')}`
 
 const [first, second] = getRoutes(menuRoutesFilter)
 const threeGroup = structuredClone(first.filter(item => item.type === 'page').concat(second.map((item, i) => ({ ...item, id: first.length + i + 1 }))))
@@ -48,7 +50,7 @@ const three = threeGroup
     const actions: Omit<MenuItem, 'id'>[] = keys
       .filter(value => {
         if (['商品库存'].includes(item.name)) return [permissionEnum.list, permissionEnum.update].includes(value)
-        if (['全部用户'].includes(item.name)) return [permissionEnum.list, permissionEnum.create].includes(value)
+        if (['全部用户', '手动发券'].includes(item.name)) return [permissionEnum.list, permissionEnum.create].includes(value)
         if (['仪表面板', '拉黑名单'].includes(item.name)) return permissionEnum.list === value
         if (['用户设置', '隐私协议', '订单设置', '热搜词设置'].includes(item.name)) return value !== permissionEnum.delete
         return true
@@ -167,4 +169,6 @@ const three = threeGroup
   .flat()
 
 const [firstSql, secondSql, threeSql] = [first, second, three].map(getValue)
-writeFileSync('./scripts/menu.sql', `${firstSql}\n${secondSql}\n${threeSql}`)
+writeFileSync('./scripts/menu.sql', `INSERT INTO \`eco_menu\` (\`name\`, \`parentId\`, \`content\`, \`type\`) VALUES ${firstSql},\n${secondSql},\n${threeSql};`)
+writeFileSync('./scripts/role.sql', `INSERT INTO \`eco_user_role\` (\`name\`, \`permissions\`) VALUES ('超级管理员', '["*"]'), ('游客', '${JSON.stringify(roleData)}');`)
+
