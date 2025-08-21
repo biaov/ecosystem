@@ -88,7 +88,8 @@ const { data, loading } = useApiRequest<DataType>(
     saleRenderData(res)
     userRenderData(res)
     techStackRenderData(res)
-  }
+  },
+  true
 )
 
 const features = Object.freeze([

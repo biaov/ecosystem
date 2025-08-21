@@ -92,10 +92,11 @@ export const usePagingApiRequest = <T extends Record<string, any> = {}>(
 /**
  * 普通请求
  */
-export const useApiRequest = <T = unknown>(request: () => Promise<unknown>, calledOnMounted = true, initData: unknown = [], callback?: (data: T) => void) => {
+export const useApiRequest = <T = unknown>(request: () => Promise<unknown>, calledOnMounted = true, initData: unknown = [], callback?: (data: T) => void, showLoadingMessage = false) => {
   const loading = ref(false)
-
   const data = ref<T>(initData as T)
+  let loadingClose: ReturnType<typeof message.loading> | undefined
+  showLoadingMessage && (loadingClose = message.loading('数据加载中...'))
 
   const getData = async () => {
     loading.value = true
@@ -105,6 +106,7 @@ export const useApiRequest = <T = unknown>(request: () => Promise<unknown>, call
       throw error
     } finally {
       loading.value = false
+      loadingClose && loadingClose()
     }
     callback && callback(data.value)
   }
