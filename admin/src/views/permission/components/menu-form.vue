@@ -28,7 +28,9 @@ const { formState, setFormRules, validFormState, setFormState, resetFormState } 
   content: ''
 })
 
-const emit = defineEmits<OkValueEmit<typeof formState.value>>()
+const emit = defineEmits<{
+  (e: 'ok', value: typeof formState.value): void
+}>()
 
 setFormRules({
   type: { required: true, message: '请选择权限类型' },

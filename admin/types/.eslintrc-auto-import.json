@@ -1,5 +1,6 @@
 {
   "globals": {
+    "Callback": true,
     "Component": true,
     "ComponentPublicInstance": true,
     "ComputedRef": true,

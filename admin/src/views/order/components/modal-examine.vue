@@ -32,7 +32,9 @@ interface Props {
     }
   }
 }
-const emit = defineEmits<OkEmit>()
+const emit = defineEmits<{
+  (event: 'ok'): void
+}>()
 const props = defineProps<Props>()
 
 const visible = defineModel('visible', {

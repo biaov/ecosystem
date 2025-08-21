@@ -13,10 +13,10 @@ export default defineConfig({
   base: './',
   plugins: [
     tailwindcss(),
-    // eslint({
-    //   lintOnStart: true,
-    //   exclude: ["node_modules", "dist"],
-    // }),
+    eslint({
+      lintOnStart: true,
+      exclude: ["node_modules", "dist"],
+    }),
     vue(),
     autoImport({
       imports: [

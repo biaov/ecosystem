@@ -105,7 +105,7 @@ declare global {
   export type { Component, Slot, Slots, ComponentPublicInstance, ComputedRef, DirectiveBinding, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, ShallowRef, MaybeRef, MaybeRefOrGetter, VNode, WritableComputedRef } from 'vue'
   import('vue')
   // @ts-ignore
-  export type { FormRule, PagingResponse } from '../src/composables/types'
+  export type { FormRule, PagingResponse, Callback } from '../src/composables/types'
   import('../src/composables/types')
   // @ts-ignore
   export type { UserInfo } from '../src/stores/types'
