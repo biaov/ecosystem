@@ -18,10 +18,10 @@ export default defineConfig({
   },
   esbuild: false,
   plugins: [
-    eslint({
+    /* eslint({
       lintOnStart: true,
       exclude: ['node_modules', 'dist']
-    }),
+    }), */
     autoImport({
       include: /\.ts$/,
       imports,

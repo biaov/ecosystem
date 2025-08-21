@@ -68,6 +68,7 @@ declare global {
   const unref: typeof import('vue')['unref']
   const useApiRequest: typeof import('../src/composables/useRequest')['useApiRequest']
   const useAttrs: typeof import('vue')['useAttrs']
+  const useChart: typeof import('../src/composables/useChart')['useChart']
   const useCommand: typeof import('../src/composables/useRequest')['useCommand']
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVars: typeof import('vue')['useCssVars']

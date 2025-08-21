@@ -18,6 +18,7 @@ export const perm: Directive = {
       return
     }
     if (el.nodeName !== 'A') return
+    classList.includes('ant-btn-primary') && el.classList.add('ant-btn-disabled')
     el.style.pointerEvents = 'none'
     el.parentNode.style.cursor = 'not-allowed'
   }

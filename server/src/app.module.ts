@@ -26,11 +26,13 @@ const imports = [
 if (!import.meta.env.PROD) {
   // 开发环境使用静态目录
   imports.push(
-    ServeStaticModule.forRoot({
-      rootPath: join(process.cwd(), 'uploads'),
-      useGlobalPrefix: false,
-      serveRoot: '/uploads'
-    })
+    ...['uploads', 'static'].map(name =>
+      ServeStaticModule.forRoot({
+        rootPath: join(process.cwd(), name),
+        useGlobalPrefix: false,
+        serveRoot: `/${name}`
+      })
+    )
   )
 }
 

@@ -9,7 +9,7 @@
         </a-space>
       </a-form-item>
       <a-form-item label="活动名称" required>
-        <a-input v-model:value="formState.name" placeholder="请输入活动名称" :max-length="32" />
+        <a-input v-model:value="formState.name" placeholder="请输入活动名称" :maxlength="32" />
       </a-form-item>
     </a-card>
     <a-card title="活动规则">

@@ -84,6 +84,7 @@ declare global {
   const MinLength: typeof import('class-validator')['MinLength']
   const Module: typeof import('@nestjs/common')['Module']
   const ModuleLabelEnum: typeof import('../src/enums/menu')['ModuleLabelEnum']
+  const MoreThan: typeof import('typeorm')['MoreThan']
   const NestFactory: typeof import('@nestjs/core')['NestFactory']
   const OneToMany: typeof import('typeorm')['OneToMany']
   const OneToOne: typeof import('typeorm')['OneToOne']
@@ -97,6 +98,7 @@ declare global {
   const Param: typeof import('@nestjs/common')['Param']
   const ParseIntPipe: typeof import('@nestjs/common')['ParseIntPipe']
   const Patch: typeof import('@nestjs/common')['Patch']
+  const PayStatusEnum: typeof import('../src/enums/order')['PayStatusEnum']
   const Permission: typeof import('../src/common/base.decorator')['Permission']
   const PermissionEnum: typeof import('../src/enums/index')['PermissionEnum']
   const PermissionKeyEnum: typeof import('../src/enums/menu')['PermissionKeyEnum']
@@ -211,7 +213,7 @@ declare global {
   export type { PermissionKeyEnum, ModuleLabelEnum } from '../src/enums/menu'
   import('../src/enums/menu')
   // @ts-ignore
-  export type { OrderStatusEnum, OrderTypeEnum, SaleOrderStatusEnum, SaleOrderTypeEnum } from '../src/enums/order'
+  export type { OrderStatusEnum, PayStatusEnum, OrderTypeEnum, SaleOrderStatusEnum, SaleOrderTypeEnum } from '../src/enums/order'
   import('../src/enums/order')
   // @ts-ignore
   export type { SettingKeyEnum } from '../src/enums/setting'

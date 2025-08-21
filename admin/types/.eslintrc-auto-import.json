@@ -82,6 +82,7 @@
     "unref": true,
     "useApiRequest": true,
     "useAttrs": true,
+    "useChart": true,
     "useCommand": true,
     "useCssModule": true,
     "useCssVars": true,

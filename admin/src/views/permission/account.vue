@@ -29,8 +29,8 @@
             {{ roleData.find(item => item.id === record.roleId)?.name }}
           </template>
         </a-table-column>
-        <a-table-column title="创建时间" data-index="createdAt" :width="200" />
-        <a-table-column title="操作" :width="180">
+        <a-table-column title="创建时间" data-index="createdAt" :width="180" />
+        <a-table-column title="操作" :width="200">
           <template #="{ record }">
             <a-button type="link" size="small" @click="handleResetPwd(record)" v-perm="permKey.reset">重置密码</a-button>
             <a-button type="link" size="small" @click="onEdit(record)" v-perm="permKey.update">编辑</a-button>

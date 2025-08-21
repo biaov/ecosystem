@@ -10,16 +10,19 @@ export class OrderModel extends AddressModel {
   @Column({ length: 12, comment: '订单类型, entity: 实物商品, virtual: 虚拟商品' })
   type: string
 
+  @Column({ length: 4, comment: '订单支付状态,  pay: 未支付, paid: 已支付', default: 'pay' })
+  payStatus: string
+
   @Column({ length: 16, comment: '订单状态, pay: 待支付, paid: 已支付/待发货, shipped: 已发货/待收货, completed: 已完成, cancelled: 已取消' })
   status: string
 
-  @Column({ comment: '总金额' })
+  @Column({ type: 'float', precision: 10, scale: 2, comment: '总金额' })
   totalAmount: number
 
-  @Column({ comment: '支付金额' })
+  @Column({ type: 'float', precision: 10, scale: 2, comment: '支付金额' })
   payAmount: number
 
-  @Column({ comment: '优惠金额' })
+  @Column({ type: 'float', precision: 10, scale: 2, comment: '优惠金额' })
   discountAmount: number
 
   @Column({ length: 128, comment: '订单备注', nullable: true })
@@ -160,7 +163,6 @@ export class CreditOrderModel extends AddressModel {
 
   @Column({ length: 128, comment: '订单备注', nullable: true })
   remark: string
-  
 
   @Column({ length: 16, comment: '订单来源: pc - PC 官网, h5 - H5 端, app - APP 端, miniprogram - 微信小程序端' })
   source: string

@@ -92,7 +92,7 @@ export const usePagingApiRequest = <T extends Record<string, any> = {}>(
 /**
  * 普通请求
  */
-export const useApiRequest = <T = unknown>(request: () => Promise<unknown>, calledOnMounted = true, initData: unknown = []) => {
+export const useApiRequest = <T = unknown>(request: () => Promise<unknown>, calledOnMounted = true, initData: unknown = [], callback?: (data: T) => void) => {
   const loading = ref(false)
 
   const data = ref<T>(initData as T)
@@ -106,6 +106,7 @@ export const useApiRequest = <T = unknown>(request: () => Promise<unknown>, call
     } finally {
       loading.value = false
     }
+    callback && callback(data.value)
   }
 
   calledOnMounted && onMounted(getData)

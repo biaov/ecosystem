@@ -112,3 +112,23 @@ export namespace CouponName {
     expired: number
   }
 }
+
+export namespace DashboardName {
+  export interface DashboardType {
+    updatedAt: string
+    salesAmount: number
+    totalSalesAmount: number
+    orderCount: number
+    totalOrderCount: number
+    userCount: number
+    totalUserCount: number
+    salesList: {
+      label: string
+      value: number
+    }[]
+    userList: {
+      label: string
+      value: number
+    }[]
+  }
+}

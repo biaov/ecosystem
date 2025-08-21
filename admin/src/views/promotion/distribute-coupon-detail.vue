@@ -2,7 +2,7 @@
   <c-layout-form :ok-text="id ? '' : '保存'" @ok="handleSubmit" v-if="!loading">
     <a-card title="基本信息">
       <a-form-item label="发放主题" required>
-        <a-input v-model:value="formState.title" placeholder="请输入发放主题" :max-length="32" :disabled="disabled" />
+        <a-input v-model:value="formState.title" placeholder="请输入发放主题" :maxlength="32" :disabled="disabled" />
       </a-form-item>
       <a-form-item label="发放用户" required>
         <a-textarea v-model:value="formState.range" placeholder="请输入发放用户手机号码，每行一个" :disabled="disabled" v-bind="$config.textarea" />

@@ -29,6 +29,21 @@ export enum OrderStatusEnum {
 }
 
 /**
+ * 订单支付状态枚举
+ */
+export enum PayStatusEnum {
+  /**
+   * 未支付
+   */
+  pay = 'pay',
+
+  /**
+   * 已支付
+   */
+  paid = 'paid'
+}
+
+/**
  * 订单类型枚举
  */
 export enum OrderTypeEnum {

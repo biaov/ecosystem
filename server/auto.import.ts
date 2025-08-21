@@ -68,7 +68,8 @@ export default [
       'TreeChildren',
       'Tree',
       'AfterLoad',
-      'LessThan'
+      'LessThan',
+      'MoreThan'
     ]
   },
   {

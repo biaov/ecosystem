@@ -5,7 +5,7 @@
         <select-category v-model="formState.categoryId" placeholder="请选择礼品分类" :disabled="disabled" />
       </a-form-item>
       <a-form-item label="礼品名称" required>
-        <a-input v-model:value="formState.name" placeholder="请输入礼品名称" :disabled="disabled" :max-length="32" />
+        <a-input v-model:value="formState.name" placeholder="请输入礼品名称" :disabled="disabled" :maxlength="32" />
       </a-form-item>
       <a-form-item label="礼品SKU" required>
         <a-input v-model:value="formState.sku" placeholder="请输入礼品SKU" :disabled="disabled" />

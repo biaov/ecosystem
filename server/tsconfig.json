@@ -36,7 +36,6 @@
     "noImplicitAny": false
   },
   "allowDefaultProject": true,
-  "include": ["typings/*.d.ts", "src/**/*.ts", "vite.config.ts", "scripts", "auto.import.ts"],
-
+  "include": ["typings/*.d.ts", "src/**/*.ts", "vite.config.ts", "scripts", "auto.import.ts", "package.json"],
   "exclude": ["node_modules", ".vscode", "dist"]
 }

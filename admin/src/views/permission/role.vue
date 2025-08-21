@@ -16,7 +16,7 @@
       <a-table :data-source="data.items" row-key="id" :loading="loading" :pagination="$formatter.pagination(data)" @change="setPage">
         <a-table-column title="名称" data-index="name" />
         <a-table-column title="更新时间" data-index="updatedAt" :width="200" />
-        <a-table-column title="操作" :width="180">
+        <a-table-column title="操作" :width="200">
           <template #="{ record }">
             <a-button type="link" size="small" :href="`/admin/permission/role/${record.id}`" v-perm="permKey.perm">分配权限</a-button>
             <a-button type="link" size="small" @click="onEdit(record)" v-perm="permKey.update">编辑</a-button>

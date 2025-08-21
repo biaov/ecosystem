@@ -5,7 +5,7 @@
         <a-select v-model:value="formState.type" placeholder="请选择优惠券类型" :disabled="disabled" :options="couponTypeEnum.options()" />
       </a-form-item>
       <a-form-item label="优惠券名称" required>
-        <a-input v-model:value="formState.name" placeholder="请输入优惠券名称" :max-length="32" />
+        <a-input v-model:value="formState.name" placeholder="请输入优惠券名称" :maxlength="32" />
       </a-form-item>
     </a-card>
     <a-card title="使用规则">

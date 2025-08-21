@@ -22,6 +22,11 @@
               <c-ant-icon :name="isFullScreen ? 'FullscreenExitOutlined' : 'FullscreenOutlined'" />
             </template>
           </a-button>
+          <a-button type="text" title="开源地址" href="https://github.com/biaov/ecosystem" target="_blank">
+            <template #icon>
+              <c-ant-icon name="GithubOutlined" />
+            </template>
+          </a-button>
           <a-button type="text" title="退出登录" @click="logout">
             <template #icon>
               <c-ant-icon name="PoweroffOutlined" />

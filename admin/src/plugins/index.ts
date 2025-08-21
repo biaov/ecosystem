@@ -7,6 +7,7 @@ import 'ant-design-vue/dist/reset.css'
 import 'nprogress/nprogress.css'
 import '@/styles/tailwindcss.css'
 import * as directives from '@/directives'
+import 'virtual:svg-icons-register'
 
 interface UploadChangeOption {
   file: {

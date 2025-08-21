@@ -16,7 +16,7 @@ export class RegisterService {
       avatar: defaultAvatar,
       source,
       mobile: username,
-      roleId: 2 // 游客
+      role: { id: 2 } // 游客
     })
 
     return res

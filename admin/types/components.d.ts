@@ -18,9 +18,11 @@ declare module 'vue' {
     CRichText: typeof import('./../src/components/c-rich-text/c-rich-text.vue')['default']
     CRoleSelect: typeof import('./../src/components/c-role-select.vue')['default']
     CSms: typeof import('./../src/components/c-sms.vue')['default']
+    CSvgIcon: typeof import('./../src/components/c-svg-icon.vue')['default']
     CUpload: typeof import('./../src/components/c-upload.vue')['default']
     Emoji: typeof import('./../src/components/c-rich-text/emoji.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    UcSvgIcon: typeof import('../src/components/c-svg-icon.vue')['default']
   }
 }

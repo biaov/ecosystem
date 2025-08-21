@@ -14,10 +14,10 @@
               </div>
             </template>
             <a-form-item>
-              <a-input v-model:value="formState.username" placeholder="请输入账号/手机号" />
+              <a-input v-model:value="formState.username" placeholder="请输入账号/手机号" :maxlength="11" />
             </a-form-item>
             <a-form-item>
-              <a-input-password v-model:value="formState.password" placeholder="请输入密码" />
+              <a-input-password v-model:value="formState.password" placeholder="请输入密码" :maxlength="32" />
             </a-form-item>
           </a-tab-pane>
           <a-tab-pane :key="1">

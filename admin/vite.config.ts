@@ -6,9 +6,9 @@ import autoImport from 'unplugin-auto-import/vite'
 import components from 'unplugin-vue-components/vite'
 import tailwindcss from '@tailwindcss/vite'
 import { VitePWA } from 'vite-plugin-pwa'
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 
 const env = loadEnv('development', './')
-
 export default defineConfig({
   base: './',
   plugins: [
@@ -64,6 +64,10 @@ export default defineConfig({
         skipWaiting: true,
         clientsClaim: true
       }
+    }),
+    createSvgIconsPlugin({
+      iconDirs: [resolve(import.meta.dirname, './src/assets/svgs')],
+      symbolId: '[name]'
     })
   ],
   server: {

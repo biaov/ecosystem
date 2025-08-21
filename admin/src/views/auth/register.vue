@@ -6,16 +6,16 @@
     <a-card title="注册" class="w-320">
       <a-form>
         <a-form-item>
-          <a-input v-model:value="formState.username" placeholder="请输入手机号，随便填一个" />
+          <a-input v-model:value="formState.username" placeholder="请输入手机号，随便填一个" :maxlength="11" />
         </a-form-item>
         <a-form-item>
           <c-sms :mobile="formState.username" v-model="formState.code" ref="sms" />
         </a-form-item>
         <a-form-item>
-          <a-input-password v-model:value="formState.password" placeholder="请输入密码" />
+          <a-input-password v-model:value="formState.password" placeholder="请输入密码" :maxlength="32" />
         </a-form-item>
         <a-form-item>
-          <a-input-password v-model:value="formState.cpassword" placeholder="请输入确认密码" />
+          <a-input-password v-model:value="formState.cpassword" placeholder="请输入确认密码" :maxlength="32" />
         </a-form-item>
         <a-form-item>
           <a-button type="primary" block @click="handleSubmit">注册</a-button>
