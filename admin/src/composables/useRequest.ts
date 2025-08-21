@@ -1,5 +1,5 @@
 import { service } from '@/utils/request'
-import { PagingResponse } from './types'
+import { PagingResponse, USEApiRequestName } from './types'
 
 export const useRestful = (path: string) => ({
   paging: (query = {}) => service.get(path, { params: query }) as Promise<PagingResponse>,
@@ -92,7 +92,7 @@ export const usePagingApiRequest = <T extends Record<string, any> = {}>(
 /**
  * 普通请求
  */
-export const useApiRequest = <T = unknown>(request: () => Promise<unknown>, calledOnMounted = true, initData: unknown = [], callback?: (data: T) => void, showLoadingMessage = false) => {
+export const useApiRequest = <T = unknown>(request: () => Promise<unknown>, calledOnMounted = true, initData: unknown = [], callback?: USEApiRequestName.Callback<T>, showLoadingMessage = false) => {
   const loading = ref(false)
   const data = ref<T>(initData as T)
   let loadingClose: ReturnType<typeof message.loading> | undefined

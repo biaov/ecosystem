@@ -33,9 +33,7 @@ const { formState, setFormRules, validFormState, setFormState, resetFormState } 
   roleId: undefined
 })
 
-const emit = defineEmits<{
-  (e: 'ok', value: typeof formState.value): void
-}>()
+const emit = defineEmits<OkValueEmit<typeof formState.value>>()
 
 setFormRules({
   username: useValidPhoneForm(true),

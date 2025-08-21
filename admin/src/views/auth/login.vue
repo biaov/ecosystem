@@ -87,7 +87,7 @@ setFormRules({
  */
 const handleSubmit = async () => {
   if (!(await validFormState())) return
-  const param = { ...formState.value } as Record<string, any>
+  const param = { ...formState.value } as Record<string, unknown>
   param.type = activeKey.value ? 'account' : 'mobile'
   const userInfo = await (activeKey.value ? loginApi.post<UserInfo>(formState.value) : loginApi.post<UserInfo>(formState.value))
   message.success('登录成功')

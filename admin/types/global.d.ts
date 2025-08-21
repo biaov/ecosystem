@@ -70,3 +70,11 @@ interface Option {
   label: string
   value: string
 }
+
+interface OkEmit {
+  (event: 'ok'): void
+}
+
+interface OkValueEmit<T> {
+  (e: 'ok', value: T): void
+}

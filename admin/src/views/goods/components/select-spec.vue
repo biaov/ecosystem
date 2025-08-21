@@ -1,14 +1,14 @@
 <template>
   <!-- 商品规格 -->
   <a-space direction="vertical" :size="20">
-    <a-space wrap v-for="(item, index) in specs" :key="index" class="w-full">
+    <a-space wrap v-for="(item, index) in specsModel" :key="index" class="w-full">
       <a-input v-model:value="item.sku" placeholder="SKU" :disabled="disabled" />
       <a-input-number v-model:value="item.price" :min="0" :max="999999" :precision="2" placeholder="价格" class="w-100!" :disabled="disabled" />
       <a-input v-for="(attr, i) in item.attrs" :key="i" v-model:value="attr.value" :placeholder="attr.label" class="w-100" :disabled="disabled" />
       <c-upload v-model="item.photo" :size="32" title="商品图片" :disabled="disabled" />
-      <a-button type="text" @click="onDelete(index)" :disabled="disabled || specs.length <= 1">
+      <a-button type="text" @click="onDelete(index)" :disabled="disabled || specsModel.length <= 1">
         <template #icon>
-          <c-ant-icon name="CloseCircleFilled" :color="specs.length > 1 ? '#f56c6c' : 'rgba(0, 0, 0, 0.2)'" />
+          <c-ant-icon name="CloseCircleFilled" :color="specsModel.length > 1 ? '#f56c6c' : 'rgba(0, 0, 0, 0.2)'" />
         </template>
       </a-button>
     </a-space>
@@ -33,7 +33,7 @@ export interface SpecType extends Record<string, any> {
   sku?: string
   price?: number
 }
-const specs = defineModel<SpecType[]>({ default: () => [] })
+const specsModel = defineModel<SpecType[]>({ default: () => [] })
 
 const initSpec = () => {
   const attrs = props.specs.map(label => ({ label, value: '' }))
@@ -48,24 +48,24 @@ const initSpec = () => {
 watch(
   () => props.specs,
   value => {
-    if (specs.value.length) {
-      specs.value.forEach(spec => {
+    if (specsModel.value.length) {
+      specsModel.value.forEach(spec => {
         spec.attrs = value.map(label => {
           const value = spec.attrs.find(item => item.label === label)?.value ?? ''
           return { label, value }
         })
       })
     } else {
-      specs.value = [initSpec()]
+      specsModel.value = [initSpec()]
     }
   },
   { immediate: true, deep: true }
 )
 
 const onAddSpec = () => {
-  specs.value.push(initSpec())
+  specsModel.value.push(initSpec())
 }
 const onDelete = (index: number) => {
-  specs.value = specs.value.filter((_, i) => i !== index)
+  specsModel.value = specsModel.value.filter((_, i) => i !== index)
 }
 </script>

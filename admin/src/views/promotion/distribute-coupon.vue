@@ -20,7 +20,7 @@
         <a-table-column title="主题" data-index="title" />
         <a-table-column title="用户">
           <template #="{ record }">
-            <div v-for="(value, index) in record.range" :index="index">{{ value }}</div>
+            <div v-for="(value, index) in record.range" :key="index">{{ value }}</div>
           </template>
         </a-table-column>
         <a-table-column title="发放" data-index="send" />

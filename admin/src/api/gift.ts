@@ -1,6 +1,3 @@
-// import { useStore } from '@/store/auth'
-const { state } = useStore()
-
 /**
  * 礼品
  */

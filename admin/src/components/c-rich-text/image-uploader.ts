@@ -95,7 +95,7 @@ class ImageUploader {
 
     this.quill.focus()
     this.range = this.quill.getSelection()
-    let file = evt.dataTransfer.files[0]
+    const file = evt.dataTransfer.files[0]
 
     setTimeout(() => {
       this.quill.focus()
@@ -114,7 +114,7 @@ class ImageUploader {
     const imgTypeRege = /^image\/(jpe?g|gif|png|svg|webp)$/i
     for (let i = 0; i < items.length; i++) {
       if (!imgTypeRege.test(items[i].type)) return
-      let file = items[i].getAsFile()
+      const file = items[i].getAsFile()
       if (!file) return
       this.quill.focus()
       this.range = this.quill.getSelection()
@@ -137,8 +137,7 @@ class ImageUploader {
       'load',
       () => {
         if (isUploadReject) return
-        let base64ImageSrc = fileReader.result as string
-        this.insertBase64Image(base64ImageSrc)
+        this.insertBase64Image(fileReader.result as string)
       },
       false
     )
@@ -151,6 +150,7 @@ class ImageUploader {
       error => {
         isUploadReject = true
         this.removeBase64Image()
+        // eslint-disable-next-line no-console
         console.warn(error)
       }
     )

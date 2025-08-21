@@ -26,9 +26,7 @@ interface Props {
   }
   type?: string
 }
-const emit = defineEmits<{
-  (event: 'ok'): void
-}>()
+const emit = defineEmits<OkEmit>()
 const props = withDefaults(defineProps<Props>(), {
   type: 'order'
 })

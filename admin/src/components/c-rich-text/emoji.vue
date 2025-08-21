@@ -40,7 +40,6 @@ const props = defineProps<{
 const range = ref({ index: 0, length: 0 })
 const [visible, setVisible] = useState()
 const onShowEmoji = () => {
-  props.quill().getSelection
   const selection = props.quill().getSelection()
   selection && (range.value = selection)
 }

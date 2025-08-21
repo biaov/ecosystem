@@ -28,9 +28,7 @@ import { userAdminApi } from '@/api/user'
 import { UserInfo } from '@/stores/types'
 import { genderEnum } from '@/enums'
 
-const emit = defineEmits<{
-  (event: 'ok'): void
-}>()
+const emit = defineEmits<OkEmit>()
 
 const { state, login } = useStore()
 const visible = defineModel<boolean>('visible', { default: false })

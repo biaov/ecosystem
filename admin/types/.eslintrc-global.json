@@ -4,6 +4,9 @@
     "PageDataType": true,
     "Page": true,
     "ResponseSuccess": true,
-    "ResponseError": true
+    "ResponseError": true,
+    "NodeJS": true,
+    "OkEmit": true,
+    "OkValueEmit": true
   }
 }

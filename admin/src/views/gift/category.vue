@@ -42,7 +42,7 @@ const { data, getData, loading } = useApiRequest<TableType[]>(giftCategoryApi.al
 const [formVisible, setFormVisible] = useState()
 const editForm = ref<Partial<TableType> | null>(null)
 
-const onAdd = (item?: TableType) => {
+const onAdd = () => {
   editForm.value = null
   setFormVisible(true)
 }

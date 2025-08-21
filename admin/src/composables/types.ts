@@ -14,3 +14,7 @@ export interface PagingResponse {
   meta: Meta
   list: Record<string, any>[]
 }
+
+export namespace USEApiRequestName {
+  export type Callback<T> = (data: T) => void
+}

@@ -33,11 +33,11 @@ export default {
    */
   customRender:
     (field: string, field2?: string, operator?: string) =>
-    ({ record }: { record: Record<string, any> }) => {
+    ({ record }: { record: Record<string, unknown> }) => {
       if (field2) {
-        const value = calcValue(record[field], record[field2], operator)
+        const value = calcValue(record[field] as number, record[field2] as number, operator)
         if (value !== false) return +value.toFixed(2).toLocaleString()
       }
-      return record[field].toLocaleString()
+      return (record[field] as number).toLocaleString()
     }
 }

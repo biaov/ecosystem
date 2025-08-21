@@ -52,7 +52,11 @@ export default [
       '@typescript-eslint/no-unsafe-function-type': 'off',
       '@typescript-eslint/no-namespace': 'off',
       '@typescript-eslint/no-empty-object-type': 'off',
-      '@typescript-eslint/no-non-null-asserted-optional-chain': 'off'
+      '@typescript-eslint/no-non-null-asserted-optional-chain': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
+      'no-useless-catch': 'off',
+      'no-useless-escape': 'off',
+      'no-prototype-builtins': 'off'
     }
   },
   {
@@ -62,7 +66,7 @@ export default [
     }
   },
   {
-    files: ['**/types.ts', '**/*.d.ts'],
+    files: ['**/*.ts', '**/*.vue'],
     rules: {
       'no-unused-vars': 'off',
       'no-shadow': 'off',

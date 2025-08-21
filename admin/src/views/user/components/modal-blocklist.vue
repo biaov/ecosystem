@@ -20,9 +20,7 @@ interface FormStateType {
   [k: string]: unknown
 }
 
-const emit = defineEmits<{
-  (e: 'ok'): void
-}>()
+const emit = defineEmits<OkEmit>()
 const visible = defineModel<boolean>('visible', {
   default: false
 })
