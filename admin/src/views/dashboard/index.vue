@@ -17,7 +17,7 @@
     </a-card>
     <a-card title="常用功能">
       <div class="flex justify-around">
-        <router-link v-for="(item, index) in features" :key="index" :to="{ name: item.routeName }" class="inline-flex flex-col items-center gap-12 py-12 px-24 hover:bg-gray-100">
+        <router-link v-for="(item, index) in features" :key="index" :to="{ name: item.routeName }" class="inline-flex! flex-col items-center gap-12 py-12 px-24 hover:bg-gray-100">
           <c-svg-icon :name="item.icon" size="30px" :color="item.color" />
           <span class="text-gray-800">{{ item.title }}</span>
         </router-link>
