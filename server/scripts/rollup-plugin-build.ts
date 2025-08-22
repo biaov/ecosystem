@@ -14,7 +14,7 @@ export default (): InputPluginOption => {
       cpSync(resolve(import.meta.dirname, '../package-lock.json'), resolve(output, 'package-lock.json'))
       writeFileSync(resolve(output, 'package.json'), JSON.stringify(pkg, null, 2))
       cpSync(resolve(import.meta.dirname, '../src/migrations/sql'), resolve(output, 'migrations/sql'), { recursive: true })
-      cpSync(resolve(import.meta.dirname, '../static'), resolve(output, 'static'), { recursive: true })
+      cpSync(resolve(import.meta.dirname, '../src/assets'), resolve(output, 'assets'), { recursive: true })
     }
   }
 }

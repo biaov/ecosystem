@@ -1,4 +1,3 @@
-import { ServeStaticModule } from '@nestjs/serve-static'
 import { join } from 'path'
 import { TransformResponseInterceptor, LogInterceptor } from '@/common/base.interceptor'
 import { RedisCacheModule } from '@/redis.module'
@@ -27,7 +26,7 @@ if (!import.meta.env.PROD) {
   // 开发环境使用静态目录
   imports.push(
     ...['uploads', 'static'].map(name =>
-      ServeStaticModule.forRoot({
+      import('@nestjs/serve-static')['ServeStaticModule'].forRoot({
         rootPath: join(process.cwd(), name),
         useGlobalPrefix: false,
         serveRoot: `/${name}`

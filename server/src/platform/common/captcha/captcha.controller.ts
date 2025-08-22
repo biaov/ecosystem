@@ -1,10 +1,12 @@
 import { createCanvas, loadImage } from 'canvas'
-import { join } from 'path'
+import { resolve } from 'path'
+import { readdirSync } from 'fs'
 import { VerifyCaptchaDot } from './captcha.dot'
 import { CaptchaService } from './captcha.service'
 
-const imagePaths = Object.keys(import.meta.glob('@/assets/captch/*.png'))
-const imgTasks = imagePaths.map(item => loadImage(join(process.cwd(), item)))
+const captchDir = resolve(import.meta.dirname, '../../../assets/captch')
+const fileNames = readdirSync(captchDir)
+const imgTasks = fileNames.map(name => loadImage(resolve(captchDir, name)))
 const images = await Promise.all(imgTasks)
 
 @Controller('/captcha')
