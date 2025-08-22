@@ -7,17 +7,28 @@
   <a href="https://github.com/biaov/ecosystem/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="LICENSE" /></a>
 </h2>
 
+- [旧版源码](https://github.com/biaov/ecosystem/tree/v1)
+
+## 开发进度
+
+- `PC 网站`: 待完成
+- `APP/H5/微信小程序`: 待完成
+- `控制台`: 初步完成
+- `服务端`: 初步完成控制台接口
+
 ## 特性
 
+- 数据统计
 - 购物流程
 - 登录注册
 - 用户管理
-- 礼品管理
 - 商品管理
+- 礼品管理
 - 订单管理
-- 促销管理
-- 账号/权限管理
-- 基础设置
+- 促销活动
+- 权限管理
+- 日志管理
+- 系统设置
 
 ## 技术栈
 
