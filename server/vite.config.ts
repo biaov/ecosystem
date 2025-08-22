@@ -1,45 +1,60 @@
-import { UserConfig } from 'vite'
-import { resolve } from 'path'
+import { defineConfig, loadEnv } from 'vite'
 import { VitePluginNode } from 'vite-plugin-node'
-import { port } from './src/config/port'
+import { resolve } from 'path'
+import autoImport from 'unplugin-auto-import/vite'
+import eslint from 'vite-plugin-eslint'
+import imports from './auto.import.ts'
+import rollupPluginBuild from './scripts/rollup-plugin-build'
+import { globSync } from 'fs'
 
-const config: UserConfig = {
+const env = loadEnv('development', './')
+
+export default defineConfig({
   root: import.meta.dirname,
   resolve: {
     alias: {
       '@': resolve(import.meta.dirname, './src')
     }
   },
+  esbuild: false,
   plugins: [
+    /* eslint({
+      lintOnStart: true,
+      exclude: ['node_modules', 'dist']
+    }), */
+    autoImport({
+      include: /\.ts$/,
+      imports,
+      dirs: ['./src/exceptions', './src/models', './src/utils', './src/enums', './src/config', './src/common'],
+      dts: './typings/auto-imports.d.ts',
+      eslintrc: { enabled: true, filepath: './typings/.eslintrc-auto-import.json', globalsPropValue: true }
+    }),
     ...VitePluginNode({
-      adapter: 'express',
-      appPath: './src/index.ts',
+      adapter: 'nest',
+      appPath: './src/main.ts',
       exportName: 'app',
-      tsCompiler: 'esbuild'
+      tsCompiler: 'swc'
     })
   ],
-  optimizeDeps: {
-    exclude: ['sequelize']
-  },
   server: {
     host: '0.0.0.0',
-    port
+    port: +env.VITE_PORT
   },
   build: {
-    target: 'node18',
-    outDir: resolve(import.meta.dirname, './dist/dist'),
+    target: 'node22',
+    outDir: resolve(import.meta.dirname, './dist'),
     lib: {
-      entry: resolve(import.meta.dirname, './src/index.ts'),
-      formats: ['cjs']
+      entry: resolve(import.meta.dirname, './src/main.ts'),
+      formats: ['es']
     },
     rollupOptions: {
-      external: ['path', 'child_process', 'fs', 'crypto', 'dayjs', 'express', 'jsonwebtoken', 'md5', 'multer', 'sequelize'],
+      input: [...globSync('./src/migrations/*.ts'), './src/config/database.ts'],
       output: {
+        preserveModules: true,
+        preserveModulesRoot: 'src',
         entryFileNames: '[name].js'
-      }
-    },
-    minify: 'terser'
+      },
+      plugins: [rollupPluginBuild()]
+    }
   }
-}
-
-export default config
+})

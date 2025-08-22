@@ -1,25 +1,39 @@
 import globals from 'globals'
 import pluginJs from '@eslint/js'
 import tseslint from 'typescript-eslint'
-import pluginReact from 'eslint-plugin-react'
+import pluginVue from 'eslint-plugin-vue'
+import prettier from 'eslint-plugin-prettier'
+import { FlatCompat } from '@eslint/eslintrc'
 
 const developmentOff = process.env.NODE_ENV === 'development' ? 'off' : 'error'
+const compat = new FlatCompat()
 
 export default [
-  { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'] },
   {
-    settings: {
-      react: {
-        version: 'detect'
-      }
+    files: ['src/**/*.{js,ts,vue}'],
+    plugins: {
+      prettier
+    }
+  },
+  {
+    linterOptions: {
+      reportUnusedDisableDirectives: true
     },
     languageOptions: {
-      globals: { ...globals.browser, ...globals.node }
+      globals: {
+        ...globals.browser,
+        ...globals.node
+      },
+      parserOptions: {
+        parser: tseslint.parser
+      }
     }
   },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
-  pluginReact.configs.flat.recommended,
+  ...pluginVue.configs['flat/essential'],
+  ...compat.config({ extends: ['./types/.eslintrc-auto-import.json'] }),
+  ...compat.config({ extends: ['./types/.eslintrc-global.json'] }),
   {
     rules: {
       'no-unused-vars': developmentOff,
@@ -35,23 +49,34 @@ export default [
       'no-multi-assign': 'off',
       'no-restricted-exports': 'off',
       'vue/multi-word-component-names': 'off',
-      'default-case': 'off',
-      'react/react-in-jsx-scope': 'off',
-      '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-unused-vars': developmentOff,
-      '@typescript-eslint/no-non-null-assertion': 'off',
-      '@typescript-eslint/no-empty-function': 'off',
+      'import/no-extraneous-dependencies': 'off',
+      'vue/valid-attribute-name': 'off',
+      '@typescript-eslint/no-unused-expressions': 'off',
+      '@typescript-eslint/no-unsafe-function-type': 'off',
       '@typescript-eslint/no-namespace': 'off',
-      '@typescript-eslint/no-unused-expressions': 'off'
+      '@typescript-eslint/no-empty-object-type': 'off',
+      '@typescript-eslint/no-non-null-asserted-optional-chain': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
+      'no-useless-catch': 'off',
+      'no-useless-escape': 'off',
+      'no-prototype-builtins': 'off'
     }
   },
   {
-    files: ['**/types.ts'],
+    files: ['**/components/*.vue'],
     rules: {
-      'no-unused-vars': 'off'
+      'vue/multi-word-component-names': 'error'
     }
   },
   {
-    ignores: ['node_modules', 'dist', '**/fonts/**']
+    files: ['**/*.ts', '**/*.vue'],
+    rules: {
+      'no-unused-vars': 'off',
+      'no-shadow': 'off',
+      '@typescript-eslint/no-explicit-any': 'off'
+    }
+  },
+  {
+    ignores: ['node_modules', 'dist']
   }
 ]

@@ -1,0 +1,37 @@
+<template>
+  <c-layout-list title="迁移日志">
+    <template #filter>
+      <a-form-item>
+        <a-input v-model:value.trim="formState.name" placeholder="标题" />
+      </a-form-item>
+      <a-form-item>
+        <a-button type="primary" @click="setPage">查询</a-button>
+        <a-button @click="resetFormState">重置</a-button>
+      </a-form-item>
+    </template>
+    <template #extra></template>
+    <template #list>
+      <a-table :data-source="data.items" row-key="id" :loading="loading" :pagination="$formatter.pagination(data)" @change="setPage">
+        <a-table-column title="操作名称" data-index="name" />
+        <a-table-column title="操作时间" data-index="createdAt" />
+      </a-table>
+    </template>
+  </c-layout-list>
+</template>
+<script lang="ts" setup>
+import { migrationApi } from '@/api/log'
+
+const { formState, onRestFormState, resetFormState } = useFormState({
+  name: undefined
+})
+
+const { data, setPage, loading } = usePagingApiRequest(({ current, pageSize }) =>
+  migrationApi.paging({
+    ...formState.value,
+    current,
+    pageSize
+  })
+)
+
+onRestFormState(setPage)
+</script>

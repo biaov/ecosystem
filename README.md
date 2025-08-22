@@ -1,23 +1,58 @@
 # ecosystem
 
-**[v2.0.0 计划](https://github.com/biaov/ecosystem/discussions/31)**
-
-一个简单的生态系统，包含 APP，H5，微信小程序，控制台，服务端 😄
+一个简单的商城系统，包含 `PC 网站`，`APP`，`H5`，`微信小程序`，`控制台`，`服务端` 😄
 
 <h2 align="center">
   <a href="https://github.com/biaov/ecosystem"><img src="https://shields.io/github/v/release/biaov/ecosystem.svg?logo=github&label=version" alt="version" /></a>
   <a href="https://github.com/biaov/ecosystem/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="LICENSE" /></a>
 </h2>
 
+- [旧版源码](https://github.com/biaov/ecosystem/tree/v1)
+
+## 开发进度
+
+- `PC 网站`: 待完成
+- `APP/H5/微信小程序`: 待完成
+- `控制台`: 初步完成
+- `服务端`: 初步完成控制台接口
+
+## 特性
+
+- 数据统计
+- 购物流程
+- 登录注册
+- 用户管理
+- 商品管理
+- 礼品管理
+- 订单管理
+- 促销活动
+- 权限管理
+- 日志管理
+- 系统设置
+
 ## 技术栈
 
-`Vite` + `Vue3.x` + `TypeScript` + `Less` + `React` + `Uni-App` +  `Node` + `Express` + `Sequelize` + `MySql`
+- `PC 网站`: `NuxtJs` + `Vue3.x` + `TypeScript` + `Less` + `Tailwindcss`
+- `APP/H5/微信小程序`: `Vite` + `Uni-App` + `Vue3.x` + `TypeScript` + `Less` + `Tailwindcss` + `UView-plus`
+- `控制台`: `Vite` + `Vue3.x` + `TypeScript` + `Less` + `Ant Design Vue` + `Tailwindcss`
+- `服务端`: `Vite` + `Node.js` + `NestJs` + `MySQL` + `TypeScript`
 
 ## 项目结构
 
-- `admin`: `vite + react` 控制台
-- `mobile`: `vite + uni-app` 包含 APP, H5, 微信小程序
-- `server`: `vite + node` 服务端，包含控制台和 APP 的接口
+- `pc`: 商城的 PC 网页
+- `admin`: PC + Mobile 的控制台
+- `mobile`: APP, H5, 微信小程序
+- `server`: PC 网页，控制台和 Mobile 的接口
+- `README.md`: 项目文档
+
+## 演示地址
+
+- [PC 端](http://ecosystem.biaov.cn/)
+- [控制台](http://ecosystem.biaov.cn/admin/)
+- [服务端接口文档](https://apifox.com/apidoc/shared/1058a6ee-8362-4b19-b74b-83fe690625fd)
+- [APP](https://github.com/biaov/ecosystem/releases)
+- [H5](http://ecosystem.biaov.cn/h5)
+- 小程序: 本地开发者工具运行
 
 ## 项目启动
 
@@ -29,29 +64,16 @@ git clone https://github.com/biaov/ecosystem.git --depth=1
 
 ### 项目运行文档
 
+- [PC 端](https://github.com/biaov/ecosystem/blob/main/pc/README.md)
 - [控制台](https://github.com/biaov/ecosystem/blob/main/admin/README.md)
 - [移动端](https://github.com/biaov/ecosystem/blob/main/mobile/README.md)
 - [服务端](https://github.com/biaov/ecosystem/blob/main/server/README.md)
 
-## 演示地址
-
-- [控制台](http://ecosystem.biaov.cn/admin/)
-- [APP](https://github.com/biaov/ecosystem/releases)
-- [服务端接口文档](https://apifox.com/apidoc/shared-668841b4-2ff4-4ac5-8674-8a2e9223f54d)
-- [H5](http://ecosystem.biaov.cn/)
-
-  - 浏览器浏览请开启：`Toogle device toolbar`
-  - 手机浏览请扫描下方二维码
-
-<img src="https://ecosystem.biaov.cn/uploads/h5-qrcode.png" width="200px" height="200px" alt="qrcode" />
-
-- 微信小程序: 微信开发者工具本地运行
+#### 注意事项
 
 > [!WARNING]
-> 由于小程序正式版有一些功能个人开发者不支持，所有需要本地运行或者使用体验版体验
-> 以下是小程序体验码，体验版需要审核
-
-<img src="https://ecosystem.biaov.cn/uploads/trial-version.png" width="200px" height="200px" alt="qrcode" />
+> 项目不包含第三方对接，如 `微信支付`、`云存储`、`短信验证` 等，需自行对接。
+> [意见反馈](https://github.com/biaov/ecosystem/issues)
 
 ## 贡献者们
 

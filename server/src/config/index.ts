@@ -1,21 +1,17 @@
-export { port } from './port'
+/**
+ * 初始化分页参数
+ */
+export const initPage = {
+  current: 1,
+  pageSize: 10
+}
 
 /**
- * 路由前缀
+ * 默认密码
  */
-export const baseURL = '/api'
+export const defaultPwd = '123456'
 
 /**
- * 域名
+ * 默认头像
  */
-export const domainName = import.meta.env.PROD ? 'http://ecosystem.biaov.cn/server/' : 'http://127.0.0.1:3600/'
-
-/**
- * 最大上传文件, 单位: 字节 b
- */
-export const maxFileSize = 1024 * 1024 * 1
-
-/**
- * 文件目录
- */
-export const uploadDir = 'uploads/'
+export const defaultAvatar = 'https://ecosystem.biaov.cn/uploads/default-avatar.png'

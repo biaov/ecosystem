@@ -1,50 +1,75 @@
 {
-  "name": "ecosystem-server",
-  "private": false,
-  "version": "0.0.0",
-  "main": "src/index.ts",
-  "author": {
-    "name": "biaov",
-    "email": "biaov@qq.com",
-    "url": "https://biaov.cn"
-  },
-  "description": "生态系统的服务端",
+  "name": "ecosystem",
+  "version": "2.0.0",
+  "main": "main.js",
   "scripts": {
     "start": "npm run dev",
+    "start:dev": "nest start --watch",
     "dev": "vite",
-    "build": "vite build && node ./scripts/release",
-    "install": "node scripts/install",
-    "ncu": "ncu --configFileName .ncurc.json && npm i"
+    "build": "vite build",
+    "build:start": "vite build && cd dist && npm i",
+    "preview": "node dist/main",
+    "lint": "eslint ./src/**/*.ts --fix",
+    "migration:create": "node --experimental-strip-types ./scripts/migration.ts -n",
+    "migration:run": "typeorm -d ./config/database.js migration:run",
+    "migration:revert": "typeorm -d ./config/database.js migration:revert"
   },
   "type": "module",
+  "keywords": [
+    "nestjs",
+    "typescript",
+    "node"
+  ],
   "engines": {
-    "node": ">=22.11"
+    "node": ">=22.12"
+  },
+  "author": {
+    "name": "biaov",
+    "email": "biaov@qq.com"
   },
   "license": "ISC",
-  "contributors": [
-    {
-      "name": "biaov",
-      "email": "biaov@qq.com"
-    }
-  ],
+  "description": "一个商城项目的后端服务，使用 NestJS 框架构建",
   "dependencies": {
+    "@nestjs-modules/ioredis": "^2.0.2",
+    "@nestjs/common": "^11.1.6",
+    "@nestjs/core": "^11.1.6",
+    "@nestjs/platform-express": "^11.1.6",
+    "@nestjs/schedule": "^6.0.0",
+    "@nestjs/typeorm": "^11.0.0",
+    "canvas": "^3.1.2",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.2",
+    "crypto-js": "^4.2.0",
     "dayjs": "^1.11.13",
-    "express": "^4.21.2",
+    "ioredis": "^5.7.0",
     "jsonwebtoken": "^9.0.2",
-    "md5": "^2.3.0",
-    "multer": "^1.4.5-lts.1",
-    "mysql2": "^3.13.0",
-    "sequelize": "^6.37.6"
+    "multer": "^2.0.2",
+    "mysql2": "^3.14.3",
+    "rxjs": "^7.8.2",
+    "typeorm": "^0.3.25",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
-    "@types/express": "^5.0.0",
-    "@types/jsonwebtoken": "^9.0.9",
-    "@types/md5": "^2.3.5",
-    "@types/multer": "^1.4.12",
-    "@types/node": "^22.13.10",
-    "terser": "^5.39.0",
-    "typescript": "^5.8.2",
-    "vite": "^5.4.11",
-    "vite-plugin-node": "^4.0.0"
+    "@eslint/eslintrc": "^3.3.1",
+    "@eslint/js": "^9.33.0",
+    "@nestjs/serve-static": "^5.0.3",
+    "@swc/core": "^1.13.3",
+    "@types/crypto-js": "^4.2.2",
+    "@types/express": "^5.0.3",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/multer": "^2.0.0",
+    "@types/node": "^24.3.0",
+    "eslint": "^9.33.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "globals": "^16.3.0",
+    "jiti": "^2.5.1",
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.39.1",
+    "unplugin-auto-import": "^20.0.0",
+    "vite": "^7.1.2",
+    "vite-plugin-eslint": "^1.8.1",
+    "vite-plugin-node": "^7.0.0"
   }
 }

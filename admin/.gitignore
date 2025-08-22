@@ -1,3 +1,8 @@
-/node_modules
-/dist
-/.git
+node_modules
+dist
+.log
+.git
+.idea
+.DS_Store
+.env.*
+scripts/*.sql

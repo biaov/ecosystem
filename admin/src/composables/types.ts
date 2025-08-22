@@ -1,11 +1,20 @@
-/**
- * 基础参数
- */
-export interface BaseParams {
-  loading: boolean
+export interface FormRule {
+  required?: boolean
+  message?: string
+  validator?: (value: unknown) => Promise<void>
 }
 
-/**
- * useRoles 参数
- */
-export type UseRolesParams = BaseParams
+interface Meta {
+  total: number
+  current: number
+  pageSize: number
+}
+
+export interface PagingResponse {
+  meta: Meta
+  list: Record<string, any>[]
+}
+
+export namespace USEApiRequestName {
+  export type Callback<T> = (data: T) => void
+}

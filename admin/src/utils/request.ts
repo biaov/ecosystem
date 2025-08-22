@@ -1,8 +1,6 @@
 import axios, { AxiosRequestConfig, Canceler } from 'axios'
-import { message } from 'antd'
-import { baseURL } from '@/config'
-import store, { authSlice } from '@/store'
-import { navigateTo } from '@/router'
+import { useStore } from '@/stores'
+import { router } from '@/router'
 
 /**
  * 等待请求
@@ -14,7 +12,9 @@ const { CancelToken } = axios
  */
 const cacelKey = 'requesting'
 
-// 移除等待请求
+/**
+ * 移除等待请求
+ */
 const removePendingAjax = (config: AxiosRequestConfig<unknown>, cancel?: Canceler) => {
   const params = typeof config.params === 'string' ? config.params : JSON.stringify(config.params)
   const data = typeof config.data === 'string' ? config.data : JSON.stringify(config.data)
@@ -32,7 +32,7 @@ const removePendingAjax = (config: AxiosRequestConfig<unknown>, cancel?: Cancele
  * 创建 axios 实例
  */
 export const service = axios.create({
-  baseURL,
+  baseURL: import.meta.env.VITE_BASE_URL,
   /**
    * 请求超时时间
    */
@@ -47,13 +47,11 @@ export const service = axios.create({
  */
 service.interceptors.request.use(
   config => {
-    /**
-     * 添加取消 key
-     */
+    config.headers.Authorization = `Bearer ${useStore().state.token}`
+    // 添加取消 key
     config.cancelToken = new CancelToken(cancel => {
       removePendingAjax(config, cancel)
     })
-    config.headers.Authorization = `Bearer ${store.getState().token}`
     return config
   },
   error => {
@@ -67,7 +65,7 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   response => {
     removePendingAjax(response.config)
-    return response.data
+    return response.data.data
   },
   ({ response, message: msg }) => {
     if (msg === cacelKey) return Promise.reject(msg)
@@ -75,11 +73,14 @@ service.interceptors.response.use(
     removePendingAjax(config)
     switch (status) {
       case 401:
-        store.dispatch(authSlice.actions.logout())
-        navigateTo('/login')
+        message.error(data.message)
+        useStore().logout()
         break
-      default:
-        message.error(data.message || msg || '请求失败')
+      case 403:
+        router.push({ name: '403' })
+        break
+      case 422:
+        message.error(data.message)
         break
     }
     return Promise.reject(response)

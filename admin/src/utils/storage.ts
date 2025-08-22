@@ -1,7 +1,7 @@
 import { StorageType } from './types'
 
 /**
- * 缓存类型
+ * storage 类型值
  */
 const StorageTypeValue: Record<string, StorageType> = {
   Local: 'local',
@@ -57,12 +57,6 @@ const removeLocalStorage = (key: string) => {
  * @param { string } key 获取缓存的 key
  * @param { unknown } value 缓存的值
  * @param { StorageType } type 缓存类型
- * @example
- * ```
- * import { setStorage } from '@/utils/storage'
- *
- * setStorage('key', 'value')
- * ```
  */
 export const setStorage = (key: string, value: unknown, type: StorageType = StorageTypeValue.Local) => {
   switch (type) {
@@ -80,12 +74,6 @@ export const setStorage = (key: string, value: unknown, type: StorageType = Stor
  * @param { string } key 获取缓存的 key
  * @param { StorageType } type 缓存类型
  * @returns { unknown } 缓存值
- *  * @example
- * ```
- * import { getStorage } from '@/utils/storage'
- *
- * getStorage('key')
- * ```
  */
 export const getStorage = (key: string, type: StorageType = StorageTypeValue.Local): unknown => {
   switch (type) {

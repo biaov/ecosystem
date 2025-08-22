@@ -1,16 +1,9 @@
-import { command } from './factory'
-
 /**
  * 登录
  */
-export const loginApi = command('/login')
+export const loginApi = useCommand('admin/login')
 
 /**
  * 注册
  */
-export const registerApi = command('/register')
-
-/**
- * 修改密码
- */
-export const editPwdApi = command('/edit-password')
+export const registerApi = useCommand('admin/register')

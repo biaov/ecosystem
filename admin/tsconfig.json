@@ -1,24 +1,35 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
+    "incremental": true,
+    "composite": true,
+    "target": "esnext",
+    "module": "esnext",
     "useDefineForClassFields": true,
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "allowJs": false,
+    "declaration": true,
+    "removeComments": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
-    "esModuleInterop": false,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "module": "ESNext",
-    "moduleResolution": "Node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
+    "types": ["vite/client", "node"],
+
+    /* 路径别名 */
     "baseUrl": "./",
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+
+    /* 模块解析策略 */
+    "moduleResolution": "Bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "preserve",
+
+    /* 校验 */
+    "strict": true
   },
-  "include": ["src"]
+  "include": ["types/*.d.ts", "src/**/*.ts", "src/**/*.vue", "scripts/route-sql.ts"],
+  "exclude": ["node_modules", "dist"]
 }

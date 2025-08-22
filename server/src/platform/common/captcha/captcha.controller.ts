@@ -1,0 +1,81 @@
+import { createCanvas, loadImage } from 'canvas'
+import { resolve } from 'path'
+import { readdirSync } from 'fs'
+import { VerifyCaptchaDot } from './captcha.dot'
+import { CaptchaService } from './captcha.service'
+
+const captchDir = resolve(import.meta.dirname, '../../../assets/captch')
+const fileNames = readdirSync(captchDir)
+const imgTasks = fileNames.map(name => loadImage(resolve(captchDir, name)))
+const images = await Promise.all(imgTasks)
+
+@Controller('/captcha')
+export class CaptchaController {
+  @InjectRedis()
+  private readonly redis: Redis
+
+  constructor(private readonly captchaService: CaptchaService) {}
+
+  @Get()
+  async getCaptcha() {
+    /**
+     * 背景参数
+     */
+    const bg = {
+      url: '',
+      size: [670, 400]
+    }
+    /**
+     * 验证码参数
+     */
+    const code = {
+      url: '',
+      size: [120, 120],
+      initPos: [20, null]
+    }
+
+    const canvas = createCanvas(bg.size[0], bg.size[1])
+    const ctx = canvas.getContext('2d')
+    const index = random(images.length)
+    /**
+     * 随机图片对象
+     */
+    const image = images[index]
+    /**
+     * x 的最大值
+     */
+    const maxX = bg.size[0] - code.size[0]
+    /**
+     * 容差值
+     */
+    const gap = 20
+    /**
+     * 随机生成验证码目标位置
+     */
+    const target = [random(maxX - gap, maxX / 2 + gap / 2), random(bg.size[1] - code.size[1] - gap, gap)]
+    code.initPos[1] = target[1]
+
+    const drawImg = new DrawImg({ image, bg, canvas, ctx, code, target })
+    /**
+     * 为 base64 编码的图片
+     * 也可转为网络路径图片增加传输速度
+     */
+    bg.url = drawImg.draw('bg')
+    code.url = drawImg.draw()
+
+    const id = randomId()
+
+    this.redis.set(getRedisKey(CaptchaEnum.Image, id), JSON.stringify({ value: target }), 'EX', 60 * 5)
+
+    return {
+      id,
+      bgElem: bg,
+      elem: code
+    }
+  }
+
+  @Post('/verify')
+  async verifyCaptcha(@Body() { id, value }: VerifyCaptchaDot) {
+    return this.captchaService.verifyImage(id, value)
+  }
+}

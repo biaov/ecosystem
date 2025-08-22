@@ -14,27 +14,42 @@
   background: lighten(@color-primary, 20%);
 }
 
-ul,
-ol,
-dl,
-li {
-  list-style: none;
+html,
+body,
+#app {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family:
+    'Chinese Quote',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    'PingFang SC',
+    'Hiragino Sans GB',
+    'Microsoft YaHei',
+    'Helvetica Neue',
+    Helvetica,
+    Arial,
+    sans-serif;
+  color: rgba(0, 0, 0, 0.65);
 }
 
-h1,
-h2,
-h3 {
-  font-style: normal;
-  font-weight: normal;
+.ant-btn,
+.ant-upload-list-picture-card {
+  svg {
+    vertical-align: baseline;
+  }
 }
 
-a,
-input,
-img {
-  display: block;
+.ant-input-affix-wrapper .ant-input-prefix > *:not(:last-child),
+.ant-input-affix-wrapper .ant-input-suffix > *:not(:last-child) {
+  margin-inline-end: 0;
 }
 
-a,
-a:hover {
-  text-decoration: none;
+.ant-upload-list-item-actions {
+  a,
+  a:hover {
+    display: inline;
+  }
 }

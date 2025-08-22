@@ -1,25 +1,41 @@
 {
   "compilerOptions": {
-    "incremental": false,
-    "composite": false,
+    "incremental": true,
+    "composite": true,
     "target": "esnext",
-    "useDefineForClassFields": true,
     "module": "esnext",
-    "moduleResolution": "node",
-    "strict": true,
-    "jsx": "preserve",
+    "useDefineForClassFields": true,
+    "declaration": true,
+    "removeComments": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "allowSyntheticDefaultImports": true,
     "sourceMap": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
     "esModuleInterop": true,
-    "lib": ["esnext", "dom"],
-    "types": ["node", "vite/client"],
+    "outDir": "./dist",
+    "lib": ["ESNext"],
     "skipLibCheck": true,
+    "types": ["vite/client", "node", "multer"],
+
+    /* 路径别名 */
     "baseUrl": "./",
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+
+    /* 模块解析策略 */
+    "moduleResolution": "Bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+
+    /* 校验 */
+    "strict": true,
+    "strictPropertyInitialization": false,
+    "noImplicitAny": false
   },
-  "include": ["src/**/*.ts", "vite.config.ts"],
-  "exclude": ["node_modules", "dist", ".git"]
+  "allowDefaultProject": true,
+  "include": ["typings/*.d.ts", "src/**/*.ts", "vite.config.ts", "scripts", "auto.import.ts", "package.json"],
+  "exclude": ["node_modules", ".vscode", "dist"]
 }

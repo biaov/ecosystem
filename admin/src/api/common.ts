@@ -1,6 +1,14 @@
-import { command } from './factory'
+/**
+ * 获取验证码
+ */
+export const captchaApi = useCommand('captcha')
 
 /**
- * 图片上传
+ * 验证码校验
  */
-export const uploadImgApi = command('/upload-img')
+export const captchaVerifyApi = useCommand('captcha/verify')
+
+/**
+ * 上传图片
+ */
+export const uploadImageApi = useCommand('upload/image')

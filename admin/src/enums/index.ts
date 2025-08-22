@@ -1,30 +1,48 @@
-import { ActivityStatus } from './types'
-
+import { themeColor } from '@/config/color'
 /**
- * 性别列表
+ * 注册来源
  */
-export const genderList = {
-  /**
-   * 保密
-   */
-  secrecy: 2,
-
-  /**
-   * 男
-   */
-  man: 1,
-
-  /**
-   * 女
-   */
-  woman: 0,
-
+export const sourceEnum = defineEnum({
+  pc: 'pc',
+  h5: 'h5',
+  app: 'app',
+  admin: 'admin',
+  miniprogram: 'miniprogram',
   options() {
     return [
       {
-        label: '保密',
-        value: this.secrecy
+        label: '官网',
+        value: this.pc
       },
+      {
+        label: 'H5',
+        value: this.h5
+      },
+      {
+        label: 'APP',
+        value: this.app
+      },
+      // {
+      //   label: '控制台',
+      //   value: this.admin
+      // },
+      {
+        label: '微信小程序',
+        value: this.miniprogram
+      }
+    ]
+  }
+})
+
+/**
+ * 性别
+ */
+export const genderEnum = defineEnum({
+  woman: 0,
+  man: 1,
+  other: 2,
+  options() {
+    return [
       {
         label: '男',
         value: this.man
@@ -32,72 +50,172 @@ export const genderList = {
       {
         label: '女',
         value: this.woman
+      },
+      {
+        label: '保密',
+        value: this.other
       }
     ]
-  },
-  filter(value?: number) {
-    return this.options().find(item => item.value === value)
   }
+})
+
+/**
+ * 权限枚举
+ */
+export enum permissionEnum {
+  /**
+   * 浏览
+   */
+  list = 'list',
+  /**
+   * 创建
+   */
+  create = 'create',
+
+  /**
+   * 更新
+   */
+  update = 'update',
+
+  /**
+   * 删除
+   */
+  delete = 'delete'
 }
 
 /**
- * 展示状态
+ * 权限类型
+ * 菜单类型
  */
-export const showStatus = {
-  /**
-   * 展示
-   */
-  show: true,
-
-  /**
-   * 隐藏
-   */
-  hide: false,
-
+export const MenuTypeEnum = defineEnum({
+  module: 'module',
+  page: 'page',
+  action: 'action',
   options() {
     return [
       {
-        label: '展示',
-        value: this.show
+        label: '模块',
+        value: this.module
       },
       {
-        label: '隐藏',
-        value: this.hide
+        label: '页面',
+        value: this.page
+      },
+      {
+        label: '行为',
+        value: this.action
       }
     ]
   },
-  filter(value?: boolean) {
-    return this.options().find(item => item.value === value)
+  filterOptions(isFilter = false) {
+    const options = this.options()
+    return isFilter ? options.filter(item => item.value !== this.action) : options
+  },
+  transformToOptions(data: any[]) {
+    const list = structuredClone(data)
+    list.forEach(item => {
+      if (item.type === MenuTypeEnum.page) {
+        item.children && delete item.children
+      } else if (item.children?.length) {
+        item.children = this.transformToOptions(item.children)
+      }
+    })
+    return list
   }
+})
+
+/**
+ * admin 权限枚举
+ */
+export enum PermissionKeyEnum {
+  // 仪表面板
+  dashboard = 'dashboard:list',
+
+  // 商品管理
+  goodsList = 'goods:list',
+  goodsCategory = 'goods:category',
+  goodsStock = 'goods:stock',
+
+  // 礼品管理
+  giftList = 'gift:list',
+  giftCategory = 'gift:category',
+
+  // 订单管理
+  orderList = 'order:list',
+  orderCredit = 'order:credit',
+  orderSale = 'order:sale',
+
+  // 促销活动
+  promotionList = 'promotion:coupon',
+  promotionActivity = 'promotion:activity-coupon',
+  promotionDistribute = 'promotion:distribute-coupon',
+
+  // 用户管理
+  userList = 'user:list',
+  userBlocklist = 'user:blocklist',
+
+  // 权限管理
+  permissionMenu = 'permission:menu',
+  permissionRole = 'permission:role',
+  permissionAccount = 'permission:account',
+
+  // 日志管理
+  logOperation = 'log:operation',
+  logMigration = 'log:migration',
+
+  // 系统设置
+  settingUser = 'setting:user',
+  settingProtocol = 'setting:protocol',
+  settingOrder = 'setting:order',
+  settingHotkeyword = 'setting:hotkeyword',
+  settingAdv = 'setting:adv',
+  settingExpress = 'setting:express'
 }
+
+/**
+ * 上下架
+ */
+export const onsaleEnum = defineEnum({
+  true: true,
+  false: false,
+  options() {
+    return [
+      {
+        label: '上架',
+        value: `${this.true}`
+      },
+      {
+        label: '下架',
+        value: `${this.false}`
+      }
+    ]
+  }
+})
 
 /**
  * 活动状态
  */
-export const activityStatus = {
-  /**
-   * 未开始
-   */
-  noStart: 'noStart',
-
-  /**
-   * 进行中
-   */
+export const activityStatusEnum = defineEnum({
+  notStart: 'notStart',
   normal: 'normal',
-
-  /**
-   * 已结束
-   */
   ended: 'ended',
-
-  options(): ActivityStatus.Option[] {
+  options() {
     return [
-      { label: '未开始', value: this.noStart, status: 'processing' },
-      { label: '进行中', value: this.normal, status: 'success' },
-      { label: '已结束', value: this.ended, status: 'default' }
+      {
+        label: '未开始',
+        value: this.notStart,
+        color: themeColor.primary
+      },
+      {
+        label: '进行中',
+        value: this.normal,
+        color: themeColor.success
+      },
+      {
+        label: '已结束',
+        value: this.ended,
+        color: themeColor.disabled
+      }
     ]
-  },
-  filter(value: string) {
-    return this.options().find(item => item.value === value)!
   }
-}
+})

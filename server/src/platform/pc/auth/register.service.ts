@@ -1,0 +1,33 @@
+@Injectable()
+export class RegisterService {
+  @InjectRepository(UserModel)
+  private userRepository: Repository<UserModel>
+  @InjectRepository(UserAdminModel)
+  private userAdminRepository: Repository<UserAdminModel>
+  async register(username: string, password: string, source: number) {
+    const exist = await this.userRepository.findOneBy({ username })
+    if (exist) throw new BizException('账号已存在')
+
+    const res = await this.userRepository.save({
+      username,
+      password: md5(password),
+      source,
+      mobile: username
+    })
+
+    return res
+  }
+  async adminRegister(username: string, password: string, source: number) {
+    const exist = await this.userAdminRepository.findOneBy({ username })
+    if (exist) throw new BizException('账号已存在')
+
+    const res = await this.userAdminRepository.save({
+      username,
+      password: md5(password),
+      source,
+      mobile: username
+    })
+
+    return res
+  }
+}
