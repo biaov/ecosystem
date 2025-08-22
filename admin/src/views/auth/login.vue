@@ -51,7 +51,7 @@ const store = useStore()
 const smsRef = useTemplateRef<{ valid: () => string }>('sms')
 const activeKey = ref(0)
 const { formState, setFormRules, validFormState } = useFormState({
-  username: '15575148487',
+  username: '18888888888',
   password: '123456',
   code: null
 })

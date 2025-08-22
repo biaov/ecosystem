@@ -9,7 +9,7 @@ export const initPage = {
 /**
  * 默认密码
  */
-export const defaultPwd = '88888888'
+export const defaultPwd = '123456'
 
 /**
  * 默认头像
