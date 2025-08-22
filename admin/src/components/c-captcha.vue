@@ -5,7 +5,7 @@
 <script lang="ts" setup>
 import { MeCaptcha } from 'mine-h5-ui'
 import 'mine-h5-ui/styles/MeCaptcha.css'
-import { captchaApi, captchaVerifyApi } from '@/api/common'
+import { captchaApi } from '@/api/common'
 import { Captcha } from './types'
 
 const emit = defineEmits(['success'])
@@ -27,7 +27,7 @@ const { data, getData } = useApiRequest<Captcha.DataType>(
 
 const onCheck = async (value: number[]) => {
   try {
-    const res = await captchaVerifyApi.post<{
+    const res = await captchaApi.post<{
       id: string
       value: string
     }>({

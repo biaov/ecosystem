@@ -74,7 +74,7 @@ export class CaptchaController {
     }
   }
 
-  @Post('/verify')
+  @Post()
   async verifyCaptcha(@Body() { id, value }: VerifyCaptchaDot) {
     return this.captchaService.verifyImage(id, value)
   }
