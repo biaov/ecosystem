@@ -16,6 +16,9 @@ export default [
     }
   },
   {
+    linterOptions: {
+      reportUnusedDisableDirectives: true
+    },
     languageOptions: {
       globals: {
         ...globals.browser,

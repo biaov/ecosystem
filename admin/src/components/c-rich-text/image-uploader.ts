@@ -147,11 +147,9 @@ class ImageUploader {
       imageUrl => {
         this.insertToEditor(imageUrl)
       },
-      error => {
+      () => {
         isUploadReject = true
         this.removeBase64Image()
-        // eslint-disable-next-line no-console
-        console.warn(error)
       }
     )
   }
