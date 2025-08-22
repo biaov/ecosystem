@@ -4,5 +4,5 @@ dist
 .git
 .idea
 .DS_Store
-.env.production
+.env.*
 scripts/*.sql
