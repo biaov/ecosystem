@@ -3,7 +3,7 @@
  */
 export enum PermissionKeyEnum {
   // 仪表面板
-  dashboard = 'dashboard:list',
+  dashboard = 'dashboard',
 
   // 商品管理
   goodsList = 'goods:list',

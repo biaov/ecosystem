@@ -23,10 +23,11 @@ const imports = [
 ]
 
 if (!import.meta.env.PROD) {
+  const { ServeStaticModule } = await import('@nestjs/serve-static')
   // 开发环境使用静态目录
   imports.push(
     ...['uploads', 'static'].map(name =>
-      import('@nestjs/serve-static')['ServeStaticModule'].forRoot({
+      ServeStaticModule.forRoot({
         rootPath: join(process.cwd(), name),
         useGlobalPrefix: false,
         serveRoot: `/${name}`

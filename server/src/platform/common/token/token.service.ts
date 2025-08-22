@@ -102,22 +102,3 @@ export class AuthGuardAll implements CanActivate {
     return this.tokenService.verify(context, 'all')
   }
 }
-
-/**
- * 日志
- * 用于控制台用户
- */
-@Injectable()
-export class LogGuard implements CanActivate {
-  constructor(
-    private reflector: Reflector,
-    private tokenService: TokenService
-  ) {}
-
-  canActivate(context: ExecutionContext) {
-    const logInfo = this.reflector.getAllAndOverride<string>(MetaKeyEnum.log, [context.getHandler(), context.getClass()])
-    // return this.tokenService.verify(context, 'admin', permission)
-    console.log(logInfo)
-    return true
-  }
-}
