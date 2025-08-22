@@ -23,6 +23,5 @@ declare module 'vue' {
     Emoji: typeof import('./../src/components/c-rich-text/emoji.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    UcSvgIcon: typeof import('../src/components/c-svg-icon.vue')['default']
   }
 }
