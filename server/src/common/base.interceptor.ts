@@ -4,6 +4,7 @@ import { map, tap } from 'rxjs/operators'
 import { LogService } from '@/platform/admin/log/log.service'
 import { TokenService } from '@/platform/common/token/token.service'
 import { Reflector } from '@nestjs/core'
+import { getClientIp } from 'request-ip'
 
 /**
  * 错误拦截器
@@ -58,7 +59,7 @@ export class LogInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const logInfo = this.reflector.get<{ module: string; content: string; field?: string } | undefined>(MetaKeyEnum.log, context.getHandler())
     if (!logInfo) return next.handle()
-    const { ip } = context.switchToHttp().getRequest()
+    const ip = getClientIp(context.switchToHttp().getRequest()) ?? ''
     return next.handle().pipe(
       tap(async res => {
         let nickname: string

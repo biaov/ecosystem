@@ -133,6 +133,7 @@ declare global {
   const UserModel: typeof import('../src/models/user')['UserModel']
   const UserRoleModel: typeof import('../src/models/user')['UserRoleModel']
   const Validate: typeof import('class-validator')['Validate']
+  const ValidateIf: typeof import('class-validator')['ValidateIf']
   const ValidateNested: typeof import('class-validator')['ValidateNested']
   const ValidationPipe: typeof import('@nestjs/common')['ValidationPipe']
   const aesDecrypt: typeof import('../src/utils/crypto')['aesDecrypt']

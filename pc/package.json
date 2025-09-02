@@ -3,15 +3,24 @@
   "type": "module",
   "private": true,
   "scripts": {
+    "start": "npm run dev",
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "nuxt dev --qr false",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@ant-design/icons-vue": "^7.0.1",
+    "dayjs": "^1.11.13",
+    "mine-h5-ui": "^2.15.7-ssr",
     "nuxt": "^4.0.3",
     "vue": "^3.5.18",
     "vue-router": "^4.5.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.12",
+    "less": "^4.4.1",
+    "tailwindcss": "^4.1.12"
   }
 }

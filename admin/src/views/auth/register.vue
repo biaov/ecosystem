@@ -1,7 +1,7 @@
 <template>
   <div class="w-screen h-screen bg-radial flex justify-center items-center relative">
     <div class="absolute top-50 left-50 cursor-pointer">
-      <a-image src="/logo-white.svg" :width="60" :preview="false" />
+      <a-image :src="$formatter.publicURL('/logo-white.svg')" :width="60" :preview="false" />
     </div>
     <a-card title="注册" class="w-320">
       <a-form>

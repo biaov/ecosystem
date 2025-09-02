@@ -2,6 +2,7 @@ import { TokenService } from '@/platform/common/token/token.service'
 import { CaptchaService } from '@/platform/common/captcha/captcha.service'
 import { LoginService } from './login.service'
 import { LoginDto, MobileLoginDto } from './auto.dto'
+import { AuthType } from './auth.enum'
 
 @Controller('login')
 export class LoginController {
@@ -24,14 +25,14 @@ export class LoginController {
   }
   @Log('授权/登录', '登录系统', 'nickname')
   @Post()
-  async login(@Ip() ip: string, @Body() { username, password, type, code }: LoginDto & MobileLoginDto) {
+  async login(@Body() { username, password, type, code }: LoginDto) {
     let result
-    if (type === 'mobile') {
+    if (type === AuthType.Mobile) {
       if (!validator.mobile(username)) return
-      if (!(await this.codeValidator(code))) return
+      if (!(await this.codeValidator(code!))) return
       result = await this.getToken(this.loginService.mobileLogin(username))
-    } else {
-      result = await this.getToken(this.loginService.login(username, password))
+    } else if (type === AuthType.Password) {
+      result = await this.getToken(this.loginService.login(username, password!))
     }
 
     return result

@@ -130,6 +130,7 @@
     "UserModel": true,
     "UserRoleModel": true,
     "Validate": true,
+    "ValidateIf": true,
     "ValidateNested": true,
     "ValidationPipe": true,
     "aesDecrypt": true,

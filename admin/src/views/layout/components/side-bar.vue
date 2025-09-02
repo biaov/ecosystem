@@ -2,7 +2,7 @@
   <!-- 菜单栏 -->
   <div class="h-full flex flex-col transition-200 transition-[width] z-10 shadow-xl shadow-gray-300" :style="{ width: sidebarWidth }">
     <router-link to="/" class="flex! justify-center items-center h-80" title="回到首页">
-      <img src="/logo.svg" class="w-40" />
+      <img :src="$formatter.publicURL('/logo.svg')" class="w-40" />
     </router-link>
     <div class="flex-grow h-0 overflow-auto">
       <a-menu v-model:selected-keys="menuState.selectedKeys" v-model:open-keys="menuState.openKeys" :items="items" mode="inline" :inline-collapsed="isCollapsed" />

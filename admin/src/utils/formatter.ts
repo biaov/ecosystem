@@ -39,5 +39,6 @@ export default {
         if (value !== false) return +value.toFixed(2).toLocaleString()
       }
       return (record[field] as number).toLocaleString()
-    }
+    },
+  publicURL: (path: string) => `${import.meta.env.VITE_ROUTER_BASEURL}${path}`
 }

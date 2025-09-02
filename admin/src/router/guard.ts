@@ -9,10 +9,11 @@ const filterAuth = ['login', 'register']
 export const beforeEach = ({ name }: RouteLocationNormalized) => {
   NProgress.start()
   const store = useStore()
+  const filterResult = filterAuth.includes(name as string)
   if (store.state.token) {
-    return !filterAuth.includes(name as string) || { name: 'dashboard' }
+    return !filterResult || { name: 'dashboard' }
   } else {
-    return filterAuth.includes(name as string) || { name: 'login' }
+    return filterResult || { name: 'login' }
   }
 }
 

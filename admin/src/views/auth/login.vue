@@ -1,7 +1,7 @@
 <template>
   <div class="w-screen h-screen bg-radial flex justify-center items-center relative">
     <div class="absolute top-50 left-50 cursor-pointer">
-      <a-image src="/logo-white.svg" :width="60" :preview="false" />
+      <a-image :src="$formatter.publicURL('/logo-white.svg')" :width="60" :preview="false" />
     </div>
     <a-card class="w-320">
       <a-form>
@@ -57,14 +57,7 @@ const { formState, setFormRules, validFormState } = useFormState({
 })
 
 setFormRules({
-  username: {
-    required: true,
-    message: '请输入账号',
-    validator(value: string) {
-      if (activeKey.value && !useValidPhone(value)) return Promise.reject('手机号格式错误')
-      return Promise.resolve()
-    }
-  },
+  username: useValidPhoneForm(true),
   password: {
     validator(value: string) {
       if (!activeKey.value && !value) return Promise.reject('请输入密码')
@@ -87,9 +80,7 @@ setFormRules({
  */
 const handleSubmit = async () => {
   if (!(await validFormState())) return
-  const param = { ...formState.value } as Record<string, unknown>
-  param.type = activeKey.value ? 'account' : 'mobile'
-  const userInfo = await (activeKey.value ? loginApi.post<UserInfo>(formState.value) : loginApi.post<UserInfo>(formState.value))
+  const userInfo = await loginApi.post<UserInfo>({ ...formState.value, type: activeKey.value ? 'mobile' : 'password' })
   message.success('登录成功')
   store.login(userInfo)
   router.push({ name: 'dashboard' })

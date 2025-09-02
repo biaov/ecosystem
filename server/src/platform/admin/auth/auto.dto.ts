@@ -1,3 +1,15 @@
+import { AuthType } from './auth.enum'
+
+class Code {
+  @IsString({ message: 'code.id 必需是字符串' })
+  @IsNotEmpty({ message: 'code.id 必传' })
+  id: string
+
+  @IsString({ message: 'code.value 必需是字符串' })
+  @IsNotEmpty({ message: 'code.value 必传' })
+  value: string
+}
+
 /**
  * 登录验证器
  */
@@ -12,21 +24,16 @@ export class LoginDto {
   @MinLength(6, { message: '密码长度不能小于6个字符' })
   @IsString({ message: '密码必须是字符串' })
   @IsNotEmpty({ message: '密码不能为空' })
-  password: string
+  @ValidateIf(o => o.type === AuthType.Password)
+  password?: string
 
-  @IsString()
-  @IsNotEmpty()
+  @Type(() => Code)
+  @IsNotEmpty({ message: 'code 必传' })
+  @ValidateIf(o => o.type === AuthType.Mobile)
+  code?: Code
+
+  @IsEnum(AuthType)
   type: string
-}
-
-class Code {
-  @IsString({ message: 'code.id 必需是字符串' })
-  @IsNotEmpty({ message: 'code.id 必传' })
-  id: string
-
-  @IsString({ message: 'code.value 必需是字符串' })
-  @IsNotEmpty({ message: 'code.value 必传' })
-  value: string
 }
 
 /**

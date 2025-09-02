@@ -17,6 +17,7 @@ export class LoginService {
   async mobileLogin(username: string) {
     const result = await this.userAdminRepository.findOne({
       where: {
+        username,
         mobile: username
       },
       relations: ['role']
