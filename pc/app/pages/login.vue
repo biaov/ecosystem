@@ -15,7 +15,6 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { NuxtLink } from '#components'
 import { loginApi } from '@/api/auth'
 
 const tabList = Object.freeze(['密码登录', '验证码登录'])
@@ -54,7 +53,7 @@ setFormRules({
 const handleSubmit = async () => {
   if (!(await validFormState())) return
   useToastRequest(
-    () => loginApi.post<UserInfo>({ ...formState.value, type: activeKey.value ? 'account' : 'mobile' }),
+    () => loginApi.post<UserInfo>({ ...formState.value, type: activeKey.value ? 'mobile' : 'password' }),
     userInfo => {
       store.login(userInfo)
       router.push('/')

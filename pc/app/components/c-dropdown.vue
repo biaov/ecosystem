@@ -2,10 +2,8 @@
   <div class="c-dropdown cursor-pointer flex items-center">
     <slot />
     <ul class="dropdown text-xs font-normal" :class="dropdownClass">
-      <li class="dropdown-item px-24 text-gray-500" v-for="(item, index) in list" :key="index"
-        @click="onClickItem(item)">
-        <NuxtLink :to="item.link" v-if="item.link" class="flex! items-center gap-12"
-          :target="item.link.includes('http') ? '_blank' : '_self'">
+      <li class="dropdown-item px-24 text-gray-500" v-for="(item, index) in list" :key="index" @click="onClickItem(item)">
+        <NuxtLink :to="item.path" v-if="item.path" class="flex! items-center gap-12" :target="item.path.includes('http') ? '_blank' : '_self'">
           <c-ant-icon :name="item.antIcon" v-if="item.antIcon" />
           <span>{{ item.label }}</span>
         </NuxtLink>
@@ -19,21 +17,24 @@
 </template>
 <script lang="ts" setup>
 interface ListItem {
-  link?: string
+  path?: string
   label: string
   antIcon?: string
   action?: () => void
   [key: string]: unknown
 }
-withDefaults(defineProps<{
-  list: ListItem[]
-  dropdownClass: string
-}>(), {
-  list: () => []
-})
+withDefaults(
+  defineProps<{
+    list: ListItem[]
+    dropdownClass: string
+  }>(),
+  {
+    list: () => []
+  }
+)
 
 const onClickItem = (item: ListItem) => {
-  if (item.link) return
+  if (item.path) return
   item.action?.()
 }
 </script>
@@ -61,8 +62,6 @@ const onClickItem = (item: ListItem) => {
         color: @color-primary;
       }
     }
-
-
   }
 
   &:hover {

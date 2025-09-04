@@ -43,7 +43,10 @@ export enum PermissionKeyEnum {
   settingOrder = 'setting:order',
   settingHotkeyword = 'setting:hotkeyword',
   settingAdv = 'setting:adv',
-  settingExpress = 'setting:express'
+  settingExpress = 'setting:express',
+
+  // 装饰器管理
+  decoratorList = 'decorator:list'
 }
 
 /**
@@ -84,5 +87,8 @@ export enum ModuleLabelEnum {
   settingOrder = '系统设置/订单设置',
   settingHotkeyword = '系统设置/热搜词设置',
   settingAdv = '系统设置/弹窗广告设置',
-  settingExpress = '系统设置/物流设置'
+  settingExpress = '系统设置/物流设置',
+
+  // 装饰器管理
+  decoratorList = '装修管理/官网首页'
 }

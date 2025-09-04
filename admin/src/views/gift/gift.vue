@@ -39,7 +39,7 @@
             </a-button>
           </a-upload>
         </a-space>
-        <a-button type="primary" href="/gift/add" v-perm="permKey.create">新增礼品</a-button>
+        <a-button type="primary" :href="$formatter.publicURL('/gift/add')" v-perm="permKey.create">新增礼品</a-button>
       </a-space>
     </template>
     <template #list>
@@ -78,8 +78,8 @@
         </a-table-column>
         <a-table-column title="操作" :width="180" fixed="right">
           <template #="{ record }">
-            <a-button type="link" size="small" :href="`/gift/detail/${record.id}`" v-perm="permKey.list">详情</a-button>
-            <a-button type="link" size="small" :href="`/gift/edit/${record.id}`" v-perm="permKey.update">编辑</a-button>
+            <a-button type="link" size="small" :href="$formatter.publicURL(`/gift/detail/${record.id}`)" v-perm="permKey.list">详情</a-button>
+            <a-button type="link" size="small" :href="$formatter.publicURL(`/gift/edit/${record.id}`)" v-perm="permKey.update">编辑</a-button>
             <a-popconfirm placement="left" title="你确定要删除这条数据吗?" @confirm="handleDelete(record)">
               <a-button type="link" size="small" danger v-perm="permKey.delete">删除</a-button>
             </a-popconfirm>

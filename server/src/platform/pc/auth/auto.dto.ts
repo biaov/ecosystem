@@ -1,3 +1,13 @@
+class Code {
+  @IsString({ message: 'code.id 必需是字符串' })
+  @IsNotEmpty({ message: 'code.id 必传' })
+  id: string
+
+  @IsString({ message: 'code.value 必需是字符串' })
+  @IsNotEmpty({ message: 'code.value 必传' })
+  value: string
+}
+
 /**
  * 登录验证器
  */
@@ -12,32 +22,18 @@ export class LoginDto {
   @MinLength(6, { message: '密码长度不能小于6个字符' })
   @IsString({ message: '密码必须是字符串' })
   @IsNotEmpty({ message: '密码不能为空' })
-  password: string
-}
+  @ValidateIf(o => o.type === AuthType.password)
+  password?: string
 
-class Code {
-  @IsString({ message: 'code.id 必需是字符串' })
-  @IsNotEmpty({ message: 'code.id 必传' })
-  id: string
-
-  @IsString({ message: 'code.value 必需是字符串' })
-  @IsNotEmpty({ message: 'code.value 必传' })
-  value: string
-}
-
-/**
- * 手机号登录
- */
-export class MobileLoginDto {
-  @IsString({ message: '手机号必须是字符串' })
-  @IsNotEmpty({ message: '手机号不能为空' })
-  username: string
-
-  @ValidateNested()
   @Type(() => Code)
   @IsNotEmpty({ message: 'code 必传' })
-  code: Code
+  @ValidateIf(o => o.type === AuthType.mobile)
+  code?: Code
+
+  @IsEnum(AuthType)
+  type: string
 }
+
 
 /**
  * 注册验证器
@@ -66,7 +62,7 @@ export class RegisterDto {
   @IsNotEmpty({ message: 'code 必传' })
   code: Code
 
-  @IsNumber({}, { message: 'source 必须是数字' })
+  @IsEnum(SourceEnum)
   @IsNotEmpty({ message: 'source 必传' })
-  source: number
+  source: string
 }

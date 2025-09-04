@@ -1,5 +1,3 @@
-
-
 export namespace PermissionName {
   export interface MenuDataType extends IdDataType {
     name: string
@@ -133,4 +131,18 @@ export namespace DashboardName {
       value: number
     }[]
   }
+}
+
+export interface GoodsItemType {
+  id: number
+  type: string
+  name: string
+  photos: string[]
+  video?: string
+  desc: string
+  onsale: boolean
+  saleNum: number
+  defaultPrice: string
+  defaultSku: string
+  categoryId: number
 }

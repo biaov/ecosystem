@@ -1,7 +1,7 @@
 /**
  * 优惠券
  */
-export const couponApi = useRestful('admin/coupon')
+export const couponApi = useRestful('pc/coupon')
 
 /**
  * 优惠券统计信息
@@ -16,9 +16,9 @@ export const couponStatisticApi = (couponId: number) => useRestful(`admin/coupon
 /**
  * 活动发券信息
  */
-export const activityCouponApi = useRestful('admin/activity-coupon')
+export const activityCouponApi = useRestful('pc/activity-coupon')
 
 /**
  * 手动发券信息
  */
-export const distributeCouponApi = useRestful('admin/distribute-coupon')
+export const distributeCouponApi = useRestful('pc/distribute-coupon')

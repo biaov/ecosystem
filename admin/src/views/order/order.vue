@@ -60,7 +60,7 @@
         </a-table-column>
         <a-table-column title="操作" :width="120" fixed="right">
           <template #="{ record }">
-            <a-button type="link" size="small" :href="`/order/detail/${record.id}`" v-perm="permKey.list">详情</a-button>
+            <a-button type="link" size="small" :href="$formatter.publicURL(`/order/detail/${record.id}`)" v-perm="permKey.list">详情</a-button>
             <a-button type="link" size="small" @click="onSend(record)" v-perm="permKey.update" v-if="record.status === orderStatusEnum.paid">发货</a-button>
           </template>
         </a-table-column>

@@ -3,12 +3,6 @@ export class LoginService {
   @InjectRepository(UserModel)
   private userRepository: Repository<UserModel>
 
-  @InjectRepository(UserAdminModel)
-  private userAdminRepository: Repository<UserAdminModel>
-
-  @InjectRepository(UserRoleModel)
-  private userRoleRepository: Repository<UserRoleModel>
-
   async login(username: string, password: string) {
     const result = await this.userRepository.findOne({
       where: {
@@ -20,7 +14,12 @@ export class LoginService {
     return result
   }
   async mobileLogin(username: string) {
-    const result = await this.userRepository.findOneBy({ mobile: username })
+    const result = await this.userRepository.findOne({
+      where: {
+        username,
+        mobile: username
+      }
+    })
     if (!result) throw new BizException('用户不存在')
     return result
   }

@@ -14,7 +14,6 @@ export const useStore = () => {
   const userInfoStorage = useCookie<UserInfo | null>('userInfo', { default: () => null })
   state.token = tokenStorage.value
   state.userInfo = userInfoStorage.value
-
   /**
    * 登录
    */
@@ -34,9 +33,11 @@ export const useStore = () => {
 
   const setStorage = () => {
     tokenStorage.value = state.token
+    userInfoStorage.value = state.userInfo
   }
 
   const isLogin = computed(() => !!state.token)
 
   return { state: readonly(state), login, logout, isLogin }
 }
+

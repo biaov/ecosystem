@@ -1,6 +1,7 @@
 export interface FormRule {
   required?: boolean
   message?: string
+  allowable?: boolean
   validator?: (value: unknown) => Promise<void>
 }
 

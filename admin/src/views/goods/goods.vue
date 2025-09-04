@@ -19,7 +19,7 @@
       </a-form-item>
     </template>
     <template #extra>
-      <a-button type="primary" href="/goods/add" v-perm="permKey.create">新增商品</a-button>
+      <a-button type="primary" :href="$formatter.publicURL('/goods/add')" v-perm="permKey.create">新增商品</a-button>
     </template>
     <template #list>
       <a-table :data-source="data.items" row-key="id" :loading="loading" :pagination="$formatter.pagination(data)" @change="setPage">
@@ -44,8 +44,8 @@
         <a-table-column title="更新时间" data-index="updatedAt" :width="180" />
         <a-table-column title="操作" :width="180">
           <template #="{ record }">
-            <a-button type="link" size="small" :href="`/goods/detail/${record.id}`" v-perm="permKey.list">详情</a-button>
-            <a-button type="link" size="small" :href="`/goods/edit/${record.id}`" v-perm="permKey.update">编辑</a-button>
+            <a-button type="link" size="small" :href="$formatter.publicURL(`/goods/detail/${record.id}`)" v-perm="permKey.list">详情</a-button>
+            <a-button type="link" size="small" :href="$formatter.publicURL(`/goods/edit/${record.id}`)" v-perm="permKey.update">编辑</a-button>
             <a-popconfirm placement="left" title="你确定要删除这条数据吗?" @confirm="handleDelete(record)">
               <a-button type="link" size="small" danger v-perm="permKey.delete">删除</a-button>
             </a-popconfirm>

@@ -56,7 +56,7 @@
         </a-table-column>
         <a-table-column title="操作" :width="120" fixed="right">
           <template #="{ record }">
-            <a-button type="link" size="small" :href="`/order/sale-detail/${record.id}`" v-perm="permKey.list">详情</a-button>
+            <a-button type="link" size="small" :href="$formatter.publicURL(`/order/sale-detail/${record.id}`)" v-perm="permKey.list">详情</a-button>
             <a-button type="link" size="small" @click="onExamine(record)" v-perm="permKey.update" v-if="record.status === saleOrderStatusEnum.normal">审核</a-button>
             <a-button type="link" size="small" @click="handleReceive(record)" v-perm="permKey.receive" v-if="record.status === saleOrderStatusEnum.receiving">签收</a-button>
             <a-button type="link" size="small" @click="onExamine(record)" v-perm="permKey.refund" v-if="record.status === saleOrderStatusEnum.refunding">退款</a-button>

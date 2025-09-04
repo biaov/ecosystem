@@ -400,7 +400,6 @@ export const menuRoutes: RouteRecordRaw[] = [
       }
     ]
   },
-
   {
     path: 'setting',
     redirect: {
@@ -458,6 +457,26 @@ export const menuRoutes: RouteRecordRaw[] = [
           title: '物流设置'
         },
         component: () => import('@/views/setting/express.vue')
+      }
+    ]
+  },
+  {
+    path: 'decorator',
+    redirect: {
+      name: 'decorator-list'
+    },
+    meta: {
+      title: '装修管理',
+      antIcon: 'ShoppingOutlined'
+    },
+    children: [
+      {
+        path: 'home',
+        name: 'decorator-home',
+        meta: {
+          title: '官网首页'
+        },
+        component: () => import('@/views/decorator/home.vue')
       }
     ]
   }

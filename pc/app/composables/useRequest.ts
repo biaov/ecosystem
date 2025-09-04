@@ -1,8 +1,9 @@
 import type { PagingResponse, USEApiRequestName, RequestOption } from './types'
 
 const request = async (path: string, option: RequestOption) => {
+  const baseURL = `${import.meta.client ? '' : import.meta.env.VITE_PROXY_BASE_URL}${import.meta.env.VITE_BASE_URL}`
   const res = await $fetch<{ data: unknown }>(path, {
-    baseURL: import.meta.env.VITE_BASE_URL,
+    baseURL,
     ...option,
     onRequest({ options }) {
       const store = useStore()
@@ -14,14 +15,14 @@ const request = async (path: string, option: RequestOption) => {
       const { status, _data } = response
       switch (status) {
         case 401:
-          MeToast(_data.message)
+          // MeToast(_data.message)
           useStore().logout()
           break
         case 422:
-          MeToast(_data.message)
+          // MeToast(_data.message)
           break
       }
-      return Promise.reject(response)
+      return Promise.reject({ ...response, data: _data })
     }
   })
   return res.data
@@ -46,7 +47,7 @@ const service = {
 }
 
 export const useRestful = (path: string) => ({
-  paging: (query = {}) => service.get(path, { params: query }) as Promise<PagingResponse>,
+  paging: <T>(query = {}) => service.get(path, { params: query }) as Promise<PagingResponse<T>>,
   all: <T extends Record<string, any>>(query = {}) => service.get(path, { params: { ...query, all: true } }) as Promise<T[]>,
   get: <T extends Record<string, any>>(id: number) => service.get(`${path}/${id}`) as Promise<T>,
   create: (data = {}) => service.post(path, data),
@@ -84,7 +85,7 @@ export const useToastRequest = async <T = unknown>(promise: () => Promise<T>, re
     MeToast(message || '操作成功')
     return res
   } catch (error) {
-    MeToast(message || (error as ResponseError)?.data?.message || '操作失败')
+    MeToast((error as ResponseError)?.data?.message || '操作失败')
   }
 }
 

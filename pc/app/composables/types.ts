@@ -5,15 +5,11 @@ export interface FormRule {
   validator?: (value: unknown) => Promise<void>
 }
 
-interface Meta {
+export interface PagingResponse<T = Record<string, any>> {
   total: number
   current: number
   pageSize: number
-}
-
-export interface PagingResponse {
-  meta: Meta
-  list: Record<string, any>[]
+  items: T[]
 }
 
 export namespace USEApiRequestName {

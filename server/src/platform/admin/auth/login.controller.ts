@@ -1,8 +1,7 @@
 import { TokenService } from '@/platform/common/token/token.service'
 import { CaptchaService } from '@/platform/common/captcha/captcha.service'
 import { LoginService } from './login.service'
-import { LoginDto, MobileLoginDto } from './auto.dto'
-import { AuthType } from './auth.enum'
+import { LoginDto } from './auto.dto'
 
 @Controller('login')
 export class LoginController {
@@ -27,11 +26,11 @@ export class LoginController {
   @Post()
   async login(@Body() { username, password, type, code }: LoginDto) {
     let result
-    if (type === AuthType.Mobile) {
+    if (type === AuthType.mobile) {
       if (!validator.mobile(username)) return
       if (!(await this.codeValidator(code!))) return
       result = await this.getToken(this.loginService.mobileLogin(username))
-    } else if (type === AuthType.Password) {
+    } else if (type === AuthType.password) {
       result = await this.getToken(this.loginService.login(username, password!))
     }
 

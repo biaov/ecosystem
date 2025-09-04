@@ -1,4 +1,5 @@
 import { CaptchaService } from '@/platform/common/captcha/captcha.service'
+import { LogService } from '@/platform/admin/log/log.service'
 import { RegisterService } from './register.service'
 import { RegisterDto } from './auto.dto'
 
@@ -6,7 +7,8 @@ import { RegisterDto } from './auto.dto'
 export class RegisterController {
   constructor(
     private readonly userService: RegisterService,
-    private readonly captchaService: CaptchaService
+    private readonly captchaService: CaptchaService,
+    private readonly logService: LogService
   ) {}
 
   async registerValidator(password, cpassword, code: { id: string; value: string }) {
@@ -17,13 +19,8 @@ export class RegisterController {
   }
 
   @Post()
-  async register(@Body() { username, password, cpassword, code, source }: RegisterDto) {
+  async register(@Ip() ip: string, @Body() { username, password, cpassword, code, source }: RegisterDto) {
     if (!(await this.registerValidator(password, cpassword, code))) return
-    return this.userService.register(username, password, source)
-  }
-  @Post('admin')
-  async adminRegister(@Body() { username, password, cpassword, code, source }: RegisterDto) {
-    if (!(await this.registerValidator(password, cpassword, code))) return
-    return this.userService.adminRegister(username, password, source)
+    return await this.userService.register(username, password, source)
   }
 }

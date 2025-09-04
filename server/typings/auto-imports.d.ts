@@ -18,6 +18,7 @@ declare global {
   const AuthGuard: typeof import('../src/platform/common/token/token.service')['AuthGuard']
   const AuthGuardAdmin: typeof import('../src/platform/common/token/token.service')['AuthGuardAdmin']
   const AuthGuardAll: typeof import('../src/platform/common/token/token.service')['AuthGuardAll']
+  const AuthType: typeof import('../src/enums/auth')['AuthType']
   const BaseEntity: typeof import('typeorm')['BaseEntity']
   const BaseModel: typeof import('../src/common/base.model')['BaseModel']
   const BeforeInsert: typeof import('typeorm')['BeforeInsert']
@@ -36,6 +37,8 @@ declare global {
   const CreditOrderModel: typeof import('../src/models/order')['CreditOrderModel']
   const Cron: typeof import('@nestjs/schedule')['Cron']
   const CustomRoute: typeof import('../src/common/base.decorator')['CustomRoute']
+  const DecoratorKeyEnum: typeof import('../src/enums/decorator')['DecoratorKeyEnum']
+  const DecoratorModel: typeof import('../src/models/decorator')['DecoratorModel']
   const Delete: typeof import('@nestjs/common')['Delete']
   const DistributeCouponModel: typeof import('../src/models/promotion')['DistributeCouponModel']
   const DrawImg: typeof import('../src/utils/draw')['DrawImg']
@@ -175,6 +178,9 @@ declare global {
   export type { BizException } from '../src/exceptions/biz'
   import('../src/exceptions/biz')
   // @ts-ignore
+  export type { DecoratorModel } from '../src/models/decorator'
+  import('../src/models/decorator')
+  // @ts-ignore
   export type { GiftModel, GiftCategoryModel } from '../src/models/gift'
   import('../src/models/gift')
   // @ts-ignore
@@ -205,8 +211,14 @@ declare global {
   export type { ActivityStatusEnum } from '../src/enums/activity'
   import('../src/enums/activity')
   // @ts-ignore
+  export type { AuthType } from '../src/enums/auth'
+  import('../src/enums/auth')
+  // @ts-ignore
   export type { CouponTypeEnum, UserCouponStatusEnum } from '../src/enums/coupon'
   import('../src/enums/coupon')
+  // @ts-ignore
+  export type { DecoratorKeyEnum } from '../src/enums/decorator'
+  import('../src/enums/decorator')
   // @ts-ignore
   export type { CaptchaEnum, PermissionEnum, MetaKeyEnum, GenderEnum, SourceEnum, InvoiceTypeEnum } from '../src/enums/index'
   import('../src/enums/index')

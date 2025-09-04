@@ -1,7 +1,7 @@
 /**
  * 购物订单
  */
-export const orderApi = useRestful('admin/order')
+export const orderApi = useRestful('pc/order')
 
 /**
  * 订单发货
@@ -11,7 +11,7 @@ export const orderShippedApi = (id: number) => useCommand(`admin/order/${id}/shi
 /**
  * 积分订单
  */
-export const creditOrderApi = useRestful('admin/credit-order')
+export const creditOrderApi = useRestful('pc/credit-order')
 
 /**
  * 积分订单发货
@@ -21,7 +21,7 @@ export const creditOrderShippedApi = (id: number) => useCommand(`admin/credit-or
 /**
  * 售后退款
  */
-export const saleOrderApi = useRestful('admin/sale-order')
+export const saleOrderApi = useRestful('pc/sale-order')
 
 /**
  * 售后订单签收

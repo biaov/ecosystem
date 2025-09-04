@@ -1,12 +1,12 @@
 /**
  * 权限菜单
  */
-export const menuApi = useRestful('admin/menu')
+export const menuApi = useRestful('pc/menu')
 
 /**
  * 角色权限
  */
-export const roleApi = useRestful('admin/role')
+export const roleApi = useRestful('pc/role')
 
 /**
  * 角色权限-分配权限
@@ -16,7 +16,7 @@ export const rolePermissionApi = (id: number) => useCommand(`admin/role/${id}/pe
 /**
  * 账号设置
  */
-export const accountApi = useRestful('admin/account')
+export const accountApi = useRestful('pc/account')
 
 /**
  * 账号-重置密码

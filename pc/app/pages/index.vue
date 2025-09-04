@@ -1,15 +1,12 @@
 <template>
-  <!--  -->
-  <div class="home">
-    <c-swiper :list="bannerList" />
-  </div>
+  <!-- 首页 -->
+  <c-swiper :list="bannerList" />
+  <c-recommend-goods />
 </template>
 <script lang="ts" setup>
-const bannerList = Array.from({ length: 5 }, (_, i) => ({
-  url: `https://dummyimage.com/600x400/f60/fff&text=s${i}`,
-  title: 'banner' + i,
-  link: 'https://baidu.com'
-}))
+import { homeApi } from '@/api/decorator'
+
+const { data: bannerList } = useAsyncData<{ link: string; photo: string }[]>('home', () => homeApi.get(), { default: () => [] })
 
 useHead({
   title: '商城官网 - 购物方便快捷，安全可靠',

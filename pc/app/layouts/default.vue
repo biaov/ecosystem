@@ -1,18 +1,15 @@
 <template>
-  <div class="flex flex-col w-full h-full overflow-y-auto">
+  <div class="flex flex-col w-full h-full overflow-y-auto page-scroll" @scroll="onScroll" ref="scrollNode">
     <div class="h-80 shrink-0" v-if="route.path !== '/'"></div>
     <!-- 头部信息 -->
-    <header class="header fixed top-0 left-0 w-full h-80 z-10 flex justify-between px-[5%] bg-[rgba(0,0,0,0.02)]"
-      :class="{ white: route.path !== '/' }">
+    <header class="header fixed top-0 left-0 w-full h-80 z-10 flex justify-between px-[5%] bg-[rgba(0,0,0,0.02)]" :class="{ white: route.path !== '/' }">
       <NuxtLink to="/" class="flex! items-center">
         <img src="/logo.svg" alt="logo" class="w-40 cursor-pointer" title="回到首页" />
       </NuxtLink>
       <nav class="flex text-white navbar">
-        <div class="px-12 cursor-pointer font-bold hover:text-primary relative group h-full flex items-center"
-          v-for="(item, index) in navbar" :key="index">
+        <div class="px-12 cursor-pointer font-bold hover:text-primary relative group h-full flex items-center" v-for="(item, index) in navbar" :key="index">
           <c-dropdown :list="item.children || []" class="h-full" dropdown-class="top-70 left-0 w-240">
-            <NuxtLink :to="item.link" v-if="item.link" :target="item.link.includes('http') ? '_blank' : '_self'">{{
-              item.label }}</NuxtLink>
+            <NuxtLink :to="item.link" v-if="item.link" :target="item.link.includes('http') ? '_blank' : '_self'">{{ item.label }}</NuxtLink>
             <span v-else>{{ item.label }}</span>
           </c-dropdown>
         </div>
@@ -23,8 +20,7 @@
             <img :src="state.userInfo?.avatar" alt="avatar" class="w-40 h-40 rounded-full object-cover" />
           </NuxtLink>
         </c-dropdown>
-        <NuxtLink class="text-white cursor-pointer text-sm hover:underline flex! items-center h-full login-text"
-          to="/login" v-else>登录</NuxtLink>
+        <NuxtLink class="text-white cursor-pointer text-sm hover:underline flex! items-center h-full login-text" to="/login" v-else>登录</NuxtLink>
       </div>
     </header>
     <!-- 内容区域 -->
@@ -43,11 +39,7 @@
         <p class="flex justify-center gap-12">
           <template v-for="(item, index) in navbar" :key="index">
             <template v-if="index !== 0">|</template>
-            <NuxtLink :to="item.link" :target="$formatter.linkTarget(item.link)" class="hover:text-primary"
-              v-if="item.link">{{
-                item.label
-              }}
-            </NuxtLink>
+            <NuxtLink :to="item.link" :target="$formatter.linkTarget(item.link)" class="hover:text-primary" v-if="item.link">{{ item.label }}</NuxtLink>
             <span v-else>{{ item.label }}</span>
           </template>
         </p>
@@ -79,6 +71,7 @@ const navbar = Object.freeze([
   },
   {
     label: '案例集锦',
+    link: 'https://biaov.cn/',
     children: [
       {
         label: '组件库 mine-h5-ui',
@@ -122,24 +115,24 @@ const navbar = Object.freeze([
   }
 ])
 const qrcodeList = Object.freeze([{ label: '微信公众号', url: qrcodeURL }])
-const { state, isLogin, logout } = useStore()
-const userDropdownList = [
-  {
-    antIcon: 'UserOutlined',
-    label: '个人中心',
-    link: '/user'
-  },
-  {
-    antIcon: 'PoweroffOutlined',
-    label: '退出登录',
-    action: logout
-  }
-]
+const { state, isLogin } = useStore()
+const userDropdownList = useUserSidebar()
 const year = dayjs().format('YYYY')
+
+const { onScroll, setScrollOption } = useScrollStore()
+const scrollRef = useTemplateRef('scrollNode')
+
+onMounted(() => {
+  const { clientHeight, scrollHeight } = scrollRef.value!
+  setScrollOption({
+    clientHeight,
+    scrollHeight
+  })
+})
 </script>
 <style lang="less" scoped>
 .white {
-  background: #fff;
+  background: #463838;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
   .login-text,

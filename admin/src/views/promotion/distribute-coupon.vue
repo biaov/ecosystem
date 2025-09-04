@@ -13,7 +13,7 @@
       </a-form-item>
     </template>
     <template #extra>
-      <a-button type="primary" href="/promotion/distribute-coupon-add" v-perm="permKey.create">新增手动发券</a-button>
+      <a-button type="primary" :href="$formatter.publicURL('/promotion/distribute-coupon-add')" v-perm="permKey.create">新增手动发券</a-button>
     </template>
     <template #list>
       <a-table :data-source="data.items" row-key="id" :loading="loading" :pagination="$formatter.pagination(data)" @change="setPage">
@@ -29,7 +29,7 @@
         <a-table-column title="创建时间" data-index="createdAt" :width="180" />
         <a-table-column title="操作" :width="120">
           <template #="{ record }">
-            <a-button type="link" size="small" :href="`/promotion/distribute-coupon-detail/${record.id}`" v-perm="permKey.list">详情</a-button>
+            <a-button type="link" size="small" :href="$formatter.publicURL(`/promotion/distribute-coupon-detail/${record.id}`)" v-perm="permKey.list">详情</a-button>
           </template>
         </a-table-column>
       </a-table>

@@ -169,7 +169,10 @@ export enum PermissionKeyEnum {
   settingOrder = 'setting:order',
   settingHotkeyword = 'setting:hotkeyword',
   settingAdv = 'setting:adv',
-  settingExpress = 'setting:express'
+  settingExpress = 'setting:express',
+
+  // 装修管理
+  decoratorHome = 'decorator:home'
 }
 
 /**

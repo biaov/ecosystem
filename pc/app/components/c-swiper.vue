@@ -1,20 +1,30 @@
 <template>
-  <MeSwiper dot loop class="cursor-pointer" height="100vh">
-    <MeSwiperItem v-for="(item, index) in list" :key="index" :url="item.url" :name="index" @click="onClick(item, index)"
-      @mousedown="onMousedown($event, index)" @mouseup="onMouseup($event, index)">
-    </MeSwiperItem>
+  <MeSwiper dot loop class="cursor-pointer" height="100vh" delay="4000" v-if="list.length">
+    <MeSwiperItem
+      v-for="(item, index) in list"
+      :key="index"
+      :url="item.photo"
+      :name="index"
+      @click="onClick(item, index)"
+      @mousedown="onMousedown($event, index)"
+      @mouseup="onMouseup($event, index)"
+    ></MeSwiperItem>
   </MeSwiper>
 </template>
 <script lang="ts" setup>
 interface ListItem {
-  url: string
+  link: string
+  photo: string
   [key: string]: unknown
 }
-withDefaults(defineProps<{
-  list: ListItem[]
-}>(), {
-  list: () => []
-})
+withDefaults(
+  defineProps<{
+    list: ListItem[]
+  }>(),
+  {
+    list: () => []
+  }
+)
 const router = useRouter()
 const recordX: Record<number | string, { sx: number; x?: number } | null> = {}
 const onClick = (item: ListItem, i: number) => {

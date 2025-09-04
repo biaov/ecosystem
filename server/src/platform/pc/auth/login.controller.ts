@@ -1,9 +1,8 @@
 import { TokenService } from '@/platform/common/token/token.service'
 import { CaptchaService } from '@/platform/common/captcha/captcha.service'
 import { LoginService } from './login.service'
-import { LoginDto, MobileLoginDto } from './auto.dto'
+import { LoginDto } from './auto.dto'
 
-// @UseGuards(AuthGuardAdmin)
 @Controller('login')
 export class LoginController {
   constructor(
@@ -12,36 +11,28 @@ export class LoginController {
     private readonly tokenService: TokenService
   ) {}
 
-  async codeValidator(code: { id: string; value: string }) {
+  private async codeValidator(code: { id: string; value: string }) {
     const { id, value } = code
     if (!(await this.captchaService.verify(id, value))) return
     return true
   }
 
-  async getToken<T extends Promise<Record<string, any>>>(data: T) {
+  private async getToken<T extends Promise<Record<string, any>>>(data: T) {
     const result = await data
     const token = this.tokenService.getToken({ userId: result.id })
     return { ...result, token }
   }
-
   @Post()
-  login(@Body() { username, password }: LoginDto) {
-    return this.getToken(this.loginService.login(username, password))
-  }
-  @Post('mobile')
-  async mobileLogin(@Body() { username, code }: MobileLoginDto) {
-    if (!validator.mobile(username)) return
-    if (!(await this.codeValidator(code))) return
-    return await this.getToken(this.loginService.mobileLogin(username))
-  }
-  @Post('admin')
-  adminLogin(@Body() { username, password }: LoginDto) {
-    return this.getToken(this.loginService.adminLogin(username, password))
-  }
-  @Post('admin-mobile')
-  async mobileAdminLogin(@Body() { username, code }: MobileLoginDto) {
-    if (!validator.mobile(username)) return
-    if (!(await this.codeValidator(code))) return
-    return await this.getToken(this.loginService.mobileAdminLogin(username))
+  async login(@Body() { username, password, type, code }: LoginDto) {
+    let result
+    if (type === AuthType.mobile) {
+      if (!validator.mobile(username)) return
+      if (!(await this.codeValidator(code!))) return
+      result = await this.getToken(this.loginService.mobileLogin(username))
+    } else if (type === AuthType.password) {
+      result = await this.getToken(this.loginService.login(username, password!))
+    }
+
+    return result
   }
 }

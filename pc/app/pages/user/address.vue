@@ -5,7 +5,9 @@ import { ref } from 'vue'
 
 <template>
   <!--  -->
-  <div class="">案例集锦</div>
+  <div class="">
+    order
+  </div>
 </template>
 
 <style scoped lang="less"></style>

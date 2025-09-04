@@ -108,6 +108,14 @@ watch(
   },
   { immediate: true, deep: true }
 )
+watch(modelValue, value => {
+  if (props.multiple) return
+  if (value && !fileList.value.length) {
+    fileList.value = [{ url: value }]
+  } else if (!value && fileList.value.length) {
+    fileList.value = []
+  }
+})
 </script>
 
 <style lang="less">
