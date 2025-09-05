@@ -146,3 +146,8 @@ export interface GoodsItemType {
   defaultSku: string
   categoryId: number
 }
+
+export interface GoodsCategoryType {
+  id: number
+  name: string
+}

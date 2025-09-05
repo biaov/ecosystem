@@ -10,4 +10,11 @@ export class DecoratorController {
     const result = await this.decoratorService.find(DecoratorKeyEnum.home)
     return result?.value?.map?.((item, i) => ({ ...item, id: i + 1 })) ?? []
   }
+
+  // 官网分类
+  @Get(DecoratorKeyEnum.category)
+  async findCategory() {
+    const result = await this.decoratorService.find(DecoratorKeyEnum.category)
+    return result?.value
+  }
 }

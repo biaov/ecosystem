@@ -46,7 +46,8 @@ export enum PermissionKeyEnum {
   settingExpress = 'setting:express',
 
   // 装饰器管理
-  decoratorList = 'decorator:list'
+  decoratorHome = 'decorator:home',
+  decoratorCategory = 'decorator:category',
 }
 
 /**
@@ -90,5 +91,6 @@ export enum ModuleLabelEnum {
   settingExpress = '系统设置/物流设置',
 
   // 装饰器管理
-  decoratorList = '装修管理/官网首页'
+  decoratorHome = '装修管理/官网首页',
+  decoratorCategory = '装修管理/官网分类',
 }

@@ -172,7 +172,8 @@ export enum PermissionKeyEnum {
   settingExpress = 'setting:express',
 
   // 装修管理
-  decoratorHome = 'decorator:home'
+  decoratorHome = 'decorator:home',
+  decoratorCategory = 'decorator:category',
 }
 
 /**

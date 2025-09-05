@@ -39,8 +39,7 @@ interface MenuItem {
   type: string
 }
 
-const getValue = (list: MenuItem[]) =>
-  `${list.reduce((prev, item, i) => `${prev}${i ? ',' : ''}('${item.name}', ${item.parentId || 'NULL'}, '${item.content}', '${item.type}')`, '')}`
+const getValue = (list: MenuItem[]) => `${list.reduce((prev, item, i) => `${prev}${i ? ',' : ''}('${item.name}', ${item.parentId || 'NULL'}, '${item.content}', '${item.type}')`, '')}`
 
 const [first, second] = getRoutes(menuRoutesFilter)
 const threeGroup = structuredClone(first.filter(item => item.type === 'page').concat(second.map((item, i) => ({ ...item, id: first.length + i + 1 }))))
@@ -52,7 +51,7 @@ const three = threeGroup
         if (['商品库存'].includes(item.name)) return [permissionEnum.list, permissionEnum.update].includes(value)
         if (['全部用户', '手动发券'].includes(item.name)) return [permissionEnum.list, permissionEnum.create].includes(value)
         if (['仪表面板', '拉黑名单'].includes(item.name)) return permissionEnum.list === value
-        if (['用户设置', '隐私协议', '订单设置', '热搜词设置'].includes(item.name)) return value !== permissionEnum.delete
+        if (['用户设置', '隐私协议', '订单设置', '热搜词设置', '官网首页', '官网分类'].includes(item.name)) return value !== permissionEnum.delete
         return true
       })
       .map(value => {
@@ -171,4 +170,3 @@ const three = threeGroup
 const [firstSql, secondSql, threeSql] = [first, second, three].map(getValue)
 writeFileSync('./scripts/menu.sql', `INSERT INTO \`eco_menu\` (\`name\`, \`parentId\`, \`content\`, \`type\`) VALUES ${firstSql},\n${secondSql},\n${threeSql};`)
 writeFileSync('./scripts/role.sql', `INSERT INTO \`eco_user_role\` (\`name\`, \`permissions\`) VALUES ('超级管理员', '["*"]'), ('游客', '${JSON.stringify(roleData)}');`)
-

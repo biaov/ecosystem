@@ -477,6 +477,14 @@ export const menuRoutes: RouteRecordRaw[] = [
           title: '官网首页'
         },
         component: () => import('@/views/decorator/home.vue')
+      },
+      {
+        path: 'category',
+        name: 'decorator-category',
+        meta: {
+          title: '官网分类'
+        },
+        component: () => import('@/views/decorator/category.vue')
       }
     ]
   }
