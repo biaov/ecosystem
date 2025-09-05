@@ -9,6 +9,7 @@ export interface PagingResponse<T = Record<string, any>> {
   total: number
   current: number
   pageSize: number
+  hasMore: boolean
   items: T[]
 }
 

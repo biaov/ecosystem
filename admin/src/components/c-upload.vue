@@ -2,7 +2,7 @@
   <!-- 上传图片 -->
   <a-upload
     list-type="picture-card"
-    class="custom-upload"
+    class="custom-upload !block"
     :class="{ single: !multiple }"
     :file-list="fileList"
     :max-count="multiple ? maxCount : 1"

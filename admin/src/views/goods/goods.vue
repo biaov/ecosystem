@@ -38,7 +38,7 @@
         <a-table-column title="销量" :custom-render="$formatter.customRender('saleNum')" />
         <a-table-column title="上架状态" :width="140">
           <template #="{ record }">
-            <a-switch :checked="record.onsale" @change="handleUpdate(record)" v-perm="permKey.update" />
+            <a-switch v-model:checked="record.onsale" @change="handleUpdate(record)" v-perm="permKey.update" />
           </template>
         </a-table-column>
         <a-table-column title="更新时间" data-index="updatedAt" :width="180" />

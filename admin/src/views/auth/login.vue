@@ -51,8 +51,8 @@ const store = useStore()
 const smsRef = useTemplateRef<{ valid: () => string }>('sms')
 const activeKey = ref(0)
 const { formState, setFormRules, validFormState } = useFormState({
-  username: '18888888888',
-  password: '123456',
+  username: import.meta.env.VITE_DEMO_USERNAME,
+  password: import.meta.env.VITE_DEMO_PASSWORD,
   code: null
 })
 

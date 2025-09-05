@@ -58,6 +58,9 @@ export class GoodsCreateDto {
   @IsInt()
   categoryId: number
 
+  @IsEnum(OrderTypeEnum)
+  type: string
+
   @IsString()
   @IsNotEmpty()
   name: string

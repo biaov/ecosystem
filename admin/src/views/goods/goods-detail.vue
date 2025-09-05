@@ -4,6 +4,9 @@
       <a-form-item label="商品分类" required>
         <select-category v-model="formState.categoryId" placeholder="请选择商品分类" :disabled="disabled" />
       </a-form-item>
+      <a-form-item label="商品类型" required>
+        <a-select v-model:value="formState.type" :options="orderTypeEnum.options()" :disabled="disabled" placeholder="请选择商品类型" />
+      </a-form-item>
       <a-form-item label="商品名称" required>
         <a-input v-model:value="formState.name" placeholder="请输入商品名称" :disabled="disabled" />
       </a-form-item>
@@ -35,6 +38,7 @@
 </template>
 <script lang="ts" setup>
 import { goodsApi } from '@/api/goods'
+import { orderTypeEnum } from '@/enums/goods'
 import SelectCategory from './components/select-category.vue'
 import SelectSpec, { SpecType } from './components/select-spec.vue'
 import { specEnum } from './enums'
@@ -48,6 +52,7 @@ const disabled = ref(path.includes('/detail/'))
 const router = useRouter()
 const { formState, setFormRules, setFormState, validFormState } = useFormState({
   categoryId: undefined,
+  type: undefined,
   name: undefined,
   onsale: false,
   photos: [] as string[],
@@ -59,6 +64,7 @@ const { formState, setFormRules, setFormState, validFormState } = useFormState({
 
 setFormRules({
   categoryId: { required: true, message: '请选择商品分类' },
+  type: { required: true, message: '请选择商品类型' },
   name: { required: true, message: '请输入商品名称' },
   photos: { required: true, message: '请上传商品相册' },
   defaultSku: { required: true, message: '请输入默认商品SKU' },
@@ -82,7 +88,7 @@ setFormRules({
         })
         if (msg) return true
         if (!spec.photo) {
-          msg = '请上传商品图片'
+          msg = '请上传商品规格图片'
           return true
         }
       })
@@ -99,15 +105,6 @@ setFormRules({
   desc: { required: true, message: '请输入商品描述' }
 })
 
-const { loading } = useApiRequest(
-  async () => {
-    const res = await goodsApi.get<typeof formState.value>(+id)
-    setFormState(res)
-  },
-  !!id,
-  null
-)
-
 const specs = ref<string[]>([specEnum.category])
 const onSpecChange = (value: string[]) => {
   if (!value.length) {
@@ -116,6 +113,16 @@ const onSpecChange = (value: string[]) => {
   }
   specs.value = value
 }
+
+const { loading } = useApiRequest(
+  async () => {
+    const res = await goodsApi.get<typeof formState.value>(+id)
+    specs.value = res.specs[0].attrs.map(item => item.label)
+    setFormState(res)
+  },
+  !!id,
+  null
+)
 
 const handleSubmit = async () => {
   if (!(await validFormState())) return

@@ -7,7 +7,7 @@ import { resolve } from 'path'
 export const databaseOptions: DataSourceOptions = {
   type: 'mysql',
   host: import.meta.env.VITE_DB_HOST,
-  port: 3306,
+  port: import.meta.env.VITE_DB_PORT,
   username: import.meta.env.VITE_DB_USERNAME,
   password: import.meta.env.VITE_DB_PASSWORD,
   database: import.meta.env.VITE_DB_NAME,

@@ -23,7 +23,7 @@ export class GoodsService {
     if (skuExist) throw new BizException(`SKU已存在`)
   }
 
-  list({ skip, take, current, pageSize }: PageOption, { name, sku, categoryId, onsale }: Partial<Pick<GoodsModel, 'name' | 'categoryId' | 'onsale'> & { sku: string }>) {
+  async list({ skip, take, current, pageSize }: PageOption, { name, sku, categoryId, onsale }: Partial<Pick<GoodsModel, 'name' | 'categoryId' | 'onsale'> & { sku: string }>) {
     return findAndCount(
       this.goodsRepository
         .createQueryBuilder('goods')

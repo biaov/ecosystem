@@ -1,5 +1,5 @@
 @Injectable()
-export class ActivityCouponService {
+export class ActivityCouponScheduleService {
   @InjectRepository(ActivityCouponModel)
   private activityCouponRepository: Repository<ActivityCouponModel>
 
@@ -15,7 +15,7 @@ export class ActivityCouponService {
     return status
   }
 
-  @Cron('*/60 * * * * *')
+  @Cron(CronExpression.EVERY_MINUTE)
   async handleCron() {
     const now = dayjs()
     const nowLessThan = LessThan(now.toDate())

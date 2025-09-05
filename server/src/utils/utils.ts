@@ -32,7 +32,8 @@ export const getPageQuery = ({ current, pageSize }: { current?: number | string;
  */
 export const findAndCount = async (promise: Promise<any>, page: Pick<PageOption, 'current' | 'pageSize'>) => {
   const [items, total] = await promise
-  return { items, total, ...page }
+  const hasMore = page.current * page.pageSize < total
+  return { items, total, ...page, hasMore }
 }
 
 type USETransfrormQueryOption = boolean | number | string | string[] | FindOperator<string> | undefined | Record<string, any>
@@ -69,7 +70,7 @@ export const useTransfrormQuery = <T = Record<string, USETransfrormQueryOption |
     result = dataEntries.reduce(
       (prev, [key, value]) => {
         const keyArr = key.split('.')
-        if (value !== 0 && value) {
+        if (value === 0 || value) {
           let newValue = value
           let symbol = '='
 
@@ -91,7 +92,7 @@ export const useTransfrormQuery = <T = Record<string, USETransfrormQueryOption |
   } else {
     // 普通查询
     result = dataEntries.reduce((prev, [key, value]) => {
-      value !== 0 && value && (prev[key] = value)
+      value !== undefined && value !== null && (prev[key] = value)
       return prev
     }, {})
   }

@@ -13,11 +13,9 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { NuxtLink } from '#components'
 import { registerApi } from '@/api/auth'
 
 const router = useRouter()
-const store = useStore()
 const smsRef = useTemplateRef<{ valid: () => string }>('sms')
 const { formState, setFormRules, validFormState } = useFormState({
   username: '',

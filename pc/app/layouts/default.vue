@@ -2,7 +2,7 @@
   <div class="flex flex-col w-full h-full overflow-y-auto page-scroll" @scroll="onScroll" ref="scrollNode">
     <div class="h-80 shrink-0" v-if="route.path !== '/'"></div>
     <!-- 头部信息 -->
-    <header class="header fixed top-0 left-0 w-full h-80 z-10 flex justify-between px-[5%] bg-[rgba(0,0,0,0.02)]" :class="{ white: route.path !== '/' }">
+    <header class="header fixed top-0 left-0 w-full h-80 z-10 flex justify-between px-[5%] bg-[rgba(0,0,0,0.02)] duration-500" :class="{ white: route.path !== '/' }">
       <NuxtLink to="/" class="flex! items-center">
         <img src="/logo.svg" alt="logo" class="w-40 cursor-pointer" title="回到首页" />
       </NuxtLink>
@@ -118,26 +118,19 @@ const qrcodeList = Object.freeze([{ label: '微信公众号', url: qrcodeURL }])
 const { state, isLogin } = useStore()
 const userDropdownList = useUserSidebar()
 const year = dayjs().format('YYYY')
-
-const { onScroll, setScrollOption } = useScrollStore()
-const scrollRef = useTemplateRef('scrollNode')
-
-onMounted(() => {
-  const { clientHeight, scrollHeight } = scrollRef.value!
-  setScrollOption({
-    clientHeight,
-    scrollHeight
-  })
-})
+const { onScroll } = useScrollStore()
 </script>
 <style lang="less" scoped>
-.white {
-  background: #463838;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.header {
+  &:hover,
+  &.white {
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
-  .login-text,
-  .navbar {
-    color: #333;
+    .login-text,
+    .navbar {
+      color: #333;
+    }
   }
 }
 </style>

@@ -3,7 +3,7 @@ import type { FindOptionsWhere } from 'typeorm'
 const shippedWhere = { type: OrderTypeEnum.entity, status: OrderStatusEnum.shipped }
 
 @Injectable()
-export class ScheduleService {
+export class OrderScheduleService {
   @InjectRepository(OrderModel)
   private orderRepository: Repository<OrderModel>
 
@@ -45,12 +45,12 @@ export class ScheduleService {
     )
   }
 
-  @Cron('*/60 * * * * *')
+  @Cron(CronExpression.EVERY_MINUTE)
   async handleOrderCron() {
     await this.handleOrderResult(this.orderRepository, [{ type: OrderTypeEnum.entity, status: OrderStatusEnum.pay }, shippedWhere])
   }
 
-  @Cron('*/60 * * * * *')
+  @Cron(CronExpression.EVERY_MINUTE)
   async handleCreditOrderCron() {
     await this.handleOrderResult(this.creditOrderRepository, shippedWhere)
   }

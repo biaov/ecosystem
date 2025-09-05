@@ -1,7 +1,7 @@
 <template>
   <!-- 首页 -->
   <c-swiper :list="bannerList" />
-  <c-recommend-goods />
+  <c-goods-list />
 </template>
 <script lang="ts" setup>
 import { homeApi } from '@/api/decorator'

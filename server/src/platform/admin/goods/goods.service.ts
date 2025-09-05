@@ -1,6 +1,6 @@
 import { GoodsModel, GoodsCategoryModel, GoodsSpecModel } from '@/models/goods'
 
-type GoodsCreate = Pick<GoodsModel, 'categoryId' | 'name' | 'onsale' | 'photos' | 'defaultSku' | 'desc'> & { video?: string } & {
+type GoodsCreate = Pick<GoodsModel, 'categoryId' | 'name' | 'onsale' | 'photos' | 'defaultSku' | 'desc' | 'type'> & { video?: string } & {
   specs: (Pick<GoodsSpecModel, 'sku' | 'price' | 'attrs' | 'photo'> & { id?: number })[]
 }
 
@@ -24,11 +24,13 @@ export class GoodsService {
   }
 
   list({ skip, take, current, pageSize }: PageOption, { name, sku, categoryId, onsale }: Partial<Pick<GoodsModel, 'name' | 'categoryId' | 'onsale'> & { sku: string }>) {
+    const where = useTransfrormQuery({ name, categoryId, onsale }, { name: 'like', sku: 'like' })
     return findAndCount(
       this.goodsRepository
         .createQueryBuilder('goods')
         .leftJoinAndSelect('goods.specs', 'spec')
-        .where(useTransfrormQuery({ name, categoryId, onsale }, { name: 'like', sku: 'like' }))
+        .leftJoinAndSelect('goods.category', 'category')
+        .where(where)
         .andWhere(...useTransfrormQuery<[string, {}]>({ 'spec.sku': sku }, { 'spec.sku': 'like' }))
         .skip(skip)
         .take(take)
@@ -40,10 +42,10 @@ export class GoodsService {
   detail(id: number) {
     return this.goodsRepository.findOne({ where: { id }, relations: ['category', 'specs'] })
   }
-  async create({ categoryId, name, onsale, photos, specs, desc, defaultSku }: GoodsCreate) {
+  async create({ categoryId, name, onsale, photos, specs, desc, defaultSku, type }: GoodsCreate) {
     const defaultPrice = this.findDefaultPrice({ defaultSku, specs })
     await this.existSku(specs)
-    const goods = await this.goodsRepository.save({ categoryId, name, onsale, photos, defaultSku, defaultPrice, desc })
+    const goods = await this.goodsRepository.save({ categoryId, name, onsale, photos, defaultSku, defaultPrice, desc, type })
     goods.specs = await this.goodsSpecRepository.save(specs.map(item => ({ ...item, product: { id: goods.id } })))
     return goods
   }
@@ -52,7 +54,7 @@ export class GoodsService {
     if (!goods) throw new BizException('商品不存在')
     return goods
   }
-  async update(id: number, { categoryId, name, onsale, photos, specs, desc, defaultSku }: GoodsCreate) {
+  async update(id: number, { categoryId, name, onsale, photos, specs, desc, defaultSku, type }: GoodsCreate) {
     const defaultPrice = this.findDefaultPrice({ defaultSku, specs })
     const existIdSpecs: Required<GoodsCreate['specs'][number]>[] = []
     const newSpecs = specs.filter(item => {
@@ -71,7 +73,7 @@ export class GoodsService {
 
     // 更新商品和商品规格
     return useAffected(
-      Promise.all([...existIdSpecs.map(item => this.goodsSpecRepository.update(item.id, item)), this.goodsRepository.update(id, { categoryId, name, onsale, photos, desc, defaultPrice })])
+      Promise.all([...existIdSpecs.map(item => this.goodsSpecRepository.update(item.id, item)), this.goodsRepository.update(id, { categoryId, name, onsale, photos, desc, defaultPrice, type })])
     )
   }
 
@@ -81,7 +83,11 @@ export class GoodsService {
 
   async delete(id: number) {
     const goods = await this.existGoods(id)
-    await useAffected(this.goodsSpecRepository.delete(goods.specs.map(({ id }) => id)))
+    
+    if (goods.specs.length) {
+      await useAffected(this.goodsSpecRepository.delete(goods.specs.map(({ id }) => id)))
+    }
+
     return useAffected(this.goodsRepository.delete({ id }))
   }
 }

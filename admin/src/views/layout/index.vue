@@ -42,7 +42,6 @@
       </div>
     </div>
   </div>
-  <c-reload-prompt />
   <user-info v-model:visible="userInfoOpen" @ok="setWebInfo" />
   <edit-pwd v-model:visible="pwdOpen" />
 </template>

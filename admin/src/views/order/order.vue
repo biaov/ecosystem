@@ -72,8 +72,9 @@
 <script lang="ts" setup>
 import { orderApi } from '@/api/order'
 import { sourceEnum } from '@/enums'
+import { orderTypeEnum } from '@/enums/goods'
 import ModalSend from './components/modal-send.vue'
-import { orderSearchEnum, orderStatusEnum, orderTypeEnum } from './enums'
+import { orderSearchEnum, orderStatusEnum } from './enums'
 
 const permKey = definePermission(PermissionKeyEnum.orderList)
 const { formState, onRestFormState, resetFormState } = useFormState({

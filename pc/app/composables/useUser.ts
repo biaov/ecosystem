@@ -27,7 +27,7 @@ export const useUserSidebar = () => {
     },
     {
       antIcon: 'LogoutOutlined',
-      label: '退出',
+      label: '退出登录',
       action: logout
     }
   ]

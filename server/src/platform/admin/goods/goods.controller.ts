@@ -30,15 +30,15 @@ export class GoodsController extends FindController {
   @Log(ModuleLabelEnum.goodsList, '创建商品：[name]')
   @Permission(goodsPermKey.create)
   @Post()
-  create(@Body() { categoryId, name, onsale, photos, specs, desc, defaultSku }: GoodsCreateDto) {
-    return this.goodsService.create({ categoryId, name, onsale, photos, defaultSku, specs, desc })
+  create(@Body() { categoryId, name, onsale, photos, specs, desc, defaultSku, type }: GoodsCreateDto) {
+    return this.goodsService.create({ categoryId, name, onsale, photos, defaultSku, specs, desc, type })
   }
 
   @Log(ModuleLabelEnum.goodsList, '更新商品：[name]')
   @Permission(goodsPermKey.update)
   @Patch(':id')
-  update(@IdParam() id: number, @Body() { categoryId, name, onsale, photos, defaultSku, specs, desc }: GoodsCreateDto) {
-    return this.find(this.goodsService.update(id, { categoryId, name, onsale, defaultSku, photos, specs, desc }), id)
+  update(@IdParam() id: number, @Body() { categoryId, name, onsale, photos, defaultSku, specs, desc, type }: GoodsCreateDto) {
+    return this.find(this.goodsService.update(id, { categoryId, name, onsale, defaultSku, photos, specs, desc, type }), id)
   }
 
   @Log(ModuleLabelEnum.goodsList, '上下架商品：[name]')

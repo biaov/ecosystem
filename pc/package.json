@@ -13,7 +13,7 @@
   "dependencies": {
     "@ant-design/icons-vue": "^7.0.1",
     "dayjs": "^1.11.13",
-    "mine-h5-ui": "^2.15.7-ssr",
+    "mine-h5-ui": "^2.15.4-ssr.0",
     "nuxt": "^4.0.3",
     "vue": "^3.5.18",
     "vue-router": "^4.5.1"

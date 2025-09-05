@@ -104,7 +104,7 @@ export default [
     '@nestjs-modules/ioredis': ['InjectRedis']
   },
   {
-    '@nestjs/schedule': ['Cron']
+    '@nestjs/schedule': ['Cron', 'CronExpression', 'ScheduleModule']
   },
   {
     from: 'ioredis',

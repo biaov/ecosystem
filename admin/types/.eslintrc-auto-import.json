@@ -65,6 +65,7 @@
     "onUpdated": true,
     "onWatcherCleanup": true,
     "onsaleEnum": true,
+    "orderTypeEnum": true,
     "permissionEnum": true,
     "provide": true,
     "reactive": true,

@@ -5,6 +5,7 @@ import autoImport from 'unplugin-auto-import/vite'
 import eslint from 'vite-plugin-eslint'
 import imports from './auto.import.ts'
 import rollupPluginBuild from './scripts/rollup-plugin-build'
+
 import { globSync } from 'fs'
 
 const env = loadEnv('development', './')
@@ -33,12 +34,14 @@ export default defineConfig({
       adapter: 'nest',
       appPath: './src/main.ts',
       exportName: 'app',
-      tsCompiler: 'swc'
+      tsCompiler: 'swc',
+      initAppOnBoot: true
     })
   ],
   server: {
     host: '0.0.0.0',
-    port: +env.VITE_PORT
+    port: +env.VITE_PORT,
+    open: false
   },
   build: {
     target: 'node22',
