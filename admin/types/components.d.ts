@@ -14,7 +14,6 @@ declare module 'vue' {
     CColorPicker: typeof import('./../src/components/c-color-picker.vue')['default']
     CLayoutForm: typeof import('./../src/components/c-layout-form.vue')['default']
     CLayoutList: typeof import('./../src/components/c-layout-list.vue')['default']
-    CReloadPrompt: typeof import('./../src/components/c-reload-prompt.vue')['default']
     CRichText: typeof import('./../src/components/c-rich-text/c-rich-text.vue')['default']
     CRoleSelect: typeof import('./../src/components/c-role-select.vue')['default']
     CSms: typeof import('./../src/components/c-sms.vue')['default']

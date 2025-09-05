@@ -73,8 +73,9 @@
 import { orderApi } from '@/api/order'
 import { expressSettingApi } from '@/api/setting'
 import { sourceEnum } from '@/enums'
+import { orderTypeEnum } from '@/enums/goods'
 import type { OrderName } from '@/api/types'
-import { orderTypeEnum, orderStatusEnum, payTypeEnum, invoiceTypeEnum } from './enums'
+import { orderStatusEnum, payTypeEnum, invoiceTypeEnum } from './enums'
 
 const { id } = useRoute().params
 const { data, loading } = useApiRequest<OrderName.OrderDataType>(() => orderApi.get(+id), true, null)
