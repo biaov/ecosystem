@@ -12,15 +12,15 @@
   },
   "dependencies": {
     "@ant-design/icons-vue": "^7.0.1",
-    "dayjs": "^1.11.13",
-    "mine-h5-ui": "^2.15.4-ssr.0",
-    "nuxt": "^4.0.3",
-    "vue": "^3.5.18",
+    "dayjs": "^1.11.18",
+    "mine-h5-ui": "^2.16.1-ssr.1",
+    "nuxt": "^4.1.1",
+    "vue": "^3.5.21",
     "vue-router": "^4.5.1"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "^4.1.12",
+    "@tailwindcss/vite": "^4.1.13",
     "less": "^4.4.1",
-    "tailwindcss": "^4.1.12"
+    "tailwindcss": "^4.1.13"
   }
 }

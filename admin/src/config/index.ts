@@ -27,5 +27,6 @@ export default {
   },
   textarea: {
     autoSize: { minRows: 6, maxRows: 6 }
-  }
+  },
+  fileSize: 1024 * 1024 * 1
 }

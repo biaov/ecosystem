@@ -28,7 +28,7 @@
         <a-checkbox-group :value="specs" :options="specEnum.options()" :disabled="disabled" @change="onSpecChange" />
       </a-form-item>
       <a-form-item label="商品规格" required>
-        <select-spec v-model="formState.specs" :specs="specs" :disabled="disabled" />
+        <select-spec v-model="formState.specs" :specs="specs" :disabled="disabled" :disabled-sku="isEdit"  />
       </a-form-item>
     </a-card>
     <a-card>
@@ -49,6 +49,7 @@ const {
 } = useRoute()
 
 const disabled = ref(path.includes('/detail/'))
+const isEdit = ref(path.includes('/edit/'))
 const router = useRouter()
 const { formState, setFormRules, setFormState, validFormState } = useFormState({
   categoryId: undefined,

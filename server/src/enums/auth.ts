@@ -3,5 +3,5 @@
  */
 export enum AuthType {
   password = 'password',
-  mobile = 'mobile'
+  email = 'email'
 }

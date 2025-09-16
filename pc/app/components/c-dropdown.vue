@@ -47,7 +47,6 @@ const onClickItem = (item: ListItem) => {
     position: absolute;
     background: #fff;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
-    border-radius: 4px;
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s;

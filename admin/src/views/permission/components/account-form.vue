@@ -38,7 +38,7 @@ const emit = defineEmits<{
 }>()
 
 setFormRules({
-  username: useValidPhoneForm(true),
+  username: useValidEmailForm(true),
   nickname: { required: true, message: '请输入昵称' },
   roleId: { required: true, message: '请选择角色' }
 })

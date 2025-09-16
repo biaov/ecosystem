@@ -3,7 +3,7 @@
  */
 export const useUserSidebar = () => {
   const { logout } = useStore()
-  
+
   return [
     {
       antIcon: 'UserOutlined',
@@ -16,18 +16,19 @@ export const useUserSidebar = () => {
       path: '/user/order'
     },
     {
-      antIcon: 'OrderedListOutlined',
-      label: '售后订单',
-      path: '/user/aftersale'
+      antIcon: 'CloudServerOutlined',
+      label: '售后服务',
+      path: '/user/after-sale'
     },
     {
-      antIcon: 'HeatMapOutlined',
+      antIcon: 'AlignCenterOutlined',
       label: '收货地址',
       path: '/user/address'
     },
     {
       antIcon: 'LogoutOutlined',
       label: '退出登录',
+      class: 'text-danger',
       action: logout
     }
   ]

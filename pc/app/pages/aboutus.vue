@@ -2,7 +2,7 @@
   <!-- 关于我们 -->
   <div class="flex flex-col items-center pt-60">
     <h1 class="text-4xl font-bold text-gray-950 text-center mb-60">关于我们</h1>
-    <div class="w-600 leading-[1.8]">
+    <div class="w-700 leading-[1.8] bg-white p-48">
       <p>这是一个商城的官网</p>
       <p>这是一个基于 NuxtJs + Vue 3 的演示网站，用于展示商城的功能。</p>
       <p>技术栈：NuxtJs + Vue 3 + TypeScript + NodeJs + Markdown + Less</p>

@@ -6,10 +6,10 @@
     <a-card title="注册" class="w-320">
       <a-form>
         <a-form-item>
-          <a-input v-model:value="formState.username" placeholder="请输入手机号，随便填一个" :maxlength="11" />
+          <a-input v-model:value="formState.username" placeholder="请输入您的邮箱" :maxlength="32" />
         </a-form-item>
         <a-form-item>
-          <c-sms :mobile="formState.username" v-model="formState.code" ref="sms" />
+          <c-sms :username="formState.username" v-model="formState.code" />
         </a-form-item>
         <a-form-item>
           <a-input-password v-model:value="formState.password" placeholder="请输入密码" :maxlength="32" />
@@ -29,24 +29,16 @@
 import { registerApi } from '@/api/auth'
 
 const router = useRouter()
-const smsRef = useTemplateRef<{ valid: () => string }>('sms')
-
 const { formState, setFormRules, validFormState } = useFormState({
   username: '',
-  code: null,
+  code: '',
   password: '',
   cpassword: ''
 })
 
 setFormRules({
-  username: useValidPhoneForm(true),
-  code: {
-    validator() {
-      const result = smsRef.value!.valid()
-      if (result) return Promise.reject(result)
-      return Promise.resolve()
-    }
-  },
+  username: useValidEmailForm(true),
+  code: { required: true, message: '请输入验证码' },
   password: { required: true, message: '请输入密码' },
   cpassword: {
     validator(value: string) {

@@ -14,11 +14,11 @@ export class LoginService {
     if (!result) throw new BizException('用户名或密码错误')
     return result
   }
-  async mobileLogin(username: string) {
+  async codeLogin(username: string) {
     const result = await this.userAdminRepository.findOne({
       where: {
         username,
-        mobile: username
+        email: username
       },
       relations: ['role']
     })

@@ -11,4 +11,9 @@ export class VerifyCaptchaDot {
   @IsArray({ message: 'value 必须是数组' })
   @IsNotEmpty({ message: 'value 必传' })
   value: number[]
+
+  @IsString({ message: 'username 必须是字符串' })
+  @IsEmail({}, { message: '邮箱格式错误' })
+  @IsNotEmpty({ message: 'username 必传' })
+  username: string
 }

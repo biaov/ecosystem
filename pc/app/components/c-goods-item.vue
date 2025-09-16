@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink :to="`/goods/detail/${item.id}`" class="bg-white rounded-lg shadow-md w-282 hover:shadow-lg duration-300 group">
+  <NuxtLink :to="`/goods/detail/${item.id}`" class="bg-white shadow-md w-282 hover:shadow-lg duration-300 group">
     <div class="h-220 relative overflow-hidden">
       <img :src="item.photos[0]" :alt="item.name" class="w-full h-full object-cover" />
       <div class="absolute top-0 left-0 w-full h-full bg-[rgba(0,0,0,0)] none group-hover:bg-[rgba(0,0,0,0.06)] duration-300"></div>

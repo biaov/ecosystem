@@ -15,7 +15,7 @@ export class RegisterService {
       password: md5(password),
       avatar: defaultAvatar,
       source,
-      mobile: username,
+      email: username,
       role: { id: 2 } // 游客
     })
 

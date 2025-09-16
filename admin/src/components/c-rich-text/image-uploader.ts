@@ -131,27 +131,9 @@ class ImageUploader {
    * 读取并上传文件
    */
   readAndUploadFile(file: File) {
-    let isUploadReject = false
-    const fileReader = new FileReader()
-    fileReader.addEventListener(
-      'load',
-      () => {
-        if (isUploadReject) return
-        this.insertBase64Image(fileReader.result as string)
-      },
-      false
-    )
-
-    file && fileReader.readAsDataURL(file)
-    this.options.upload!(file).then(
-      imageUrl => {
-        this.insertToEditor(imageUrl)
-      },
-      () => {
-        isUploadReject = true
-        this.removeBase64Image()
-      }
-    )
+    this.options.upload!(file).then(imageUrl => {
+      imageUrl && this.insertToEditor(imageUrl)
+    })
   }
 
   /**
@@ -177,7 +159,7 @@ class ImageUploader {
     const range = this.range!
     const lengthToDelete = this.calculatePlaceholderInsertLength()
     this.quill.deleteText(range.index, lengthToDelete, 'user')
-    this.quill.insertEmbed(range.index, 'image', `${url}`, 'user')
+    this.quill.insertEmbed(range.index, 'image', url, 'user')
     range.index++
     this.quill.setSelection(range, 'user')
   }
@@ -186,6 +168,7 @@ class ImageUploader {
    * 计算占位符长度
    */
   calculatePlaceholderInsertLength() {
+    if (!this.placeholderDelta) return 0
     return this.placeholderDelta!.ops.reduce((accumulator, deltaOperation) => {
       if (deltaOperation.hasOwnProperty('insert')) accumulator++
       return accumulator

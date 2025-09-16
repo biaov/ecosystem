@@ -15,3 +15,8 @@ export const defaultPwd = '123456'
  * 默认头像
  */
 export const defaultAvatar = 'https://ecosystem.biaov.cn/uploads/default-avatar.png'
+
+/**
+ * redis 有效期, 单位: 分钟
+ */
+export const redisExpire = 5

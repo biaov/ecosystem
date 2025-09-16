@@ -1,3 +1,4 @@
+import { EmailService } from '@/platform/common/email/email.service'
 import { CaptchaController } from './captcha.controller'
 import { CaptchaService } from './captcha.service'
 

@@ -30,6 +30,21 @@
   color: #722ed1;
 }
 
+.bg-danger {
+  background: #f56c6c;
+}
+.hover\:bg-danger:hover {
+  background: #dd6363 !important;
+}
+
+.bg-primary {
+  background: #409eff;
+}
+
+.hover\:bg-primary:hover {
+  background: #388add !important;
+}
+
 .bg-radial {
   background: #f5f5f5;
   background: linear-gradient(-60deg, #48c6ef, #6f86d6, #ee7752, #23a6d5, #23d5ab);

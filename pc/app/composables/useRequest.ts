@@ -50,7 +50,7 @@ export const useRestful = (path: string) => ({
   paging: <T>(query = {}) => service.get(path, { params: query }) as Promise<PagingResponse<T>>,
   all: <T extends Record<string, any>>(query = {}) => service.get(path, { params: { ...query, all: true } }) as Promise<T[]>,
   get: <T extends Record<string, any>>(id: number) => service.get(`${path}/${id}`) as Promise<T>,
-  create: (data = {}) => service.post(path, data),
+  create: <T>(data = {}) => service.post(path, data) as Promise<T>,
   delete: (id: number) => service.delete(`${path}/${id}`),
   update: <T = boolean>(id: number, data = {}) => service.patch(`${path}/${id}`, data) as Promise<T>,
   replace: (id: number, data = {}) => service.put(`${path}/${id}`, data)
@@ -78,11 +78,11 @@ export const useLoadingRequest = async <T = unknown>(fn: () => Promise<T>) => {
 /**
  * 提示请求
  */
-export const useToastRequest = async <T = unknown>(promise: () => Promise<T>, resolve?: (value: T) => void, message?: string) => {
+export const useToastRequest = async <T = unknown>(promise: () => Promise<T>, resolve?: (value: T) => void, message?: string | boolean) => {
   try {
     const res = await useLoadingRequest(promise)
     resolve && resolve(res as T)
-    MeToast(message || '操作成功')
+    message !== false && MeToast((message as string) || '操作成功')
     return res
   } catch (error) {
     MeToast((error as ResponseError)?.data?.message || '操作失败')

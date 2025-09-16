@@ -3,7 +3,7 @@ import { OrderModel, CreditOrderModel } from './order'
 import { UserCouponModel } from './promotion'
 
 export abstract class UserInfo extends BaseModel {
-  @Column({ length: 32, comment: '用户名', unique: true })
+  @Column({ length: 64, comment: '用户名', unique: true })
   username: string
 
   @Column({ length: 64, comment: '密码', select: false })
@@ -12,7 +12,7 @@ export abstract class UserInfo extends BaseModel {
   @Column({ length: 32, comment: '昵称', nullable: true })
   nickname: string
 
-  @Column({ length: 32, comment: '邮箱', nullable: true })
+  @Column({ length: 32, comment: '邮箱', nullable: true, unique: true })
   email: string
 
   @Column({ length: 128, comment: '头像', nullable: true })
@@ -30,7 +30,6 @@ export abstract class UserInfo extends BaseModel {
   @AfterLoad()
   formatMobile() {
     useFormatMobile.call(this)
-    this.username && (this.username = this.username.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2'))
   }
 }
 

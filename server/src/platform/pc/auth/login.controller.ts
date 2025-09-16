@@ -25,10 +25,10 @@ export class LoginController {
   @Post()
   async login(@Body() { username, password, type, code }: LoginDto) {
     let result
-    if (type === AuthType.mobile) {
+    if (type === AuthType.email) {
       if (!validator.mobile(username)) return
       if (!(await this.codeValidator(code!))) return
-      result = await this.getToken(this.loginService.mobileLogin(username))
+      result = await this.getToken(this.loginService.codeLogin(username))
     } else if (type === AuthType.password) {
       result = await this.getToken(this.loginService.login(username, password!))
     }

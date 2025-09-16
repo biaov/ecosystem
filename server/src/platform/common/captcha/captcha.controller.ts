@@ -65,7 +65,7 @@ export class CaptchaController {
 
     const id = randomId()
 
-    this.redis.set(getRedisKey(CaptchaEnum.Image, id), JSON.stringify({ value: target }), 'EX', 60 * 5)
+    this.redis.set(getRedisKey(CaptchaEnum.Image, id), JSON.stringify({ value: target }), 'EX', 60 * redisExpire)
 
     return {
       id,
@@ -75,7 +75,7 @@ export class CaptchaController {
   }
 
   @Post()
-  async verifyCaptcha(@Body() { id, value }: VerifyCaptchaDot) {
-    return this.captchaService.verifyImage(id, value)
+  async verifyCaptcha(@Body() { id, value, username }: VerifyCaptchaDot) {
+    return this.captchaService.verifyImage(id, value, username)
   }
 }

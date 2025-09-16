@@ -11,7 +11,7 @@ export class UpdateUserAdminDto {
   avatar?: string
 
   @IsOptional()
-  @IsString()
+  @IsEmail()
   email?: string
 
   @IsOptional()

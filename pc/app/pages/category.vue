@@ -1,7 +1,7 @@
 <template>
   <!-- 分类 -->
   <img :src="config?.banner" alt="banner" class="w-full" v-if="config?.banner" />
-  <div class="flex w-1200 m-auto mt-72 py-48 bg-white rounded-xl">
+  <div class="flex w-1200 m-auto mt-72 py-48 bg-white">
     <div class="w-282 shrink-0">
       <div
         class="px-24 py-10 flex gap-10 hover:text-primary cursor-pointer font-bold"

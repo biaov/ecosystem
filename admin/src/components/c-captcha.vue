@@ -9,11 +9,10 @@ import { captchaApi } from '@/api/common'
 import { Captcha } from './types'
 
 const emit = defineEmits(['success'])
-
+const props = defineProps<{
+  username?: string
+}>()
 const visible = defineModel<boolean>('visible', { default: false })
-
-const modelValue = defineModel<{ id: string; value: string } | undefined | null>()
-
 const statusCode = ref(-1)
 
 const { data, getData } = useApiRequest<Captcha.DataType>(
@@ -26,16 +25,14 @@ const { data, getData } = useApiRequest<Captcha.DataType>(
 )
 
 const onCheck = async (value: number[]) => {
+  if (!props.username) return
   try {
-    const res = await captchaApi.post<{
-      id: string
-      value: string
-    }>({
+    const res = await captchaApi.post({
       id: data.value.id,
-      value
+      value,
+      username: props.username
     })
     statusCode.value = 1
-    modelValue.value = res
     emit('success')
   } catch (error) {
     statusCode.value = (error as ResponseError)?.data?.message?.includes('过期') ? 3 : 2

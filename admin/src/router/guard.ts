@@ -1,8 +1,9 @@
 import NProgress from 'nprogress'
 import type { RouteLocationNormalized } from 'vue-router'
 import { useStore } from '@/stores'
+import { routes } from './routes'
 
-const filterAuth = ['login', 'register']
+const filterAuth = routes.map(item => item.name).filter(Boolean)
 /**
  * 全局前置守卫
  */

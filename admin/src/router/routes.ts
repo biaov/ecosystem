@@ -502,6 +502,11 @@ export const routes: RouteRecordRaw[] = [
     component: () => import(`@/views/auth/register.vue`)
   },
   {
+    path: 'forget',
+    name: 'forget',
+    component: () => import(`@/views/auth/forget.vue`)
+  },
+  {
     path: '/',
     redirect: {
       name: 'dashboard'

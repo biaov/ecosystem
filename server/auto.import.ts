@@ -97,7 +97,8 @@ export default [
       'IsEnum',
       'IsObject',
       'Validate',
-      'ValidateIf'
+      'ValidateIf',
+      'IsEmail'
     ]
   },
   {

@@ -12,6 +12,11 @@ export const random = (max: number = 0, min: number = 0): number => ~~(Math.rand
 export const randomId = (binary = 32) => +new Date() + Math.random().toString(binary).slice(2)
 
 /**
+ * 生成随机 Code
+ */
+export const randomCode = () => Math.random().toString().slice(2, 8)
+
+/**
  * 生成 Redis 键
  */
 export const getRedisKey = (prefix: string, id: string): string => `${prefix}-${id}`
@@ -182,6 +187,8 @@ export const useTransformLike = (data: Record<string, string | number | undefine
 /**
  * 格式化手机号
  */
-export function useFormatMobile(this: { mobile: string }) {
+export function useFormatMobile(this: { mobile?: string; email?: string; username?: string }) {
   this.mobile && (this.mobile = this.mobile.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2'))
+  this.email && (this.email = this.email.replace(/(.{2}).+(.{3})/, '$1****$2'))
+  this.username && (this.username = this.username.replace(/(.{2}).+(.{3})/, '$1****$2'))
 }

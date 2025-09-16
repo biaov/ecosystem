@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="200" height="200">
+  <style>
+    @keyframes a {
+      0% {
+        cy: 66;
+      }
+
+      50% {
+        cy: 34;
+      }
+
+      100% {
+        cy: 66;
+      }
+    }
+
+    @keyframes a2 {
+      0% {
+        cy: 66;
+      }
+
+      50% {
+        cy: 36;
+      }
+
+      100% {
+        cy: 66;
+      }
+    }
+
+    @keyframes a3 {
+      0% {
+        cy: 66;
+      }
+
+      50% {
+        cy: 38;
+      }
+
+      100% {
+        cy: 66;
+      }
+    }
+
+    @keyframes a4 {
+      0% {
+        cy: 66;
+      }
+
+      50% {
+        cy: 40;
+      }
+
+      100% {
+        cy: 66;
+      }
+    }
+
+
+    .a {
+      animation-name: a;
+      animation-iteration-count: infinite;
+      animation-duration: 0.8s !important;
+      animation-timing-function: ease-in-out !important;
+    }
+
+    .a2 {
+      animation-name: a2;
+      animation-delay: 0.12s;
+    }
+
+    .a3 {
+      animation-name: a3;
+      animation-delay: 0.24s;
+    }
+
+    .a4 {
+      animation-name: a4;
+      animation-delay: 0.36s;
+    }
+
+    .a5 {
+      animation-name: a4;
+      animation-delay: 0.48s;
+    }
+
+    .a6 {
+      animation-name: a3;
+      animation-delay: 0.60s;
+    }
+
+    .a7 {
+      animation-name: a2;
+      animation-delay: 0.72s;
+    }
+
+    .a8 {
+      animation-name: a;
+      animation-delay: 0.84s;
+    }
+
+    .a1,
+    .a5 {
+      fill: #e15b64;
+    }
+
+    .a2,
+    .a6 {
+      fill: #f47e60;
+    }
+
+    .a3,
+    .a7 {
+      fill: #f8b26a;
+    }
+
+    .a4,
+    .a8 {
+      fill: #abbd81;
+    }
+  </style>
+  <circle r="4" cy="66" cx="18" class="a a1"></circle>
+  <circle r="4" cy="66" cx="27" class="a a2"></circle>
+  <circle r="4" cy="66" cx="36" class="a a3"></circle>
+  <circle r="4" cy="66" cx="45" class="a a4"></circle>
+  <circle r="4" cy="66" cx="54" class="a a5"></circle>
+  <circle r="4" cy="66" cx="63" class="a a6"></circle>
+  <circle r="4" cy="66" cx="72" class="a a7"></circle>
+  <circle r="4" cy="66" cx="81" class="a a8"></circle>
+</svg>

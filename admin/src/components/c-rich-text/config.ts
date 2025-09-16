@@ -110,10 +110,10 @@ export const toolbar = [
     title: '超链接',
     class: 'link'
   },
-  {
+/*   {
     title: '视频',
     class: 'video'
-  },
+  }, */
   {
     title: '上传图片',
     class: 'image'

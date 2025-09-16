@@ -19,6 +19,7 @@
 import Quill from 'quill'
 import 'quill/dist/quill.snow.css'
 import { uploadImageApi } from '@/api/common'
+import config from '@/config'
 import './image-uploader'
 import emoji from './emoji.vue'
 import { toolbar } from './config'
@@ -39,7 +40,7 @@ const props = withDefaults(
 const modelValue = defineModel<string>()
 
 const onBlur = () => {
-  modelValue.value = editor.getText().length <= 1 ? '' : editor.root.innerHTML
+  modelValue.value = !editor.getText().trim().length && !editor.getSemanticHTML().includes('img') ? '' : editor.getSemanticHTML()
 }
 
 let editor: Quill
@@ -51,6 +52,10 @@ onMounted(() => {
       toolbar: '#toolbar',
       imageUploader: {
         upload: async (file: File) => {
+          if (file.size > config.fileSize) {
+            message.error('只能上传 1M 以下的图片')
+            return false
+          }
           const { url } = await uploadImageApi.post<{ url: string }>({ file }, { headers: { 'Content-Type': 'multipart/form-data' } })
           return url
         }

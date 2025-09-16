@@ -20,7 +20,7 @@ export class GoodsService {
     )
   }
   detail(id: number) {
-    return this.goodsRepository.findOne({ where: { id }, relations: ['category', 'specs'] })
+    return this.goodsRepository.findOne({ where: { id, onsale: true }, relations: ['category', 'specs'] })
   }
 }
 @Injectable()

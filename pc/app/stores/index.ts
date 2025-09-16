@@ -38,6 +38,10 @@ export const useStore = () => {
 
   const isLogin = computed(() => !!state.token)
 
-  return { state: readonly(state), login, logout, isLogin }
-}
+  const needLogin = () => {
+    if (isLogin.value) return true
+    router.push('/login')
+  }
 
+  return { state: readonly(state), login, logout, isLogin, needLogin }
+}

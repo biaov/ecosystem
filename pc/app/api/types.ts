@@ -133,6 +133,18 @@ export namespace DashboardName {
   }
 }
 
+export interface AttrType {
+  label: string
+  value: string
+}
+export interface GoodsSpecType {
+  sku: string
+  attrs: AttrType[]
+  photo: string
+  price: number
+  stock: number
+  hold: number
+}
 export interface GoodsItemType {
   id: number
   type: string
@@ -145,9 +157,23 @@ export interface GoodsItemType {
   defaultPrice: string
   defaultSku: string
   categoryId: number
+  specs: GoodsSpecType[]
 }
 
 export interface GoodsCategoryType {
   id: number
   name: string
+}
+
+export interface TransformGoodsDataType extends GoodsItemType {
+  currentImg: string
+  attrGroups: [string, string[]][]
+}
+
+export namespace ConfirmOrderName {
+  export interface ConfirmOrderParam {
+    id: number
+    sku: string
+    quantity: number
+  }
 }

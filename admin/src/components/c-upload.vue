@@ -28,6 +28,7 @@
 <script lang="ts" setup>
 import type { UploadFile } from 'ant-design-vue'
 import { uploadImageApi } from '@/api/common'
+import config from '@/config'
 
 const maxSize = 60
 interface FileListItem {
@@ -65,7 +66,7 @@ const onBeforeUpload = (file: Required<UploadFile>) => {
     return false
   }
 
-  if (file.size > 1024 * 1024 * 1) {
+  if (file.size > config.fileSize) {
     message.error('只能上传 1M 以下的图片')
     return false
   }

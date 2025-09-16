@@ -28,9 +28,9 @@ export class LoginController {
     return this.getToken(this.loginService.login(username, password))
   }
   @Post('mobile')
-  async mobileLogin(@Body() { username, code }: MobileLoginDto) {
+  async codeLogin(@Body() { username, code }: MobileLoginDto) {
     if (!validator.mobile(username)) return
     if (!(await this.codeValidator(code))) return
-    return await this.getToken(this.loginService.mobileLogin(username))
+    return await this.getToken(this.loginService.codeLogin(username))
   }
 }

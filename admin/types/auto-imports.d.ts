@@ -7,6 +7,7 @@
 export {}
 declare global {
   const EffectScope: typeof import('vue')['EffectScope']
+  const LoginType: typeof import('../src/enums/login')['LoginType']
   const MenuTypeEnum: typeof import('../src/enums/index')['MenuTypeEnum']
   const PermissionKeyEnum: typeof import('../src/enums/index')['PermissionKeyEnum']
   const activityStatusEnum: typeof import('../src/enums/index')['activityStatusEnum']
@@ -114,4 +115,7 @@ declare global {
   // @ts-ignore
   export type { permissionEnum, PermissionKeyEnum } from '../src/enums/index'
   import('../src/enums/index')
+  // @ts-ignore
+  export type { LoginType } from '../src/enums/login'
+  import('../src/enums/login')
 }
