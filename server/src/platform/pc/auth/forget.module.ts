@@ -1,10 +1,11 @@
-import { CaptchaService } from '@/platform/common/captcha/captcha.service'
+import { EmailService } from '@/platform/common/email/email.service'
 import { ForgetController } from './forget.controller'
 import { ForgetService } from './forget.service'
+
 
 @Module({
   imports: [TypeOrmModule.forFeature([UserModel])],
   controllers: [ForgetController],
-  providers: [ForgetService, CaptchaService]
+  providers: [ForgetService, EmailService]
 })
 export class ForgetModule {}

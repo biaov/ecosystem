@@ -14,7 +14,7 @@
               </div>
             </template>
             <a-form-item>
-              <a-input v-model:value="formState.username" placeholder="请输入您的邮箱" :maxlength="32" />
+              <a-input v-model:value="formState.username" placeholder="请输入邮箱" :maxlength="32" />
             </a-form-item>
             <a-form-item>
               <a-input-password v-model:value="formState.password" placeholder="请输入密码" :maxlength="32" />
@@ -28,7 +28,7 @@
               </div>
             </template>
             <a-form-item>
-              <a-input v-model:value="formState.username" placeholder="请输入您的邮箱" />
+              <a-input v-model:value="formState.username" placeholder="请输入邮箱" />
             </a-form-item>
             <a-form-item>
               <c-sms :username="formState.username" v-model="formState.code" />

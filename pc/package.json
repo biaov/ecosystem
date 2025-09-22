@@ -5,7 +5,7 @@
   "scripts": {
     "start": "npm run dev",
     "build": "nuxt build",
-    "dev": "nuxt dev --qr false",
+    "dev": "nuxt dev --qr false --dotenv .env.development",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"

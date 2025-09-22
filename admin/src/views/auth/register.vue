@@ -6,7 +6,7 @@
     <a-card title="注册" class="w-340">
       <a-form>
         <a-form-item>
-          <a-input v-model:value="formState.username" placeholder="请输入您的邮箱" :maxlength="32" />
+          <a-input v-model:value="formState.username" placeholder="请输入邮箱" :maxlength="32" />
         </a-form-item>
         <a-form-item>
           <c-sms :username="formState.username" v-model="formState.code" />

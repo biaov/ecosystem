@@ -3,7 +3,7 @@
   <me-input
     v-model="sms"
     placeholder="请输入验证码"
-    :sms-msg="countTime > 0 ? `${countTime}秒后重试` : '获取验证码'"
+    :sms-msg="countTime > 0 ? `${countTime}s后重试` : '获取验证码'"
     :sms-is="countTime > 0"
     sms-color="#549ff2"
     maxlength="20"
@@ -14,7 +14,7 @@
 </template>
 <script lang="ts" setup>
 const props = defineProps<{
-  mobile?: string
+  username?: string
 }>()
 const [showCaptcha, setShowCaptcha] = useToggle()
 const sms = defineModel<string>({ default: '' })
@@ -36,17 +36,10 @@ const onSuccess = () => {
 }
 const onSms = () => {
   if (countTime.value) return
-  if (!useValidPhone(props.mobile)) {
-    MeToast('手机号格式错误')
+  if (!useValidEmail(props.username)) {
+    MeToast('邮箱格式错误')
     return
   }
   setShowCaptcha(true)
 }
-
-const valid = () => {
-  if (!sms.value) return '请输入验证码'
-  return ''
-}
-
-defineExpose({ valid })
 </script>

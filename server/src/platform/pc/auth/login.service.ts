@@ -17,7 +17,7 @@ export class LoginService {
     const result = await this.userRepository.findOne({
       where: {
         username,
-        mobile: username
+        email: username
       }
     })
     if (!result) throw new BizException('用户不存在')

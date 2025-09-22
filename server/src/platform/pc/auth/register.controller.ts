@@ -1,26 +1,19 @@
-import { CaptchaService } from '@/platform/common/captcha/captcha.service'
-import { LogService } from '@/platform/admin/log/log.service'
+import { EmailService } from '@/platform/common/email/email.service'
 import { RegisterService } from './register.service'
 import { RegisterDto } from './auto.dto'
 
 @Controller('register')
 export class RegisterController {
   constructor(
-    private readonly userService: RegisterService,
-    private readonly captchaService: CaptchaService,
-    private readonly logService: LogService
+    private readonly registerService: RegisterService,
+    private readonly emailService: EmailService
   ) {}
 
-  async registerValidator(password, cpassword, code: { id: string; value: string }) {
-    if (password !== cpassword) throw new BizException('两次密码输入不一致')
-    const { id, value } = code
-    if (!(await this.captchaService.verify(id, value))) return
-    return true
-  }
-
   @Post()
-  async register(@Ip() ip: string, @Body() { username, password, cpassword, code, source }: RegisterDto) {
-    if (!(await this.registerValidator(password, cpassword, code))) return
-    return await this.userService.register(username, password, source)
+  @Log('授权/注册', '注册用户', 'nickname')
+  async register(@Body() { username, password, cpassword, code, source }: RegisterDto) {
+    if (password !== cpassword) throw new BizException('两次密码输入不一致')
+    await this.emailService.verify(username, code)
+    return await this.registerService.register(username, password, code, source)
   }
 }
