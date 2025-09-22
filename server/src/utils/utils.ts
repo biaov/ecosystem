@@ -97,7 +97,7 @@ export const useTransfrormQuery = <T = Record<string, USETransfrormQueryOption |
   } else {
     // 普通查询
     result = dataEntries.reduce((prev, [key, value]) => {
-      value !== undefined && value !== null && (prev[key] = value)
+      value !== undefined && value !== null && value !== '' && (prev[key] = value)
       return prev
     }, {})
   }

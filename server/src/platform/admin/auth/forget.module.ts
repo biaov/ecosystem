@@ -1,11 +1,11 @@
 import { EmailService } from '@/platform/common/email/email.service'
-import { RegisterController } from './register.controller'
-import { RegisterService } from './register.service'
+import { ForgetController } from './forget.controller'
+import { ForgetService } from './forget.service'
 
 
 @Module({
   imports: [TypeOrmModule.forFeature([UserAdminModel])],
-  controllers: [RegisterController],
-  providers: [RegisterService, EmailService]
+  controllers: [ForgetController],
+  providers: [ForgetService, EmailService]
 })
-export class RegisterModule {}
+export class ForgetModule {}

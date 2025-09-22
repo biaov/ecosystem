@@ -26,10 +26,10 @@ export class MenuService {
     return this.menuRepository.findOneBy({ id })
   }
 
-  private async findSameContent(content?: string, type?: string, parentId?: number) {
-    const isExist = await this.menuRepository.existsBy({ content, type, parentId: parentId || undefined })
-    if (isExist) throw new BizException(`相同类型下 \`${content}\` 已存在`)
-    if (parentId) {
+  private async findSameContent(content?: string, type?: string, parentId?: number, isUpdate: boolean = false) {
+    const menu = await this.menuRepository.findOneBy({ content, type, parentId: parentId || undefined })
+    if (menu && ((isUpdate && menu.id != parentId) || !isUpdate)) throw new BizException(`相同类型下 \`${content}\` 已存在`)
+    if (parentId && !isUpdate) {
       const parent = await this.menuRepository.findOneBy({ id: parentId })
       if (!parent) throw new BizException(`父级不存在`)
 
@@ -56,7 +56,7 @@ export class MenuService {
   }
 
   async update(id: number, { name, content, type }: Partial<Pick<MenuModel, 'name' | 'content' | 'type'>>) {
-    await this.findSameContent(content, type)
+    await this.findSameContent(content, type, id, true)
     return useAffected(this.menuRepository.update({ id }, { name, content }))
   }
 

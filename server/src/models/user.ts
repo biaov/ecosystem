@@ -9,7 +9,7 @@ export abstract class UserInfo extends BaseModel {
   @Column({ length: 64, comment: '密码', select: false })
   password: string
 
-  @Column({ length: 32, comment: '昵称', nullable: true })
+  @Column({ length: 32, comment: '昵称' })
   nickname: string
 
   @Column({ length: 32, comment: '邮箱', nullable: true, unique: true })

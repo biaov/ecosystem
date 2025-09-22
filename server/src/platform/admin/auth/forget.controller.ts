@@ -10,7 +10,7 @@ export class ForgetController {
   ) {}
 
   @Post()
-  @Log('授权/注册', '注册用户', 'nickname')
+  @Log('授权/忘记密码', '忘记密码', 'nickname')
   async forget(@Body() { username, password, cpassword, code }: ForgetDto) {
     if (password !== cpassword) throw new BizException('两次密码输入不一致')
     await this.emailService.verify(username, code)
