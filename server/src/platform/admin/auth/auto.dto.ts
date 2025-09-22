@@ -12,8 +12,8 @@ class Code {
  * 登录验证器
  */
 export class LoginDto {
-  @MaxLength(30, { message: '用户名长度不能超过30个字符' })
-  @MinLength(4, { message: '用户名长度不能小于4个字符' })
+  @MaxLength(32, { message: '用户名长度不能超过32个字' })
+  @MinLength(4, { message: '用户名长度不能小于4个字' })
   @IsString({ message: '用户名必须是字符串' })
   @IsEmail({}, { message: '邮箱格式错误' })
   username: string
@@ -38,7 +38,7 @@ export class LoginDto {
  * 注册验证器
  */
 export class RegisterDto {
-  @MaxLength(11, { message: '用户名长度不能超过12个字' })
+  @MaxLength(32, { message: '用户名长度不能超过32个字' })
   @MinLength(4, { message: '用户名长度不能小于4个字' })
   @IsString({ message: '用户名必须是字符串' })
   @IsNotEmpty({ message: '用户名不能为空' })
@@ -63,4 +63,31 @@ export class RegisterDto {
   @IsEnum(SourceEnum)
   @IsNotEmpty({ message: 'source 必传' })
   source: string
+}
+
+/**
+ * 忘记密码验证器
+ */
+export class ForgetDto {
+  @MaxLength(32, { message: '用户名长度不能超过12个字' })
+  @MinLength(4, { message: '用户名长度不能小于4个字' })
+  @IsString({ message: '用户名必须是字符串' })
+  @IsNotEmpty({ message: '用户名不能为空' })
+  username: string
+
+  @MaxLength(32, { message: '密码长度不能超过32个字' })
+  @MinLength(6, { message: '密码长度不能小于6个字' })
+  @IsString({ message: '密码必须是字符串' })
+  @IsNotEmpty({ message: '密码不能为空' })
+  password: string
+
+  @MaxLength(32, { message: '确认密码长度不能超过32个字' })
+  @MinLength(6, { message: '确认密码长度不能小于6个字' })
+  @IsString({ message: '确认密码必须是字符串' })
+  @IsNotEmpty({ message: '确认密码不能为空' })
+  cpassword: string
+
+  @IsString()
+  @IsNotEmpty({ message: 'code 必传' })
+  code: string
 }

@@ -34,7 +34,7 @@ const onSuccess = () => {
 const onSms = () => {
   if (countTime.value) return
   if (!useValidEmail(props.username)) {
-    message.error('手机号格式错误')
+    message.error('邮箱格式错误')
     return
   }
   setShowCaptcha(true)

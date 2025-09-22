@@ -29,9 +29,9 @@ export class EmailService {
       subject: '验证码',
       text: `您的验证码为: ${value}，有效时间 ${redisExpire} 分钟，请在有效时间内进行验证【ECOSYSTEM】`
     }
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
       transport.sendMail(option, (error, info) => {
-        if (error) throw new BizException('邮件发送失败')
+        if (error) reject(error)
         resolve(info)
       })
     })
@@ -39,9 +39,7 @@ export class EmailService {
   async verify(username: string, code: string) {
     const key = getRedisKey(CaptchaEnum.Code, username)
     const res = await this.redis.get(key)
-
     if (!res) throw new BizException('验证已过期')
-
     const cacheValue = JSON.parse(res).value
     if (code !== cacheValue) throw new BizException('验证码错误，请重试')
     this.redis.del(key)

@@ -17,7 +17,11 @@ export class CaptchaService {
     const gap = 5 // 容差
     if (Math.abs(value[0] - target[0]) < gap && Math.abs(value[1] - target[1]) < gap) {
       this.redis.del(key)
-      await this.emailService.send(username)
+      try {
+        await this.emailService.send(username)
+      } catch {
+        throw new BizException('邮件发送失败，请检查邮箱是否正确')
+      }
       return true
     } else {
       throw new BizException('验证错误，请重试')

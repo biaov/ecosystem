@@ -3,7 +3,7 @@
     <div class="absolute top-50 left-50 cursor-pointer">
       <a-image :src="$formatter.publicURL('/logo-white.svg')" :width="60" :preview="false" />
     </div>
-    <a-card class="w-320">
+    <a-card class="w-340">
       <a-form>
         <a-tabs v-model:activeKey="activeKey" centered>
           <a-tab-pane :key="0">

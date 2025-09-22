@@ -3,7 +3,7 @@
     <div class="absolute top-50 left-50 cursor-pointer">
       <a-image :src="$formatter.publicURL('/logo-white.svg')" :width="60" :preview="false" />
     </div>
-    <a-card title="注册" class="w-320">
+    <a-card title="注册" class="w-340">
       <a-form>
         <a-form-item>
           <a-input v-model:value="formState.username" placeholder="请输入您的邮箱" :maxlength="32" />
