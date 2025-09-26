@@ -9,7 +9,7 @@
       <nav class="flex text-white navbar">
         <div class="px-12 cursor-pointer font-bold hover:text-primary relative group h-full flex items-center" v-for="(item, index) in navbar" :key="index">
           <c-dropdown :list="item.children || []" class="h-full" dropdown-class="top-70 left-0 w-240">
-            <NuxtLink :to="item.link" v-if="item.link" :target="item.link.includes('http') ? '_blank' : '_self'">{{ item.label }}</NuxtLink>
+            <NuxtLink :to="item.path" v-if="item.path" :target="item.path.includes('http') ? '_blank' : '_self'">{{ item.label }}</NuxtLink>
             <span v-else>{{ item.label }}</span>
           </c-dropdown>
         </div>
@@ -28,96 +28,89 @@
       <slot></slot>
     </main>
     <!-- 底部信息 -->
-    <footer class="py-20 bg-white text-center text-info text-xs">
-      <div class="w-1200 mx-auto flex flex-col items-center gap-12">
-        <div class="flex justify-center items-center">
-          <div v-for="(item, index) in qrcodeList" :key="index" class="flex flex-col items-center justify-center">
-            <img :src="item.url" alt="公众号" class="w-100 h-100" />
-            <span class="text-info text-xs">{{ item.label }}</span>
-          </div>
+    <footer class="py-20 bg-white text-center text-info text-xs flex flex-col items-center gap-12">
+      <div class="flex justify-center items-center">
+        <div v-for="(item, index) in qrcodeList" :key="index" class="flex flex-col items-center justify-center">
+          <img :src="item.url" alt="公众号" class="w-100 h-100" />
+          <span class="text-info text-xs">{{ item.label }}</span>
         </div>
-        <p class="flex justify-center gap-12">
-          <template v-for="(item, index) in navbar" :key="index">
-            <template v-if="index !== 0">|</template>
-            <NuxtLink :to="item.link" :target="$formatter.linkTarget(item.link)" class="hover:text-primary" v-if="item.link">{{ item.label }}</NuxtLink>
-            <span v-else>{{ item.label }}</span>
-          </template>
-        </p>
-        <p>Copyright © 2020-{{ year }} ecosystem.biaov.cn All Rights Reserved biaov</p>
-        <p class="text-info">
-          <a href="https://beian.miit.gov.cn" target="_blank" class="hover:text-primary">湘ICP备18022869号-2</a>
-        </p>
       </div>
+      <p class="flex justify-center gap-12">
+        <template v-for="(item, index) in navbar" :key="index">
+          <template v-if="index !== 0">|</template>
+          <NuxtLink :to="item.path" :target="$formatter.linkTarget(item.path)" class="hover:text-primary" v-if="item.path">{{ item.label }}</NuxtLink>
+          <span v-else>{{ item.label }}</span>
+        </template>
+      </p>
+      <p>版权所有@biaov</p>
+      <a href="https://beian.miit.gov.cn" target="_blank" class="text-info hover:text-primary">湘ICP备18022869号-2</a>
     </footer>
   </div>
 </template>
 
 <script lang="ts" setup>
-import qrcodeURL from '@/assets/official-account.jpg'
-
 const route = useRoute()
 const navbar = Object.freeze([
   {
     label: '首页',
-    link: '/'
+    path: '/'
   },
   {
     label: '分类',
-    link: '/category'
+    path: '/category'
   },
   {
     label: '购物车',
-    link: '/cart'
+    path: '/cart'
   },
   {
     label: '案例集锦',
-    link: 'https://biaov.cn/',
+    path: 'https://biaov.cn/',
     children: [
       {
         label: '组件库 mine-h5-ui',
-        link: 'https://mineh5ui.biaov.cn/v2/',
+        path: 'https://mineh5ui.biaov.cn/v2/',
         antIcon: 'MediumSquareFilled'
       },
       {
         label: '特效集锦 effects',
-        link: 'https://effects.biaov.cn/',
+        path: 'https://effects.biaov.cn/',
         antIcon: 'CodeSandboxCircleFilled'
       },
       {
         label: '博客 wordpress',
-        link: 'https://wordpress.biaov.cn/',
+        path: 'https://wordpress.biaov.cn/',
         antIcon: 'BookFilled'
       },
       {
         label: '桌面软件项目 mine-desktop',
-        link: 'https://github.com/biaov/mine-desktop',
+        path: 'https://github.com/biaov/mine-desktop',
         antIcon: 'GithubFilled'
       },
       {
         label: '多命令简化 mine-auto-cli',
-        link: 'https://github.com/biaov/mine-auto-cli',
+        path: 'https://github.com/biaov/mine-auto-cli',
         antIcon: 'RobotFilled'
       },
       {
         label: '初始化项目 create-mine',
-        link: 'https://github.com/biaov/create-mine',
+        path: 'https://github.com/biaov/create-mine',
         antIcon: 'GoldenFilled'
       }
     ]
   },
   {
     label: '源码地址',
-    link: 'https://github.com/biaov/ecosystem'
+    path: 'https://github.com/biaov/ecosystem'
   },
   {
     label: '关于我们',
-    link: '/aboutus'
+    path: '/aboutus'
   }
 ])
-const qrcodeList = Object.freeze([{ label: '微信公众号', url: qrcodeURL }])
+const qrcodeList = Object.freeze([{ label: '微信公众号', url: 'https://biaov.cn/static/official-account.jpg' }])
 const { state, isLogin } = useStore()
 const userDropdownList = useUserSidebar()
-const year = dayjs().format('YYYY')
 const { onScroll } = useScrollStore()
 </script>
 <style lang="less" scoped>

@@ -43,5 +43,9 @@ export const useStore = () => {
     router.push('/login')
   }
 
-  return { state: readonly(state), login, logout, isLogin, needLogin }
+  const updateUserInfo = (userInfo: UserInfo) => {
+    login({ ...userInfo, token: state.token! })
+  }
+
+  return { state: readonly(state), login, logout, isLogin, needLogin, updateUserInfo }
 }

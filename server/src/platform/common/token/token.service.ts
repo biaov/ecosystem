@@ -14,29 +14,13 @@ export class TokenService {
   @InjectRepository(UserRoleModel)
   private userRoleRepository: Repository<UserRoleModel>
 
-  async getPayload(context: ExecutionContext) {
+  getPayload(context: ExecutionContext) {
     const request = context.switchToHttp().getRequest()
-    let { token } = request.query
-    const { authorization } = request.headers
-    // token 校验
-    if (!authorization && !token) throw new BizException('未登录', HttpStatus.UNAUTHORIZED)
-    !token && (token = authorization.split(' ')[1])
-    if (!token) throw new BizException('未登录', HttpStatus.UNAUTHORIZED)
-    let payload: TokenValue
-    try {
-      payload = jwt.verify(token, import.meta.env.VITE_JWT_SECRET)
-    } catch (error) {
-      throw new BizException((error as Error).message.includes('expired') ? 'token 已过期' : 'token 错误', HttpStatus.UNAUTHORIZED)
-    }
-
-    // 用户校验
-    if (!payload?.userId) throw new BizException('未登录或登录已过期', HttpStatus.UNAUTHORIZED)
-
-    return { userId: +payload.userId }
+    return useParseToken(request.headers.authorization, request.query.token)
   }
 
   async verify(context: ExecutionContext, type: 'user' | 'admin' | 'all' = 'user', permission?: string): Promise<boolean> {
-    const payload = await this.getPayload(context)
+    const payload = this.getPayload(context)
     // 所有用户都可以访问
     if (type === 'all') return true
     const userExist = await this[type === 'admin' ? 'userAdminRepository' : 'userRepository'].findOneBy({ id: payload.userId })

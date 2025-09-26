@@ -1,16 +1,11 @@
 <template>
   <!-- 验证器 -->
-  <transition name="fade">
-    <div class="fixed top-0 left-0 w-full h-full bg-black/60 z-999 flex justify-center items-center" v-if="loading">
-      <a-spin :spinning="loading" size="large" />
-    </div>
-  </transition>
   <me-captcha :item="data" v-model:visible="visible" v-model:status-code="statusCode" @check="onCheck" @refresh="getData" v-show="data" />
 </template>
 <script lang="ts" setup>
 import { MeCaptcha } from 'mine-h5-ui'
 import 'mine-h5-ui/styles/MeCaptcha.css'
-import { captchaApi } from '@/api/common'
+import { captchaApi, captchaByMobileApi } from '@/api/common'
 import type { Captcha } from './types'
 
 const emit = defineEmits(['success'])
@@ -32,11 +27,8 @@ const { data, getData, loading } = useApiRequest<Captcha.DataType>(
 const onCheck = async (value: number[]) => {
   if (!props.username) return
   try {
-    await captchaApi.post({
-      id: data.value.id,
-      value,
-      username: props.username
-    })
+    const option = { id: data.value.id, value, username: props.username }
+    await (option.username.includes('@') ? captchaApi.post(option) : captchaByMobileApi.post(option))
     statusCode.value = 1
     emit('success')
   } catch (error) {

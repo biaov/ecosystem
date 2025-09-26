@@ -47,7 +47,7 @@
                 <span class="text-info" v-else>库存不足</span>
               </div>
             </div>
-            <div class="flex w-240 h-50 text-sm cursor-pointer text-white mt-60">
+            <div class="flex gap-12 w-240 h-50 text-sm cursor-pointer text-white mt-60">
               <div class="flex-1 flex items-center justify-center bg-danger hover:bg-danger transition" @click="onAddCart">加入购物车</div>
               <div class="flex-1 flex items-center justify-center bg-primary hover:bg-primary transition" @click="onBuy">立即购买</div>
             </div>

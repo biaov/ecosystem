@@ -68,7 +68,7 @@ export class LogInterceptor implements NestInterceptor {
           nickname = res[field]
         } else {
           try {
-            const payload = await this.tokenService.getPayload(context)
+            const payload = this.tokenService.getPayload(context)
             const userInfo = await this.userAdminRepository.findOneBy({ id: payload.userId })
             nickname = userInfo?.nickname || '未知'
           } catch {

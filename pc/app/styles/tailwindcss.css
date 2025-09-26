@@ -33,6 +33,10 @@
 .bg-danger {
   background: #f56c6c;
 }
+
+.hover\:text-primary:hover {
+  color: #409eff;
+}
 .hover\:bg-danger:hover {
   background: #dd6363 !important;
 }

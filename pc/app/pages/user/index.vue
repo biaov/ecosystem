@@ -16,7 +16,7 @@
         <span class="text-xl font-bold">全部订单</span>
         <c-ant-icon name="RightOutlined" class="text-info group-hover:text-blue-400" />
       </NuxtLink>
-      <div class="flex pt-24">
+      <div class="flex pt-48">
         <NuxtLink class="flex-1 flex! flex-col justify-center items-center gap-8 hover:text-blue-400" v-for="(item, index) in data" :key="index" :to="item.path">
           <div>{{ item.label }}</div>
           <div class="text-2xl font-bold">{{ item.count }}</div>
@@ -24,11 +24,17 @@
       </div>
     </div>
   </div>
-  <NuxtLink :to="item.path" class="flex! items-center justify-between group p-24 bg-gray-50 mb-24 hover:bg-blue-50 hover:text-blue-400 transition" v-for="(item, index) in moreList" :key="index">
+  <NuxtLink
+    :to="item.path"
+    class="flex! items-center justify-between gap-12 group p-24 bg-gray-50 mb-24 hover:bg-blue-50 hover:text-blue-400 transition"
+    v-for="(item, index) in moreList"
+    :key="index"
+  >
     <div class="flex items-center gap-12">
       <c-ant-icon :name="item.anIcon" class="text-info group-hover:text-blue-400" />
       <span class="text-xl">{{ item.label }}</span>
     </div>
+    <div class="flex-1 text-right" v-if="item.value">{{ item.value }}</div>
     <c-ant-icon name="RightOutlined" class="text-info group-hover:text-blue-400" />
   </NuxtLink>
 </template>
@@ -57,6 +63,12 @@ const { data } = useAsyncData('user-order-label', async () => {
 })
 
 const moreList = [
+  {
+    anIcon: 'MobileOutlined',
+    path: '/user/bind-mobile',
+    label: state.userInfo?.mobile ? '更换手机号' : '绑定手机号',
+    value: state.userInfo?.mobile || ''
+  },
   {
     anIcon: 'EditOutlined',
     path: '/user/edit-password',

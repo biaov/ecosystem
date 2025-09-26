@@ -1,7 +1,7 @@
 import { createCanvas, loadImage } from 'canvas'
 import { resolve } from 'path'
 import { readdirSync } from 'fs'
-import { VerifyCaptchaDot } from './captcha.dot'
+import { VerifyCaptchaDot,VerifyCaptchaByMobileDot } from './captcha.dot'
 import { CaptchaService } from './captcha.service'
 
 const captchDir = resolve(import.meta.dirname, '../../../assets/captch')
@@ -77,5 +77,10 @@ export class CaptchaController {
   @Post()
   async verifyCaptcha(@Body() { id, value, username }: VerifyCaptchaDot) {
     return this.captchaService.verifyImage(id, value, username)
+  }
+
+  @Post('mobile')
+  async verifyCaptchaByMobile(@Body() { id, value }: VerifyCaptchaByMobileDot) {
+    return this.captchaService.verifyImage(id, value)
   }
 }

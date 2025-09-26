@@ -192,3 +192,24 @@ export function useFormatMobile(this: { mobile?: string; email?: string; usernam
   this.email && (this.email = this.email.replace(/(.{2}).+(.{3})/, '$1****$2'))
   this.username && (this.username = this.username.replace(/(.{2}).+(.{3})/, '$1****$2'))
 }
+
+/**
+ * token 解析
+ */
+export const useParseToken = (authorization: string, token?: string) => {
+  // token 校验
+  if (!authorization && !token) throw new BizException('未登录', HttpStatus.UNAUTHORIZED)
+  !token && (token = authorization.split(' ')[1])
+  if (!token) throw new BizException('未登录', HttpStatus.UNAUTHORIZED)
+  let payload: TokenValue
+  try {
+    payload = jwt.verify(token, import.meta.env.VITE_JWT_SECRET)
+  } catch (error) {
+    throw new BizException((error as Error).message.includes('expired') ? 'token 已过期' : 'token 错误', HttpStatus.UNAUTHORIZED)
+  }
+
+  // 用户校验
+  if (!payload?.userId) throw new BizException('未登录或登录已过期', HttpStatus.UNAUTHORIZED)
+
+  return { userId: +payload.userId }
+}

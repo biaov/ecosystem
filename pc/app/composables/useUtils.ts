@@ -6,14 +6,14 @@ export const useRandomId = () => `${+dayjs()}${Math.random().toString(36).slice(
 /**
  * 校验手机号
  */
-export const useValidPhone = (value?: string) => /^1[3-9]\d{9}$/.test(`${value}`)
+export const useValidMobile = (value?: string) => /^1[3-9]\d{9}$/.test(`${value}`)
 
 /**
  * 校验手机号表单
  */
-export const useValidPhoneForm = (isObj = false) => {
+export const useValidMobileForm = (isObj = false) => {
   const validator = (value: string) => {
-    if (!useValidPhone(value)) return Promise.reject('手机号格式错误')
+    if (!useValidMobile(value)) return Promise.reject('手机号格式错误')
     return Promise.resolve()
   }
   return isObj ? { validator } : validator
@@ -26,12 +26,12 @@ export const useValidEmail = (value?: string) => /^([A-Za-z0-9_\-\.\\u4e00-\\u9f
 /**
  * 校验邮箱表单
  */
-export const useValidEmailForm = (isObj = false) => {
+export const useValidEmailForm = (isReturnObj = false) => {
   const validator = (value: string) => {
     if (!useValidEmail(value)) return Promise.reject('邮箱格式错误')
     return Promise.resolve(true)
   }
-  return isObj ? { validator } : validator
+  return isReturnObj ? { validator } : validator
 }
 
 /**

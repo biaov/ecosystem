@@ -6,7 +6,7 @@
       <div
         v-for="(attr, i) in item[1]"
         :key="i"
-        class="px-14 py-6 border border-gray-300 hover:text-red-400 hover:border-red-400"
+        class="px-14 py-6 border border-gray-300 hover:text-red-400 hover:border-red-400 transition"
         :class="`${isExist(selectAttr, item[0], attr) ? 'text-red-400 border-red-400' : ''} ${isDisabled(item[0], attr) ? 'cursor-not-allowed !text-gray-200 !border-gray-200' : 'cursor-pointer'}`"
         @click="onSelectAttr($event, item[0], attr)"
       >

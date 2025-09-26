@@ -7,7 +7,7 @@ export class CaptchaService {
 
   constructor(private readonly emailService: EmailService) {}
 
-  async verifyImage(id, value, username) {
+  async verifyImage(id, value, username?: string) {
     const key = getRedisKey(CaptchaEnum.Image, id)
     const res = await this.redis.get(key)
 
@@ -18,7 +18,7 @@ export class CaptchaService {
     if (Math.abs(value[0] - target[0]) < gap && Math.abs(value[1] - target[1]) < gap) {
       this.redis.del(key)
       try {
-        await this.emailService.send(username)
+        username && username.includes('@') && (await this.emailService.send(username))
       } catch {
         throw new BizException('邮件发送失败，请检查邮箱是否正确')
       }

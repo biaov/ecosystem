@@ -28,6 +28,7 @@ export default [
       'Query',
       'Body',
       'Header',
+      'Headers',
       'UseGuards',
       'HttpException',
       'HttpStatus',
@@ -98,7 +99,8 @@ export default [
       'IsObject',
       'Validate',
       'ValidateIf',
-      'IsEmail'
+      'IsEmail',
+      'IsPhoneNumber'
     ]
   },
   {
