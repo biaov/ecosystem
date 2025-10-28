@@ -9,7 +9,7 @@ export class LogService {
   private logRepository: Repository<LogModel>
 
   migration({ skip, take, current, pageSize }: PageOption, { name }: Partial<Pick<MigrationsModel, 'name'>>) {
-    const where = useTransfrormQuery({ name }, { name: 'like' })
+    const where = useTransformQuery({ name }, { name: 'like' })
     return findAndCount(
       this.migrationRepository.findAndCount({
         where,
@@ -23,7 +23,7 @@ export class LogService {
     )
   }
   operation({ skip, take, current, pageSize }: PageOption, { nickname, module, content, createdAt, ip }: Partial<Pick<LogModel, 'nickname' | 'module' | 'content' | 'ip'> & { createdAt: string[] }>) {
-    const where = useTransfrormQuery({ nickname, module, content, createdAt, ip }, { nickname: 'like', content: 'like', createdAt: 'between' })
+    const where = useTransformQuery({ nickname, module, content, createdAt, ip }, { nickname: 'like', content: 'like', createdAt: 'between' })
     return findAndCount(
       this.logRepository.findAndCount({
         where,

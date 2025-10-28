@@ -1,6 +1,8 @@
 import tailwindcss from '@tailwindcss/vite'
 import { formatDate } from 'compatx'
 import { loadEnv } from 'vite'
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+import { resolve } from 'path'
 import loadingTemplate from './scripts/loading-template'
 
 const env = loadEnv('development', './')
@@ -21,7 +23,7 @@ export default defineNuxtConfig({
     }
   },
   imports: {
-    dirs: ['stores', 'enums'],
+    dirs: ['stores', 'enums', 'config'],
     presets: [
       {
         from: 'dayjs',
@@ -38,7 +40,13 @@ export default defineNuxtConfig({
     loadingTemplate
   },
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [
+      tailwindcss(),
+      createSvgIconsPlugin({
+        iconDirs: [resolve(import.meta.dirname, `app/assets/svgs`)],
+        symbolId: '[name]'
+      })
+    ],
     css: {
       preprocessorOptions: {
         less: {

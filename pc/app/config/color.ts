@@ -1,7 +1,7 @@
 /**
  * 颜色配置
  */
-export const themeColor = {
+export const useConfigThemeColor = {
   primary: '#409eff',
   success: '#67c23a',
   warning: '#e6a23c',

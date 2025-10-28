@@ -1,8 +1,8 @@
 <template>
-  <!-- 绑定/更换手机号 -->
+  <!-- 绑定/更换邮箱 -->
   <div class="flex flex-col gap-24 w-400 mx-auto">
     <EmailForm title="验证邮箱" @ok="handleEmailValid" v-if="!allowUpdate" />
-    <EmailForm title="更新邮箱" @ok="handleSubmit" v-else />
+    <EmailForm title="更换邮箱" @ok="handleSubmit" v-else />
   </div>
 </template>
 <script lang="ts" setup>

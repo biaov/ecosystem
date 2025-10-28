@@ -6,7 +6,7 @@ export class RoleService {
   private roleRepository: Repository<UserRoleModel>
 
   list({ skip, take, current, pageSize }: PageOption, { name }: Partial<Pick<UserRoleModel, 'name'>>) {
-    const where = useTransfrormQuery({ name }, { name: 'like' })
+    const where = useTransformQuery({ name }, { name: 'like' })
     return findAndCount(this.roleRepository.findAndCount({ where, skip, take }), { current, pageSize })
   }
 

@@ -16,7 +16,7 @@ export class GiftService {
     { skip, take, current, pageSize }: PageOption,
     { name, sku, categoryId, onsale, recommend, newest, preferential }: Partial<Pick<GiftModel, 'name' | 'categoryId' | 'onsale' | 'recommend' | 'newest' | 'preferential'> & { sku: string }>
   ) {
-    const where = useTransfrormQuery({ name, categoryId, onsale, sku, recommend, newest, preferential }, { name: 'like', sku: 'like' })
+    const where = useTransformQuery({ name, categoryId, onsale, sku, recommend, newest, preferential }, { name: 'like', sku: 'like' })
     return findAndCount(
       this.giftRepository.findAndCount({
         where,
@@ -37,7 +37,7 @@ export class GiftService {
     await this.existSku(sku)
     return await this.giftRepository.save({ categoryId, name, onsale, photos, sku, desc, recommend, newest, preferential })
   }
-  update(id: number, { categoryId, name, onsale, photos, desc, sku, recommend, newest, preferential }: Partial<GiftCreate>) { 
+  update(id: number, { categoryId, name, onsale, photos, desc, sku, recommend, newest, preferential }: Partial<GiftCreate>) {
     return useAffected(this.giftRepository.update(id, { categoryId, name, sku, onsale, photos, desc, recommend, newest, preferential }))
   }
   delete(id: number) {

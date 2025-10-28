@@ -169,7 +169,8 @@
     "useRandomLetter": true,
     "useRandomName": true,
     "useTransformLike": true,
-    "useTransfrormQuery": true,
+    "useTransformParams": true,
+    "useTransformQuery": true,
     "useXlsx": true,
     "validator": true
   }

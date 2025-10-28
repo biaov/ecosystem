@@ -13,6 +13,7 @@
   <c-captcha :username="username" v-model:visible="showCaptcha" @success="onSuccess" />
 </template>
 <script lang="ts" setup>
+const emit = defineEmits(['ok'])
 const props = withDefaults(
   defineProps<{
     username?: string
@@ -41,6 +42,7 @@ const onStartCountDown = () => {
 const onSuccess = () => {
   countTime.value = 60
   onStartCountDown()
+  emit('ok')
 }
 const onSms = () => {
   if (countTime.value) return

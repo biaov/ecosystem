@@ -28,7 +28,7 @@ export class CouponService {
   }
 
   async list({ skip, take, current, pageSize }: PageOption, { name, type }: Partial<Pick<CouponModel, 'name' | 'type'>>) {
-    const where = useTransfrormQuery({ name, type }, { name: 'like' })
+    const where = useTransformQuery({ name, type }, { name: 'like' })
     const [items, total] = await this.couponRepository.findAndCount({
       where,
       skip,
@@ -49,11 +49,11 @@ export class CouponService {
   }
   create({ name, type, value, condition, startTime, endTime }: Pick<CouponModel, 'name' | 'type' | 'value' | 'startTime'> & { endTime?: string; condition?: number }) {
     const code = useRandomName()
-    const option = useTransfrormQuery({ name, type, value, condition, startTime, endTime, code }, { startTime: 'datetime', endTime: 'datetime' })
+    const option = useTransformQuery({ name, type, value, condition, startTime, endTime, code }, { startTime: 'datetime', endTime: 'datetime' })
     return this.couponRepository.save(option)
   }
   update(id: number, { name, endTime }: Partial<Pick<CouponModel, 'name' | 'endTime'>>) {
-    const option = useTransfrormQuery({ name, endTime }, { endTime: 'datetime' })
+    const option = useTransformQuery({ name, endTime }, { endTime: 'datetime' })
     return useAffected(this.couponRepository.update(id, option))
   }
   async delete(id: number) {
@@ -73,9 +73,9 @@ export class CouponService {
         .createQueryBuilder('userCoupon')
         .leftJoinAndSelect('userCoupon.user', 'user')
         .leftJoinAndSelect('userCoupon.coupon', 'coupon')
-        .where(useTransfrormQuery({ status }, {}))
+        .where(useTransformQuery({ status }, {}))
         .andWhere(
-          ...useTransfrormQuery<[string, {}]>(
+          ...useTransformQuery<[string, {}]>(
             {
               'user.nickname': nickname,
               'user.mobile': mobile,

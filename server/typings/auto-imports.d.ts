@@ -172,7 +172,8 @@ declare global {
   const useRandomLetter: typeof import('../src/utils/utils')['useRandomLetter']
   const useRandomName: typeof import('../src/utils/utils')['useRandomName']
   const useTransformLike: typeof import('../src/utils/utils')['useTransformLike']
-  const useTransfrormQuery: typeof import('../src/utils/utils')['useTransfrormQuery']
+  const useTransformParams: typeof import('../src/utils/utils')['useTransformParams']
+  const useTransformQuery: typeof import('../src/utils/utils')['useTransformQuery']
   const useXlsx: typeof import('../src/utils/utils')['useXlsx']
   const validator: typeof import('../src/utils/validator')['validator']
 }

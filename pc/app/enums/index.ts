@@ -1,4 +1,4 @@
-import { themeColor } from '@/config/color'
+import { useConfigThemeColor } from '@/config/color'
 /**
  * 注册来源
  */
@@ -91,17 +91,17 @@ export const activityStatusEnum = defineEnum({
       {
         label: '未开始',
         value: this.notStart,
-        color: themeColor.primary
+        color: useConfigThemeColor.primary
       },
       {
         label: '进行中',
         value: this.normal,
-        color: themeColor.success
+        color: useConfigThemeColor.success
       },
       {
         label: '已结束',
         value: this.ended,
-        color: themeColor.disabled
+        color: useConfigThemeColor.disabled
       }
     ]
   }

@@ -36,14 +36,14 @@ export class DistributeCouponService {
   }
 
   async list({ skip, take, current, pageSize }: PageOption, { title, mobile }: Partial<Pick<DistributeCouponModel, 'title'>> & { mobile?: string }) {
-    const where = useTransfrormQuery({ title }, { title: 'like' })
+    const where = useTransformQuery({ title }, { title: 'like' })
     const [items, total] = await this.distributeCouponRepository
       .createQueryBuilder('distributeCoupon')
       .leftJoinAndSelect('distributeCoupon.rules', 'rules')
       .leftJoinAndSelect('rules.userCoupons', 'userCoupons')
       .leftJoinAndSelect('userCoupons.user', 'user')
       .where(where)
-      .andWhere(...useTransfrormQuery<[string, {}]>({ 'user.mobile': mobile }, { 'user.mobile': 'like' }))
+      .andWhere(...useTransformQuery<[string, {}]>({ 'user.mobile': mobile }, { 'user.mobile': 'like' }))
       .take(take)
       .skip(skip)
       .orderBy('distributeCoupon.createdAt', 'DESC')
@@ -57,7 +57,7 @@ export class DistributeCouponService {
   async create({ title, range, rules }: Pick<DistributeCouponModel, 'title' | 'range'> & { rules: Pick<CouponRuleModel, 'quantity' | 'couponId'>[] }) {
     const list = [...new Set(range.filter(item => validator.mobile(item)))]
     if (!list.length) throw new BizException('请输入正确的手机号')
-    const option = useTransfrormQuery({ title, range: list }, {})
+    const option = useTransformQuery({ title, range: list }, {})
     /**
      * 手动发券规则
      */

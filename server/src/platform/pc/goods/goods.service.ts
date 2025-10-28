@@ -10,8 +10,8 @@ export class GoodsService {
       this.goodsRepository
         .createQueryBuilder('goods')
         .leftJoinAndSelect('goods.specs', 'spec')
-        .where(useTransfrormQuery({ name, categoryId, onsale }, { name: 'like', sku: 'like' }))
-        .andWhere(...useTransfrormQuery<[string, {}]>({ 'spec.sku': sku }, { 'spec.sku': 'like' }))
+        .where(useTransformQuery({ name, categoryId, onsale }, { name: 'like', sku: 'like' }))
+        .andWhere(...useTransformQuery<[string, {}]>({ 'spec.sku': sku }, { 'spec.sku': 'like' }))
         .skip(skip)
         .take(take)
         .orderBy('goods.createdAt', 'DESC')
@@ -55,8 +55,8 @@ export class GoodsStockService {
   private goodsSpecRepository: TreeRepository<GoodsSpecModel>
 
   list({ skip, take, current, pageSize }: PageOption, { name, sku, categoryId, onsale }: Partial<Pick<GoodsModel, 'name' | 'categoryId' | 'onsale'> & { sku: string }>) {
-    const where = useTransfrormQuery({ sku }, { sku: 'like' })
-    where.product = useTransfrormQuery({ name }, { name: 'like' }) as Record<string, string | FindOperator<string>>
+    const where = useTransformQuery({ sku }, { sku: 'like' })
+    where.product = useTransformQuery({ name }, { name: 'like' }) as Record<string, string | FindOperator<string>>
 
     return findAndCount(
       this.goodsSpecRepository.findAndCount({

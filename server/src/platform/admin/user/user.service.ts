@@ -15,7 +15,7 @@ export class UserService {
     return useAffected(this.userAdminRepository.update(id, { avatar, nickname, gender, email }))
   }
   list({ skip, take, current, pageSize }: PageOption, { nickname, mobile, createdAt }: Partial<Pick<UserModel, 'nickname' | 'mobile'> & { createdAt: string[] }>) {
-    const where = useTransfrormQuery({ nickname, mobile, createdAt, blocklist: false }, { nickname: 'like', mobile: 'like', createdAt: 'between' })
+    const where = useTransformQuery({ nickname, mobile, createdAt, blocklist: false }, { nickname: 'like', mobile: 'like', createdAt: 'between' })
     return findAndCount(
       this.userRepository.findAndCount({
         where,
@@ -35,7 +35,7 @@ export class UserService {
     return useAffected(this.userRepository.update({ id }, { reason, blocklist: true }))
   }
   blocklist({ skip, take, current, pageSize }: PageOption, { nickname, mobile, reason }: Partial<Pick<UserModel, 'nickname' | 'mobile' | 'reason'>>) {
-    const where = useTransfrormQuery({ nickname, mobile, reason, blocklist: true }, { nickname: 'like', mobile: 'like' })
+    const where = useTransformQuery({ nickname, mobile, reason, blocklist: true }, { nickname: 'like', mobile: 'like' })
     return findAndCount(
       this.userRepository.findAndCount({
         where,

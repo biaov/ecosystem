@@ -15,7 +15,7 @@ const props = defineProps<{
 const visible = defineModel<boolean>('visible', { default: false })
 const statusCode = ref(-1)
 
-const { data, getData, loading } = useApiRequest<Captcha.DataType>(
+const { data, getData } = useApiRequest<Captcha.DataType>(
   () => {
     statusCode.value = -1
     return captchaApi.get()

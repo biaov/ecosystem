@@ -30,7 +30,7 @@ export class ActivityCouponService {
   }
 
   async list({ skip, take, current, pageSize }: PageOption, { name, status }: Partial<Pick<ActivityCouponModel, 'name' | 'status'>>) {
-    const where = useTransfrormQuery({ name, status }, { name: 'like' })
+    const where = useTransformQuery({ name, status }, { name: 'like' })
     const [items, total] = await this.activityCouponRepository
       .createQueryBuilder('activityCoupon')
       .leftJoinAndSelect('activityCoupon.rules', 'rules')
@@ -71,7 +71,7 @@ export class ActivityCouponService {
     const end = dayjs(endTime)
     if (end <= start) throw new BizException('结束时间不能早于开始时间')
     const status = this.getStatus({ now, start, end })
-    const option = useTransfrormQuery({ name, startTime, endTime, setting, desc, status }, { startTime: 'datetime', endTime: 'datetime' })
+    const option = useTransformQuery({ name, startTime, endTime, setting, desc, status }, { startTime: 'datetime', endTime: 'datetime' })
     const activityCoupon = await this.activityCouponRepository.save(option)
     const newRules = rules.map(({ couponId, quantity }) => ({ couponId, quantity, activityCoupon: { id: activityCoupon.id } }))
     await this.couponRuleRepository.save(newRules)
@@ -87,7 +87,7 @@ export class ActivityCouponService {
     const end = dayjs(endTime)
     if (end <= start) throw new BizException('结束时间不能早于开始时间')
     const status = this.getStatus({ now, start, end })
-    const option = useTransfrormQuery({ name, endTime, setting, desc, status }, { endTime: 'datetime' })
+    const option = useTransformQuery({ name, endTime, setting, desc, status }, { endTime: 'datetime' })
     return useAffected(this.activityCouponRepository.update(id, option))
   }
   async delete(id: number) {

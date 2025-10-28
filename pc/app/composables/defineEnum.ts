@@ -14,7 +14,7 @@ interface DefineEnumOption {
 export const defineEnum = <T extends DefineEnumOption>(option: T) =>
   Object.freeze({
     ...option,
-    filter(value: string) {
+    filter<T = string>(value: T) {
       return this.options().find(item => item.value === value)
     }
   })

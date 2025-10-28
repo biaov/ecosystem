@@ -15,7 +15,7 @@ export class AccountService {
   }
 
   async list({ skip, take, current, pageSize }: PageOption, { nickname, mobile, roleId }: Partial<Pick<UserAdminModel, 'nickname' | 'mobile' | 'roleId'>>) {
-    const where = useTransfrormQuery({ nickname, mobile, roleId }, { nickname: 'like', mobile: 'like' })
+    const where = useTransformQuery({ nickname, mobile, roleId }, { nickname: 'like', mobile: 'like' })
     return findAndCount(this.userAdminRepository.findAndCount({ where, skip, take }), { current, pageSize })
   }
 

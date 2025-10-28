@@ -25,3 +25,37 @@ export class VerifyEmailDot {
   @IsString()
   code: string
 }
+
+/**
+ * 验证用户更新信息验证器
+ */
+export class VerifyUserUpdateDot {
+  @IsOptional()
+  @IsString()
+  nickname?: string
+
+  @IsOptional()
+  @IsString()
+  avatar?: string
+
+  @IsOptional()
+  @IsEnum(GenderEnum)
+  gender?: number
+}
+
+/**
+ * 验证用户更新密码验证器
+ */
+export class VerifyPasswordDot {
+  @IsNotEmpty()
+  @IsString()
+  oPassword: string
+
+  @IsNotEmpty()
+  @IsString()
+  password: string
+
+  @IsNotEmpty()
+  @IsString()
+  cPassword: string
+}

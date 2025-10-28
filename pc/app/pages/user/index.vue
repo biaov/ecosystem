@@ -1,16 +1,19 @@
 <template>
   <!-- 用户信息  -->
   <div class="flex gap-24 flex-wrap row-wrap mb-24">
-    <div class="bg-blue-50 p-24 flex gap-24 flex-1 max-[1920px]:basis-full">
-      <NuxtLink to="/user/edit-info" class="w-120 h-120 rounded-full bg-gray-100 relative overflow-hidden cursor-pointer group">
-        <img :src="state.userInfo?.avatar" alt="头像" class="w-full h-full object-cover" />
-        <div class="absolute top-0 left-0 bg-[rgba(0,0,0,0.6)] text-white text-sm w-full h-full flex items-center justify-center transition opacity-0 group-hover:opacity-100">编辑资料</div>
-      </NuxtLink>
-      <div class="flex flex-col justify-center">
-        <NuxtLink to="/user/edit-info" class="text-2xl font-bold hover:text-primary mb-8">{{ state.userInfo?.nickname }}</NuxtLink>
-        <div class="text-info">{{ state.userInfo?.email ?? '' }}</div>
+    <NuxtLink to="/user/edit-info" class="bg-blue-50 p-24 flex! justify-between items-center flex-1 max-[1920px]:basis-full w-full cursor-pointer group">
+      <div class="flex gap-24">
+        <div class="w-120 h-120 rounded-full bg-gray-100 relative overflow-hidden">
+          <img :src="state.userInfo?.avatar" alt="头像" class="w-full h-full object-cover" />
+          <div class="absolute top-0 left-0 bg-[rgba(0,0,0,0.6)] text-white text-sm w-full h-full flex items-center justify-center transition opacity-0 group-hover:opacity-100">编辑资料</div>
+        </div>
+        <div class="flex flex-col justify-center">
+          <div class="text-2xl font-bold group-hover:text-blue-400 mb-8">{{ state.userInfo?.nickname }}</div>
+          <div class="text-info">{{ state.userInfo?.email ?? '' }}</div>
+        </div>
       </div>
-    </div>
+      <c-ant-icon name="SettingOutlined" class="text-2xl group-hover:text-blue-400" />
+    </NuxtLink>
     <div class="p-24 bg-gray-50 flex-1 max-[1920px]:basis-full">
       <NuxtLink to="/user/order" class="flex! items-center justify-between group">
         <span class="text-xl font-bold">全部订单</span>
@@ -31,7 +34,10 @@
     :key="index"
   >
     <div class="flex items-center gap-12">
-      <c-ant-icon :name="item.anIcon" class="text-info group-hover:text-blue-400" />
+      <div class="text-xl text-info group-hover:text-blue-400 inline-flex">
+        <c-ant-icon :name="item.anIcon" v-if="item.anIcon" />
+        <c-svg-icon :name="item.icon" v-else-if="item.icon" />
+      </div>
       <span class="text-xl">{{ item.label }}</span>
     </div>
     <div class="flex-1 text-right" v-if="item.value">{{ item.value }}</div>
@@ -68,6 +74,12 @@ const moreList = [
     path: '/user/bind-mobile',
     label: state.userInfo?.mobile ? '更换手机号' : '绑定手机号',
     value: state.userInfo?.mobile || ''
+  },
+  {
+    icon: 'email',
+    path: '/user/edit-email',
+    label: '更换邮箱',
+    value: state.userInfo?.email
   },
   {
     anIcon: 'EditOutlined',

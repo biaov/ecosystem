@@ -40,9 +40,9 @@ export class OrderService {
         .createQueryBuilder('order')
         .leftJoinAndSelect('order.items', 'items')
         .leftJoinAndSelect('order.user', 'user')
-        .where(useTransfrormQuery({ sn, status, type, source }, { sn: 'like' }))
+        .where(useTransformQuery({ sn, status, type, source }, { sn: 'like' }))
         .andWhere(
-          ...useTransfrormQuery<[string, {}]>(
+          ...useTransformQuery<[string, {}]>(
             {
               'user.nickname': nickname,
               'user.mobile': mobile,
@@ -104,9 +104,9 @@ export class CreditOrderService {
         .createQueryBuilder('order')
         .leftJoinAndSelect('order.items', 'items')
         .leftJoinAndSelect('order.user', 'user')
-        .where(useTransfrormQuery({ sn, status, type, source }, { sn: 'like' }))
+        .where(useTransformQuery({ sn, status, type, source }, { sn: 'like' }))
         .andWhere(
-          ...useTransfrormQuery<[string, {}]>(
+          ...useTransformQuery<[string, {}]>(
             {
               'user.nickname': nickname,
               'user.mobile': mobile,
@@ -168,9 +168,9 @@ export class SaleOrderService {
         .leftJoinAndSelect('saleOrder.order', 'order')
         .leftJoinAndSelect('order.items', 'items')
         .leftJoinAndSelect('saleOrder.user', 'user')
-        .where(useTransfrormQuery({ sn, status, type }, { sn: 'like' }))
+        .where(useTransformQuery({ sn, status, type }, { sn: 'like' }))
         .andWhere(
-          ...useTransfrormQuery<[string, {}]>(
+          ...useTransformQuery<[string, {}]>(
             {
               'user.nickname': nickname,
               'user.mobile': mobile,
