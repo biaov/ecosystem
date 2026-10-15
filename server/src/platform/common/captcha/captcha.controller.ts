@@ -1,4 +1,4 @@
-import { createCanvas, loadImage } from 'canvas'
+import { createCanvas, loadImage } from '@napi-rs/canvas'
 import { resolve } from 'path'
 import { readdirSync } from 'fs'
 import { VerifyCaptchaDot } from './captcha.dot'

@@ -1,4 +1,4 @@
-import type { Canvas, CanvasRenderingContext2D, Image } from 'canvas'
+import type { Canvas, CanvasRenderingContext2D, Image } from '@napi-rs/canvas'
 
 /**
  * 方向值
