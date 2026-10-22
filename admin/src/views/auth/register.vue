@@ -1,7 +1,7 @@
 <template>
   <div class="w-screen h-screen bg-radial flex justify-center items-center relative">
     <div class="absolute top-50 left-50 cursor-pointer">
-      <a-image src="/logo-white.svg" :width="60" :preview="false" />
+      <a-image :src="`${baseUrl}logo-white.svg`" :width="60" :preview="false" />
     </div>
     <a-card title="注册" class="w-320">
       <a-form>
@@ -28,6 +28,7 @@
 <script lang="ts" setup>
 import { registerApi } from '@/api/auth'
 
+const baseUrl = import.meta.env.BASE_URL
 const router = useRouter()
 const smsRef = useTemplateRef<{ valid: () => string }>('sms')
 

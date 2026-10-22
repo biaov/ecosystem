@@ -10,11 +10,11 @@ import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 
 const env = loadEnv('development', './')
 export default defineConfig({
-  base: './',
+  base: `${env.VITE_ROUTER_BASEURL}/`,
   plugins: [
     tailwindcss(),
     eslint({
-      lintOnStart: true,
+      lintOnStart: false,
       exclude: ["node_modules", "dist"],
     }),
     vue(),

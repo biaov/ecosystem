@@ -2,7 +2,7 @@
   <!-- 菜单栏 -->
   <div class="h-full flex flex-col transition-200 transition-[width] z-10 shadow-xl shadow-gray-300" :style="{ width: sidebarWidth }">
     <router-link to="/" class="flex! justify-center items-center h-80" title="回到首页">
-      <img src="/logo.svg" class="w-40" />
+      <img :src="`${baseUrl}logo.svg`" class="w-40" />
     </router-link>
     <div class="flex-grow h-0 overflow-auto">
       <a-menu v-model:selected-keys="menuState.selectedKeys" v-model:open-keys="menuState.openKeys" :items="items" mode="inline" :inline-collapsed="isCollapsed" />
@@ -22,6 +22,7 @@ import type { RouteRecordRaw, RouteLocationNormalizedLoadedGeneric } from 'vue-r
 import { menuRoutes } from '@/router/routes'
 import CAntIcon from '@/components/c-ant-icon.vue'
 
+const baseUrl = import.meta.env.BASE_URL
 const props = defineProps({
   // 收缩状态
   collapsed: {

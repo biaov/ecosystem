@@ -1,7 +1,7 @@
 <template>
   <div class="w-screen h-screen bg-radial flex justify-center items-center relative">
     <div class="absolute top-50 left-50 cursor-pointer">
-      <a-image src="/logo-white.svg" :width="60" :preview="false" />
+      <a-image :src="`${baseUrl}logo-white.svg`" :width="60" :preview="false" />
     </div>
     <a-card class="w-320">
       <a-form>
@@ -46,12 +46,13 @@
 <script lang="ts" setup>
 import { loginApi } from '@/api/auth'
 
+const baseUrl = import.meta.env.BASE_URL
 const router = useRouter()
 const store = useStore()
 const smsRef = useTemplateRef<{ valid: () => string }>('sms')
 const activeKey = ref(0)
 const { formState, setFormRules, validFormState } = useFormState({
-  username: '18888888888',
+  username: 'test@qq.com',
   password: '123456',
   code: null
 })
