@@ -36,7 +36,7 @@
           </a-tab-pane>
         </a-tabs>
         <a-form-item>
-          <a-button type="primary" @click="handleSubmit" block>登录</a-button>
+          <a-button type="primary" :loading="loading" block @click="handleSubmit">登录</a-button>
         </a-form-item>
       </a-form>
       <router-link to="/register" class="text-center text-info block">还没有账号？去注册</router-link>
@@ -86,13 +86,17 @@ setFormRules({
 /**
  * 提交
  */
+const loading = ref(false)
 const handleSubmit = async () => {
+  if (loading.value) return
   if (!(await validFormState())) return
-  const param = { ...formState.value } as Record<string, unknown>
-  param.type = activeKey.value ? 'account' : 'mobile'
-  const userInfo = await (activeKey.value ? loginApi.post<UserInfo>(formState.value) : loginApi.post<UserInfo>(formState.value))
-  message.success('登录成功')
-  store.login(userInfo)
-  router.push({ name: 'dashboard' })
+  loading.value = true
+  try {
+    const userInfo = await loginApi.post<UserInfo>(formState.value)
+    store.login(userInfo)
+    await router.push({ name: 'dashboard' })
+  } finally {
+    loading.value = false
+  }
 }
 </script>
