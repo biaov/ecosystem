@@ -36,7 +36,7 @@
           </a-tab-pane>
         </a-tabs>
         <a-form-item>
-          <a-button type="primary" @click="handleSubmit" block>登录</a-button>
+          <a-button type="primary" :loading="loading" block @click="handleSubmit">登录</a-button>
         </a-form-item>
       </a-form>
       <router-link to="/forget" class="text-right text-info block -mt-10">忘记密码?</router-link>
@@ -47,6 +47,7 @@
 <script lang="ts" setup>
 import { loginApi } from '@/api/auth'
 
+const baseUrl = import.meta.env.BASE_URL
 const router = useRouter()
 const store = useStore()
 const activeKey = ref(0)
@@ -75,11 +76,17 @@ setFormRules({
 /**
  * 提交
  */
+const loading = ref(false)
 const handleSubmit = async () => {
+  if (loading.value) return
   if (!(await validFormState())) return
-  const userInfo = await loginApi.post<UserInfo>({ ...formState.value, type: activeKey.value ? LoginType.email : LoginType.password })
-  message.success('登录成功')
-  store.login(userInfo)
-  router.push({ name: 'dashboard' })
+  loading.value = true
+  try {
+    const userInfo = await loginApi.post<UserInfo>({ ...formState.value, type: activeKey.value ? LoginType.email : LoginType.password })
+    store.login(userInfo)
+    router.push({ name: 'dashboard' })
+  } finally {
+    loading.value = false
+  }
 }
 </script>

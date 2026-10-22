@@ -22,6 +22,7 @@ import type { RouteRecordRaw, RouteLocationNormalizedLoadedGeneric } from 'vue-r
 import { menuRoutes } from '@/router/routes'
 import CAntIcon from '@/components/c-ant-icon.vue'
 
+const baseUrl = import.meta.env.BASE_URL
 const props = defineProps({
   // 收缩状态
   collapsed: {

@@ -28,6 +28,7 @@
 <script lang="ts" setup>
 import { registerApi } from '@/api/auth'
 
+const baseUrl = import.meta.env.BASE_URL
 const router = useRouter()
 const { formState, setFormRules, validFormState } = useFormState({
   username: '',
