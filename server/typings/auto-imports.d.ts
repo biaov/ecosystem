@@ -27,6 +27,7 @@ declare global {
   const BizException: typeof import('../src/exceptions/biz')['BizException']
   const Body: typeof import('@nestjs/common')['Body']
   const CaptchaEnum: typeof import('../src/enums/index')['CaptchaEnum']
+  const CartModel: typeof import('../src/models/cart')['CartModel']
   const Column: typeof import('typeorm')['Column']
   const Controller: typeof import('@nestjs/common')['Controller']
   const CouponModel: typeof import('../src/models/promotion')['CouponModel']
@@ -188,6 +189,9 @@ declare global {
   // @ts-ignore
   export type { BizException } from '../src/exceptions/biz'
   import('../src/exceptions/biz')
+  // @ts-ignore
+  export type { CartModel } from '../src/models/cart'
+  import('../src/models/cart')
   // @ts-ignore
   export type { DecoratorModel } from '../src/models/decorator'
   import('../src/models/decorator')

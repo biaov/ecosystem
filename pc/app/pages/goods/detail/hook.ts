@@ -13,8 +13,16 @@ export const useDetailMove = (data: Ref<TransformGoodsDataType | undefined>) => 
   const move = reactive({ x: 0, y: 0 })
   const rectRef = useTemplateRef<HTMLDivElement>('rectNode')
   const moveNode = useTemplateRef<HTMLDivElement>('moveNode')
-  const movesize = computed(() => moveNode.value && moveNode.value.getBoundingClientRect())
-  const rectsize = computed(() => rectRef.value && rectRef.value.getBoundingClientRect())
+  const imgRef = useTemplateRef<HTMLImageElement>('imgNode')
+
+  const movesize = computed(() => moveNode.value?.getBoundingClientRect())
+  const rectsize = computed(() => rectRef.value?.getBoundingClientRect())
+  // 图片原始尺寸（object-contain 需按原图比例计算，避免拉伸变形）
+  const naturalSize = computed(() => {
+    const img = imgRef.value
+    return img?.naturalWidth && img?.naturalHeight ? { width: img.naturalWidth, height: img.naturalHeight } : null
+  })
+
   const rengeValue = (cx: number, rx: number, width: number) => {
     const iw = cx - rx
     let x = iw - movesize.value!.width / 2
@@ -29,7 +37,30 @@ export const useDetailMove = (data: Ref<TransformGoodsDataType | undefined>) => 
     move.y = rengeValue(clientY, ry, height)
   }
 
-  return { isVideo, currentImg, onMouseenter, move, moveNode, movesize, rectsize, setMove }
+  // 放大镜样式：按 contain 显示区域等比放大，并限制在图片范围内
+  const zoomStyle = computed(() => {
+    const rect = rectsize.value
+    const lens = movesize.value
+    const natural = naturalSize.value
+    if (!rect || !lens || !natural) return {}
+    const scale = Math.min(rect.width / natural.width, rect.height / natural.height)
+    const width = natural.width * scale
+    const height = natural.height * scale
+    const offsetX = (rect.width - width) / 2
+    const offsetY = (rect.height - height) / 2
+    const clampRange = (v: number, len: number, total: number) => (len >= total ? (total - len) / 2 : Math.min(Math.max(v, 0), total - len))
+    const left = clampRange(move.x - offsetX, lens.width, width)
+    const top = clampRange(move.y - offsetY, lens.height, height)
+    return {
+      width: `${lens.width}px`,
+      height: `${lens.height}px`,
+      backgroundImage: `url(${currentImg.value || data.value?.currentImg})`,
+      backgroundSize: `${width}px ${height}px`,
+      backgroundPosition: `-${left}px -${top}px`
+    }
+  })
+
+  return { isVideo, currentImg, onMouseenter, move, setMove, zoomStyle }
 }
 
 /**

@@ -1,7 +1,7 @@
 <template>
   <!-- 用户 -->
   <div class="p-24">
-    <div class="w-[90%] mx-auto flex gap-24">
+    <div class="w-1200 mx-auto flex gap-24">
       <div class="w-300 shrink-0 bg-white p-48 text-base font-bold">
         <div
           class="py-24 flex items-center gap-12 hover:text-primary cursor-pointer"

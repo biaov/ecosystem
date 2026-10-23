@@ -1,14 +1,14 @@
 <template>
   <!-- 商品详情 -->
   <div class="p-24">
-    <div class="w-[80%] mx-auto" v-if="data">
+    <div class="w-1200 mx-auto" v-if="data">
       <div class="p-48 bg-white flex gap-60 mb-24">
         <div class="flex-grow w-0 flex gap-48">
           <div class="h-570 overflow-auto shrink-0">
             <div
               v-for="(item, index) in data.photos"
               :key="index"
-              class="border-2 border-transparent hover:border-red-400 w-80 aspect-square cursor-pointer duration-300 overflow-hidden mb-12"
+              class="border-2 border-transparent hover:border-danger w-80 aspect-square cursor-pointer duration-300 overflow-hidden mb-12"
               @mouseenter="onMouseenter(item)"
             >
               <span v-if="item === 'video'" class="text-base w-full h-full flex items-center justify-center bg-gray-100">视频</span>
@@ -16,15 +16,10 @@
             </div>
           </div>
           <div class="flex-1 relative group cursor-move" ref="rectNode" @mousemove="setMove">
-            <video :src="data.video" class="w-full h-full object-cover relative z-10" controls v-show="isVideo"></video>
-            <img :src="currentImg || data.currentImg" alt="当前图" class="w-full h-full object-cover" v-show="!isVideo" />
+            <video :src="data.video" class="w-full h-full object-contain relative z-10" controls v-show="isVideo"></video>
+            <img :src="currentImg || data.currentImg" alt="当前图" class="w-full h-full object-contain" v-show="!isVideo" ref="imgNode" />
             <div class="absolute group-hover:opacity-[1] opacity-[0] max-w-500 w-[80%] aspect-square bg-[url('@/assets/grid.png')]" :style="`top:${move.y}px;left:${move.x}px;`" ref="moveNode"></div>
-            <div
-              class="absolute top-0 -right-524 bg-no-repeat scale-[1.5] origin-top-left group-hover:block hidden shadow-md"
-              :style="`width:${movesize?.width}px;height:${movesize?.height}px;background-image:url(${currentImg || data.currentImg});background-size:${rectsize?.width}px ${
-                rectsize?.height
-              }px;background-position:-${move.x}px -${move.y}px;`"
-            ></div>
+            <div class="absolute top-0 -right-524 bg-no-repeat scale-[1.5] origin-top-left group-hover:block hidden shadow-md" :style="zoomStyle"></div>
           </div>
         </div>
         <div class="flex-grow w-0">
@@ -56,7 +51,7 @@
       </div>
       <div class="p-48 bg-white">
         <h2 class="text-2xl font-bold mb-12">商品详情</h2>
-        <div v-html="data.desc" class="text-sm"></div>
+        <div v-html="data.desc" class="text-sm leading-relaxed"></div>
       </div>
       <c-goods-list class="w-full" />
     </div>
@@ -86,7 +81,7 @@ const { data } = useAsyncData<TransformGoodsDataType>('goods-detail', async () =
 
   return { ...res, currentImg: res.photos[0]!, attrGroups: Object.entries(attrGroup) }
 })
-const { isVideo, currentImg, onMouseenter, move, moveNode, movesize, rectsize, setMove } = useDetailMove(data)
+const { isVideo, currentImg, onMouseenter, move, setMove, zoomStyle } = useDetailMove(data)
 const { selectSku, selectAttr, curPrice, stock } = useDetailInfo(data)
 const { formState, setFormRules, validFormState } = useFormState({
   quantity: 1
@@ -106,6 +101,7 @@ const onAddCart = async () => {
   if (!needLogin()) return
   useToastRequest(() =>
     cartApi.create({
+      goodsId: data.value!.id,
       quantity: formState.value.quantity,
       sku: selectSku.value
     })

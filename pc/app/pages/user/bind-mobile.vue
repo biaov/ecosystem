@@ -1,7 +1,7 @@
 <template>
   <!-- 绑定/更换手机号 -->
   <div class="flex flex-col gap-24 w-400 mx-auto">
-    <h2 class="text-center text-2xl text-gray-900">更换手机号</h2>
+    <h2 class="text-center text-2xl text-title">更换手机号</h2>
     <div>
       <div class="mb-12">手机号</div>
       <me-input v-model="formState.mobile" placeholder="请输入您的新手机号" maxlength="11" />

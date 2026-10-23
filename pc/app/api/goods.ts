@@ -12,3 +12,8 @@ export const goodsCategoryApi = useRestful('pc/goods-category')
  * 加购
  */
 export const cartApi = useRestful('pc/cart')
+
+/**
+ * 购物车全选 / 取消全选
+ */
+export const cartSelectAllApi = useCommand('pc/cart/select-all')

@@ -3,25 +3,25 @@
   <div class="flex flex-col gap-24 w-400 mx-auto">
     <h3 class="text-xl font-bold mb-20">编辑用户信息</h3>
     <div class="flex items-center">
-      <div class="w-100 before:content-['*'] before:text-red-500 before:mr-4">头像</div>
+      <div class="w-100 before:content-['*'] before:text-danger before:mr-4">头像</div>
       <c-upload v-model="formState.avatar" title="点击上传头像">
         <img :src="formState.avatar" alt="avatar" class="w-120 h-120 rounded-full" title="点击上传头像" />
       </c-upload>
     </div>
     <div class="flex items-center">
-      <div class="w-100 shrink-0 before:content-['*'] before:text-red-500 before:mr-4">昵称</div>
+      <div class="w-100 shrink-0 before:content-['*'] before:text-danger before:mr-4">昵称</div>
       <me-input v-model="formState.nickname" placeholder="请输入您的昵称" maxlength="12" />
     </div>
     <div class="flex items-center">
-      <div class="w-100 before:content-['*'] before:text-red-500 before:mr-4">邮箱</div>
-      <div class="text-base text-gray-400">{{ formState.email }}</div>
+      <div class="w-100 before:content-['*'] before:text-danger before:mr-4">邮箱</div>
+      <div class="text-base text-info">{{ formState.email }}</div>
     </div>
     <div class="flex items-center">
-      <div class="w-100 before:content-['*'] before:text-red-500 before:mr-4">手机号</div>
-      <div class="text-base text-gray-400">{{ formState.mobile || '未绑定' }}</div>
+      <div class="w-100 before:content-['*'] before:text-danger before:mr-4">手机号</div>
+      <div class="text-base text-info">{{ formState.mobile || '未绑定' }}</div>
     </div>
     <div class="flex items-center">
-      <div class="w-100 before:content-['*'] before:text-red-500 before:mr-4">性别</div>
+      <div class="w-100 before:content-['*'] before:text-danger before:mr-4">性别</div>
       <div class="text-base">
         <me-radio-group v-model="formState.gender" class="flex gap-40">
           <me-radio v-for="item in genderEnum.options()" :key="item.value" :value="item.value" :name="item.value" class="cursor-pointer">{{ item.label }}</me-radio>

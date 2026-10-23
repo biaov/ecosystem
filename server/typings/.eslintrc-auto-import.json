@@ -21,6 +21,7 @@
     "BizException": true,
     "Body": true,
     "CaptchaEnum": true,
+    "CartModel": true,
     "Column": true,
     "Controller": true,
     "CouponModel": true,

@@ -26,10 +26,6 @@
   color: #f56c6c;
 }
 
-.text-special {
-  color: #722ed1;
-}
-
 .bg-danger {
   background: #f56c6c;
 }
@@ -49,27 +45,52 @@
   background: #388add !important;
 }
 
-.bg-radial {
-  background: #f5f5f5;
-  background: linear-gradient(-60deg, #48c6ef, #6f86d6, #ee7752, #23a6d5, #23d5ab);
-  background-size: 400% 400%;
-  animation: gradient 20s ease-in-out infinite forwards;
+/* —— 语义颜色补充（避免混用 Tailwind 默认色板）—— */
+
+/* 标题 / 强调文字 */
+.text-title {
+  color: #333;
+}
+.hover\:text-title:hover {
+  color: #333;
 }
 
-@keyframes gradient {
-  0% {
-    background-position: 0% 0%;
-  }
-  25% {
-    background-position: 50% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  75% {
-    background-position: 50% 100%;
-  }
-  100% {
-    background-position: 0% 0%;
-  }
+/* 主色浅背景（卡片 hover 底） */
+.bg-primary-light {
+  background: #ecf5ff;
+}
+.hover\:bg-primary-light:hover {
+  background: #ecf5ff;
+}
+
+/* danger 补充：边框 / hover / 必填星号 */
+.border-danger {
+  border-color: #f56c6c;
+}
+.hover\:text-danger:hover {
+  color: #f56c6c;
+}
+.hover\:border-danger:hover {
+  border-color: #f56c6c;
+}
+.before\:text-danger::before {
+  color: #f56c6c;
+}
+
+/* 禁用态 */
+.text-disabled {
+  color: rgba(0, 0, 0, 0.25);
+}
+.border-disabled {
+  border-color: rgba(0, 0, 0, 0.25);
+}
+
+/* 分割线 / 边框 */
+.border-line {
+  border-color: #e5e5e5;
+}
+
+/* 分组 hover 高亮（primary） */
+.group:hover .group-hover\:text-primary {
+  color: #409eff;
 }

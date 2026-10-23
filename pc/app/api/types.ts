@@ -170,6 +170,19 @@ export interface TransformGoodsDataType extends GoodsItemType {
   attrGroups: [string, string[]][]
 }
 
+export interface CartItemType {
+  id: number
+  goodsId: number
+  sku: string
+  quantity: number
+  checked: boolean
+  name: string
+  photo: string
+  price: number
+  stock: number
+  attrs: AttrType[]
+}
+
 export namespace ConfirmOrderName {
   export interface ConfirmOrderParam {
     id: number

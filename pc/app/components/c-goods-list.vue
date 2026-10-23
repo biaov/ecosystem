@@ -1,7 +1,7 @@
 <template>
   <!-- 推荐商品 -->
   <section class="w-1200 m-auto py-48">
-    <h2 class="text-3xl font-bold mb-32 text-gray-900" v-if="title">{{ title }}</h2>
+    <h2 class="text-3xl font-bold mb-32 text-title" v-if="title">{{ title }}</h2>
     <div class="flex flex-wrap gap-24 mb-48" v-if="data">
       <c-goods-item v-for="item in data.items" :key="item.id" :item="item" />
     </div>

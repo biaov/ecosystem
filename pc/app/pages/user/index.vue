@@ -1,26 +1,26 @@
 <template>
   <!-- 用户信息  -->
   <div class="flex gap-24 flex-wrap row-wrap mb-24">
-    <NuxtLink to="/user/edit-info" class="bg-blue-50 p-24 flex! justify-between items-center flex-1 max-[1920px]:basis-full w-full cursor-pointer group">
+    <NuxtLink to="/user/edit-info" class="bg-primary-light p-24 flex! justify-between items-center flex-1 max-[1920px]:basis-full w-full cursor-pointer group">
       <div class="flex gap-24">
         <div class="w-120 h-120 rounded-full bg-gray-100 relative overflow-hidden">
           <img :src="state.userInfo?.avatar" alt="头像" class="w-full h-full object-cover" />
           <div class="absolute top-0 left-0 bg-[rgba(0,0,0,0.6)] text-white text-sm w-full h-full flex items-center justify-center transition opacity-0 group-hover:opacity-100">编辑资料</div>
         </div>
         <div class="flex flex-col justify-center">
-          <div class="text-2xl font-bold group-hover:text-blue-400 mb-8">{{ state.userInfo?.nickname }}</div>
+          <div class="text-2xl font-bold group-hover:text-primary mb-8">{{ state.userInfo?.nickname }}</div>
           <div class="text-info">{{ state.userInfo?.email ?? '' }}</div>
         </div>
       </div>
-      <c-ant-icon name="SettingOutlined" class="text-2xl group-hover:text-blue-400" />
+      <c-ant-icon name="SettingOutlined" class="text-2xl group-hover:text-primary" />
     </NuxtLink>
     <div class="p-24 bg-gray-50 flex-1 max-[1920px]:basis-full">
       <NuxtLink to="/user/order" class="flex! items-center justify-between group">
         <span class="text-xl font-bold">全部订单</span>
-        <c-ant-icon name="RightOutlined" class="text-info group-hover:text-blue-400" />
+        <c-ant-icon name="RightOutlined" class="text-info group-hover:text-primary" />
       </NuxtLink>
       <div class="flex pt-48">
-        <NuxtLink class="flex-1 flex! flex-col justify-center items-center gap-8 hover:text-blue-400" v-for="(item, index) in data" :key="index" :to="item.path">
+        <NuxtLink class="flex-1 flex! flex-col justify-center items-center gap-8 hover:text-primary" v-for="(item, index) in data" :key="index" :to="item.path">
           <div>{{ item.label }}</div>
           <div class="text-2xl font-bold">{{ item.count }}</div>
         </NuxtLink>
@@ -29,19 +29,19 @@
   </div>
   <NuxtLink
     :to="item.path"
-    class="flex! items-center justify-between gap-12 group p-24 bg-gray-50 mb-24 hover:bg-blue-50 hover:text-blue-400 transition"
+    class="flex! items-center justify-between gap-12 group p-24 bg-gray-50 mb-24 hover:bg-primary-light hover:text-primary transition"
     v-for="(item, index) in moreList"
     :key="index"
   >
     <div class="flex items-center gap-12">
-      <div class="text-xl text-info group-hover:text-blue-400 inline-flex">
+      <div class="text-xl text-info group-hover:text-primary inline-flex">
         <c-ant-icon :name="item.anIcon" v-if="item.anIcon" />
         <c-svg-icon :name="item.icon" v-else-if="item.icon" />
       </div>
       <span class="text-xl">{{ item.label }}</span>
     </div>
     <div class="flex-1 text-right" v-if="item.value">{{ item.value }}</div>
-    <c-ant-icon name="RightOutlined" class="text-info group-hover:text-blue-400" />
+    <c-ant-icon name="RightOutlined" class="text-info group-hover:text-primary" />
   </NuxtLink>
 </template>
 
