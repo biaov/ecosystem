@@ -62,7 +62,7 @@ export class GoodsCategoryModel extends BaseModel {
   products: Relation<GoodsModel[]>
 }
 
-interface Attr {
+export interface Attr {
   label: string
   value: string
 }

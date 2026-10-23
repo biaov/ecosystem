@@ -59,15 +59,12 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { goodsApi, cartApi } from '@/api/goods'
-import { confirmOrderApi } from '@/api/order'
+import { goodsApi } from '@/api/goods'
 import type { GoodsItemType, TransformGoodsDataType } from '@/api/types'
 import GoodsAttr from '@/biz-components/goods-attr.vue'
 import { useDetailMove, useDetailInfo } from './hook'
 
-const { needLogin } = useStore()
 const { id } = useRoute().params
-const router = useRouter()
 const { data } = useAsyncData<TransformGoodsDataType>('goods-detail', async () => {
   const res = await goodsApi.get<GoodsItemType>(+id!)
   res.video && res.photos.unshift('video')
@@ -82,44 +79,12 @@ const { data } = useAsyncData<TransformGoodsDataType>('goods-detail', async () =
   return { ...res, currentImg: res.photos[0]!, attrGroups: Object.entries(attrGroup) }
 })
 const { isVideo, currentImg, onMouseenter, move, setMove, zoomStyle } = useDetailMove(data)
-const { selectSku, selectAttr, curPrice, stock } = useDetailInfo(data)
-const { formState, setFormRules, validFormState } = useFormState({
+const { selectAttr, curPrice, stock } = useDetailInfo(data)
+const { formState } = useFormState({
   quantity: 1
 })
-setFormRules({
-  quantity: {
-    validator(value: number) {
-      if (!selectSku.value) return Promise.reject('请选择规格')
-      if (value > stock.value) return Promise.reject('库存不足')
-      return Promise.resolve()
-    }
-  }
-})
 
-const onAddCart = async () => {
-  if (!(await validFormState())) return
-  if (!needLogin()) return
-  useToastRequest(() =>
-    cartApi.create({
-      goodsId: data.value!.id,
-      quantity: formState.value.quantity,
-      sku: selectSku.value
-    })
-  )
-}
-const onBuy = async () => {
-  if (!(await validFormState())) return
-  if (!needLogin()) return
-  useToastRequest(
-    () =>
-      confirmOrderApi.create<IdDataType>({
-        quantity: formState.value.quantity,
-        sku: selectSku.value
-      }),
-    res => {
-      router.push(`/confirm-order/${res.id}`)
-    },
-    false
-  )
-}
+// 暂未开发
+const onAddCart = () => MeToast('暂未开发')
+const onBuy = () => MeToast('暂未开发')
 </script>

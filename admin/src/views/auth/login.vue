@@ -73,6 +73,11 @@ setFormRules({
   }
 })
 
+// 验证码登录不预填演示邮箱
+watch(activeKey, key => {
+  formState.value.username = key === 0 ? import.meta.env.VITE_DEMO_USERNAME : ''
+})
+
 /**
  * 提交
  */

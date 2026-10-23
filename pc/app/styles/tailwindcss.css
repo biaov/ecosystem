@@ -63,6 +63,11 @@
   background: #ecf5ff;
 }
 
+/* 分割线 / 边框（默认边框色，danger/disabled 在其后覆盖） */
+.border-line {
+  border-color: #e5e5e5;
+}
+
 /* danger 补充：边框 / hover / 必填星号 */
 .border-danger {
   border-color: #f56c6c;
@@ -83,11 +88,6 @@
 }
 .border-disabled {
   border-color: rgba(0, 0, 0, 0.25);
-}
-
-/* 分割线 / 边框 */
-.border-line {
-  border-color: #e5e5e5;
 }
 
 /* 分组 hover 高亮（primary） */
